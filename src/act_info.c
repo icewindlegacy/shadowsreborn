@@ -335,38 +335,38 @@ void show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
     }
     else
     {
+        if (IS_SET (victim->comm, COMM_AFK))
+            strcat (buf, "{W[{GA{YF{GK{W]{x ");
+        if (IS_AFFECTED (victim, AFF_INVISIBLE))
+            strcat (buf, "{W({CInvis{W){x ");
+        if (victim->invis_level >= LEVEL_HERO)
+            strcat (buf, "{W({CWizi{W){x ");
+        if (IS_AFFECTED (victim, AFF_HIDE))
+            strcat (buf, "{W({DHide{W){x ");
+        if (IS_AFFECTED (victim, AFF_CHARM))
+            strcat (buf, "{W({mCharmed{W){x ");
+        if (IS_AFFECTED (victim, AFF_PASS_DOOR))
+            strcat (buf, "{W{cTranslucent{W){x ");
+        if (IS_AFFECTED (victim, AFF_FAERIE_FIRE))
+            strcat (buf, "{W({MPink Aura{W){x ");
+        if (IS_EVIL (victim) && IS_AFFECTED (ch, AFF_DETECT_EVIL))
+            strcat (buf, "{W({RRed Aura{W){x ");
+        if (IS_GOOD (victim) && IS_AFFECTED (ch, AFF_DETECT_GOOD))
+            strcat (buf, "{W({yGolden Aura{W){x ");
+        if (IS_AFFECTED (victim, AFF_SANCTUARY))
+            strcat (buf, "{W({wWhite Aura{W){x ");
+        if (!IS_NPC (victim) && IS_SET (victim->act, PLR_KILLER))
+            strcat (buf, "{W({rKILLER{W){x ");  
+        if (!IS_NPC (victim) && IS_SET (victim->act, PLR_THIEF))
+            strcat (buf, "{W({rTHIEF{W){x ");
+        if (!IS_NPC(victim) && !victim->desc)
+            strcat( buf, "{r({RLinkdead{r){x " );
     }
     if ( RIDDEN(victim) )
         if ( ch != RIDDEN(victim) )
             strcat( buf, "(Ridden) " );
         else
             strcat( buf, "(Your mount) " );
-    if (IS_SET (victim->comm, COMM_AFK))
-        strcat (buf, "{W[{GA{YF{GK{W]{x ");
-    if (IS_AFFECTED (victim, AFF_INVISIBLE))
-        strcat (buf, "{W({CInvis{W){x ");
-    if (victim->invis_level >= LEVEL_HERO)
-        strcat (buf, "{W({CWizi{W){x ");
-    if (IS_AFFECTED (victim, AFF_HIDE))
-        strcat (buf, "{W({DHide{W){x ");
-    if (IS_AFFECTED (victim, AFF_CHARM))
-        strcat (buf, "{W({mCharmed{W){x ");
-    if (IS_AFFECTED (victim, AFF_PASS_DOOR))
-        strcat (buf, "{W{cTranslucent{W){x ");
-    if (IS_AFFECTED (victim, AFF_FAERIE_FIRE))
-        strcat (buf, "{W({MPink Aura{W){x ");
-    if (IS_EVIL (victim) && IS_AFFECTED (ch, AFF_DETECT_EVIL))
-        strcat (buf, "{W({RRed Aura{W){x ");
-    if (IS_GOOD (victim) && IS_AFFECTED (ch, AFF_DETECT_GOOD))
-        strcat (buf, "{W({yGolden Aura{W){x ");
-    if (IS_AFFECTED (victim, AFF_SANCTUARY))
-        strcat (buf, "{W({wWhite Aura{W){x ");
-    if (!IS_NPC (victim) && IS_SET (victim->act, PLR_KILLER))
-        strcat (buf, "{W({rKILLER{W){x ");  
-    if (!IS_NPC (victim) && IS_SET (victim->act, PLR_THIEF))
-        strcat (buf, "{W({rTHIEF{W){x ");
-    if (!IS_NPC(victim) && !victim->desc)
-        strcat( buf, "{r({RLinkdead{r){x " ); 
 
     /* Show Quest Mob targets in the room -Koqlb*/
     if (IS_NPC(victim) && !IS_NPC(ch) && ch->pcdata && ch->pcdata->questmob > 0 
