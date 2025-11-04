@@ -330,6 +330,17 @@ void multi_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt)
         if ( ch->fighting != victim )
             return;
     }
+    
+    /* Ohshit skill - extra attack with held object if no weapon wielded */
+    if (!IS_NPC (ch) && get_eq_char (ch, WEAR_HOLD) != NULL 
+        && get_eq_char (ch, WEAR_WIELD) == NULL
+        && get_skill (ch, gsn_ohshit) > 0)
+    {
+        one_hit (ch, victim, TYPE_HIT + gsn_ohshit, FALSE);
+        check_improve (ch, gsn_ohshit, TRUE, 3);
+        if (ch->fighting != victim)
+            return;
+    }
 
     if (IS_AFFECTED (ch, AFF_HASTE))
         one_hit (ch, victim, dt, FALSE);
@@ -547,14 +558,7 @@ void one_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary )
         if (wield != NULL && wield->item_type == ITEM_WEAPON)
             dt += wield->value[3];
         else
-        {
-            /* Check for ohshit skill - holding object without weapon */
-            if (!IS_NPC (ch) && get_eq_char (ch, WEAR_HOLD) != NULL 
-                && get_skill (ch, gsn_ohshit) > 0)
-                dt = TYPE_HIT + gsn_ohshit;  /* Use ohshit skill for damage message */
-            else
-                dt += ch->dam_type;
-        }
+            dt += ch->dam_type;
     }
 
     if (dt < TYPE_HIT)
@@ -564,6 +568,10 @@ void one_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary )
             dam_type = attack_table[ch->dam_type].damage;
     else
         dam_type = attack_table[dt - TYPE_HIT].damage;
+
+    /* Force DAM_BASH for ohshit skill - swinging random objects */
+    if (dt == TYPE_HIT + gsn_ohshit)
+        dam_type = DAM_BASH;
 
     if (dam_type == -1)
         dam_type = DAM_BASH;
@@ -1161,13 +1169,81 @@ bool damage (CHAR_DATA * ch, CHAR_DATA * victim, int dam, int dt,
             OBJ_DATA *held = get_eq_char(ch, WEAR_HOLD);
             if (held != NULL)
             {
-                act ("Your wild swing with $p connects!", ch, held, victim, TO_CHAR);
-                act ("$n's wild swing with $p connects!", ch, held, victim, TO_NOTVICT);
-                act ("$n's wild swing with $p connects!", ch, held, victim, TO_VICT);
+                /* Generate damage verb based on damage amount */
+                const char *vs, *vp;
+                char buf1[256], buf2[256], buf3[256];
+                char punct;
+                int pain_percent = 1000 * dam / victim->max_hit;
+                
+                if ( dam  ==   0 ) { vs = "miss";	vp = "misses";		}
+                else if ( pain_percent <=   5 ) { vs = "{gscratch";	vp = "{gscratches";	}
+                else if ( pain_percent <=  10 ) { vs = "{Ggraze";	vp = "{Ggrazes";		}
+                else if ( pain_percent <=  25 ) { vs = "{ghit";	vp = "{ghits";		}
+                else if ( pain_percent <=  30 ) { vs = "{cinjure";	vp = "{cinjures";		}
+                else if ( pain_percent <=  40 ) { vs = "{cwound";	vp = "{cwounds";		}
+                else if ( pain_percent <=  55 ) { vs = "{Cmaul";       vp = "{Cmauls";		}
+                else if ( pain_percent <=  65 ) { vs = "{ydestroy";	vp = "{ydestroys";	}
+                else if ( pain_percent <=  70 ) { vs = "{ydestroy";	vp = "{ydestroys";	}
+                else if ( pain_percent <=  80 ) { vs = "{rmaim";	vp = "{rmaims";		}
+                else if ( pain_percent <=  90 ) { vs = "{rMUTILATE";	vp = "{rMUTILATES";	}
+                else if ( pain_percent <=  100 ) { vs = "{RDISEMBOWEL";	vp = "{RDISEMBOWELS";	}
+                else if ( pain_percent <=  120 ) { vs = "{RDISMEMBER";	vp = "{RDISMEMBERS";	}
+                else if ( pain_percent <=  140 ) { vs = "{RMASSACRE";	vp = "{RMASSACRES";	}
+                else if ( pain_percent <=  160 ) { vs = "{RMANGLE";	vp = "{RMANGLES";		}
+                else if ( pain_percent <=  180 ) { vs = "{W*** {RDEMOLISH ***{W==={R";
+                             vp = "{W*** {RDEMOLISHES {W==={R";			}
+                else if ( pain_percent <=  190 ) { vs = "{W*** {RDEVASTATE ***{W==={R";
+                             vp = "{W*** {RDEVASTATES {W==={R";			}
+                else if ( pain_percent <= 210)  { vs = "{W=== {ROBLITERATE {W==={R";
+                             vp = "{W=== {ROBLITERATES {W==={R";		}
+                else if ( pain_percent <= 230)  { vs = "{r>>> ANNIHILATE <<<";
+                             vp = "{r>>> ANNIHILATES <<<";		}
+                else if ( pain_percent <= 250)  { vs = "{R<<< ERADICATE >>>";
+                             vp = "{R<<< ERADICATES >>>";			}
+                else                   { vs = "{Mdo {r***{RUNS{YPE{WA{YKA{RBLE{r***{M things to";
+                             vp = "{Mdoes {r***{RUNS{YPE{WA{YKA{RBLE{r***{M things to";		}
+                
+                punct = (pain_percent <= 90) ? '.' : '!';
+                
+                /* Custom messages with held object */
+                if (IS_SET(ch->act, PLR_AUTODAMAGE))
+                {
+                    sprintf (buf1, "{3$n's wild swing with $p %s {3$N%c (%d){x", vp, punct, dam);
+                    sprintf (buf2, "{2Your wild swing with $p %s {2$N%c (%d){x", vp, punct, dam);
+                    sprintf (buf3, "{4$n's wild swing with $p %s {4you%c (%d){x", vp, punct, dam);
+                }
+                else
+                {
+                    sprintf (buf1, "{3$n's wild swing with $p %s {3$N%c{x", vp, punct);
+                    sprintf (buf2, "{2Your wild swing with $p %s {2$N%c{x", vp, punct);
+                    sprintf (buf3, "{4$n's wild swing with $p %s {4you%c{x", vp, punct);
+                }
+                
+                act (buf1, ch, held, victim, TO_NOTVICT);
+                act (buf2, ch, held, victim, TO_CHAR);
+                
+                if (IS_SET(victim->act, PLR_AUTODAMAGE))
+                {
+                    char buf3_damage[256];
+                    sprintf (buf3_damage, "{4$n's wild swing with $p %s {4you%c (%d){x", vp, punct, dam);
+                    act (buf3_damage, ch, held, victim, TO_VICT);
+                }
+                else
+                {
+                    act (buf3, ch, held, victim, TO_VICT);
+                }
+            }
+            else
+            {
+                /* No held object - fall back to regular message */
+                dam_message (ch, victim, dam, dt, immune, critical);
             }
         }
-        
-        dam_message (ch, victim, dam, dt, immune, critical);
+        else
+        {
+            /* Regular damage message for everything else */
+            dam_message (ch, victim, dam, dt, immune, critical);
+        }
     }
 
     if (dam == 0)
@@ -3801,11 +3877,14 @@ void do_rake (CHAR_DATA * ch, char *argument)
     CHAR_DATA *victim;
     int dam;
     int move_cost;
+    int skill;
 
     one_argument (argument, arg);
+    
+    skill = get_skill (ch, gsn_hand_to_hand);
 
     /* Felar only */
-    if (IS_NPC (ch) || ch->race != 6) /* felar is race 6 */
+    if (IS_NPC (ch) || ch->race != race_lookup ("felar")) /* felar is race 6 */
     {
         send_to_char ("Only felar can use their natural claws to rake.\n\r", ch);
         return;
@@ -3881,18 +3960,12 @@ void do_rake (CHAR_DATA * ch, char *argument)
     /* Delay similar to backstab - prevents spam */
     WAIT_STATE (ch, skill_table[gsn_backstab].beats);
 
-    /* Calculate damage scaling with level */
-    dam = number_range (ch->level * 2 / 3, ch->level * 4 / 3);
+    /* Base felar claw damage - same as their normal attack */
+    dam = number_range (3 + 8 * skill / 100 + ch->level / 4,
+                        5 + 12 * skill / 100 + ch->level * 2 / 3);
 
-    /* Apply weapon skill bonus if they have hand-to-hand */
-    {
-        int skill = get_skill (ch, gsn_hand_to_hand);
-        if (skill > 0)
-            dam = dam * (100 + skill) / 100;
-    }
-
-    /* Enhanced damage for felar claws */
-    dam = dam * 11 / 10;
+    /* Backstab-like multiplier for rake */
+    dam *= 2 + (ch->level / 10);
 
     /* Apply damage */
     act ("$n rakes $N with $s sharp claws!", ch, NULL, victim, TO_NOTVICT);
@@ -3900,6 +3973,7 @@ void do_rake (CHAR_DATA * ch, char *argument)
     act ("$n rakes you with $s sharp claws!", ch, NULL, victim, TO_VICT);
 
     damage (ch, victim, dam, TYPE_HIT + DAM_SLASH, DAM_SLASH, TRUE, FALSE);
+    check_improve (ch, gsn_hand_to_hand, TRUE, 1);
 
     return;
 }
