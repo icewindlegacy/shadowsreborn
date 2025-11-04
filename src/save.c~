@@ -1135,7 +1135,7 @@ bool load_char_obj (DESCRIPTOR_DATA * d, char *name)
 
         ch->size = pc_race_table[ch->race].size;
         /* Felar use claws instead of punch */
-        if (ch->race == race_lookup ("felar"))  /* felar is race 6 */
+        if (ch->race == 6)  /* felar is race 6 */
             ch->dam_type = 5;        /* claw */
         else
             ch->dam_type = 17;        /* punch */

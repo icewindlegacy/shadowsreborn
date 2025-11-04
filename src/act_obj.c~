@@ -1963,7 +1963,7 @@ void wear_obj (CHAR_DATA * ch, OBJ_DATA * obj, bool fReplace)
         int sn, skill;
 
         /* Felar cannot wield weapons - hand-to-hand only */
-        if (!IS_NPC (ch) && ch->race == race_lookup ("felar")) /* felar is race 6 */
+        if (!IS_NPC (ch) && ch->race == 6) /* felar is race 6 */
         {
             send_to_char ("Your natural claws are your only weapons. You cannot wield items.\\n\\r", ch);
             return;

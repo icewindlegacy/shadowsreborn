@@ -736,7 +736,7 @@ void one_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary )
                 }
             }
             /* Felar (race 6) get enhanced hand-to-hand damage with their natural claws */
-            else if (!IS_NPC (ch) && ch->race == race_lookup ("felar"))
+            else if (!IS_NPC (ch) && ch->race == 6)
             {
                 /* Felar claws do damage comparable to weapons - scale better with level */
                 dam = number_range (3 + 8 * skill / 100 + ch->level / 4,
@@ -1764,7 +1764,7 @@ bool check_parry (CHAR_DATA * ch, CHAR_DATA * victim)
     if (wield == NULL)
     {
         /* Felar (race 6) can parry with their long claws */
-        if (!IS_NPC (victim) && victim->race == race_lookup ("felar"))
+        if (!IS_NPC (victim) && victim->race == 6)
         {
             /* Felar can parry without a weapon */
             defender_weapon_sn = gsn_hand_to_hand;
