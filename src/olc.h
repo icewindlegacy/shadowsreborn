@@ -226,6 +226,7 @@ DECLARE_OLC_FUN( redit_clan		);
 DECLARE_OLC_FUN( redit_owner		);
 DECLARE_OLC_FUN( redit_room		);
 DECLARE_OLC_FUN( redit_sector		);
+DECLARE_OLC_FUN( redit_copy		);
 
 
 /*
@@ -260,6 +261,7 @@ DECLARE_OLC_FUN( oedit_autoweapon );
 DECLARE_OLC_FUN( oedit_autoarmor );
 DECLARE_OLC_FUN( oedit_delete		);
 DECLARE_OLC_FUN( oedit_timer);
+DECLARE_OLC_FUN( oedit_copy		);
 
 /*
  * Mobile Editor Prototypes
@@ -303,6 +305,7 @@ DECLARE_OLC_FUN( medit_autoset );
 DECLARE_OLC_FUN( medit_autohard );
 DECLARE_OLC_FUN( medit_autoeasy );
 DECLARE_OLC_FUN( medit_delete		);
+DECLARE_OLC_FUN( medit_copy		);
 
 /* Mobprog editor */
 DECLARE_OLC_FUN( mpedit_create		);

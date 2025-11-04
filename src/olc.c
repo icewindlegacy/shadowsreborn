@@ -297,6 +297,7 @@ const struct olc_cmd_type redit_table[] = {
     {"owner", redit_owner},
     {"room", redit_room},
     {"sector", redit_sector},
+    {"copy", redit_copy},
 
     {"?", show_help},
     {"version", show_version},
@@ -338,6 +339,7 @@ const struct olc_cmd_type oedit_table[] = {
     {"autoweapon", oedit_autoweapon },
 	{"autoarmor", oedit_autoarmor },
     {"timer", oedit_timer},
+    {"copy", oedit_copy},
     {"?", show_help},
     {"version", show_version},
 
@@ -389,6 +391,7 @@ const struct olc_cmd_type medit_table[] = {
     {"autoset", medit_autoset},
     {"autohard", medit_autohard},
     {"autoeasy", medit_autoeasy},
+    {"copy", medit_copy},
     {"?", show_help},
     {"version", show_version},
 
