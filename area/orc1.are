@@ -39,6 +39,58 @@ ABQa 0 0 -1  -1000 0
 0 0 Q S
 stand stand none 50000
 AHMV ABCDEFGHIJK medium unknown
+#402
+Sorcerer Trainer~
+Sorcerer Trainer~
+The sorcerer trainer is here
+~
+~
+orc~
+ABJKb 0 0 -1  0 0
+50 50 104d17+506 50d11+95 17d2+40 none
+-28 -28 -28 -18
+0 0 Q S
+stand stand female 0
+AHMV ABCDEFGHIJK medium unknown
+#403
+Berserker trainer~
+Berserker Trainer~
+The bersekrer trainer is here
+~
+~
+troll~
+ABJKb 0 0 -1  0 0
+50 50 104d17+506 50d11+95 17d2+40 none
+-28 -28 -28 -18
+D 0 BE HK
+stand stand male 0
+ABHMV ABCDEFGHIJKUV medium unknown
+#404
+Knave trainer~
+Knave Trainer~
+The knave trainer is here
+~
+~
+stalker~
+ABJKb 0 0 -1  0 0
+50 50 104d17+506 50d11+95 17d2+40 none
+-28 -28 -28 -18
+0 0 IL H
+stand stand female 0
+AHMV ABCDEFGHIJKUV medium unknown
+#405
+Shaman trainer~
+Shaman Trainer~
+The Shaman trainer is here
+~
+~
+troll~
+ABJKb 0 0 -1  0 0
+50 50 104d17+506 50d11+95 17d2+40 none
+-28 -28 -28 -18
+D 0 BE HK
+stand stand male 0
+ABHMV ABCDEFGHIJKUV medium unknown
 #0
 
 
@@ -162,6 +214,37 @@ map 0 A
 0 0 0 P
 E
 map~
+{W        ***********
+{W        * Dushgoi *                      +-Sorcerers
+{W        ***********                      | Guild
+{W                                         |
+{W                                 Martial-+-Berserkers
+{W Whares   Tralls    Trulls       Academy | Guild     Slave  Jewelry  Magic
+{W      \   Armour    Supplies             |          Auction  Store   Shop
+{W       \     |          |          Center               |       |      |
+{WChuKaal +----+----------+------    Tunnel  -------------+-------+------+-
+{WRocks  /     |          |       Intersection            |       |      | \
+{W      /  Kruels       Butcher    /       |          Bruths   Graks   Maps \ 
+{WLeather Weapons MUD    Shop     /        |          Vessels  Elixirs      |
+{WShop           School          /  Black -+-Knaves                         |
+{W                     \        /   Dragon | Guild                       Orc
+{W           Portal--- Battle  /           |                          Invasion
+{W           Room      School /            |                           Highway
+ 
+{W                       |   /             +-Shamans
+{W         Quest ---- Circle of--Donation    Guild
+{W         Room         Power      Room
+{W                    /(recall)
+{W                   /   |
+{W                  /   Orc
+{W            Morgue   Temple
+{W                       |
+{W                     Great
+{W                   Necromancer
+ 
+~
+E
+map~
 ,        * Dushgoi *                      +-Sorcerers
 ,        ***********                      | Guild
 ,                                         |
@@ -189,9 +272,6 @@ map~
 ,                   Necromancer
  
 ~
-E
-map~
-~
 #413
 orc school newbie commstone comm stone~
 a newbie comm stone~
@@ -208,6 +288,9 @@ unknown~
 map 0 A
 0 0 0 0 0
 0 0 0 P
+E
+map~
+~
 E
 map~
 ,                {WWizards
@@ -233,9 +316,6 @@ map~
 ,              {yv{B.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B         {yv{B.,.,.,.,.,.,
 ,      {yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B.,.,.,.,.,.,.{x
  
-~
-E
-map~
 ~
 #415
 hole donation pit~
@@ -272,6 +352,10 @@ you hear the guttural yelling of orcs engaged in the fine art (for an orc)
 of haggling.  This rarely results in death or injury. 
 ~
 0 0 0
+D0
+~
+~
+0 0 406
 D1
 ~
 ~
@@ -280,6 +364,10 @@ D2
 ~
 ~
 0 0 401
+D3
+~
+~
+0 0 408
 D4
 ~
 ~
@@ -305,9 +393,28 @@ D2
 0 0 405
 S
 #402
-~
+Center Tunnel Intersection~
+You are in the center of the tunnels that lead throughout the orc stronghold.
+The east-west tunnel seems the most traveled by traders and the like, while
+the north-south one is primarily used by professional adventurers.
 ~
 0 0 0
+D0
+~
+~
+0 0 413
+D1
+~
+~
+0 0 425
+D2
+~
+~
+0 0 409
+D3
+~
+~
+0 0 417
 D5
 ~
 ~
@@ -356,6 +463,909 @@ D0
 ~
 0 0 401
 S
+#406
+~
+Above you lies the huge and noteworthy Orc Battle school, where all
+begining orcs start their adventuring careers.  Sounds of bloody screams,
+breaking bones, and deathly cackles echos through the rooms above you.  
+There is a REALLY BIG SIGN HERE for you to read.
+~
+0 0 0
+E
+sign~
+PLEASE READ HELP RULES.  It saves both you and the imms alot of
+grief if you have some concept of what is expected here.
+See also:  help multiplay   help gossip   help world
+ 
+~
+D2
+~
+~
+0 0 400
+D3
+~
+~
+0 0 407
+D4
+~
+~
+0 0 436
+S
+#407
+~
+~
+0 0 0
+D1
+~
+~
+0 0 406
+S
+#408
+Quest Room~
+~
+0 0 0
+D1
+~
+~
+0 0 400
+S
+#409
+~
+~
+0 0 0
+D0
+~
+~
+0 0 402
+D1
+~
+~
+0 0 410
+D2
+~
+~
+0 0 412
+D3
+~
+~
+0 0 411
+S
+#410
+Knave's Guild~
+~
+0 0 0
+D1
+~
+~
+0 0 462
+D3
+~
+~
+0 0 409
+S
+#411
+Black Dragon~
+~
+0 0 0
+D1
+~
+~
+0 0 409
+S
+#412
+Shaman's Guild~
+~
+0 0 0
+D0
+~
+~
+0 0 409
+D5
+~
+~
+0 0 461
+S
+#413
+North Tunnel~
+A popular place for all adventurers, this section contains the berserkers'
+guild to the east, and the Martial Academy to the west.
+~
+0 0 0
+D0
+~
+~
+0 0 416
+D1
+~
+~
+0 0 414
+D2
+~
+~
+0 0 402
+D3
+~
+~
+0 0 415
+S
+#414
+Berserker's Guild~
+This constricting passage has been well worn from heavy use.  There are
+crude drawings of past heroes along the walls.
+~
+0 0 0
+D1
+~
+~
+0 0 434
+D3
+~
+~
+0 0 413
+S
+#415
+Martial Academy~
+The walls of this room have certainly taken some abuse over the years, as
+many orcs have trained here to the peak of physical (and occasionally, mental)
+fitness.  This room invigorates you whenever you enter it, the smell of blood
+and sweat calling to your baser nature.
+~
+0 0 0
+D1
+~
+~
+0 0 413
+S
+#416
+Sorcerer's Guild~
+This narrow passageway seems to throb with power.  Protective spells that
+have most certainly been laid here make the walls glow bright enough to make
+your eyes begin to tear up, and the air itself seems to press down on you
+~
+0 0 0
+D1
+~
+~
+0 0 460
+D2
+~
+~
+0 0 413
+S
+#417
+~
+~
+0 0 0
+D0
+~
+~
+0 0 419
+D1
+~
+~
+0 0 402
+D2
+~
+~
+0 0 418
+D3
+~
+~
+0 0 420
+S
+#418
+Butcher Shop~
+~
+0 0 0
+D0
+~
+~
+0 0 417
+S
+#419
+Trull's Supplies~
+~
+0 0 0
+D2
+~
+~
+0 0 417
+S
+#420
+~
+~
+0 0 0
+D0
+~
+~
+0 0 421
+D1
+~
+~
+0 0 417
+D2
+~
+~
+0 0 422
+D3
+~
+~
+0 0 423
+S
+#421
+Trall's Armour~
+~
+0 0 0
+D2
+~
+~
+0 0 420
+S
+#422
+Kruel's Weapons~
+~
+0 0 0
+D0
+~
+~
+0 0 420
+S
+#423
+ChuKaal Docks~
+~
+0 0 0
+D1
+~
+~
+0 0 420
+D5
+~
+~
+0 0 424
+S
+#424
+Leather Shop~
+~
+0 0 0
+D4
+~
+~
+0 0 423
+S
+#425
+~
+~
+0 0 0
+D0
+~
+~
+0 0 426
+D1
+~
+~
+0 0 428
+D2
+~
+~
+0 0 427
+D3
+~
+~
+0 0 402
+S
+#426
+Slave auction~
+~
+0 0 0
+D2
+~
+~
+0 0 425
+S
+#427
+Bruth's Vessels~
+~
+0 0 0
+D0
+~
+~
+0 0 425
+S
+#428
+~
+~
+0 0 0
+D0
+~
+~
+0 0 429
+D1
+~
+~
+0 0 431
+D2
+~
+~
+0 0 430
+D3
+~
+~
+0 0 425
+S
+#429
+Jewlery Shop~
+~
+0 0 0
+D2
+~
+~
+0 0 428
+S
+#430
+Grak's Elixers~
+~
+0 0 0
+D0
+~
+~
+0 0 428
+S
+#431
+~
+~
+0 0 0
+D0
+~
+~
+0 0 432
+D2
+~
+~
+0 0 433
+D3
+~
+~
+0 0 428
+S
+#432
+Baggh's Magic Shop~
+~
+0 0 0
+D2
+~
+~
+0 0 431
+S
+#433
+Mikk's Maps~
+~
+0 0 0
+D0
+~
+~
+0 0 431
+S
+#434
+~
+This is a place for the orc fighters to gather, and tell stories of their
+past victories, and brag about their prowess.
+A sturdy oaken bar is against the back wall.
+~
+0 0 0
+D3
+~
+~
+0 0 414
+D5
+~
+~
+0 0 435
+S
+#435
+~
+Weapons and armor too badly damaged to be used litter this room.  The dents
+in the walls and floors, along with the spatterings of blood throughout the
+area, prove to you that this room has been well used.
+~
+0 0 0
+D4
+~
+~
+0 0 434
+S
+#436
+Orc Battle School~
+This is the entrance to Orc Battle School.  If you just created a character
+go north to learn how the mud works.  If you've been here before you can
+enter the arena to the south and kill some fairly easy critters.
+ 
+~
+0 0 0
+D0
+~
+~
+0 0 437
+D5
+~
+~
+0 0 406
+S
+#437
+Entryway for Neophyte Killers~
+You are in a room in Mud School.  Paintings of the heroic graduates of
+mud school adorn the walls.  To the west is Khabal's Training Room, and to
+the east is Grishnakh's Guild Room.  North of you is the next Station of Mud
+School.  There is a sign on the wall (type 'LOOK SIGN' to read it).  
+Type 'help world' to see a list of maps in helpfiles.
+ 
+~
+0 0 0
+E
+sign~
+To find out your attributes, type 'score'. You can improve your attributes
+by typing 'west' and entering Khabal's Training Room.  To the east is Grishnakh's
+practice room.  There you can practice and improve your skills.
+ 
+~
+D0
+~
+~
+0 0 440
+D1
+~
+~
+0 0 438
+D2
+~
+~
+0 0 436
+D3
+~
+~
+0 0 439
+S
+#438
+The Practice room of Grish'nakh~
+You are in a room filled with weapons, books, and many combat dummies, some
+cut and stabbed many times, others burnt to a crisp.  The room is filled with
+sweat and an aura of magic.  There is a sign on the wall.
+~
+0 0 0
+E
+sign~
+Grish'Nakh can help you learn your skills and spells.  To find out what
+skills and spells and how many practice sessions you have, type 'practice'. 
+To practice a specific skill or spell type 'practice <skill|spell>', where
+'skill|spell' is the name of the skill or spell you wish to practice. 
+Practicing increases the amount you know of that skill or spell, up to a
+certain maximum.  When you have finished here, go west.  
+~
+D3
+~
+~
+0 0 437
+S
+#439
+Khabals room of Training and Death~
+You are in Khabal's Training Room.  Around you are all sorts of physical
+and mental training tools.  The whole room is filled with magic, death, 
+and sweat.  There is a sign on the wall.
+ 
+~
+0 0 0
+E
+sign~
+This is where you train your attributes.  To train an attribute, you need
+training sessions.  To find out how many trains you have, type 'train'.  To
+train a specific attribute, type 'train <attr>', where attr is the first 3
+letters of the attribute you want increased.  Type 'help train' to learn
+more about this.  
+~
+D1
+~
+~
+0 0 437
+S
+#440
+Deep into the Gauntlet~
+You are in a square white room.  The walls are all blank, with no
+windows.  Light fluoresces off the ceiling in soft white tones.  Of course,
+there is a sign on the wall.  The exits are west and south.  A small plaque
+is on the wall.  The first traces of gore and blood can be found splattered
+on the floor here.  {RLook at the sign. {x
+~
+0 0 0
+E
+sign~
+Equipment check time!  Type 'EQUIPMENT' to see your current equipment.  Right
+now, you have just a vest, a shield, and a weapon.  As you go through Mud
+School you will acquire a complete set of equipment.
+To pick up items on the ground as you see them, type 'GET item'.
+To wear a piece of armor, type 'WEAR item'.
+To hold a light source, type 'HOLD item'.
+To wield a weapon, type 'WIELD weapon'.
+To wear, hold, and wield everything you have, type 'WEAR ALL'.
+To stop using a piece of equipment, type 'REMOVE item'.
+Finally, to see the items in your inventory, type 'INVENTORY'.
+When you are ready to continue, go west.
+~
+D2
+~
+~
+0 0 437
+D3
+~
+~
+0 0 441
+S
+#441
+The Center Room~
+You are in a square white room.  The walls are all blank, with no
+windows.  Light fluoresces off the ceiling in soft white tones.  Of course,
+there is a sign on the wall.  Exits lead in ALL directions.  Screams of
+dying humans and humanoids can be heard echoing throughout the massive
+training complex.  Blood drips from the ceiling in a slow, pulsing rythym.
+{RLook at the sign.{x
+~
+0 0 0
+E
+sign~
+This is the direction practicing room.  The directions you can go in any
+room are: north, south, east, west, up, or down.  Of course, not all rooms
+have all exits available.
+To see the obvious exits in a room, type 'EXITS'.
+Sometimes doors are closed, or locked, or secret.  Then you have to notice
+clues in the room description, or try going into that direction and seeing
+if you bump into a door.
+Try going into each direction from here.  When you are done, go NORTH.
+~
+D0
+~
+~
+0 0 446
+D1
+~
+~
+0 0 440
+D2
+~
+~
+0 0 443
+D3
+~
+~
+0 0 442
+D4
+~
+~
+0 0 444
+D5
+~
+~
+0 0 445
+S
+#442
+Test of Awareness~
+You are in a square white room.  The walls are all blank, with no windows.
+Light fluoresces off the ceiling in soft white tones.  Of course, there is a
+sign on the wall.  The only exit is east.
+~
+0 0 0
+D1
+~
+~
+0 0 441
+S
+#443
+Test of Awareness~
+You are in a square white room.  The walls are all blank, with no windows.
+Light fluoresces off the ceiling in soft white tones.  Of course, there is a
+sign on the wall.  The only exit is north.
+ 
+~
+0 0 0
+D0
+~
+~
+0 0 441
+S
+#444
+Test of Awareness~
+You are in a square white room.  The walls are all blank, with no windows.
+Light fluoresces off the ceiling in soft white tones.  Of course, there is a
+sign on the wall.  The only exit is down.
+~
+0 0 0
+D5
+~
+~
+0 0 441
+S
+#445
+Test of Awareness~
+You are in a square white room.  The walls are all blank, with no windows.
+Light fluoresces off the ceiling in soft white tones.  Of course, there is a
+sign on the wall.  The only exit is up.
+~
+0 0 0
+D4
+~
+~
+0 0 441
+S
+#446
+The floating room~
+You are in a square white room.  The walls are all blank, with no
+windows.  Light fluoresces off the ceiling in soft white tones.  Of course,
+there is a sign on the wall.  Exits lead north and south.
+{RLook at the sign.{x
+~
+0 0 0
+E
+sign~
+Since you are here, let us have another lesson.  You can see the statistics on
+yourself by typing 'SCORE'.  Do that right now.  At higher levels, 'SCORE'
+gives you more information.
+ 
+~
+D0
+~
+~
+0 0 448
+D2
+~
+~
+0 0 441
+D5
+~
+~
+0 0 447
+S
+#447
+~
+~
+0 0 0
+D4
+~
+~
+0 0 446
+S
+#448
+Descent into the Cage~
+You are in a square white room.  The walls are all blank, with no
+windows.  Light fluoresces off the ceiling in soft white tones.  Of course,
+there is a sign on the wall.  Exits reach west and down.  A ravaging monster
+is shredding something fleshy below you.  It snorts and growls meanly,
+occasionally sending a spray of blood up through the grate.
+{RLook at the sign.{x
+~
+0 0 0
+E
+sign~
+The first lesson is knowing whom to fight.  Use the command 'CONSIDER' to
+consider killing a monster.  Avoid fighting monsters that will kill you
+easily.
+The second lesson is running away.  There is a monster in the room down.
+He is too strong for you to kill, but he won't kill you.  So go 'DOWN' from
+here, then 'CONSIDER' him, then 'KILL' him.  After a while, type 'FLEE' to
+escape from him.
+You can also set your character to flee automatically with the 'WIMPY' command.
+Type 'HELP WIMPY' to find out more about 'WIMPY'.
+After you flee, you will be back in this room.  When you are ready to go on
+to the next station, go 'WEST'.
+~
+D2
+~
+~
+0 0 446
+D3
+~
+~
+0 0 449
+S
+#449
+Ladder to Doom~
+An old, rotted wood and rope ladder leads down into the dark.  Torches in
+leaded sconces barely give enough illumination to get you down the ladder
+safely.  Grunts and groans can be heard below.
+{RLook at the sign.{x
+~
+0 0 0
+E
+sign~
+Welcome to the next station.  Here, you will actually fight real monsters,
+without fleeing!  Kill every mob, since they hold some equipment you need.
+To start, go down.
+ 
+~
+D1
+~
+~
+0 0 448
+D5
+~
+~
+0 0 450
+S
+#450
+~
+You are in the cage room.  All around are 4 cages.  Light fluoresces off
+the ceiling in soft white tones.  Of course, there is a big sign on the
+wall.  Exits lead into the cardinal directions plus down.  Blood curdling
+screams can be heard surounding you with their noise.  A great satisfaction
+fills your body as you slink through the school, killing and maiming.  At
+last, you are home.
+~
+0 0 0
+D0
+~
+~
+0 0 453
+D1
+~
+~
+0 0 451
+D2
+~
+~
+0 0 454
+D3
+~
+~
+0 0 452
+D4
+~
+~
+0 0 449
+D5
+~
+~
+0 0 455
+S
+#451
+~
+You are in a cage.  Blood and gore are everywhere.  The keepers must be lax
+in the upkeep here!  There is a sign on the wall. The only exit is west.
+~
+0 0 0
+D3
+~
+~
+0 0 450
+S
+#452
+~
+You are in a cage.  Blood and gore are everywhere.  The keepers must be lax
+in the upkeep here!  There is a sign on the wall. The only exit is east.
+~
+0 0 0
+D1
+~
+~
+0 0 450
+S
+#453
+~
+You are in a cage.  Blood and gore are everywhere.  The keepers must be lax
+in the upkeep here!  There is a sign on the wall. The only exit is south.
+~
+0 0 0
+D2
+~
+~
+0 0 450
+S
+#454
+~
+You are in a cage.  Blood and gore are everywhere.  The keepers must be lax
+in the upkeep here!  There is a sign on the wall. The only exit is north.
+~
+0 0 0
+D0
+~
+~
+0 0 450
+S
+#455
+~
+You are in a square white room.  The walls are all blank, with no windows.
+Light fluoresces off the ceiling in soft white tones.  Of course, there is a
+sign on the wall.  Find your own exit here.
+~
+0 0 0
+D1
+~
+~
+0 0 456
+D2
+~
+~
+0 0 458
+D4
+~
+~
+0 0 450
+S
+#456
+~
+You are in a square white room.  The walls are all blank, with no windows.
+Light fluoresces off the ceiling in soft white tones.  Of course, there is a
+sign on the wall.  The exits are north and west, with a door to the east
+~
+0 0 0
+D0
+~
+~
+0 0 457
+D1
+~
+~
+0 0 459
+D3
+~
+~
+0 0 455
+S
+#457
+The Darkened Rroom~
+This room was purposefully darkened so that you would need to hold on to a
+light source to go through.  The walls are, of course, blank, and white.
+The only exit is south.
+~
+0 0 0
+D2
+~
+~
+0 0 456
+S
+#458
+The Store in Mud School~
+You are in a cramped room.  Stacked neatly on shelves everywhere are items
+and packages.  Light fluoresces off the ceiling in soft white tones.  Of
+course, there is a sign on the wall.  The only exit is north.
+~
+0 0 0
+D0
+~
+~
+0 0 455
+S
+#459
+The End of MUD School!~
+~
+0 0 0
+D3
+~
+~
+0 0 456
+S
+#460
+~
+~
+0 0 0
+D3
+~
+~
+0 0 416
+S
+#461
+~
+~
+0 0 0
+D4
+~
+~
+0 0 412
+S
+#462
+~
+~
+0 0 0
+D3
+~
+~
+0 0 410
+S
 #0
 
 
@@ -370,6 +1380,10 @@ S
 M 0 400 1 400 1 Load Baghtru's Champion
 M 0 401 1 404 1 Load The Shaman {GGrahgsar{x
 O 0 415 0 404 A donation hole loaded to Healing Room
+M 0 403 1 435 1 Load Berserker Trainer
+M 0 402 1 460 1 Load Sorcerer Trainer
+M 0 405 1 461 1 Load Shaman Trainer
+M 0 404 1 462 1 Load Knave Trainer
 S
 
 

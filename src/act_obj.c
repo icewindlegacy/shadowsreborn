@@ -7,9 +7,9 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
@@ -1965,7 +1965,7 @@ void wear_obj (CHAR_DATA * ch, OBJ_DATA * obj, bool fReplace)
         /* Felar cannot wield weapons - hand-to-hand only */
         if (!IS_NPC (ch) && ch->race == race_lookup ("felar")) /* felar is race 6 */
         {
-            send_to_char ("Your natural claws are your only weapons. You cannot wield items.\\n\\r", ch);
+            send_to_char ("Your natural claws are your only weapons. You cannot wield items.\n\r", ch);
             return;
         }
 

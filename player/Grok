@@ -1,0 +1,68 @@
+#PLAYER
+Name Grok~
+Id   1762197476
+LogO 1762220363
+Vers 6
+Prom <%hhp %mm %vmv> ~
+Race orc~
+Fact 2
+Sex  1
+Cla  7
+Levl 3
+Sec  0
+Plyd 5862
+Scro 22
+Room 3000
+PkPdMkMd 0 0 0 9 0 0 0
+HMV  49 49 105 105 112 112
+Gold 93
+Silv 4
+Gold_bank 0
+Silv_bank 0
+Shares 0
+Share_level 3
+Shares_bought 0
+Duration 0
+Exp  3122
+Act  CDEFGHIQTd
+AfBy 1024 0 -1
+Comm NOP
+Pos  5
+Prac 6
+Trai 2
+Alig  0
+ACs 100 100 100 100
+Attr 17 14 19 14 19
+AMod 0 0 0 0 0
+Pass wanker~
+Titl  the FNG~
+Pretit ~
+Pnts 0
+TSex 1
+LLev 0
+HMVP 49 105 112
+Cnd  0 0 24 24 16
+Coloura     007 013 005 001 013
+Colourb     013 003 002 006 003
+Colourc     113 002 002 002 001
+Colourd     006 007 002 006 006
+Coloure     011 002 003 001 017
+Colourf     002 002 012 012 012
+Colourg     017 015 011 017 017
+Boards       5 General 0 Ideas 0 Announce 0 Bugs 0 Personal 0 
+Quest_Curr    0
+Quest_Accum  0
+Sk 16 'reserved'
+Sk 76 'sword'
+Sk 1 'berserk'
+Sk 1 'second attack'
+Sk 1 'scrolls'
+Sk 1 'staves'
+Sk 1 'wands'
+Sk 75 'recall'
+Sk 100 'common'
+Gr 'rom basics'
+Gr 'warrior basics'
+End
+
+#END

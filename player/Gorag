@@ -1,0 +1,232 @@
+#PLAYER
+Name Gorag~
+Id   1762237805
+LogO 1762240872
+Vers 6
+Prom {R%h{w({R%H{w){Whp {G%v{w({G%V{w){Wmv {Ytnl: %X{c->%c %b %B{x ~
+Race felar~
+Fact 2
+Sex  1
+Cla  7
+Levl 3
+Sec  0
+Plyd 3065
+Scro 22
+Room 3731
+PkPdMkMd 0 0 0 11 0 0 0
+HMV  15 52 104 104 112 112
+Gold 0
+Silv 40
+Gold_bank 0
+Silv_bank 0
+Shares 0
+Share_level 3
+Shares_bought 0
+Duration 0
+Exp  3349
+Act  CDEFGHIQTd
+AfBy 1024 0 -1
+Comm NOPa
+Pos  8
+Prac 8
+Trai 2
+Alig  0
+Dam   1
+ACs 83 81 81 99
+Attr 16 12 19 16 18
+AMod 1 0 1 0 1
+Pass wanker~
+Titl  the FNG~
+Pretit ~
+Pnts 7
+TSex 1
+LLev 0
+HMVP 52 104 112
+Cnd  0 0 0 0 0
+Coloura     007 013 005 001 013
+Colourb     013 003 002 006 003
+Colourc     113 002 002 002 001
+Colourd     006 007 002 006 006
+Coloure     011 002 003 001 017
+Colourf     002 002 012 012 012
+Colourg     017 015 011 017 017
+Boards       5 General 0 Ideas 0 Announce 0 Bugs 0 Personal 0 
+Quest_Curr    0
+Quest_Accum  0
+Sk 40 'sword'
+Sk 100 'hand to hand'
+Sk 100 'ohshit'
+Sk 1 'tune'
+Sk 1 'second attack'
+Sk 1 'hide'
+Sk 1 'sneak'
+Sk 1 'scrolls'
+Sk 1 'staves'
+Sk 1 'wands'
+Sk 75 'recall'
+Sk 100 'common'
+Gr 'rom basics'
+Gr 'warrior basics'
+End
+
+#O
+Vnum 411
+Nest 0
+Wear 0
+Plev 0
+Cost 0
+Qcost 0
+Val  0 0 449 0 0
+End
+
+#O
+Vnum 413
+Nest 0
+Wear 20
+Plev 0
+Cost 0
+Qcost 0
+End
+
+#O
+Vnum 409
+Nest 0
+Cond 99
+Wear 5
+Plev 0
+Cost 0
+Qcost 0
+End
+
+#O
+Vnum 402
+Nest 0
+Cond 86
+Wear -1
+Plev 0
+Cost 250
+Qcost 0
+End
+
+#O
+Vnum 410
+Nest 0
+Cond 98
+Wear 11
+Plev 0
+Cost 0
+Qcost 0
+End
+
+#O
+Vnum 3705
+Nest 0
+Wear 4
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3705
+Nest 0
+Cond 99
+Wear 3
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3708
+Nest 0
+Wear 8
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3713
+Nest 0
+Wear 14
+Plev 0
+Cost 48
+Qcost 0
+End
+
+#O
+Vnum 3706
+Nest 0
+Wear 6
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3711
+Nest 0
+Wear 12
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3707
+Nest 0
+Wear 7
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3712
+Nest 0
+Cond 99
+Wear 13
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3709
+Nest 0
+Wear 9
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3710
+Nest 0
+Wear 10
+Plev 0
+Cost 72
+Qcost 0
+End
+
+#O
+Vnum 3713
+Nest 0
+Cond 97
+Wear 15
+Plev 0
+Cost 48
+Qcost 0
+End
+
+#O
+Vnum 3715
+Nest 0
+Wear 17
+Plev 0
+Cost 1140
+Qcost 0
+End
+
+#END

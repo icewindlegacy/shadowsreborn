@@ -1,0 +1,32 @@
+act_obj.c:            obj->timer = 0;
+act_obj.c:            if (obj->timer)
+act_obj.c:                obj->timer = number_range (100, 200);
+act_obj.c:                    if (obj->timer)
+act_obj.c:                        obj->timer = number_range (100, 200);
+act_obj.c:                    if (obj->timer)
+act_obj.c:                        obj->timer = number_range (100, 200);
+act_obj.c:            if (t_obj->timer > 0 && !IS_OBJ_STAT (t_obj, ITEM_HAD_TIMER))
+act_obj.c:                t_obj->timer = 0;
+act_obj.c:        if (obj->timer)
+act_obj.c:            obj->timer = number_range (50, 100);
+act_wiz.c:             obj->level, obj->cost, obj->condition, obj->timer);
+act_wiz.c:        obj->timer = value;
+db.c:    obj->timer = pObjIndex->timer;
+db.c:            KEY( "Timer",       obj->timer,             fread_number( fp ) );
+db.c:            KEY( "Time",        obj->timer,             fread_number( fp ) );
+fight.c:            obj->timer = number_range (500, 1000);
+fight.c:            obj->timer = number_range (1000, 2500);
+fight.c:            obj->timer = number_range (5, 10);
+fight.c:        obj->timer = number_range (4, 7);
+fight.c~:            obj->timer = number_range (500, 1000);
+fight.c~:            obj->timer = number_range (1000, 2500);
+fight.c~:            obj->timer = number_range (5, 10);
+fight.c~:        obj->timer = number_range (4, 7);
+save.c:    if (obj->timer != 0)
+save.c:        fprintf (fp, "Time %d\n", obj->timer);
+save.c:                KEY ("Timer", obj->timer, fread_number (fp));
+save.c:                KEY ("Time", obj->timer, fread_number (fp));
+save.c:    fprintf( fp, "Timer        %d\n",   obj->timer                   );
+update.c:                if (obj->timer > 0)
+update.c:                    if (--obj->timer == 0)
+update.c:        if (obj->timer <= 0 || --obj->timer > 0)
