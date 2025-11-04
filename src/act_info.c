@@ -4998,4 +4998,35 @@ void do_bandage( CHAR_DATA *ch, char *argument)
     return;
 }
 }
+
+void do_recent( CHAR_DATA *ch, char *argument )
+{
+    if( ch == NULL ) {
+        return;
+    }
+    else if( recent_first == NULL || recent_free == NULL ) {
+        send_to_char("There have been no recent logoffs.\n\r", ch );
+        return;
+    }
+    else {
+        RECENT_DATA *r;
+        char buf[MAX_STRING_LENGTH], lo[16], lf[16];
+
+        sprintf( buf, " %-15s | %-15s | %-15s\n\r", "Character",
+            "Log on time", "Log off time" );
+        send_to_char( buf, ch );
+        send_to_char("-----------------------------------------------------\n\r",
+            ch );
+
+        for( r = recent_free->next; r != recent_free && r != NULL; r = r->next ) {
+            if( r->used ) {
+                timeString( r->logOn , lo );
+                timeString( r->logOff, lf );
+                sprintf( buf, " %-15s | %-15s | %-15s\n\r", r->name, lo, lf );
+                send_to_char( buf, ch );
+            }
+        }
+    }
+    return;
+}
  

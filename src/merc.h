@@ -139,6 +139,7 @@ typedef struct    obj_data         OBJ_DATA;
 typedef struct    obj_index_data   OBJ_INDEX_DATA;
 typedef struct    pc_data          PC_DATA;
 typedef struct    gen_data         GEN_DATA;
+typedef struct    recent_data      RECENT_DATA;
 typedef struct    reset_data       RESET_DATA;
 
 /* table struct definitions */
@@ -473,7 +474,18 @@ struct bounty_data
     int         amount;
 };
 
-
+/*
+ * Recent player tracking data.
+ */
+struct recent_data
+{
+    RECENT_DATA *prev;
+    RECENT_DATA *next;
+    char        name[16];
+    time_t      logOn;
+    time_t      logOff;
+    bool        used;
+};
 
 /*
  * Time and weather stuff.
@@ -2622,6 +2634,8 @@ extern    char *    const    tick_table                      [];
  */
 extern  HELP_DATA		*	help_first;
 extern  SHOP_DATA		*	shop_first;
+extern  RECENT_DATA		*	recent_first;
+extern  RECENT_DATA		*	recent_free;
 
 extern  CHAR_DATA		*	char_list;
 extern  DESCRIPTOR_DATA	*	descriptor_list;
@@ -2893,6 +2907,8 @@ void     free_mem            args( ( void *pMem, int sMem ) );
 char *   str_dup             args( ( const char *str ) );
 void     free_string         args( ( char *pstr ) );
 int      number_fuzzy        args( ( int number ) );
+bool     recent_create       args( ( sh_int size ) );
+bool     recent_add          args( ( CHAR_DATA *ch ) );
 int      number_range        args( ( int from, int to ) );
 bool     number_chance       args( ( int num ) );
 int      number_percent      args( ( void ) );
@@ -2947,6 +2963,7 @@ void    stop_hating     args( ( CHAR_DATA *ch ) );
 void    start_hating    args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
 
 /* handler.c */
+void    timeString      args( ( time_t time, char here[16] ) );
 AD      *affect_find args( (AFFECT_DATA *paf, int sn));
 void    affect_check    args( (CHAR_DATA *ch, int where, int vector) );
 int    count_users    args( (OBJ_DATA *obj) );
@@ -3060,6 +3077,7 @@ bool    saves_spell    args( ( int level, CHAR_DATA *victim, int dam_type ) );
 void    obj_cast_spell    args( ( int sn, int level, CHAR_DATA *ch,
                     CHAR_DATA *victim, OBJ_DATA *obj ) );
 void    do_scribe    args( ( CHAR_DATA *ch, char *argument ) );
+void    do_recent    args( ( CHAR_DATA *ch, char *argument ) );
 
 /* mob_prog.c */
 void    program_flow    args( ( sh_int vnum, char *source, CHAR_DATA *mob, CHAR_DATA *ch,

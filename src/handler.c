@@ -3931,3 +3931,21 @@ bool auto_quaff(CHAR_DATA *ch, OBJ_DATA *obj)
   return TRUE;
 }
 
+void timeString( time_t time, char here[16] )
+{
+    int  count;
+    char buf[MAX_STRING_LENGTH], tim[16];
+
+    /* Turn the time into a string. */
+    sprintf( buf, ctime( &time ) );
+
+    /* Chop the day and year. */
+    for( count = 0; count < 16; count++ ) {
+        tim[count] = buf[count+4];
+    }
+
+    tim[15] = '\0';
+    sprintf( here, tim );
+    return;
+}
+

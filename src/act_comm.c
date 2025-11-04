@@ -3111,6 +3111,7 @@ void do_quit (CHAR_DATA * ch, char *argument)
     act ("$n has left the game.", ch, NULL, NULL, TO_ROOM);
     sprintf (log_buf, "%s has quit.", ch->name);
     log_string (log_buf);
+    recent_add( ch );
     wiznet ("$N rejoins the real world.", ch, NULL, WIZ_LOGINS, 0,
             get_trust (ch));
             info( ch, 0, "{W[{YINFO{W]:{x %s just logged out!", ch->name );

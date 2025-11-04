@@ -100,6 +100,9 @@ HELP_AREA *had_list;
 SHOP_DATA *shop_first;
 SHOP_DATA *shop_last;
 
+RECENT_DATA *recent_first;
+RECENT_DATA *recent_free;
+
 NOTE_DATA *note_free;
 
 MPROG_CODE *mprog_list;
@@ -4632,4 +4635,65 @@ void load_storage( char *filename )
         }
         fclose( fp );
     }
+}
+
+bool recent_create( sh_int size )
+{
+    if( size < 1 ) {
+        bug( "recent_create: passed a size < 1, size: %d", size );
+        return FALSE;
+    }
+    else {
+        RECENT_DATA *r;
+        int count;
+
+        if( recent_first == NULL ) {
+            recent_first          = alloc_perm( sizeof( *r ) );
+            recent_first->prev    = NULL;
+            recent_first->next    = NULL;
+            recent_first->name[0] = '\0';
+            recent_first->logOn   = time(0);
+            recent_first->logOff  = time(0);
+            recent_first->used    = FALSE;
+            recent_free           = recent_first;
+        }
+
+        for( count = 0; count < size; count++ ) {
+            r          = alloc_perm( sizeof( *r ) );
+            r->prev    = NULL;
+            r->next    = NULL;
+            r->name[0] = '\0';
+            r->logOn   = time(0);
+            r->logOff  = time(0);
+            r->used    = FALSE;
+
+            recent_first->prev = r; /* look back to new entry */
+            r->next = recent_first; /* look ahead to recent_first */
+            recent_first = r;       /* push recent_first, take its place */
+        }
+
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool recent_add( CHAR_DATA *ch )
+{
+    if( ch == NULL ) {
+        return FALSE;
+    }
+    if( recent_free == NULL || recent_first == NULL ) {
+        if( !recent_create( 20 ) ) {
+            bug("recent_add: call 'recent_create( 20 )' failed.", 0 );
+            return FALSE;
+        }
+    }
+
+    sprintf( recent_free->name, ch->name );
+    recent_free->logOn  = ch->logon;
+    recent_free->logOff = time(0);
+    recent_free->used   = TRUE;
+    recent_free         = recent_free->prev;
+
+    return TRUE;
 }
