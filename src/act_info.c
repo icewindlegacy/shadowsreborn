@@ -126,6 +126,24 @@ char *format_obj_to_char (OBJ_DATA * obj, CHAR_DATA * ch, bool fShort)
         || (obj->description == NULL || obj->description[0] == '\0'))
         return buf;
 
+        if (!IS_SET(ch->comm, COMM_LONG) )
+    {
+	strcat( buf, "{x[{y.{R.{B.{M.{Y.{W.{G.{x]");
+	if ( IS_OBJ_STAT(obj, ITEM_INVIS)	)   buf[5] = 'V';
+	if ( IS_AFFECTED(ch, AFF_DETECT_EVIL)
+	&& IS_OBJ_STAT(obj, ITEM_EVIL)		)   buf[8] = 'E';
+	if (IS_AFFECTED(ch, AFF_DETECT_GOOD)
+	&&  IS_OBJ_STAT(obj,ITEM_BLESS)		)   buf[11] = 'B';
+	if ( IS_AFFECTED(ch, AFF_DETECT_MAGIC)
+	&& IS_OBJ_STAT(obj, ITEM_MAGIC)		)   buf[14] = 'M';
+	if ( IS_OBJ_STAT(obj, ITEM_GLOW)	)   buf[17] = 'G';
+	if ( IS_OBJ_STAT(obj, ITEM_HUM)		)   buf[20] = 'H';
+	if ( IS_OBJ_STAT(obj, ITEM_QUEST)	)   buf[23] = 'Q';
+	if (!strcmp(buf, "{x[{y.{R.{B.{M.{Y.{W.{G.{x]") )
+	    buf[0] = '\0';
+    }
+    else 
+    {
     if (IS_OBJ_STAT (obj, ITEM_INVIS))
         strcat (buf, "{W({CInvis{W){x ");
     if (IS_AFFECTED (ch, AFF_DETECT_EVIL) && IS_OBJ_STAT (obj, ITEM_EVIL))
@@ -140,7 +158,12 @@ char *format_obj_to_char (OBJ_DATA * obj, CHAR_DATA * ch, bool fShort)
         strcat (buf, "{W({gHumming{W){x ");
     if (IS_OBJ_STAT (obj, ITEM_QUESTITEM))
 	strcat (buf, "{W({CA{MQS{CT{W){x ");
+    }
 
+    if (buf[0] != '\0')
+    {
+	strcat(buf, " ");
+    }
     if (fShort)
     {
         if (obj->short_descr != NULL)
@@ -151,6 +174,9 @@ char *format_obj_to_char (OBJ_DATA * obj, CHAR_DATA * ch, bool fShort)
         if (obj->description != NULL)
             strcat (buf, obj->description);
     }
+    if (strlen(buf)<=0)
+	strcat(buf,"This object has no description. Please inform the IMP.");
+
 
     return buf;
 }
@@ -284,6 +310,32 @@ void show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
 
     buf[0] = '\0';
 
+    if (!IS_SET(ch->comm, COMM_LONG) )
+    {
+	strcat( buf, "{x[{y.{D.{M.{b.{m.{R.{Y.{W.{G.{x]");
+	if ( IS_AFFECTED(victim, AFF_INVISIBLE)   ) buf[5] = 'V';
+	if ( IS_AFFECTED(victim, AFF_HIDE)        ) buf[8] = 'H';
+	if ( IS_AFFECTED(victim, AFF_CHARM)       ) buf[11] = 'C';
+	if ( IS_AFFECTED(victim, AFF_PASS_DOOR)   ) buf[14] = 'T';
+	if ( IS_AFFECTED(victim, AFF_FAERIE_FIRE) ) buf[17] = 'P';
+	if ( IS_EVIL(victim)
+	&& IS_AFFECTED(ch, AFF_DETECT_EVIL)     ) buf[20] = 'E';
+	if ( IS_GOOD(victim)
+	&&   IS_AFFECTED(ch, AFF_DETECT_GOOD)     ) buf[23] = 'G';
+	if ( IS_AFFECTED(victim, AFF_SANCTUARY)   ) buf[26] = 'S';
+	/*if ( victim->on_gquest )
+	{
+	    if (!IS_NPC(victim) || IS_IMMORTAL(ch))
+		buf[38] = 'Q';
+	}*/
+	if (!strcmp(buf, "{x[{y.{D.{M.{b.{m.{R.{Y.{W.{G.{x]") )
+	    buf[0] = '\0';
+	if ( IS_SET(victim->comm,COMM_AFK  )      ) strcat( buf, "[{yAFK{x]");
+	if ( victim->invis_level >= LEVEL_HERO    ) strcat( buf, "({WWizi{x)");
+    }
+    else
+    {
+    }
     if ( RIDDEN(victim) )
         if ( ch != RIDDEN(victim) )
             strcat( buf, "(Ridden) " );
@@ -806,6 +858,12 @@ void do_autolist (CHAR_DATA * ch, char *argument)
     else
         send_to_char ("{ROFF{x\n\r", ch);
 
+        send_to_char("long flags     ",ch);
+        if (IS_SET(ch->comm,COMM_LONG))
+        send_to_char("{GON{x\n\r",ch);
+        else
+        send_to_char("{ROFF{x\n\r",ch);
+    
     if (!IS_SET (ch->act, PLR_CANLOOT))
         send_to_char ("Your corpse is safe from thieves.\n\r", ch);
     else
@@ -1019,6 +1077,21 @@ void do_compact (CHAR_DATA * ch, char *argument)
         SET_BIT (ch->comm, COMM_COMPACT);
     }
 }
+
+void do_long(CHAR_DATA *ch, char *argument)
+{
+    if (!IS_SET(ch->comm,COMM_LONG))
+    {
+      send_to_char("Long flags activated.\n\r",ch);
+      SET_BIT(ch->comm,COMM_LONG);
+    }
+    else
+    {
+      send_to_char("Short flags activated.\n\r",ch);
+      REMOVE_BIT(ch->comm,COMM_LONG);
+    }
+}
+
 
 void do_show (CHAR_DATA * ch, char *argument)
 {
