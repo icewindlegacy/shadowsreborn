@@ -1,0 +1,36 @@
+# Player and god files
+player/
+gods/
+
+# Build artifacts
+src/obj/
+src/rom
+*.o
+
+# Backup files
+*.bak
+*.bak2
+*.sav
+*.save
+*~
+
+# IDE/Editor files
+src/.codelite/
+src/.ctagsd/
+src/*.workspace
+src/*.geany
+
+# Development files
+src/Makefile.linux
+src/Makefile.solaris
+src/Makefile.windows
+src/Makefile.mine
+src/Makefile.flugh
+src/Makefile.normal
+
+# Misc files
+src/timer.txt
+src/xptl.txt
+src/*.py
+src/new.score
+
