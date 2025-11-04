@@ -943,14 +943,17 @@ void one_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary )
 
     if (result && wield != NULL && wield->item_type == ITEM_WEAPON)
     {
-        int wear = 1;
+        int wear = 0;
 
-        if (dam > 60)
+        if (dam > 40)
             wear++;
-        if (dam > 120)
+        if (dam > 100)
+            wear++;
+        if (dam > 200)
             wear++;
 
-        damage_item_condition(wield, wear, ch);
+        if (wear > 0)
+            damage_item_condition(wield, wear, ch);
     }
 
     /* Vorpal weapon code by Kyle Boyd (boyd1@proaxis.com) */
@@ -1738,14 +1741,17 @@ static void apply_armor_wear (CHAR_DATA *victim, int dam)
     if (armor == NULL)
         return;
 
-    wear = 1;
+    wear = 0;
 
-    if (dam > 60)
+    if (dam > 40)
         wear++;
-    if (dam > 120)
+    if (dam > 100)
+        wear++;
+    if (dam > 200)
         wear++;
 
-    damage_item_condition(armor, wear, victim);
+    if (wear > 0)
+        damage_item_condition(armor, wear, victim);
 }
 
 

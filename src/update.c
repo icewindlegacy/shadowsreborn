@@ -1144,11 +1144,11 @@ void obj_update (void)
             int chance;
 
             if (obj->wear_loc != WEAR_NONE)
-                chance = 2400;
+                chance = 7200;      /* Worn: 3x slower */
             else if (obj->carried_by != NULL)
-                chance = 3600;
+                chance = 10800;     /* Carried: 3x slower */
             else
-                chance = 1200;
+                chance = 3600;      /* Ground: 3x slower */
 
             if (chance < 1)
                 chance = 1;
