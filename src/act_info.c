@@ -83,7 +83,7 @@ char *const where_name[] = {
     "{C<{Wworn around neck{C>{x  ",
     "{C<{Wworn on torso{C>{x     ",
     "{C<{Wworn on head{C>{x      ",
-    "{C<{Wworn on legs{C}>{x     ",
+    "{C<{Wworn on legs{C>{x      ",
     "{C<{Wworn on feet{C>{x      ",
     "{C<{Wworn on hands{C>{x     ",
     "{C<{Wworn on arms{C>{x      ",
