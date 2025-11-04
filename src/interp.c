@@ -418,6 +418,7 @@ const struct cmd_type cmd_table[] = {
     {"reboot",		do_reboot,	POS_DEAD, L1, LOG_ALWAYS, 1},
     {"set",		do_set,		POS_DEAD, L2, LOG_ALWAYS, 1},
     {"damage",		do_damage_item,	POS_DEAD, L2, LOG_NORMAL, 1},
+    {"conditions",	do_conditions,	POS_DEAD, 0, LOG_NORMAL, 1},
     {"shutdow",		do_shutdow,	POS_DEAD, L1, LOG_NORMAL, 0},
     {"shutdown",	do_shutdown,	POS_DEAD, L1, LOG_ALWAYS, 1},
 /*  { "sockets",    do_sockets,    POS_DEAD,    L4,  LOG_NORMAL, 1 }, */

@@ -4351,6 +4351,31 @@ void do_damage_item (CHAR_DATA * ch, char *argument)
     return;
 }
 
+/* Debug command to check condition values */
+void do_conditions (CHAR_DATA * ch, char *argument)
+{
+    char buf[MAX_STRING_LENGTH];
+    
+    if (IS_NPC (ch))
+    {
+        send_to_char ("NPCs don't have conditions.\n\r", ch);
+        return;
+    }
+    
+    send_to_char ("Your current condition values:\n\r", ch);
+    sprintf (buf, "  Drunk:    %d\n\r", ch->pcdata->condition[COND_DRUNK]);
+    send_to_char (buf, ch);
+    sprintf (buf, "  Full:     %d\n\r", ch->pcdata->condition[COND_FULL]);
+    send_to_char (buf, ch);
+    sprintf (buf, "  Thirst:   %d (max 48)\n\r", ch->pcdata->condition[COND_THIRST]);
+    send_to_char (buf, ch);
+    sprintf (buf, "  Hunger:   %d (max 48)\n\r", ch->pcdata->condition[COND_HUNGER]);
+    send_to_char (buf, ch);
+    sprintf (buf, "  Bleeding: %d (0=not bleeding, >0=bleeding)\n\r", ch->pcdata->condition[COND_BLEEDING]);
+    send_to_char (buf, ch);
+    return;
+}
+
 
 
 void do_rset (CHAR_DATA * ch, char *argument)

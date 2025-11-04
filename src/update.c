@@ -419,6 +419,7 @@ int move_gain (CHAR_DATA * ch)
 void gain_condition (CHAR_DATA * ch, int iCond, int value)
 {
     int condition;
+    int new_condition;
 
     if (value == 0 || IS_NPC (ch) || ch->level >= LEVEL_IMMORTAL)
         return;
@@ -427,6 +428,34 @@ void gain_condition (CHAR_DATA * ch, int iCond, int value)
     if (condition == -1)
         return;
     ch->pcdata->condition[iCond] = URANGE (0, condition + value, 48);
+    new_condition = ch->pcdata->condition[iCond];
+
+    /* Send graduated warning messages for hunger and thirst */
+    if (value < 0)  /* Only when decreasing */
+    {
+        if (iCond == COND_HUNGER)
+        {
+            if (new_condition == 15 && condition > 15)
+                send_to_char ("{YYour stomach rumbles.{x\n\r", ch);
+            else if (new_condition == 10 && condition > 10)
+                send_to_char ("{YYou are getting very hungry.{x\n\r", ch);
+            else if (new_condition == 5 && condition > 5)
+                send_to_char ("{RYour stomach aches with hunger!{x\n\r", ch);
+            else if (new_condition == 3 && condition > 3)
+                send_to_char ("{RYou are starving!{x\n\r", ch);
+        }
+        else if (iCond == COND_THIRST)
+        {
+            if (new_condition == 15 && condition > 15)
+                send_to_char ("You feel parched.\n\r", ch);
+            else if (new_condition == 10 && condition > 10)
+                send_to_char ("{YYou are getting very thirsty.{x\n\r", ch);
+            else if (new_condition == 5 && condition > 5)
+                send_to_char ("{RYour throat is parched and dry!{x\n\r", ch);
+            else if (new_condition == 3 && condition > 3)
+                send_to_char ("{RYou are dying of thirst!{x\n\r", ch);
+        }
+    }
 
     if (ch->pcdata->condition[iCond] == 0)
     {
@@ -853,6 +882,21 @@ void char_update (void)
             gain_condition (ch, COND_THIRST, -1);
             gain_condition (ch, COND_HUNGER,
                             ch->size > SIZE_MEDIUM ? -2 : -1);
+            
+            /* Reduce bleeding over time - heals naturally */
+            if (ch->pcdata->condition[COND_BLEEDING] > 0)
+            {
+                /* Reduce faster when resting/sleeping, slower when fighting */
+                int bleed_reduction = 1;
+                if (ch->position == POS_SLEEPING)
+                    bleed_reduction = 3;
+                else if (ch->position == POS_RESTING)
+                    bleed_reduction = 2;
+                else if (ch->position == POS_FIGHTING)
+                    bleed_reduction = 0;  /* No healing while fighting */
+                    
+                gain_condition (ch, COND_BLEEDING, -bleed_reduction);
+            }
         }
 
         for (paf = ch->affected; paf != NULL; paf = paf_next)

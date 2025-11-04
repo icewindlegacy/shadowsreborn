@@ -1659,6 +1659,9 @@ void spell_cure_critical (int sn, int level, CHAR_DATA * ch, void *vo,
     send_to_char ("You feel better!\n\r", victim);
     if (ch != victim)
         send_to_char ("Ok.\n\r", ch);
+    /* Clear bleeding when healed */
+    if (!IS_NPC(victim))
+        victim->pcdata->condition[COND_BLEEDING] = 0;
     return;
 }
 
@@ -1702,6 +1705,9 @@ void spell_cure_light (int sn, int level, CHAR_DATA * ch, void *vo,
     send_to_char ("You feel better!\n\r", victim);
     if (ch != victim)
         send_to_char ("Ok.\n\r", ch);
+    /* Clear bleeding when healed */
+    if (!IS_NPC(victim))
+        victim->pcdata->condition[COND_BLEEDING] = 0;
     return;
 }
 
@@ -1743,6 +1749,9 @@ void spell_cure_serious (int sn, int level, CHAR_DATA * ch, void *vo,
     send_to_char ("You feel better!\n\r", victim);
     if (ch != victim)
         send_to_char ("Ok.\n\r", ch);
+    /* Clear bleeding when healed */
+    if (!IS_NPC(victim))
+        victim->pcdata->condition[COND_BLEEDING] = 0;
     return;
 }
 
@@ -3153,6 +3162,9 @@ void spell_heal (int sn, int level, CHAR_DATA * ch, void *vo, int target)
     send_to_char ("A warm feeling fills your body.\n\r", victim);
     if (ch != victim)
         send_to_char ("Ok.\n\r", ch);
+    /* Clear bleeding when healed */
+    if (!IS_NPC(victim))
+        victim->pcdata->condition[COND_BLEEDING] = 0;
     return;
 }
 

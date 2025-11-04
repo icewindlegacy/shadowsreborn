@@ -76,27 +76,27 @@
 void look_window( CHAR_DATA *ch, OBJ_DATA *obj );
 
 char *const where_name[] = {
-    "{C<{Wused as light{C}>{x}     ",
-    "{C<{Wworn on finger{C}>{x}    ",
-    "{C<{Wworn on finger{C}>{x}    ",
-    "{C<{Wworn around neck{C}>{x}  ",
-    "{C<{Wworn around neck{C}>{x}  ",
-    "{C<{Wworn on torso{C}>{x}     ",
-    "{C<{Wworn on head{C}>{x}      ",
-    "{C<{Wworn on legs{C}>{x}      ",
-    "{C<{Wworn on feet{C}>{x}      ",
-    "{C<{Wworn on hands{C}>{x}     ",
-    "{C<{Wworn on arms{C}>{x}      ",
-    "{C<{Wworn as shield{C}>{x}    ",
-    "{C<{Wworn about body{C}>{x}   ",
-    "{C<{Wworn about waist{C}>{x}  ",
-    "{C<{Wworn around wrist{C}>{x} ",
-    "{C<{Wworn around wrist{C}>{x} ",
-    "{C<{Wwielded{C}>{x}           ",
-    "{C<{Wheld{C}>{x}              ",
-    "{C<{Wfloating nearby{C}>{x}   ",
-    "{C<{Wsecondary weapon{C}>{x}  ",
-    "{C<{Wcommstone link{C}>{x}    ",
+    "{C<{Wused as light{C>{x     ",
+    "{C<{Wworn on finger{C>{x    ",
+    "{C<{Wworn on finger{C>{x    ",
+    "{C<{Wworn around neck{C>{x  ",
+    "{C<{Wworn around neck{C>{x  ",
+    "{C<{Wworn on torso{C>{x     ",
+    "{C<{Wworn on head{C>{x      ",
+    "{C<{Wworn on legs{C}>{x     ",
+    "{C<{Wworn on feet{C>{x      ",
+    "{C<{Wworn on hands{C>{x     ",
+    "{C<{Wworn on arms{C>{x      ",
+    "{C<{Wworn as shield{C>{x    ",
+    "{C<{Wworn about body{C>{x   ",
+    "{C<{Wworn about waist{C>{x  ",
+    "{C<{Wworn around wrist{C>{x ",
+    "{C<{Wworn around wrist{C>{x ",
+    "{C<{Wwielded{C>{x           ",
+    "{C<{Wheld{C>{x              ",
+    "{C<{Wfloating nearby{C>{x   ",
+    "{C<{Wsecondary weapon{C>{x  ",
+    "{C<{Wcommstone link{C>{x    ",
 };
 
 
@@ -2095,11 +2095,40 @@ void do_score( CHAR_DATA *ch, char *argument )
      /* Condition info */
     if (!IS_NPC (ch) && ch->pcdata->condition[COND_DRUNK] > 10)
         send_to_char ("You are drunk.\n\r", ch);
-    if (!IS_NPC (ch) && ch->pcdata->condition[COND_THIRST] == 0)
-        send_to_char ("You are thirsty.\n\r", ch);
-    if (!IS_NPC (ch) && ch->pcdata->condition[COND_HUNGER] == 0)
-        send_to_char ("You are hungry.\n\r", ch);
-    if (!IS_NPC (ch) && ch->pcdata->condition[COND_BLEEDING] == 0)
+    
+    /* Thirst messages - graduated based on severity */
+    if (!IS_NPC (ch))
+    {
+        int thirst = ch->pcdata->condition[COND_THIRST];
+        if (thirst == 0)
+            send_to_char ("{RYou are dying of thirst!{x\n\r", ch);
+        else if (thirst <= 5)
+            send_to_char ("{RYour throat is parched and dry.{x\n\r", ch);
+        else if (thirst <= 10)
+            send_to_char ("{YYou are very thirsty.{x\n\r", ch);
+        else if (thirst <= 15)
+            send_to_char ("{YYou are thirsty.{x\n\r", ch);
+        else if (thirst <= 20)
+            send_to_char ("You could use a drink.\n\r", ch);
+    }
+    
+    /* Hunger messages - graduated based on severity */
+    if (!IS_NPC (ch))
+    {
+        int hunger = ch->pcdata->condition[COND_HUNGER];
+        if (hunger == 0)
+            send_to_char ("{RYou are starving to death!{x\n\r", ch);
+        else if (hunger <= 5)
+            send_to_char ("{RYour stomach aches with hunger.{x\n\r", ch);
+        else if (hunger <= 10)
+            send_to_char ("{YYou are very hungry.{x\n\r", ch);
+        else if (hunger <= 15)
+            send_to_char ("{YYour stomach rumbles.{x\n\r", ch);
+        else if (hunger <= 20)
+            send_to_char ("You feel a bit peckish.\n\r", ch);
+    }
+    
+    if (!IS_NPC (ch) && ch->pcdata->condition[COND_BLEEDING] > 0)
         send_to_char ("You are {Rbleeding{x\n\r", ch);
 
     /* Immortal info */
@@ -3538,9 +3567,6 @@ void do_equipment( CHAR_DATA *ch, char *argument )
 
         found = TRUE;
     }
-
-    if (!found)
-        send_to_char("Nothing.\n\r", ch);
 }
 
 
@@ -4955,6 +4981,9 @@ void do_bandage( CHAR_DATA *ch, char *argument)
     act("You apply bandages to yourself.\n\r",ch,NULL,victim,TO_CHAR);
     victim->hit = (victim->hit += 200);
     ch->move = (ch->move -=200);
+    /* Clear bleeding when bandaging */
+    if (!IS_NPC(victim))
+        victim->pcdata->condition[COND_BLEEDING] = 0;
     check_improve(ch,gsn_bandage,FALSE,2);
     }else{
     act("$n kneels down and begins to bandage $N.\n\r",ch,NULL,victim,TO_NOTVICT);
@@ -4962,6 +4991,9 @@ void do_bandage( CHAR_DATA *ch, char *argument)
     act("You apply bandages to $N's wounds.\n\r",ch,NULL,victim,TO_CHAR);
     victim->hit = (victim->hit += 200);
      ch->move = (ch->move -=200);
+    /* Clear bleeding when bandaging */
+    if (!IS_NPC(victim))
+        victim->pcdata->condition[COND_BLEEDING] = 0;
     check_improve(ch,gsn_bandage,FALSE,2);
     return;
 }
