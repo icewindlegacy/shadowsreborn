@@ -1,0 +1,67 @@
+Guild Commands
+==============
+
+The following commands are available for clan/guild management:
+
+CLIST
+-----
+Syntax: clist
+
+Shows a listing of all available clans, their names, and minimum level 
+requirements for joining.
+
+CGUILD
+------
+Syntax: cguild <character>
+
+This command allows clan leaders to manage clan membership:
+
+- To invite someone to your clan: cguild <character>
+  (The character must be independent and meet the minimum level requirement)
+
+- To outcast someone from your clan: cguild <character> 
+  (When used on a current clan member, they become outcast)
+
+- To remove outcast status: cguild <character>
+  (Only immortals can remove outcast status)
+
+Note: Only clan leaders can use this command. You must be a leader of a 
+clan to invite or outcast members.
+
+CLAN
+----
+Syntax: clan [message]
+       clan
+
+- clan <message> - Send a message to all members of your clan
+- clan (no arguments) - Toggle clan channel on/off
+
+This command allows clan members to communicate with each other. When you 
+send a message, it will be seen by all online clan members who have the 
+clan channel enabled.
+
+Clan Information
+================
+
+Available Clans:
+- Rom (Immortal level required)
+- Hades (Level 30+ required)  
+- Light (Level 30+ required)
+- Outcast (Independent group)
+- Loner (Independent group)
+
+Note: Outcast and Loner are not true clans but rather status groups.
+
+Clan Leadership
+===============
+
+Only clan leaders can use the cguild command to manage membership. Leaders 
+are appointed by immortals using the 'cleader' command.
+
+When you join a clan, you gain access to:
+- Clan communication channel
+- Clan-specific recall rooms
+- Clan membership benefits
+
+For more information about specific clans, ask other players or check 
+with the immortals.

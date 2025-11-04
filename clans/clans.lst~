@@ -1,0 +1,48 @@
+#Clan 0
+Name: 
+Who: 
+Deathroom: 3000
+Recall: 3001
+Independent: true
+MinLevel: 0
+
+#Clan 1
+Name: Phoenix
+Who: {rP{Rh{Yo{We{Yn{Ri{rx{x
+Deathroom: 3000
+Recall: 3001
+Independent: false
+MinLevel: 10
+
+#Clan 2
+Name: loner
+Who: {w[{WLoner{w]{x
+Deathroom: 3000
+Recall: 3001
+Independent: false
+MinLevel: 10
+
+#Clan 3
+Name: horde
+Who: {M<HORDE>{x
+Deathroom: 3000
+Recall: 3001
+Independent: false
+MinLevel: 10
+
+#Clan 4
+Name: Immortal
+Who: {C({BI{bm{Bm{bo{Br{bt{Ba{bl{C){x
+Deathroom: 1200
+Recall: 1200
+Independent: false
+MinLevel: 51
+
+#Clan 5
+Name: 
+Who: 
+Deathroom: 3000
+Recall: 3001
+Independent: true
+MinLevel: 0
+

@@ -1,0 +1,177 @@
+#AREADATA
+Name Test Broken Area~
+Builders None~
+VNUMs 9900 9999
+Security 9
+End
+
+#AREA
+Test Broken Area~
+None
+9900 9999
+
+#MOBILES
+#9900
+test mob~
+a test mob~
+A test mob is standing here.
+~
+A basic test mob.
+~
+human~
+ACT_SENTINEL
+0 0 0
+5 0
+1d1+10 1d1+1 1d3+0 none
+0 0 0 0
+0 0 0 0
+stand stand male 100
+FORM_EDIBLE|FORM_SENTIENT|FORM_BIPED|FORM_MAMMAL
+PART_HEAD|PART_ARMS|PART_LEGS|PART_HEART|PART_GUTS
+medium unknown
+
+#9901
+duplicate mob~
+a duplicate mob~
+A duplicate mob is here.
+~
+This mobile will be loaded twice - second should be skipped.
+~
+human~
+ACT_SENTINEL
+0 0 0
+5 0
+1d1+10 1d1+1 1d3+0 none
+0 0 0 0
+0 0 0 0
+stand stand male 100
+FORM_EDIBLE|FORM_SENTIENT|FORM_BIPED|FORM_MAMMAL
+PART_HEAD|PART_ARMS|PART_LEGS|PART_HEART|PART_GUTS
+medium unknown
+
+#9901
+duplicate mob again~
+another duplicate~
+Another duplicate mob is here.
+~
+This is a duplicate vnum 9901 - should be skipped!
+~
+human~
+ACT_SENTINEL
+0 0 0
+5 0
+1d1+10 1d1+1 1d3+0 none
+0 0 0 0
+0 0 0 0
+stand stand male 100
+FORM_EDIBLE|FORM_SENTIENT|FORM_BIPED|FORM_MAMMAL
+PART_HEAD|PART_ARMS|PART_LEGS|PART_HEART|PART_GUTS
+medium unknown
+
+#0
+
+#OBJECTS
+#9900
+test object~
+a test object~
+A test object lies here.~
+leather~
+trash~
+0
+0
+0 0 0 0 0
+1 1 0 P
+
+#9901
+duplicate object~
+a duplicate object~
+A duplicate object is here.~
+iron~
+weapon~
+0
+0
+3 6 sword 11 0
+5 10 100 P
+
+#9901
+duplicate object two~
+another duplicate object~
+Yet another duplicate object.~
+wood~
+trash~
+0
+0
+0 0 0 0 0
+1 1 0 P
+
+#0
+
+#ROOMS
+#9900
+Test Room~
+This is a test room in the broken area.
+It should load fine.
+~
+0 0 1
+S
+
+#9901
+Room With Bad Exit~
+This room has an exit with a bad door number.
+~
+0 0 1
+D10
+Bad door number 10 (should be 0-5)!~
+~
+0 0 9900
+S
+
+#9902
+Duplicate Room~
+This room loads first.
+~
+0 0 1
+S
+
+#9902
+Duplicate Room Second~
+This is a duplicate vnum 9902 - should be skipped!
+~
+0 0 1
+S
+
+#9903
+Room With Duplicate Clan~
+This room has two clan fields.
+~
+0 0 1
+C independent~
+C independent~
+S
+
+#9904
+Room With Unknown Field~
+This room has an unknown field type.
+~
+0 0 1
+X
+this is not a valid field~
+D0
+To the north.~
+~
+0 0 9900
+S
+
+#0
+
+#RESETS
+S
+
+#SHOPS
+0
+
+#SPECIALS
+S
+
+#$
+

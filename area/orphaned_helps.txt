@@ -1,0 +1,10 @@
+[ 3001] Flugh: edit
+[ 3001] Flugh: olc
+[ 3001] Flugh: olc edit
+[ 3001] Flugh: alist
+[ 3001] Om: item_gun
+[ 1200] Om: quest
+[ 1200] Om: qwest
+[ 2500] Alcinious: cyborb
+[  400] Om: rake
+[  400] Om: racial

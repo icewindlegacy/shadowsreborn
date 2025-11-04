@@ -1,0 +1,385 @@
+#AREADATA
+Name orc~
+Builders None~
+VNUMs 400 599
+Credits (null)~
+Security 1
+End
+
+
+
+#MOBILES
+#400
+Baghtru champion Baghtru's~
+Baghtru's Champion~
+{YBaghtru's Champion is here, yelling "Kill! Kill!"{x
+~
+Baghtru, the great god of war (and stupidity) of the orcs, has one
+honorary champion at all times.  As he is always an incredible orcish
+warrior of surpassing experience and obscene strength, you would be
+best off if you left this beast alone.
+~
+orc~
+AB 0 0 -1  -1000 0
+50 50 104d17+506 50d11+95 17d2+40 wrath
+-28 -28 -28 -18
+0 0 Q S
+stand stand male 4000
+AHMV ABCDEFGHIJK medium unknown
+#401
+healer orcish shaman~
+The Shaman {GGrahgsar{x~
+The Shaman {GGrahgsar{x is here selling spells
+~
+~
+orc~
+ABQa 0 0 -1  -1000 0
+60 60 124d21+1213 60d11+95 21d2+47 wrath
+-37 -37 -37 -24
+0 0 Q S
+stand stand none 50000
+AHMV ABCDEFGHIJK medium unknown
+#0
+
+
+
+#OBJECTS
+#400
+orc school mace~
+a crude mace~
+A crude mace lies here~
+bronze~
+weapon U AN
+mace 1 6 crush 0
+1 40 250 P
+A
+18 1
+#401
+orc school dagger~
+a small dagger~
+A small crude dagger lies here~
+bronze~
+weapon U AN
+dagger 1 4 pierce 0
+1 40 250 P
+A
+18 1
+#402
+orc school sword~
+a crude {Bblue{Y blade{x~
+A crude piece of metal resembling a blade~
+bronze~
+weapon U AN
+sword 1 6 slash 0
+1 40 250 P
+#403
+orc school spear stick sharp~
+a sharpened stick~
+A sharpend stick vaguely resembling a spear~
+wood~
+weapon U AN
+staff 1 8 thrust F
+1 40 250 P
+#404
+orc school staff blunted stick~
+a wooden staff~
+A long piece of wood~
+wood~
+weapon U AN
+staff 1 8 crush 0
+1 40 250 P
+#405
+orc school axe~
+a small hand axe~
+A small hand axe lies here~
+bronze~
+weapon U AN
+axe 1 6 chop 0
+1 40 250 P
+#406
+orc school flail~
+a flail~
+A basic flail lies here~
+bronze~
+weapon 0 AN
+flail 1 6 crush 0
+1 40 250 P
+A
+18 1
+#407
+orc school whip~
+a braided whip~
+A coiled braided bit of leather~
+leather~
+weapon U AN
+whip 1 6 whip 0
+1 40 250 P
+A
+18 1
+#408
+orc school polearm~
+a simple polearm~
+A simple polearm lies here~
+wood~
+weapon 0 AN
+polearm 1 8 thrust F
+1 80 350 P
+#409
+orc school vest~
+a {ybrown leather{x vest~
+A vest made of {ybrown leather{x lies here~
+leather~
+armor U AD
+A A A 0 0
+1 50 280 P
+A
+19 1
+#410
+orc school shield~
+a wooden shield~
+A wooden round shield lies here~
+wood~
+armor U AJ
+B B B A 0
+1 30 150 P
+#411
+orc school war banner~
+an orcish {RWAR{x banner~
+A war banner with a bloody eye lies here~
+cloth~
+light U A
+0 0 CEFGHI 0 0
+1 10 10 P
+A
+1 1
+#412
+map of dushgoi~
+a map of dushgoi~
+A rolled up parchment in a leather tube~
+paper~
+map 0 A
+0 0 0 0 0
+0 0 0 P
+E
+map~
+,        * Dushgoi *                      +-Sorcerers
+,        ***********                      | Guild
+,                                         |
+,                                 Martial-+-Berserkers
+, Whares   Tralls    Trulls       Academy | Guild     Slave  Jewelry  Magic
+,         Armour    Supplies             |          Auction  Store   Shop
+,            |          |          Center               |       |      |
+,ChuKaal +----+----------+------    Tunnel  -------------+-------+------+-
+,Rocks  /     |          |       Intersection            |       |      | \
+,      /  Kruels       Butcher    /       |          Bruths   Graks   Maps \ 
+,Leather Weapons MUD    Shop     /        |          Vessels  Elixirs      |
+,Shop           School          /  Black -+-Knaves                         |
+,                             /   Dragon | Guild                       Orc
+,           Portal--- Battle  /           |                          Invasion
+,           Room      School /            |                           Highway
+,                       |   /             +-Shamans
+,         Quest ---- Circle of--Donation    Guild
+,         Room         Power      Room
+,                    /(recall)
+,                   /   |
+,                  /   Orc
+,            Morgue   Temple
+,                       |
+,                     Great
+,                   Necromancer
+ 
+~
+E
+map~
+~
+#413
+orc school newbie commstone comm stone~
+a newbie comm stone~
+A small glass sphere~
+glass~
+commstone U AS
+0 0 0 0 CEFGHI
+1 10 20 P
+#414
+map of thera~
+a map of thera~
+A rolled up map in a leather tube lie here~
+unknown~
+map 0 A
+0 0 0 0 0
+0 0 0 P
+E
+map~
+,                {WWizards
+,        N        {WRule
+,        |                    {WMoria
+,      W-+-E             
+,        |                     {yvvvv
+,        {WS{y                    {yv{B.,.,{yv{B
+,                            {yv{B,.,.,{yv{B            {WVolcano
+,                           {yv{B,.,.,.,{yv{B   {WMira
+,         {WDwarven         {yv{B,.,.,{R*{B,.,.{yv{B    {WCity
+,          {WKingdom      {yv{B.,.,.,.,{WBlue{B.{yv{B 
+,                        {yv{B.,.,.,{WMist{B.,.,{yv{B     {W            Sands
+,{W           Camelot    {yv{B,.,.,.,.,.,.,.,{yv{B           {W        of
+,                    {yv{B.,.,.,.,.,.,.,.,.,{yv{B {WDrakyri   {W      Sorrow
+,{WDoriath            {yv{B.,.,.,{WDRAGON{B.,.,.,{yv{B      {yv{B{yv{B{yv{B  
+,                    {yv{B.,.,.,{WSEA{B,.,.,.,.,.{yv{B   {yv{B.,.{yv{B  {WDushgoi     
+,{W    Midgaard  New   {yv{B,.,.,.,.,.,.,.,.,.,.{yv{B.,.,.,.{yv{B           {WMahn-Tor
+,{W             Thalos  {yv{B,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B  {WFauth      
+,{WGandahar           {yv{B.,.,.,.,.,.,.,.,.{R**{B,.,.,.,.{yv{B{yv{B{yv{B     {WGaash
+,                  {yv{B.,.,.,.,.,.,.,.,.{WMiramano{B,.{yv{B            {yv{B{yv{B{yv{B{yv{B 
+,               {yv{B{yv{B{yv{B.,.,.,.,.,.,.,.,.,.,{WTomb{B.,.,{yv{B        {yv{B{yv{B{yv{B,.,.,.{yv{B{yv{B
+,              {yv{B.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B         {yv{B.,.,.,.,.,.,
+,      {yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B.,.,.,.,.,.,.{x
+ 
+~
+E
+map~
+~
+#415
+hole donation pit~
+a donation hole~
+A hole in the wall for donations~
+unknown~
+container 0 0
+10000 0 0 1000 100
+0 0 0 P
+#420
+grubs~
+some wriggling grubs~
+Some grubs wriggle on the ground... YUMMY!~
+food~
+food 0 A
+D D 0 0 0
+0 10 0 P
+#0
+
+
+
+#ROOMS
+#400
+Circle of Power~
+You are now deep underground, inside the Orcs' central stronghold.  You
+stand inside a circle of power, inscribed with runes the color of blood. 
+The entire place seems to be made of obsidian, or something like it.  The
+walls are covered with orcish armies and heroes, fighting against human,
+elven, and dwarven scum.  Needless to say, the orcs are winning.  There is a
+horrid smell coming from deep below, from the mass graves that make up the
+Catacombs below.  To the north, you hear shrieks of despair, as the untried
+warriors are forced to prove their worth in the Battle School.  From above,
+you hear the guttural yelling of orcs engaged in the fine art (for an orc)
+of haggling.  This rarely results in death or injury. 
+~
+0 0 0
+D1
+~
+~
+0 0 404
+D2
+~
+~
+0 0 401
+D4
+~
+~
+0 0 402
+D5
+~
+~
+0 0 403
+S
+#401
+Dushgoi's Orc Temple~
+Orc's from all classes mass here to remember and cheer their brother Orcs
+that have been overcome in combat.
+~
+0 0 0
+D0
+~
+~
+0 0 400
+D2
+~
+~
+0 0 405
+S
+#402
+~
+~
+0 0 0
+D5
+~
+~
+0 0 400
+S
+#403
+Catacombs~
+So far beneath the earth that no sunlight has ever reached this place,
+you have now entered the orcish catacombs.  Stacked easily a hundred feet
+high, dead corpses in all states of decay stretch in rows as far as the
+eye can see.
+You here a horrendous cackling in the distance, which you assume to
+be the dread necromancers of the orcs.  Seen so rarely as to be nearly
+legend, they are responsible for the resurrection of orcish warriors
+for reasons none have yet to discern.
+~
+0 0 0
+D4
+~
+~
+0 0 400
+S
+#404
+Healing Room~
+The room is filled with a sense of calmness.  A low tone of chanting can
+be heard in the background, spirits of forgotten Orcs.  
+ 
+~
+0 0 0
+D3
+~
+~
+0 0 400
+S
+#405
+The Great Necromancer~
+Great and powerful elemental magic has been twisted and warped to
+provide a location for lost orc souls to return to.  In the center of the
+room stands an enourmous scimitar plunged blade down into the floor.  It
+glows with an eerie blue light.  The scimitar, Ghassduump'khar is the
+legendary weapon of Bolg, renowned orc warrior.
+~
+0 0 0
+D0
+~
+~
+0 0 401
+S
+#0
+
+
+
+#SPECIALS
+M 401 spec_cast_adept
+S
+
+
+
+#RESETS
+M 0 400 1 400 1 Load Baghtru's Champion
+M 0 401 1 404 1 Load The Shaman {GGrahgsar{x
+O 0 415 0 404 A donation hole loaded to Healing Room
+S
+
+
+
+#SHOPS
+0
+
+
+
+#MOBPROGS
+#0
+
+#$
