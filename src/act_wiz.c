@@ -77,6 +77,8 @@ void    obj_update      args( ( void ) );
 void    aggr_update     args( ( void ) );
 void    quest_update    args( ( void ) );
 void    auction_update  args( ( void ) );
+bool    can_backpack    args( ( CHAR_DATA *ch ) );
+
 
 DECLARE_DO_FUN( do_echo		);
 /*
@@ -410,8 +412,8 @@ void do_outfit (CHAR_DATA * ch, char *argument)
         equip_char (ch, obj, WEAR_BODY);
     }
 
-    /* do the weapon thing - felar (race 6) cannot use weapons */
-    if (ch->race != 6 && (obj = get_eq_char (ch, WEAR_WIELD)) == NULL)
+    /* do the weapon thing - felar cannot use weapons */
+    if (ch->race != race_lookup ("felar") && (obj = get_eq_char (ch, WEAR_WIELD)) == NULL)
     {
         sn = 0;
         vnum = (ch->faction == FACTION_ORCISH) ? OBJ_VNUM_ORC_SWORD : OBJ_VNUM_SCHOOL_SWORD;    /* just in case! */
@@ -461,6 +463,221 @@ void do_outfit (CHAR_DATA * ch, char *argument)
     }
 
     send_to_char ("You have been equipped by Mota.\n\r", ch);
+}
+
+void do_backpack ( CHAR_DATA *ch, char *argument )
+{
+    char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH];
+    CHAR_DATA *victim;
+    OBJ_DATA *pack;
+    OBJ_DATA *obj;
+    int i;
+    int banner_orc_vnum, vest_orc_vnum, shield_orc_vnum, comm_orc_vnum, satchel_orc_vnum, soup_orc_vnum, water_orc_vnum;
+    int banner_vnum, vest_vnum, shield_vnum, comm_vnum, satchel_vnum, soup_vnum, water_vnum;
+                                                                                                                        
+    one_argument( argument, arg );
+                                                                                                                        
+    if ( arg[0] == '\0' )
+    {
+        send_to_char( "Who would you like to send a pack too.\n\r", ch );
+        return;
+    }
+                                                                                                                        
+    if ( ( victim = get_char_world( ch, arg ) ) == NULL )
+    {
+        send_to_char( "They aren't here.\n\r", ch );
+        return;
+    }
+    /* uncomment if you wish to restrict your immortals to only give packs to lowbies */                                                                                                                    
+    /*
+    if ( (victim->level >= 10) )
+    {
+        send_to_char("They don't need one at thier level.\n\r", ch);
+        return;
+    }
+   */                                                                                                                     
+    if (!can_backpack(victim) )
+    {
+        send_to_char("They already have a survival pack.\n\r",ch);
+        return;
+    }
+     /* Set faction-appropriate equipment vnums */
+     if (victim->faction == FACTION_ORCISH)
+     {
+         banner_orc_vnum = OBJ_VNUM_ORC_BANNER;
+         vest_orc_vnum = OBJ_VNUM_ORC_VEST;
+         shield_orc_vnum = OBJ_VNUM_ORC_SHIELD;
+         satchel_orc_vnum = OBJ_VNUM_ORC_SATCHEL;
+         soup_orc_vnum = OBJ_VNUM_ORC_SOUP;
+         water_orc_vnum = OBJ_VNUM_ORC_WATER;
+         comm_orc_vnum = OBJ_VNUM_ORC_COMM;
+     }
+     else
+     {
+         /* Default to human faction equipment */
+         banner_vnum = OBJ_VNUM_SCHOOL_BANNER;
+         vest_vnum = OBJ_VNUM_SCHOOL_VEST;
+         shield_vnum = OBJ_VNUM_SCHOOL_SHIELD;
+         satchel_vnum = OBJ_VNUM_SCHOOL_SATCHEL;
+         soup_vnum = OBJ_VNUM_SCHOOL_SOUP;
+         water_vnum = OBJ_VNUM_SCHOOL_WATER;
+         comm_vnum = OBJ_VNUM_SCHOOL_COMM;
+     }
+
+     if (victim->faction == FACTION_ORCISH)
+{
+     pack = create_object( get_obj_index(satchel_orc_vnum), 0 );
+                                                                                                                        
+    obj = create_object( get_obj_index(banner_orc_vnum), 0 );                                                         
+    obj_to_obj( obj, pack );                                                                                            
+                                                                                                                        
+    obj = create_object( get_obj_index(vest_orc_vnum), 0 );                                                     
+    obj_to_obj( obj, pack );                                                                                            
+                                                                                                                        
+    obj = create_object( get_obj_index(shield_orc_vnum), 0 );                                                     
+    obj_to_obj( obj, pack );                                                                                            
+                                                                                                                        
+    obj = create_object( get_obj_index(comm_orc_vnum), 0 );
+    obj_to_obj( obj, pack );
+                                                                                                                        
+    obj = create_object( get_obj_index(water_orc_vnum), 0 );
+ obj_to_obj( obj, pack );                                                                                            
+                                                                                                                                                                                                                                                                                                     
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_ORC_SWORD), 0 );                                                
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_ORC_DAGGER), 0 );                                               
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+         obj = create_object( get_obj_index(OBJ_VNUM_ORC_SPEAR), 0 );                                                
+         obj_to_obj( obj, pack );                                                                                       
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_ORC_MACE), 0 );                                                 
+         obj_to_obj( obj, pack );
+    }
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )
+ {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_ORC_AXE), 0 );                                                  
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+        obj = create_object( get_obj_index(OBJ_VNUM_ORC_FLAIL), 0 );                                                 
+        obj_to_obj( obj, pack );                                                                                        
+    }                                                                                                                   
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_ORC_WHIP), 0 );                                                 
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+         obj = create_object( get_obj_index(OBJ_VNUM_ORC_POLEARM), 0 );                                              
+         obj_to_obj( obj, pack );                                                                                       
+                                                                                                                        
+    obj = create_object( get_obj_index(OBJ_VNUM_ORC_MAP), 0 );
+    obj_to_obj( obj, pack);
+                                                                                                                        
+    for ( i = 0; i < 10; i ++ )                                                                         
+    {                                                                                                                   
+         obj = create_object( get_obj_index(soup_orc_vnum), 0 );                                                       
+         obj_to_obj( obj, pack );                                                                                       
+    }
+    
+    obj_to_char( pack, victim );
+    send_to_char("Ok.\n\r", ch);
+    sprintf( buf, "%s appears in your inventory.\n\r", pack->short_descr );
+    send_to_char( buf, victim );
+    return;
+}
+else if (victim->faction == FACTION_HUMAN)
+{
+    pack = create_object( get_obj_index(satchel_vnum), 0 );
+                                                                                                                        
+    obj = create_object( get_obj_index(banner_vnum), 0 );                                                         
+    obj_to_obj( obj, pack );                                                                                            
+                                                                                                                        
+    obj = create_object( get_obj_index(vest_vnum), 0 );                                                     
+    obj_to_obj( obj, pack );                                                                                            
+                                                                                                                        
+    obj = create_object( get_obj_index(shield_vnum), 0 );                                                     
+    obj_to_obj( obj, pack );                                                                                            
+                                                                                                                        
+    obj = create_object( get_obj_index(comm_vnum), 0 );
+    obj_to_obj( obj, pack );
+                                                                                                                        
+    obj = create_object( get_obj_index(water_vnum), 0 );
+ obj_to_obj( obj, pack );                                                                                            
+                                                                                                                                                                                                                                                                                                     
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_SWORD), 0 );                                                
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_DAGGER), 0 );                                               
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+         obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_SPEAR), 0 );                                                
+         obj_to_obj( obj, pack );                                                                                       
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_MACE), 0 );                                                 
+         obj_to_obj( obj, pack );
+    }
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )
+ {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_AXE), 0 );                                                  
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+        obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_FLAIL), 0 );                                                 
+        obj_to_obj( obj, pack );                                                                                        
+    }                                                                                                                   
+                                                                                                                        
+    for ( i = 0; i < 2; i++ )                                                                                           
+    {                                                                                                                   
+         obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_WHIP), 0 );                                                 
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+         obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_POLEARM), 0 );                                              
+         obj_to_obj( obj, pack );                                                                                       
+                                                                                                                        
+    obj = create_object( get_obj_index(OBJ_VNUM_MAP), 0 );
+    obj_to_obj( obj, pack);
+                                                                                                                        
+    for ( i = 0; i < 10; i ++ )                                                                                         
+    {                                                                                                                   
+         obj = create_object( get_obj_index(soup_vnum), 0 );                                                       
+         obj_to_obj( obj, pack );                                                                                       
+    }                                                                                                                   
+                                                                                                                        
+    obj_to_char( pack, victim );                                                                        
+    send_to_char("Ok.\n\r", ch);                                                                        
+    sprintf( buf, "%s appears in your inventory.\n\r", pack->short_descr );                                       
+    send_to_char( buf, victim );                                       
+    return;                                                                                             
+}
+
+
 }
 
 
