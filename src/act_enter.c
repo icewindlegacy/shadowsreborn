@@ -155,12 +155,12 @@ void do_enter (CHAR_DATA * ch, char *argument)
         {
             if (portal->value[4] == FACTION_HUMAN && ch->faction != FACTION_HUMAN)
             {
-                send_to_char ("This portal rejects you - it is attuned to the human faction.\n\r", ch);
+                send_to_char ("You can't seem to find a way in.\n\r", ch);
                 return;
             }
             else if (portal->value[4] == FACTION_ORCISH && ch->faction != FACTION_ORCISH)
             {
-                send_to_char ("This portal rejects you - it is attuned to the orcish faction.\n\r", ch);
+                send_to_char ("You can't seem to find a way in.\n\r", ch);
                 return;
             }
         }
