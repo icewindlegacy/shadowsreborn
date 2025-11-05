@@ -14,11 +14,13 @@
 1 whip
 1 backstab
 1 dodge
+1 enhanced damage
 1 trip
 1 tune
 1 haggle
 1 hide
 1 peek
+1 sneak
 1 scrolls
 1 staves
 1 wands
@@ -34,7 +36,6 @@
 2 magic missile
 2 ventriloquate
 3 dirt kicking
-4 sneak
 5 detect magic
 5 faerie fire
 5 steal
@@ -90,7 +91,6 @@
 25 knock
 25 pass door
 25 teleport
-25 enhanced damage
 25 circle
 26 curse
 26 energy drain

@@ -512,6 +512,8 @@ void boot_db ()
         log_string ("Loading donation pits...");
         load_pits ();              /* Load donation pit contents */
         load_wizlist ();           /* Load wizlist */
+        log_string ("Loading mudinfo statistics...");
+        load_mudinfo_stats ();     /* Load MUD statistics */
     }
 
     return;
@@ -4651,6 +4653,162 @@ void load_storage( char *filename )
         }
         fclose( fp );
     }
+}
+
+/* Save MUD statistics to file */
+void save_mudinfo_stats( void )
+{
+    FILE *fp;
+    
+    if ((fp = fopen(MUDINFO_FILE, "w")) == NULL)
+    {
+        bug("save_mudinfo_stats: cannot open %s for writing", 0);
+        return;
+    }
+    
+    fprintf(fp, "#MUDINFO\n");
+    fprintf(fp, "BootTime     %ld\n", (long)boot_time);
+    fprintf(fp, "TotalLogins  %ld\n", total_logins);
+    fprintf(fp, "TotalPulses  %ld\n", total_pulses);
+    fprintf(fp, "MissedPulses %ld\n", missed_pulses);
+    fprintf(fp, "PeakPlayers  %d\n", peak_players);
+    fprintf(fp, "PlayerSeconds %ld\n", total_player_seconds);
+    fprintf(fp, "BytesRead    %ld\n", bytes_read_total);
+    fprintf(fp, "BytesWritten %ld\n", bytes_written_total);
+    fprintf(fp, "ColorSaved   %ld\n", color_bytes_saved);
+    fprintf(fp, "#END\n\n");
+    
+    fclose(fp);
+}
+
+/* Load MUD statistics from file */
+void load_mudinfo_stats( void )
+{
+    FILE *fp;
+    char *word;
+    bool fMatch;
+    
+    if ((fp = fopen(MUDINFO_FILE, "r")) == NULL)
+    {
+        /* File doesn't exist, use defaults */
+        return;
+    }
+    
+    for (;;)
+    {
+        char letter;
+        
+        letter = fread_letter(fp);
+        if (letter == '*')
+        {
+            fread_to_eol(fp);
+            continue;
+        }
+        
+        if (letter != '#')
+        {
+            bug("load_mudinfo_stats: # not found.", 0);
+            break;
+        }
+        
+        word = fread_word(fp);
+        if (!str_cmp(word, "MUDINFO"))
+        {
+            for (;;)
+            {
+                word = fread_word(fp);
+                fMatch = FALSE;
+                
+                switch (UPPER(word[0]))
+                {
+                    case '#':
+                        if (!str_cmp(word, "#END"))
+                        {
+                            fclose(fp);
+                            return;
+                        }
+                        break;
+                        
+                    case 'B':
+                        if (!str_cmp(word, "BootTime"))
+                        {
+                            boot_time = (time_t)fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        else if (!str_cmp(word, "BytesRead"))
+                        {
+                            bytes_read_total = fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        else if (!str_cmp(word, "BytesWritten"))
+                        {
+                            bytes_written_total = fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        break;
+                        
+                    case 'C':
+                        if (!str_cmp(word, "ColorSaved"))
+                        {
+                            color_bytes_saved = fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        break;
+                        
+                    case 'M':
+                        if (!str_cmp(word, "MissedPulses"))
+                        {
+                            missed_pulses = fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        break;
+                        
+                    case 'P':
+                        if (!str_cmp(word, "PeakPlayers"))
+                        {
+                            peak_players = fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        else if (!str_cmp(word, "PlayerSeconds"))
+                        {
+                            total_player_seconds = fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        break;
+                        
+                    case 'T':
+                        if (!str_cmp(word, "TotalLogins"))
+                        {
+                            total_logins = fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        else if (!str_cmp(word, "TotalPulses"))
+                        {
+                            total_pulses = fread_number(fp);
+                            fMatch = TRUE;
+                        }
+                        break;
+                }
+                
+                if (!fMatch)
+                {
+                    bugf("load_mudinfo_stats: no match for word '%s'", word);
+                    fread_to_eol(fp);
+                }
+            }
+        }
+        else if (!str_cmp(word, "END"))
+        {
+            break;
+        }
+        else
+        {
+            bugf("load_mudinfo_stats: bad section: %s", word);
+            break;
+        }
+    }
+    
+    fclose(fp);
 }
 
 bool recent_create( sh_int size )

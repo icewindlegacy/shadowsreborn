@@ -2,6 +2,9 @@
 player/
 gods/
 
+# MUD data files
+data/
+
 # Build artifacts
 src/obj/
 src/rom

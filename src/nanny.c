@@ -943,6 +943,25 @@ void nanny (DESCRIPTOR_DATA * d, char *argument)
             char_list = ch;
             d->connected = CON_PLAYING;
             reset_char (ch);
+            
+            /* Track login statistics for mudinfo */
+            if (!IS_NPC(ch))
+            {
+                DESCRIPTOR_DATA *dcount;
+                int current_count = 0;
+                
+                total_logins++;
+                ch->pcdata->login_time = current_time;
+                
+                /* Count current players and update peak */
+                for (dcount = descriptor_list; dcount; dcount = dcount->next)
+                {
+                    if (dcount->connected == CON_PLAYING)
+                        current_count++;
+                }
+                if (current_count > peak_players)
+                    peak_players = current_count;
+            }
 
             if (ch->level == 0)
             {

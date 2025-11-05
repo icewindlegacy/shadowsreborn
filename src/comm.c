@@ -330,6 +330,19 @@ char str_boot_time[MAX_INPUT_LENGTH];
 time_t current_time;            /* time of this pulse */
 bool MOBtrigger = TRUE;            /* act() switch                 */
 
+/* MUD statistics globals */
+time_t boot_time = 0;
+long total_logins = 0;
+long total_pulses = 0;
+long missed_pulses = 0;
+int peak_players = 0;
+long total_player_seconds = 0;
+long bytes_read_total = 0;
+long bytes_written_total = 0;
+long color_bytes_saved = 0;
+long cpu_lag_usec = 0;
+long cpu_measurements = 0;
+
 
 /*
  * OS-dependent local functions.
@@ -395,6 +408,7 @@ int main (int argc, char **argv)
     gettimeofday (&now_time, NULL);
     current_time = (time_t) now_time.tv_sec;
     strcpy (str_boot_time, ctime (&current_time));
+    boot_time = current_time;  /* Initialize boot time for mudinfo */
 
     /*
      * Macintosh console initialization.
@@ -939,6 +953,24 @@ void game_loop_unix (int control)
                     exit (1);
                 }
             }
+            else
+            {
+                /* We're lagging - track this */
+                missed_pulses++;
+                long lag = (-secDelta * 1000000) + (-usecDelta);
+                cpu_lag_usec += lag;
+                cpu_measurements++;
+            }
+            
+            /* Track total pulses */
+            total_pulses++;
+            
+            /* Reset lag counter every minute */
+            if (total_pulses % (60 * PULSE_PER_SECOND) == 0)
+            {
+                cpu_lag_usec = 0;
+                cpu_measurements = 0;
+            }
         }
 
         gettimeofday (&last_time, NULL);
@@ -1185,6 +1217,7 @@ bool read_from_descriptor (DESCRIPTOR_DATA * d)
         if (nRead > 0)
         {
             iStart += nRead;
+            bytes_read_total += nRead;  /* Track bytes read for mudinfo */
             if (d->inbuf[iStart - 1] == '\n' || d->inbuf[iStart - 1] == '\r')
                 break;
         }
@@ -1791,6 +1824,7 @@ bool write_to_descriptor (int desc, char *txt, int length)
             perror ("Write_to_descriptor");
             return FALSE;
         }
+        bytes_written_total += nWrite;  /* Track bytes written for mudinfo */
     }
 
     return TRUE;
@@ -2888,6 +2922,7 @@ void colourconv (char *buffer, const char *txt, CHAR_DATA * ch)
                 if (*point == '{')
                 {
                     point++;
+                    color_bytes_saved += 2;  /* Track color code removal for mudinfo */
                     continue;
                 }
                 *buffer = *point;

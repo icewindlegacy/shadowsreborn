@@ -639,6 +639,22 @@ glaive~
 You see a glaive of great but cheap craftsmanship.  Imprinted on the side is:
 Merc Industries
 ~
+#3723
+red backpack velvet~
+a {Rred{X velvet backpack~
+Someone has left a Rred{X velvet backpack here~
+velvet~
+container 0 A
+100 0 0 100 50
+0 20 1 P
+#3724
+a bowl of hearty soup~
+a hearty bowl of soup~
+A hearty bowl of soup lies here~
+wood~
+food 0 A
+C D 0 0 0
+0 5 5 P
 #0
 
 

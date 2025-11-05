@@ -1,0 +1,344 @@
+#AREADATA
+Name Quest Area~
+Builders None~
+VNUMs 6700 6799
+Credits (null)~
+Security 1
+End
+
+
+
+#MOBILES
+#6700
+Tarek the Questmaster~
+{yTarek{x the Questmaster~
+{yTarek{x the Questmaster is here, handing out quests.
+~
+~
+human~
+ABc 1360 9280 -1  0 0
+60 60 124d21+1213 60d11+95 21d2+47 none
+-37 -37 -37 -24
+0 0 0 0
+stand stand male 50000
+HM ABCDEFGHIJK medium unknown
+F for AV
+#6701
+Cheech the Clan Questmaster~
+{cCheech{x the Clan Questmaster~
+{cCheech{x the Clan Questmaster is here, handing out quests.
+~
+~
+human~
+ABc 1360 9280 -1  0 0
+60 60 124d21+1213 60d11+95 21d2+47 none
+-37 -37 -37 -24
+0 0 0 0
+stand stand male 50000
+HM ABCDEFGHIJK medium unknown
+F for AV
+#0
+
+
+
+#OBJECTS
+#6700
+wormhole backpack quest aquest~
+a wormhole backpack~
+A strange shimmering hole on the edge of perception~
+unknown~
+container 0 A
+1000 AC 0 9999 5
+0 0 100 P
+#6701
+aquest ring of health~
+a {yring{x of {Rhealth{x~
+A small {ygolden{x ring~
+unknown~
+jewelry GRSYa AB
+0 0 0 0 0
+0 0 300 P
+A
+13 20
+A
+5 2
+#6702
+aquest armor mithril chain shirt~
+a {wm{Wi{Ct{ch{Cr{Wi{wl{x chain shirt~
+A glittering chain shirt lies in a pile~
+mithril~
+armor AGRSYa AD
+CE CE CE CE 0
+0 0 500 P
+A
+13 20
+A
+20 -10
+A
+5 1
+#6703
+aquest everburning torch~
+the {re{Rve{Yr{Wbu{Yr{Rni{rng{x torch~
+A simple torch burns brightly~
+unknown~
+light AGRSYa A
+0 0 ABCDIJKN 0 0
+0 0 150 P
+A
+3 2
+#6704
+aquest golden neck chain~
+a {Ygo{yld{Yen{x neck chain~
+A thin golden chain glitters on the floor~
+unknown~
+jewelry GRSYa AC
+0 0 0 0 0
+0 0 150 P
+A
+12 20
+A
+4 2
+#6705
+aquest cowl dark wool~
+a {dd{wa{Dr{wk {dc{wo{Dw{wl{x~
+A woolen cowl~
+unknown~
+armor GRSYa AE
+BD BD BD D 0
+0 0 200 P
+A
+19 5
+A
+18 5
+A
+20 -5
+#6706
+aquest dagger blade assassin~
+an {Da{ds{Ms{ma{Ms{ds{Di{Mn{m'{Ds {db{ml{Ma{dd{De{x~
+A wickedly sharp looking dagger~
+unknown~
+weapon GRSYa AN
+dagger 2 8 stab EH
+0 3 500 P
+A
+19 5
+A
+2 2
+A
+14 10
+#6707
+aquest bracer of power~
+{Gbracer{x of {Mp{Do{Mw{me{Dr{x~
+A leather bracer~
+unknown~
+armor GRSYa AM
+0 0 0 0 0
+0 0 300 P
+A
+1 2
+A
+19 1
+#6708
+aquest leggings of iron~
+{wleggins{x of {Di{wr{Do{wn{x~
+A pair of iron leggings~
+unknown~
+armor GRSYa AF
+BD BD BD D 0
+0 0 500 P
+A
+5 1
+A
+14 10
+#6709
+aquest black steel boots~
+{Dblack{x {wsteel{x boots~
+Black steel boots rest on the ground~
+unknown~
+armor GRSYa AG
+BD BD BD D 0
+0 0 400 P
+A
+14 20
+A
+4 1
+#6710
+aquest gloves brown leather~
+{ybrown leather{x gloves~
+Some brown leather gloves~
+unknown~
+armor GRSYa AH
+D D 0 AC 0
+0 0 200 P
+A
+13 10
+A
+18 1
+#6711
+aquest belt of giant strength~
+{ybelt{x of {Gg{gi{ya{gn{Gt{x {yst{Yr{Ge{Yn{ygth{x~
+A discarded thick leather belt~
+unknown~
+container GRSYa AL
+1000 AC 0 1000 8
+0 0 300 P
+A
+1 2
+#6712
+aquest green forest cloak~
+{Ggr{ge{Gen {Gfo{yre{Gst{x cloak~
+A thick green cloak lies here~
+unknown~
+armor GRSYa AK
+AC AC AC AC 0
+0 0 300 P
+A
+12 10
+A
+3 1
+#6713
+aquest mithril armguards~
+{cm{Cit{Wh{Cri{cl{x armguards~
+Some glittering metal armguards~
+unknown~
+armor GRSYa AI
+BD BD BD D 0
+0 0 300 P
+A
+5 1
+A
+20 -5
+#6714
+aquest ioun stone scarlet and blue~
+a {Rsca{rr{Rlet {xand {Bb{blu{Be{x {ci{Cou{cn {xstone~
+A scarlet and blue sphere lies here~
+unknown~
+treasure GRSYa AQ
+0 0 0 0 0
+0 0 200 P
+A
+12 10
+A
+3 2
+#6715
+aquest darkwood shield dark wood~
+a {Ddar{wk{Dwood{x shield~
+A shield made of black wood~
+wood~
+armor GRSYa AJ
+BE BE BE AE 0
+1 51 250 P
+#6716
+clan formation voucher~
+clan formation voucher~
+This voucher entitles you to start a clan~
+paper~
+treasure SYa A
+0 0 0 0 0
+10 4 1000 P
+E
+clan~
+This clan formation voucher can be redeemed with any Immortal
+level 55 or higher. To form your clan, write a note to the immortals 
+so that a time to form the clan may be scheduled. You need at least 3 other
+players online and not already in another clan.
+ 
+When you turn in this voucher, be sure to have a room description planned
+for your clan hall. You will get a single clan hall room, to be connected to
+the area of your choosing, and you get three keys to your clan hall. 
+ 
+Additional keys may be purchased via voucher at the Clan Questmaster.
+~
+#6717
+a portal to dushgoi~
+a portal to dushgoi~
+A portal to {GDushgoi{x glows a sickly {GGr{ge{Gen{x~
+unknown~
+portal 0 0
+0 0 0 EHI B
+0 0 0 P
+#6718
+a portal to midgaard~
+a portal to midgaard~
+A portal to {BMidgaard{x glows a faint {bb{Clu{be{x~
+unknown~
+portal 0 0
+0 0 0 ADEFHIJL A
+0 0 0 P
+#6719
+no name~
+(no short description)~
+(no description)~
+unknown~
+trash 0 0
+0 0 0 0 0
+0 0 0 P
+#0
+
+
+
+#ROOMS
+#6700
+Quest Hall~
+~
+0 0 0
+D1
+~
+~
+0 0 6701
+D3
+~
+~
+0 0 3001
+S
+#6701
+Clan Quest Hall~
+~
+0 0 0
+S
+#0
+
+
+
+#SPECIALS
+M 6700 spec_questmaster
+M 6701 spec_questmaster
+S
+
+
+
+#RESETS
+M 0 6700 1 6700 1 Load {yTarek{x the Questmaster
+G 0 6700 0 A wormhole backpack is given to {yTarek{x the Questmaster
+G 0 6701 0 A {yring{x of {rhealth{x is given to {yTarek{x the Questmaster
+G 0 6702 0 A {wm{wi{ct{ch{cr{wi{wl{x chain shirt is given to {yTarek{x the Questmaster
+G 0 6703 0 The {re{rve{yr{wbu{yr{rni{rng{x torch is given to {yTarek{x the Questmaster
+G 0 6704 0 A {ygo{yld{yen{x neck chain is given to {yTarek{x the Questmaster
+G 0 6705 0 A {dd{wa{dr{wk {dc{wo{dw{wl{x is given to {yTarek{x the Questmaster
+G 0 6706 0 An {da{ds{ms{ma{ms{ds{di{mn{m'{ds {db{ml{ma{dd{de{x is given to {yTarek{x the Questmaster
+G 0 6707 0 {gbracer{x of {mp{do{mw{me{dr{x is given to {yTarek{x the Questmaster
+G 0 6708 0 {wleggins{x of {di{wr{do{wn{x is given to {yTarek{x the Questmaster
+G 0 6709 0 {dblack{x {wsteel{x boots is given to {yTarek{x the Questmaster
+G 0 6710 0 {ybrown leather{x gloves is given to {yTarek{x the Questmaster
+G 0 6711 0 {ybelt{x of {gg{gi{ya{gn{gt{x {yst{yr{ge{yn{ygth{x is given to {yTarek{x the Questmaster
+G 0 6712 0 {ggr{ge{gen {gfo{yre{gst{x cloak is given to {yTarek{x the Questmaster
+G 0 6713 0 {cm{cit{wh{cri{cl{x armguards is given to {yTarek{x the Questmaster
+G 0 6714 0 A {rsca{rr{rlet {xand {bb{blu{be{x {ci{cou{cn {xstone is given to {yTarek{x the Questmaster
+G 0 6715 0 A {ddar{wk{dwood{x shield is given to {yTarek{x the Questmaster
+M 0 6701 1 6701 1 Load {cCheech{x the Clan Questmaster
+G 0 6716 0 Clan formation voucher is given to {cCheech{x the Clan Questmaster
+O 0 6717 0 6701 A portal to dushgoi loaded to Clan Quest Hall
+O 0 6718 0 6701 A portal to midgaard loaded to Clan Quest Hall
+S
+
+
+
+#SHOPS
+0
+
+
+
+#MOBPROGS
+#0
+
+#$

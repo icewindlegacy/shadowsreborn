@@ -5102,4 +5102,188 @@ void do_recent( CHAR_DATA *ch, char *argument )
     }
     return;
 }
+
+void do_mudinfo( CHAR_DATA *ch, char *argument )
+{
+    char buf[MAX_STRING_LENGTH];
+    char arg[MAX_INPUT_LENGTH];
+    DESCRIPTOR_DATA *d;
+    int current_players = 0;
+    float average_players = 0.0;
+    float pulse_miss_percent = 0.0;
+    float cpu_lag_percent = 0.0;
+    float bytes_per_sec_read = 0.0;
+    float bytes_per_sec_written = 0.0;
+    time_t uptime_seconds;
+    int days, hours, minutes, seconds;
+    
+    one_argument(argument, arg);
+    
+    /* Reset command - immortals only */
+    if (arg[0] != '\0' && !str_cmp(arg, "reset"))
+    {
+        if (ch->level < LEVEL_IMMORTAL)
+        {
+            send_to_char("Only immortals can reset mudinfo statistics.\n\r", ch);
+            return;
+        }
+        
+        total_logins = 0;
+        total_pulses = 0;
+        missed_pulses = 0;
+        peak_players = 0;
+        total_player_seconds = 0;
+        bytes_read_total = 0;
+        bytes_written_total = 0;
+        color_bytes_saved = 0;
+        cpu_lag_usec = 0;
+        cpu_measurements = 0;
+        boot_time = current_time;
+        
+        send_to_char("MUD statistics have been reset.\n\r", ch);
+        sprintf(buf, "%s has reset the mudinfo statistics.", ch->name);
+        log_string(buf);
+        return;
+    }
+    
+    /* Count current players */
+    for (d = descriptor_list; d; d = d->next)
+    {
+        if (d->connected == CON_PLAYING)
+            current_players++;
+    }
+    
+    /* Calculate uptime */
+    uptime_seconds = current_time - boot_time;
+    if (uptime_seconds < 1) uptime_seconds = 1;  /* Avoid divide by zero */
+    
+    days = uptime_seconds / 86400;
+    hours = (uptime_seconds % 86400) / 3600;
+    minutes = (uptime_seconds % 3600) / 60;
+    seconds = uptime_seconds % 60;
+    
+    /* Calculate average players */
+    if (total_player_seconds > 0 && uptime_seconds > 0)
+    {
+        average_players = (float)total_player_seconds / (float)uptime_seconds;
+    }
+    
+    /* Calculate pulse miss percentage */
+    if (total_pulses > 0)
+    {
+        pulse_miss_percent = ((float)missed_pulses / (float)total_pulses) * 100.0;
+    }
+    
+    /* Calculate CPU lag percentage for last minute */
+    if (cpu_measurements > 0)
+    {
+        long expected_usec = cpu_measurements * (1000000 / PULSE_PER_SECOND);
+        if (expected_usec > 0)
+            cpu_lag_percent = ((float)cpu_lag_usec / (float)expected_usec) * 100.0;
+    }
+    
+    /* Calculate bytes per second */
+    bytes_per_sec_read = (float)bytes_read_total / (float)uptime_seconds;
+    bytes_per_sec_written = (float)bytes_written_total / (float)uptime_seconds;
+    
+    /* Display the information */
+    sprintf(buf, "\n\r{W╔══════════════════════════════════════════════════════╗{x\n\r");
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║         {YStatistics for %s{W                   ║{x\n\r", MUD_NAME);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W╠══════════════════════════════════════════════════════╣{x\n\r");
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {CUptime:{x             %3dd %2dh %2dm %2ds              {W║{x\n\r", 
+            days, hours, minutes, seconds);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {CPlayers online:{x      %-3d                           {W║{x\n\r", current_players);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {CAverage since boot:{x  %-5.2f                        {W║{x\n\r", average_players);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {CPeak since boot:{x     %-3d                           {W║{x\n\r", peak_players);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {CTotal logins:{x        %-6ld                         {W║{x\n\r", total_logins);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W╠══════════════════════════════════════════════════════╣{x\n\r");
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {GTotal pulses:{x        %-10ld                     {W║{x\n\r", total_pulses);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {GPulses missed:{x       %-10ld {G({y%.2f%%{G){x             {W║{x\n\r",
+            missed_pulses, pulse_miss_percent);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {GCPU lag (1 min):{x     {y%.2f%%{x                         {W║{x\n\r", cpu_lag_percent);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W╠══════════════════════════════════════════════════════╣{x\n\r");
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {MBytes read:{x          %-10ld {M({y%.1f/sec{M){x          {W║{x\n\r",
+            bytes_read_total, bytes_per_sec_read);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {MBytes written:{x       %-10ld {M({y%.1f/sec{M){x          {W║{x\n\r",
+            bytes_written_total, bytes_per_sec_written);
+    send_to_char(buf, ch);
+    
+    sprintf(buf, "{W║ {MColor optimized:{x     %-10ld bytes               {W║{x\n\r", 
+            color_bytes_saved);
+    send_to_char(buf, ch);
+    
+    /* Add memory stats if immortal */
+    if (ch->level >= LEVEL_IMMORTAL)
+    {
+        extern int top_area;
+        extern int top_mob_index;
+        extern int top_obj_index;
+        extern int top_room;
+        extern int mobile_count;
+        extern int nAllocString;
+        extern int sAllocString;
+        extern int nAllocPerm;
+        extern int sAllocPerm;
+        
+        sprintf(buf, "{W╠══════════════════════════════════════════════════════╣{x\n\r");
+        send_to_char(buf, ch);
+        
+        sprintf(buf, "{W║ {RMemory Info (Immortal){x                          {W║{x\n\r");
+        send_to_char(buf, ch);
+        
+        sprintf(buf, "{W║ {BAreas:{x     %-5d  {BMobs:{x  %-5d  {BObjs:{x  %-5d   {W║{x\n\r",
+                top_area, top_mob_index, top_obj_index);
+        send_to_char(buf, ch);
+        
+        sprintf(buf, "{W║ {BRooms:{x     %-5d  {BMob Count:{x  %-5d          {W║{x\n\r",
+                top_room, mobile_count);
+        send_to_char(buf, ch);
+        
+        sprintf(buf, "{W║ {BStrings:{x   %-5d blocks, %-10d bytes      {W║{x\n\r",
+                nAllocString, sAllocString);
+        send_to_char(buf, ch);
+        
+        sprintf(buf, "{W║ {BPerms:{x     %-5d blocks, %-10d bytes      {W║{x\n\r",
+                nAllocPerm, sAllocPerm);
+        send_to_char(buf, ch);
+    }
+    
+    sprintf(buf, "{W╚══════════════════════════════════════════════════════╝{x\n\r");
+    send_to_char(buf, ch);
+    
+    if (ch->level >= LEVEL_IMMORTAL)
+    {
+        send_to_char("\n\r{DType '{Ymudinfo reset{D' to reset statistics.{x\n\r", ch);
+    }
+    
+    return;
+}
  

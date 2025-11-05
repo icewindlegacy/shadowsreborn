@@ -242,6 +242,9 @@ typedef int		FLAG;
 #define LEVEL_IMMORTAL     (MAX_LEVEL - 8)
 #define L_IMM LEVEL_IMMORTAL
 
+/* MUD name for mudinfo and other displays */
+#define MUD_NAME            "Shadows Reborn"
+
 /* Added this for "orphaned help" code. Check do_help() -- JR */
 #define MAX_CMD_LEN			50
 
@@ -256,6 +259,7 @@ typedef int		FLAG;
 #define LAST_COMMAND_FILE   "last_command.txt"
 #define COPYOVER_FILE       "copyover.dat"
 #define CORPSE_FILE         "corpses.lst"
+#define MUDINFO_FILE        "../data/mudinfo.dat"
 #define EXE_FILE            "../src/rom"
 
 #define MAX_NEST            100   /* Maximum nesting for corpse loading */
@@ -2049,6 +2053,7 @@ struct    pc_data
     int				shares_bought;          /* Number of shares bought */
     int				duration;               /* Duration of investment */
     char *			history;                /* Character history */
+    time_t			login_time;             /* Session login time for mudinfo */
 
 };
 
@@ -2659,6 +2664,19 @@ extern  FILE			*	fpReserve;
 extern  KILL_DATA			kill_table[];
 extern  char				log_buf[];
 extern  TIME_INFO_DATA		time_info;
+
+/* MUD statistics globals */
+extern  time_t				boot_time;
+extern  long				total_logins;
+extern  long				total_pulses;
+extern  long				missed_pulses;
+extern  int					peak_players;
+extern  long				total_player_seconds;
+extern  long				bytes_read_total;
+extern  long				bytes_written_total;
+extern  long				color_bytes_saved;
+extern  long				cpu_lag_usec;
+extern  long				cpu_measurements;
 extern  WEATHER_DATA		weather_info[SECT_MAX];
 extern	NOTE_DATA		*	note_free;
 extern	OBJ_DATA		*	obj_free;
@@ -2890,6 +2908,8 @@ void     reset_room          args( ( ROOM_INDEX_DATA *pRoom ) );   /* OLC */
 char *   print_flags         args( ( int flag ));
 void     boot_db             args( ( void ) );
 void     area_update         args( ( void ) );
+void     save_mudinfo_stats  args( ( void ) );
+void     load_mudinfo_stats  args( ( void ) );
 extern   WIZ_DATA *wiz_list;
 CD *     create_mobile       args( ( MOB_INDEX_DATA *pMobIndex ) );
 void     clone_mobile        args( ( CHAR_DATA *parent, CHAR_DATA *clone) );

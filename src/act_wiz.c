@@ -2512,6 +2512,10 @@ void do_shutdown (CHAR_DATA * ch, char *argument)
     log_string("Saving donation pits...");
     save_all_pits();
     
+    /* Save mudinfo statistics before shutdown */
+    log_string("Saving mudinfo statistics...");
+    save_mudinfo_stats();
+    
     merc_down = TRUE;
     for (d = descriptor_list; d != NULL; d = d_next)
     {

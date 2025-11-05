@@ -325,6 +325,30 @@ unknown~
 container 0 0
 10000 0 0 1000 100
 0 0 0 P
+#416
+red backpack bloody~
+a {rbloody {Rred{X backpack~
+Someone has left a {rbloody {Rred{X backpack here~
+canvas~
+container 0 A
+100 0 0 100 50
+0 20 1 P
+#417
+blue transparent jub~
+a {Bblue{x transparent jug~
+A blue jug lies here~
+glass~
+drink 0 A
+30 30 'water' 0 0
+0 5 1 P
+#418
+a bowl of hearty soup~
+a hearty bowl of soup~
+A hearty bowl of soup lies here~
+unknown~
+food 0 A
+C D 0 0 0
+0 1 1 P
 #420
 grubs~
 some wriggling grubs~

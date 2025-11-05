@@ -3112,6 +3112,13 @@ void do_quit (CHAR_DATA * ch, char *argument)
     sprintf (log_buf, "%s has quit.", ch->name);
     log_string (log_buf);
     recent_add( ch );
+    
+    /* Track session time for mudinfo average calculation */
+    if (ch->pcdata->login_time > 0)
+    {
+        total_player_seconds += (current_time - ch->pcdata->login_time);
+    }
+    
     wiznet ("$N rejoins the real world.", ch, NULL, WIZ_LOGINS, 0,
             get_trust (ch));
             info( ch, 0, "{W[{YINFO{W]:{x %s just logged out!", ch->name );
