@@ -5189,56 +5189,50 @@ void do_mudinfo( CHAR_DATA *ch, char *argument )
     /* Display the information */
     send_to_char("\n\r{W╔══════════════════════════════════════════════════════╗{x\n\r", ch);
     
-    sprintf(buf, "{W║{x         {YStatistics for %s{x                   {W║{x\n\r", MUD_NAME);
+    sprintf(buf, "{W║{x         {YStatistics for %s{x\n\r", MUD_NAME);
     send_to_char(buf, ch);
     
     send_to_char("{W╠══════════════════════════════════════════════════════╣{x\n\r", ch);
     
-    sprintf(buf, "{W║{x {CUptime:{x              %3dd %2dh %2dm %2ds              {W║{x\n\r", 
+    sprintf(buf, "{W║{x {CUptime:{x              %3dd %2dh %2dm %2ds\n\r", 
             days, hours, minutes, seconds);
     send_to_char(buf, ch);
     
-    sprintf(buf, "{W║{x {CPlayers online:{x       %-3d                           {W║{x\n\r", 
-            current_players);
+    sprintf(buf, "{W║{x {CPlayers online:{x       %d\n\r", current_players);
     send_to_char(buf, ch);
     
-    sprintf(buf, "{W║{x {CAverage since boot:{x   %-5.2f                         {W║{x\n\r", 
-            average_players);
+    sprintf(buf, "{W║{x {CAverage since boot:{x   %.2f\n\r", average_players);
     send_to_char(buf, ch);
     
-    sprintf(buf, "{W║{x {CPeak since boot:{x      %-3d                           {W║{x\n\r", 
-            peak_players);
+    sprintf(buf, "{W║{x {CPeak since boot:{x      %d\n\r", peak_players);
     send_to_char(buf, ch);
     
-    sprintf(buf, "{W║{x {CTotal logins:{x         %-6ld                          {W║{x\n\r", 
-            total_logins);
+    sprintf(buf, "{W║{x {CTotal logins:{x         %ld\n\r", total_logins);
     send_to_char(buf, ch);
     
     send_to_char("{W╠══════════════════════════════════════════════════════╣{x\n\r", ch);
     
-    sprintf(buf, "{W║{x {GTotal pulses:{x         %-10ld                        {W║{x\n\r", 
-            total_pulses);
+    sprintf(buf, "{W║{x {GTotal pulses:{x         %ld\n\r", total_pulses);
     send_to_char(buf, ch);
     
-    sprintf(buf, "{W║{x {GPulses missed:{x        %-10ld {G({y%.2f%%{G){x               {W║{x\n\r",
+    sprintf(buf, "{W║{x {GPulses missed:{x        %ld {G({y%.2f%%{G){x\n\r",
             missed_pulses, pulse_miss_percent);
     send_to_char(buf, ch);
     
-    sprintf(buf, "{W║{x {GCPU lag (1 min):{x      {y%.2f%%{x                           {W║{x\n\r", 
-            cpu_lag_percent);
+    sprintf(buf, "{W║{x {GCPU lag (1 min):{x      {y%.2f%%{x\n\r", cpu_lag_percent);
     send_to_char(buf, ch);
     
     send_to_char("{W╠══════════════════════════════════════════════════════╣{x\n\r", ch);
     
-    sprintf(buf, "{W║{x {MBytes read:{x           %-10ld {M({y%.1f/sec{M){x            {W║{x\n\r",
+    sprintf(buf, "{W║{x {MBytes read:{x           %ld {M({y%.1f/sec{M){x\n\r",
             bytes_read_total, bytes_per_sec_read);
     send_to_char(buf, ch);
     
-    sprintf(buf, "{W║{x {MBytes written:{x        %-10ld {M({y%.1f/sec{M){x            {W║{x\n\r",
+    sprintf(buf, "{W║{x {MBytes written:{x        %ld {M({y%.1f/sec{M){x\n\r",
             bytes_written_total, bytes_per_sec_written);
     send_to_char(buf, ch);
     
-    sprintf(buf, "{W║{x {MColor optimized:{x      %-10ld bytes                  {W║{x\n\r", 
+    sprintf(buf, "{W║{x {MColor optimized:{x      %ld bytes\n\r", 
             color_bytes_saved);
     send_to_char(buf, ch);
     
@@ -5257,21 +5251,21 @@ void do_mudinfo( CHAR_DATA *ch, char *argument )
         
         send_to_char("{W╠══════════════════════════════════════════════════════╣{x\n\r", ch);
         
-        send_to_char("{W║{x {RMemory Info (Immortal){x                           {W║{x\n\r", ch);
+        send_to_char("{W║{x {RMemory Info (Immortal){x\n\r", ch);
         
-        sprintf(buf, "{W║{x {BAreas:{x      %-5d   {BMobs:{x     %-5d   {BObjs:{x     %-5d {W║{x\n\r",
+        sprintf(buf, "{W║{x {BAreas:{x      %d   {BMobs:{x     %d   {BObjs:{x     %d\n\r",
                 top_area, top_mob_index, top_obj_index);
         send_to_char(buf, ch);
         
-        sprintf(buf, "{W║{x {BRooms:{x      %-5d   {BMob Count:{x             %-5d {W║{x\n\r",
+        sprintf(buf, "{W║{x {BRooms:{x      %d   {BMob Count:{x             %d\n\r",
                 top_room, mobile_count);
         send_to_char(buf, ch);
         
-        sprintf(buf, "{W║{x {BStrings:{x    %-5d blocks, %-10d bytes        {W║{x\n\r",
+        sprintf(buf, "{W║{x {BStrings:{x    %d blocks, %d bytes\n\r",
                 nAllocString, sAllocString);
         send_to_char(buf, ch);
         
-        sprintf(buf, "{W║{x {BPerms:{x      %-5d blocks, %-10d bytes        {W║{x\n\r",
+        sprintf(buf, "{W║{x {BPerms:{x      %d blocks, %d bytes\n\r",
                 nAllocPerm, sAllocPerm);
         send_to_char(buf, ch);
     }
