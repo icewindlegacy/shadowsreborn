@@ -2975,15 +2975,15 @@ void do_who( CHAR_DATA *ch, char *argument )
 	*buf = '\0';
  
         if (IS_STAFF(wch)) {
-	        sprintf(buf, "{y %s %s %s%s{x",
+	        sprintf(buf, "{y %s {W%s{x {W%s{x%s{x",
         	        class, wch->pcdata->pretit, wch->name, wch->pcdata->title);
 	staff++;
     } else if (IS_REAL_HERO(wch)) {
-        sprintf(buf, "{x[%3d {YHERO{x] %s %s%s{x",
+        sprintf(buf, "{x[%3d {YHERO{x] {W%s{x {W%s{x%s{x",
             wch->level, wch->pcdata->pretit, wch->name, wch->pcdata->title);
 	players++;
 	} else {
-		sprintf(buf, "{x[%3d  %3s] %s%s{x",
+		sprintf(buf, "{x[%3d  %3s] {W%s{x {W%s{x%s{x",
 		    wch->level,
 		    wch->race < MAX_PC_RACE ? pc_race_table[wch->race].who_name 
 		    : "NULL",	

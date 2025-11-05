@@ -1614,11 +1614,11 @@ void advance_level_object( CHAR_DATA *ch, OBJ_DATA *obj )
     pbonus  = UMAX(  6, pbonus );
     bonus = UMAX( 1, bonus );
 
-    add_apply(obj, APPLY_DAMROLL, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel * 5);
-    add_apply(obj, APPLY_HITROLL, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel * 5); 
-    add_apply(obj, APPLY_HIT, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel * 5);
-    add_apply(obj, APPLY_MANA, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel * 5);
-    add_apply(obj, APPLY_MOVE, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel * 5);
+    add_apply(obj, APPLY_DAMROLL, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel + 1);
+    add_apply(obj, APPLY_HITROLL, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel + 1); 
+    add_apply(obj, APPLY_HIT, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel + 2);
+    add_apply(obj, APPLY_MANA, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel + 2);
+    add_apply(obj, APPLY_MOVE, pbonus, TO_OBJECT, 0, -1, 0, obj->plevel + 2);
 
     /* Apply the new affects to the character wearing the item */
     if (obj->carried_by != NULL && obj->wear_loc != WEAR_NONE)
@@ -1626,7 +1626,7 @@ void advance_level_object( CHAR_DATA *ch, OBJ_DATA *obj )
         AFFECT_DATA *paf;
         for (paf = obj->affected; paf != NULL; paf = paf->next)
         {
-            if (paf->level == obj->plevel * 5) /* Only apply the new affects */
+            if (paf->level == obj->plevel + 2) /* Only apply the new affects */
             {
                 affect_modify(obj->carried_by, paf, TRUE);
             }

@@ -404,6 +404,8 @@ DECLARE_DO_FUN( do_addapply		);
 DECLARE_DO_FUN( do_disable		);
 DECLARE_DO_FUN( do_auction		);
 DECLARE_DO_FUN( do_quest		);
+DECLARE_DO_FUN( do_bounty );
+DECLARE_DO_FUN( do_long );
 
 /* External functions from fight.c */
 void set_fighting args ((CHAR_DATA * ch, CHAR_DATA * victim));
@@ -439,13 +441,16 @@ DECLARE_DO_FUN( do_spit );
 DECLARE_DO_FUN( do_light );
 DECLARE_DO_FUN( do_pack );
 DECLARE_DO_FUN( do_scrape );
+/* Survival commands */
 DECLARE_DO_FUN( do_gather );
 DECLARE_DO_FUN( do_campfire );
-DECLARE_DO_FUN( do_ispellup);
-DECLARE_DO_FUN( do_arealinks );
-DECLARE_DO_FUN( do_fish );
-DECLARE_DO_FUN( do_bounty );
 DECLARE_DO_FUN( do_butcher );
 DECLARE_DO_FUN( do_cook );
+DECLARE_DO_FUN( do_fish );
+DECLARE_DO_FUN( do_backpack );
+/* Immortal commands */
+DECLARE_DO_FUN( do_ispellup);
+DECLARE_DO_FUN( do_arealinks );
 DECLARE_DO_FUN( do_questreset);
 DECLARE_DO_FUN( do_recall_clan);
+DECLARE_DO_FUN( do_recent );

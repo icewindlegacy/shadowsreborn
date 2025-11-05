@@ -965,8 +965,8 @@ void nanny (DESCRIPTOR_DATA * d, char *argument)
                 sprintf (buf, "the FNG");
                 set_title (ch, buf);
 
-                do_function (ch, &do_outfit, "");
-                if (ch->faction == FACTION_HUMAN)
+                do_function ( ch, &do_backpack, "self" ); 
+                               if (ch->faction == FACTION_HUMAN)
                 obj_to_char (create_object (get_obj_index (OBJ_VNUM_MAP), 0),
                              ch);
                 else if (ch->faction == FACTION_ORCISH)

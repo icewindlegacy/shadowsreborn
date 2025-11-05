@@ -196,6 +196,34 @@ int attack_lookup (const char *name)
     return 0;
 }
 
+bool can_backpack(CHAR_DATA *ch)     
+{
+    OBJ_DATA *object;     
+    bool found;     
+
+    if ( ch->desc == NULL )     
+        return TRUE;     
+
+    if ( ch->level > HERO )     
+        return TRUE;     
+
+    /*
+     * search the list of objects.     
+     */     
+    found = TRUE;      
+
+    for ( object = ch->carrying; object != NULL; object = object->next_content )     
+    {     
+        if (object->pIndexData->vnum == OBJ_VNUM_SCHOOL_SATCHEL)     
+            found = FALSE;     
+    }     
+
+    if (found)     
+        return TRUE;     
+
+    return FALSE;                                                                              
+}  
+
 /* returns a flag for wiznet */
 long wiznet_lookup (const char *name)
 {
@@ -3212,6 +3240,8 @@ char *comm_bit_name (int comm_flags)
         strcat (buf, " compact");
     if (comm_flags & COMM_BRIEF)
         strcat (buf, " brief");
+    if (comm_flags & COMM_LONG)
+        strcat (buf, " long");
     if (comm_flags & COMM_PROMPT)
         strcat (buf, " prompt");
     if (comm_flags & COMM_COMBINE)

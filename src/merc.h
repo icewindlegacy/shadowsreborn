@@ -1255,6 +1255,9 @@ struct    kill_data
 #define OBJ_VNUM_SCHOOL_BANNER     3716
 #define OBJ_VNUM_SCHOOL_COMM       3057
 #define OBJ_VNUM_MAP               3162
+#define OBJ_VNUM_SCHOOL_SATCHEL    3723
+#define OBJ_VNUM_SCHOOL_SOUP       3724
+#define OBJ_VNUM_SCHOOL_WATER      3138
 
 /* ORC SCHOOL GEAR */
 #define OBJ_VNUM_ORC_MACE       400
@@ -1272,7 +1275,9 @@ struct    kill_data
 #define OBJ_VNUM_ORC_BANNER     411
 #define OBJ_VNUM_ORC_MAP            412
 #define OBJ_VNUM_ORC_COMM       413
-
+#define OBJ_VNUM_ORC_SATCHEL    416
+#define OBJ_VNUM_ORC_SOUP       418
+#define OBJ_VNUM_ORC_WATER      417
 #define OBJ_VNUM_ORC_PIT        415
 /* MISC SKILL OBJS */
 #define OBJ_VNUM_FIREWOOD              6
@@ -1724,6 +1729,9 @@ struct    kill_data
 #define COMM_AFK                (Z)
 #define COMM_NOHINT             (aa)
 #define COMM_NOINFO             (bb)
+
+/* Long display flags */
+#define COMM_LONG                (cc)
 
 /* WIZnet flags */
 #define WIZ_ON                  (A)

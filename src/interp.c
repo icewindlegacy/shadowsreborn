@@ -122,6 +122,7 @@ const struct cmd_type cmd_table[] = {
     {"kill",      do_kill,      POS_FIGHTING, 0,  LOG_NORMAL, 1},
     {"look",      do_look,      POS_RESTING,  0,  LOG_NORMAL, 1},
     {"lookhistory",  do_lookhist,  POS_SLEEPING, 0,  LOG_NORMAL, 1},
+    {"long",      do_long,      POS_SLEEPING, 0,  LOG_NORMAL, 1},
     {"lore",      do_lore,      POS_RESTING,  0,  LOG_NORMAL, 1},
     {"keyring",   do_keyring,   POS_FIGHTING, 1,  LOG_NORMAL, 1},
     {"circle",    do_circle,    POS_FIGHTING, 0,  LOG_NORMAL, 1},
@@ -214,7 +215,7 @@ const struct cmd_type cmd_table[] = {
     {"nofollow",	do_nofollow,	POS_DEAD,	0, LOG_NORMAL, 1},
     {"noloot",		do_noloot,	POS_DEAD,	0, LOG_NORMAL, 1},
     {"nosummon",	do_nosummon,	POS_DEAD,	0, LOG_NORMAL, 1},
-    {"outfit",		do_outfit,	POS_RESTING,	0, LOG_NORMAL, 1},
+    {"outfit",		do_backpack,	POS_RESTING,	0, LOG_NORMAL, 1},
     {"password",	do_password,	POS_DEAD,	0, LOG_NEVER,  1},
     {"prompt",		do_prompt,	POS_DEAD,	0, LOG_NORMAL, 1},
     {"scroll",		do_scroll,	POS_DEAD,	0, LOG_NORMAL, 1},
@@ -445,6 +446,7 @@ const struct cmd_type cmd_table[] = {
     {"mrelic",		do_mrelic,	POS_DEAD, L3, LOG_NORMAL, 1},
     {"teleport",	do_transfer,	POS_DEAD, L5, LOG_ALWAYS, 1},
     {"transfer",	do_transfer,	POS_DEAD, L5, LOG_ALWAYS, 1},
+    {"recent",		do_recent,	POS_DEAD, L4, LOG_ALWAYS, 1},
 
 /*  { "at",        do_at,        POS_DEAD,    L6,  LOG_NORMAL, 1 }, */
     {"poofin",		do_bamfin,	POS_DEAD, L8, LOG_NORMAL, 1},

@@ -302,6 +302,7 @@ const struct flag_type comm_flags[] = {
     {"shoutsoff", COMM_SHOUTSOFF, TRUE},
     {"compact", COMM_COMPACT, TRUE},
     {"brief", COMM_BRIEF, TRUE},
+    {"long", COMM_LONG, TRUE},
     {"prompt", COMM_PROMPT, TRUE},
     {"combine", COMM_COMBINE, TRUE},
     {"telnet_ga", COMM_TELNET_GA, TRUE},
