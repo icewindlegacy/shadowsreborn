@@ -4625,6 +4625,22 @@ void load_storage( char *filename )
                     extract_obj(room->contents);
                 }
             }
+            else if( !str_cmp( word, "PITVNUM" ) )
+            {
+                /* Pit vnum - handle same as VNUM */
+                vnum = fread_number( fp );
+                if(( room = get_room_index( vnum )) == NULL )
+                {
+                    bugf( "load_storage: bad vnum %d in %s.", vnum, filename );
+                    break;
+                }
+                
+                /* Clear any existing objects in the pit before loading */
+                while (room->contents != NULL)
+                {
+                    extract_obj(room->contents);
+                }
+            }
             else if ( !str_cmp( word, "END"    ) )
                 break;
             else
