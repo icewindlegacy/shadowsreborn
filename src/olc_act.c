@@ -2320,11 +2320,15 @@ void show_obj_values (CHAR_DATA * ch, OBJ_INDEX_DATA * obj)
                      "[v0] Charges:        [%d]\n\r"
                      "[v1] Exit Flags:     %s\n\r"
                      "[v2] Portal Flags:   %s\n\r"
-                     "[v3] Goes to (vnum): [%d]\n\r",
+                     "[v3] Goes to (vnum): [%d]\n\r"
+                     "[v4] Faction:        [%d] %s\n\r",
                      obj->value[0],
                      flag_string (exit_flags, obj->value[1]),
                      flag_string (portal_flags, obj->value[2]),
-                     obj->value[3]);
+                     obj->value[3],
+                     obj->value[4],
+                     obj->value[4] == FACTION_HUMAN ? "(Human)" :
+                     obj->value[4] == FACTION_ORCISH ? "(Orcish)" : "(None/Any)");
             send_to_char (buf, ch);
             break;
 
@@ -2895,6 +2899,10 @@ bool set_obj_values (CHAR_DATA * ch, OBJ_INDEX_DATA * pObj, int value_num,
                 case 3:
                     send_to_char ("EXIT VNUM SET.\n\r\n\r", ch);
                     pObj->value[3] = atoi (argument);
+                    break;
+                case 4:
+                    send_to_char ("FACTION SET.\n\r\n\r", ch);
+                    pObj->value[4] = atoi (argument);
                     break;
             }
             break;
