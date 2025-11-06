@@ -1811,6 +1811,13 @@ void do_common (CHAR_DATA *ch, char *argument)
     if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
         makedrunk(message, ch);
 
+    /* DEBUG: Log what we're about to send */
+    {
+        extern char log_buf[];
+        sprintf(log_buf, "COMMON DEBUG: About to send message='%s'", message);
+        log_string(log_buf);
+    }
+
     if (number_percent() < chance)
     {
         act("In Common, you say '$t'", ch, message, NULL, TO_CHAR);

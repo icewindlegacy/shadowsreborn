@@ -619,6 +619,10 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
         if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
             makedrunk(message, ch);
 
+        /* DEBUG: Log what we're about to send */
+        sprintf(log_buf, "COMMSTONE DEBUG: About to send message='%s'", message);
+        log_string(log_buf);
+
         printf_to_char(ch, "%s You transmit: '%s'\n\r", sender_prefix,
                        message);
         transmitted = TRUE;
