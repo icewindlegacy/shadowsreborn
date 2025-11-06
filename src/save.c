@@ -336,6 +336,10 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
             fprintf (fp, "Bin  %s~\n", ch->pcdata->bamfin);
         if (ch->pcdata->bamfout[0] != '\0')
             fprintf (fp, "Bout %s~\n", ch->pcdata->bamfout);
+        if (ch->pcdata->email[0] != '\0')
+            fprintf (fp, "Email %s~\n", ch->pcdata->email);
+        if (ch->pcdata->real_name[0] != '\0')
+            fprintf (fp, "Real_name %s~\n", ch->pcdata->real_name);
         fprintf (fp, "Titl %s~\n", ch->pcdata->title);
         fprintf (fp, "Pretit %s~\n", ch->pcdata->pretit);
         if (ch->pcdata->history[0] != '\0')
@@ -933,6 +937,8 @@ bool load_char_obj (DESCRIPTOR_DATA * d, char *name)
     ch->pcdata->title = str_dup ("");
     ch->pcdata->pretit = str_dup ("");
     ch->pcdata->history = str_dup ("");
+    ch->pcdata->email = str_dup ("");
+    ch->pcdata->real_name = str_dup ("");
     for (stat = 0; stat < MAX_STATS; stat++)
         ch->perm_stat[stat] = 13;
     ch->pcdata->condition[COND_THIRST] = 48;
@@ -1544,6 +1550,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
                 break;
 
             case 'E':
+                KEY ("Email", ch->pcdata->email, fread_string (fp));
                 if (!str_cmp (word, "End"))
                 {
                     /* adjust hp mana move up  -- here for speed's sake */
@@ -1695,6 +1702,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
                 break;
 
             case 'R':
+                KEY ("Real_name", ch->pcdata->real_name, fread_string (fp));
                 KEY ("Race", ch->race, race_lookup (fread_string (fp)));
 
                 if (!str_cmp (word, "Room"))

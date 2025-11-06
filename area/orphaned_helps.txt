@@ -10,3 +10,7 @@
 [  400] Om: racial
 [  459] Om: link
 [ 3001] Zok: direction
+[ 3001] Om: quest
+[ 3001] Om: bank
+[ 3001] Om: repair
+[ 3001] Om: tune

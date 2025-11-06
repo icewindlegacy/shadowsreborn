@@ -117,7 +117,7 @@ void do_quest(CHAR_DATA *ch, char *argument)
 
     if (arg1[0] == '\0')
     {
-        send_to_char("QUEST commands: POINTS INFO TIME REQUEST COMPLETE LIST BUY CLEAR.\n\r", ch);
+        send_to_char("QUEST commands: POINTS INFO TIME REQUEST COMPLETE LIST BUY CLEAR TRANSFER.\n\r", ch);
         send_to_char("For more information, type 'HELP QUEST'.\n\r", ch);
         return;
     }
@@ -161,6 +161,77 @@ void do_quest(CHAR_DATA *ch, char *argument)
     {
         sprintf(buf, "You have %d glory points.\n\r",ch->pcdata->quest_curr);
         send_to_char(buf, ch);
+        return;
+    }
+    else if (!strcmp(arg1, "transfer"))
+    {
+        CHAR_DATA *victim;
+        int amount;
+        
+        if (IS_NPC(ch))
+        {
+            send_to_char("NPCs cannot transfer quest points.\n\r", ch);
+            return;
+        }
+        
+        if (arg2[0] == '\0' || argument[0] == '\0')
+        {
+            send_to_char("Syntax: quest transfer <amount> <player>\n\r", ch);
+            return;
+        }
+        
+        if (!is_number(arg2))
+        {
+            send_to_char("The amount must be a number.\n\r", ch);
+            return;
+        }
+        
+        amount = atoi(arg2);
+        
+        if (amount <= 0)
+        {
+            send_to_char("You must transfer a positive amount of quest points.\n\r", ch);
+            return;
+        }
+        
+        if (ch->pcdata->quest_curr < amount)
+        {
+            sprintf(buf, "You only have %d quest points.\n\r", ch->pcdata->quest_curr);
+            send_to_char(buf, ch);
+            return;
+        }
+        
+        if ((victim = get_char_world(ch, argument)) == NULL)
+        {
+            send_to_char("They aren't here.\n\r", ch);
+            return;
+        }
+        
+        if (IS_NPC(victim))
+        {
+            send_to_char("You cannot transfer quest points to NPCs.\n\r", ch);
+            return;
+        }
+        
+        if (victim == ch)
+        {
+            send_to_char("You cannot transfer quest points to yourself.\n\r", ch);
+            return;
+        }
+        
+        /* Perform the transfer */
+        ch->pcdata->quest_curr -= amount;
+        victim->pcdata->quest_curr += amount;
+        
+        sprintf(buf, "You transfer %d quest points to %s.\n\r", amount, victim->name);
+        send_to_char(buf, ch);
+        
+        sprintf(buf, "%s has transferred %d quest points to you!\n\r", ch->name, amount);
+        send_to_char(buf, victim);
+        
+        sprintf(buf, "%s transferred %d quest points to %s.", ch->name, amount, victim->name);
+        log_string(buf);
+        
         return;
     }
     else if (!strcmp(arg1, "time"))

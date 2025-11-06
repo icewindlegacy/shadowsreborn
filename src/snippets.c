@@ -118,7 +118,7 @@ void do_finger(CHAR_DATA *ch, char *argument)
             victim->pcdata->email ? victim->pcdata->email : "Not specified");
         send_to_char(buf, ch);
         if(victim->desc != NULL)
-            sprintf(buf, "%s is currently playing {rR{Rive{Yrs {Wof {YDr{Rec{rk{x.\n\r", victim->name);
+            sprintf(buf, "%s is currently playing {rS{Rh{Ya{Wd{Yo{Rw{rs {rR{Re{Yb{Wo{Yr{Rn{x.\n\r", victim->name);
         else
             sprintf(buf, "%s is currently linkdead.\n\r", victim->name);
         send_to_char(buf, ch);
