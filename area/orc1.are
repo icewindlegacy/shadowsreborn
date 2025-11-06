@@ -217,35 +217,6 @@ map 0 A
 0 0 0 P
 E
 map~
-,        * Dushgoi *                      +-Sorcerers
-,        ***********                      | Guild
-,                                         |
-,                                 Martial-+-Berserkers
-, Whares   Tralls    Trulls       Academy | Guild     Slave  Jewelry  Magic
-,         Armour    Supplies             |          Auction  Store   Shop
-,            |          |          Center               |       |      |
-,ChuKaal +----+----------+------    Tunnel  -------------+-------+------+-
-,Rocks  /     |          |       Intersection            |       |      | \
-,      /  Kruels       Butcher    /       |          Bruths   Graks   Maps \ 
-,Leather Weapons MUD    Shop     /        |          Vessels  Elixirs      |
-,Shop           School          /  Black -+-Knaves                         |
-,                             /   Dragon | Guild                       Orc
-,           Portal--- Battle  /           |                          Invasion
-,           Room      School /            |                           Highway
-,                       |   /             +-Shamans
-,         Quest ---- Circle of--Donation    Guild
-,         Room         Power      Room
-,                    /(recall)
-,                   /   |
-,                  /   Orc
-,            Morgue   Temple
-,                       |
-,                     Great
-,                   Necromancer
- 
-~
-E
-map~
 {W        ***********
 {W        * Dushgoi *                      +-Sorcerers
 {W        ***********                      | Guild
@@ -275,6 +246,35 @@ map~
 {W                   Necromancer
  
 ~
+E
+map~
+,        * Dushgoi *                      +-Sorcerers
+,        ***********                      | Guild
+,                                         |
+,                                 Martial-+-Berserkers
+, Whares   Tralls    Trulls       Academy | Guild     Slave  Jewelry  Magic
+,         Armour    Supplies             |          Auction  Store   Shop
+,            |          |          Center               |       |      |
+,ChuKaal +----+----------+------    Tunnel  -------------+-------+------+-
+,Rocks  /     |          |       Intersection            |       |      | \
+,      /  Kruels       Butcher    /       |          Bruths   Graks   Maps \ 
+,Leather Weapons MUD    Shop     /        |          Vessels  Elixirs      |
+,Shop           School          /  Black -+-Knaves                         |
+,                             /   Dragon | Guild                       Orc
+,           Portal--- Battle  /           |                          Invasion
+,           Room      School /            |                           Highway
+,                       |   /             +-Shamans
+,         Quest ---- Circle of--Donation    Guild
+,         Room         Power      Room
+,                    /(recall)
+,                   /   |
+,                  /   Orc
+,            Morgue   Temple
+,                       |
+,                     Great
+,                   Necromancer
+ 
+~
 #413
 orc school newbie commstone comm stone~
 a newbie comm stone~
@@ -291,6 +291,9 @@ unknown~
 map 0 A
 0 0 0 0 0
 0 0 0 P
+E
+map~
+~
 E
 map~
 ,                {WWizards
@@ -316,9 +319,6 @@ map~
 ,              {yv{B.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B         {yv{B.,.,.,.,.,.,
 ,      {yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B.,.,.,.,.,.,.{x
  
-~
-E
-map~
 ~
 #415
 hole donation pit~

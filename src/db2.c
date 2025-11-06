@@ -330,12 +330,7 @@ void load_mobiles (FILE * fp)
 
 	if (letter == 'C') /* Feydrex - clan guards */
 	{
-	    char *clan_name = fread_string(fp);
-	    pMobIndex->clan = clan_lookup(clan_name);
-	    sprintf(log_buf, "CLAN DEBUG: Mob #%d, read clan name '%s', lookup returned %d (%s)", 
-	            pMobIndex->vnum, clan_name, pMobIndex->clan, 
-	            clan_table[pMobIndex->clan].name ? clan_table[pMobIndex->clan].name : "NULL");
-	    log_string(log_buf);
+	    pMobIndex->clan = clan_lookup(fread_string(fp));
 	}
 	else
 	{

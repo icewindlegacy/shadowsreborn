@@ -62,9 +62,9 @@ jewelry GRSYa AB
 0 0 0 0 0
 0 0 300 P
 A
-13 20
-A
 5 2
+A
+13 20
 #6702
 aquest armor mithril chain shirt~
 a {wm{Wi{Ct{ch{Cr{Wi{wl{x chain shirt~
@@ -74,11 +74,11 @@ armor AGRSYa AD
 CE CE CE CE 0
 0 0 500 P
 A
-13 20
+5 1
 A
 20 -10
 A
-5 1
+13 20
 #6703
 aquest everburning torch~
 the {re{Rve{Yr{Wbu{Yr{Rni{rng{x torch~
@@ -98,9 +98,9 @@ jewelry GRSYa AC
 0 0 0 0 0
 0 0 150 P
 A
-12 20
-A
 4 2
+A
+12 20
 #6705
 aquest cowl dark wool~
 a {dd{wa{Dr{wk {dc{wo{Dw{wl{x~
@@ -110,11 +110,11 @@ armor GRSYa AE
 BD BD BD D 0
 0 0 200 P
 A
-19 5
+20 -5
 A
 18 5
 A
-20 -5
+19 5
 #6706
 aquest dagger blade assassin~
 an {Da{ds{Ms{ma{Ms{ds{Di{Mn{m'{Ds {db{ml{Ma{dd{De{x~
@@ -124,11 +124,11 @@ weapon GRSYa AN
 dagger 2 8 stab EH
 0 3 500 P
 A
-19 5
+14 10
 A
 2 2
 A
-14 10
+19 5
 #6707
 aquest bracer of power~
 {Gbracer{x of {Mp{Do{Mw{me{Dr{x~
@@ -138,9 +138,9 @@ armor GRSYa AM
 0 0 0 0 0
 0 0 300 P
 A
-1 2
-A
 19 1
+A
+1 2
 #6708
 aquest leggings of iron~
 {wleggins{x of {Di{wr{Do{wn{x~
@@ -150,9 +150,9 @@ armor GRSYa AF
 BD BD BD D 0
 0 0 500 P
 A
-5 1
-A
 14 10
+A
+5 1
 #6709
 aquest black steel boots~
 {Dblack{x {wsteel{x boots~
@@ -162,9 +162,9 @@ armor GRSYa AG
 BD BD BD D 0
 0 0 400 P
 A
-14 20
-A
 4 1
+A
+14 20
 #6710
 aquest gloves brown leather~
 {ybrown leather{x gloves~
@@ -174,9 +174,9 @@ armor GRSYa AH
 D D 0 AC 0
 0 0 200 P
 A
-13 10
-A
 18 1
+A
+13 10
 #6711
 aquest belt of giant strength~
 {ybelt{x of {Gg{gi{ya{gn{Gt{x {yst{Yr{Ge{Yn{ygth{x~
@@ -196,9 +196,9 @@ armor GRSYa AK
 AC AC AC AC 0
 0 0 300 P
 A
-12 10
-A
 3 1
+A
+12 10
 #6713
 aquest mithril armguards~
 {cm{Cit{Wh{Cri{cl{x armguards~
@@ -208,9 +208,9 @@ armor GRSYa AI
 BD BD BD D 0
 0 0 300 P
 A
-5 1
-A
 20 -5
+A
+5 1
 #6714
 aquest ioun stone scarlet and blue~
 a {Rsca{rr{Rlet {xand {Bb{blu{Be{x {ci{Cou{cn {xstone~
@@ -220,9 +220,9 @@ treasure GRSYa AQ
 0 0 0 0 0
 0 0 200 P
 A
-12 10
-A
 3 2
+A
+12 10
 #6715
 aquest darkwood shield dark wood~
 a {Ddar{wk{Dwood{x shield~
