@@ -399,6 +399,12 @@ void boot_db ()
     }
 
     /*
+     * Load clans BEFORE areas so mob clan lookups work
+     */
+    log_string ("Loading clans...");
+    load_clans ();
+
+    /*
      * Read in all the area files.
      */
     {
@@ -506,7 +512,6 @@ void boot_db ()
         load_songs ();
         load_disabled ();
         load_classes ();           /* Load class skill levels */
-        load_clans ();             /* Load clans */
         log_string ("Loading storage rooms...");
         load_storages ();          /* Load clan storeroom contents */
         log_string ("Loading donation pits...");
