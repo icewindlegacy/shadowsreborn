@@ -415,7 +415,16 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
 
     argument = one_argument(argument, command);
 
-    if (command[0] != '\0')
+    /* Check for emote */
+    bool is_emote = FALSE;
+    if (!str_prefix(command, "emote"))
+    {
+        is_emote = TRUE;
+        /* Skip past "emote" to get the emote text */
+        while (*argument == ' ')
+            ++argument;
+    }
+    else if (command[0] != '\0')
     {
         int idx;
         for (idx = 0; social_table[idx].name[0] != '\0'; idx++)
@@ -430,7 +439,54 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
         }
     }
 
-    if (is_social && social_index >= 0)
+    if (is_emote)
+    {
+        char message[MAX_STRING_LENGTH];
+        char buf[MAX_STRING_LENGTH];
+
+        if (argument[0] == '\0')
+        {
+            send_to_char("Emote what?\n\r", ch);
+            return;
+        }
+
+        strncpy(message, argument, sizeof(message) - 1);
+        message[sizeof(message) - 1] = '\0';
+
+        if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
+            makedrunk(message, ch);
+
+        sprintf(buf, "%s %s %s", sender_prefix, ch->name, message);
+        send_to_char(buf, ch);
+        send_to_char("\n\r", ch);
+        transmitted = TRUE;
+
+        for (d = descriptor_list; d != NULL; d = d->next)
+        {
+            CHAR_DATA *vch = d->original ? d->original : d->character;
+            OBJ_DATA *listener_stone;
+            char listener_prefix[64];
+
+            if (d->connected != CON_PLAYING || vch == ch)
+                continue;
+
+            if (!commstone_can_hear(vch, channel, freq))
+                continue;
+
+            listener_stone = get_commstone(vch);
+            commstone_build_prefix(listener_prefix, sizeof(listener_prefix),
+                                   listener_stone, freq, channel);
+
+            sprintf(buf, "%s %s %s\n\r", listener_prefix, ch->name, message);
+            send_to_char(buf, vch);
+        }
+
+        if (transmitted)
+            commstone_spend_charge(ch, stone);
+
+        return;
+    }
+    else if (is_social && social_index >= 0)
     {
         CHAR_DATA *victim = NULL;
         char buf[MAX_STRING_LENGTH];
