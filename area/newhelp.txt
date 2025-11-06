@@ -698,6 +698,7 @@ Syntax: quest info
         quest request
         quest complete
         quest quit
+        quest transfer <amount> <player>
 
 The questing system allows you to undertake special missions for rewards.
 Quest masters can be found in major cities and will offer tasks suitable
@@ -708,6 +709,7 @@ QUEST LIST - See available quest types
 QUEST REQUEST - Request a new quest from a questmaster
 QUEST COMPLETE - Turn in a completed quest for rewards
 QUEST QUIT - Abandon your current quest (with penalty)
+QUEST TRANSFER - Transfer quest points to another player
 
 Quest rewards include:
 - Quest points (QP)
@@ -716,7 +718,8 @@ Quest rewards include:
 - Reputation gains
 
 Quest points can be spent at quest shops for unique items not available
-elsewhere in the game.
+elsewhere in the game. You can also transfer quest points to other players
+to help friends or trade for services. All transfers are logged.
 
 ****************************
 
