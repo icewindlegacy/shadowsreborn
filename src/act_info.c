@@ -128,7 +128,7 @@ char *format_obj_to_char (OBJ_DATA * obj, CHAR_DATA * ch, bool fShort)
 
         if (!IS_SET(ch->comm, COMM_LONG) )
     {
-	strcat( buf, "{x[{y.{R.{B.{M.{Y.{W.{G.{x]");
+	strcat( buf, "{x[{w.{R.{Y.{M.{y.{W.{G.{x]");
 	if ( IS_OBJ_STAT(obj, ITEM_INVIS)	)   buf[5] = 'V';
 	if ( IS_AFFECTED(ch, AFF_DETECT_EVIL)
 	&& IS_OBJ_STAT(obj, ITEM_EVIL)		)   buf[8] = 'E';
@@ -139,7 +139,7 @@ char *format_obj_to_char (OBJ_DATA * obj, CHAR_DATA * ch, bool fShort)
 	if ( IS_OBJ_STAT(obj, ITEM_GLOW)	)   buf[17] = 'G';
 	if ( IS_OBJ_STAT(obj, ITEM_HUM)		)   buf[20] = 'H';
 	if ( IS_OBJ_STAT(obj, ITEM_QUEST)	)   buf[23] = 'Q';
-	if (!strcmp(buf, "{x[{y.{R.{B.{M.{Y.{W.{G.{x]") )
+	if (!strcmp(buf, "{x[{w.{R.{Y.{M.{y.{W.{G.{x]") )
 	    buf[0] = '\0';
     }
     else 
@@ -149,13 +149,13 @@ char *format_obj_to_char (OBJ_DATA * obj, CHAR_DATA * ch, bool fShort)
     if (IS_AFFECTED (ch, AFF_DETECT_EVIL) && IS_OBJ_STAT (obj, ITEM_EVIL))
         strcat (buf, "{W({RRed Aura{W){x ");
     if (IS_AFFECTED (ch, AFF_DETECT_GOOD) && IS_OBJ_STAT (obj, ITEM_BLESS))
-        strcat (buf, "{W({BBlue Aura{W){x ");
+        strcat (buf, "{W({YGolden Aura{W){x ");
     if (IS_AFFECTED (ch, AFF_DETECT_MAGIC) && IS_OBJ_STAT (obj, ITEM_MAGIC))
         strcat (buf, "{W({MMagical{W){x ");
     if (IS_OBJ_STAT (obj, ITEM_GLOW))
-        strcat (buf, "{W({YGlowing{W){x ");
+        strcat (buf, "{W({yGlowing{W){x ");
     if (IS_OBJ_STAT (obj, ITEM_HUM))
-        strcat (buf, "{W({gHumming{W){x ");
+        strcat (buf, "{W({GHumming{W){x ");
     if (IS_OBJ_STAT (obj, ITEM_QUESTITEM))
 	strcat (buf, "{W({CA{MQS{CT{W){x ");
     }

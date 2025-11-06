@@ -2095,17 +2095,23 @@ void do_circle( CHAR_DATA *ch, char *argument )
  
     one_argument( argument, arg );
  
+    /* If no argument given, default to current fighting target */
     if (arg[0] == '\0')
     {
-        send_to_char("Circle whom?\n\r",ch);
-        return;
+        if (ch->fighting == NULL)
+        {
+            send_to_char("Circle whom?\n\r",ch);
+            return;
+        }
+        victim = ch->fighting;
     }
- 
- 
-    else if ((victim = get_char_room(ch,arg)) == NULL)
+    else
     {
-        send_to_char("They aren't here.\n\r",ch);
-        return;
+        if ((victim = get_char_room(ch, arg)) == NULL)
+        {
+            send_to_char("They aren't here.\n\r",ch);
+            return;
+        }
     }
  
     if ( is_safe( ch, victim ) )
@@ -2126,7 +2132,7 @@ void do_circle( CHAR_DATA *ch, char *argument )
         return;
     }
  
-    if ( ( victim = ch->fighting ) == NULL )
+    if ( ch->fighting == NULL )
     {
         send_to_char( "You must be fighting in order to circle.\n\r", ch );
         return;
@@ -2143,7 +2149,7 @@ void do_circle( CHAR_DATA *ch, char *argument )
     else
     {
         check_improve(ch,gsn_circle,FALSE,1);
-        damage( ch, victim, 0, gsn_circle,DAM_NONE,TRUE, FALSE);
+        damage( ch, victim, 0, gsn_circle, DAM_PIERCE, TRUE, FALSE);
     }
  
     return;

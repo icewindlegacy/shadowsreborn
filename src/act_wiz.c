@@ -4025,9 +4025,9 @@ void do_mset (CHAR_DATA * ch, char *argument)
 
     if (!str_prefix (arg2, "hp"))
     {
-        if (value < -10 || value > 100000)
+        if (value < -10 || value > 10000000)
         {
-            send_to_char ("Hp range is -10 to 100,000 hit points.\n\r", ch);
+            send_to_char ("Hp range is -10 to 10,000,000 hit points.\n\r", ch);
             return;
         }
         victim->max_hit = value;
@@ -4038,9 +4038,9 @@ void do_mset (CHAR_DATA * ch, char *argument)
 
     if (!str_prefix (arg2, "mana"))
     {
-        if (value < 0 || value > 100000)
+        if (value < 0 || value > 10000000)
         {
-            send_to_char ("Mana range is 0 to 100,000 mana points.\n\r", ch);
+            send_to_char ("Mana range is 0 to 10,000,000 mana points.\n\r", ch);
             return;
         }
         victim->max_mana = value;
@@ -4051,9 +4051,9 @@ void do_mset (CHAR_DATA * ch, char *argument)
 
     if (!str_prefix (arg2, "move"))
     {
-        if (value < 0 || value > 100000)
+        if (value < 0 || value > 10000000)
         {
-            send_to_char ("Move range is 0 to 100,000 move points.\n\r", ch);
+            send_to_char ("Move range is 0 to 10,000,000 move points.\n\r", ch);
             return;
         }
         victim->max_move = value;
@@ -4064,9 +4064,9 @@ void do_mset (CHAR_DATA * ch, char *argument)
 
     if (!str_prefix (arg2, "practice"))
     {
-        if (value < 0 || value > 250)
+        if (value < 0 || value > 2500)
         {
-            send_to_char ("Practice range is 0 to 250 sessions.\n\r", ch);
+            send_to_char ("Practice range is 0 to 2500 sessions.\n\r", ch);
             return;
         }
         victim->practice = value;
@@ -4075,9 +4075,9 @@ void do_mset (CHAR_DATA * ch, char *argument)
 
     if (!str_prefix (arg2, "train"))
     {
-        if (value < 0 || value > 50)
+        if (value < 0 || value > 500)
         {
-            send_to_char ("Training session range is 0 to 50 sessions.\n\r",
+            send_to_char ("Training session range is 0 to 500 sessions.\n\r",
                           ch);
             return;
         }

@@ -2445,7 +2445,7 @@ struct skill_type skill_table[MAX_SKILL] = {
      "circle", {53, 53, 25, 30}, {0, 0, 8, 6},
      spell_null, TAR_IGNORE, POS_FIGHTING,
      &gsn_circle, SLOT (0), 0, 0,
-     "", "!Circle!", ""},
+     "circle", "!Circle!", ""},
 
     {
      "critical strike", {53, 53, 40, 35}, {0, 0, 8, 8},
