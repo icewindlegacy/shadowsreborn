@@ -613,14 +613,30 @@ void show_char_to_char_1 (CHAR_DATA * victim, CHAR_DATA * ch)
         }
     }
 
-    /* Kobolds can always peek, others need the skill */
-    if (victim != ch && !IS_NPC (ch)
-        && (ch->race == race_lookup("kobold") || number_percent () < get_skill (ch, gsn_peek)))
+    /* Kobolds with peek skill automatically peek, others must succeed on skill check */
+    if (victim != ch && !IS_NPC (ch) && get_skill(ch, gsn_peek) > 0)
     {
-        send_to_char ("\n\rYou peek at the inventory:\n\r", ch);
-        if (ch->race != race_lookup("kobold"))
-            check_improve (ch, gsn_peek, TRUE, 4);
-        show_list_to_char (victim->carrying, ch, TRUE, TRUE);
+        int peek_skill = get_skill(ch, gsn_peek);
+        bool is_kobold = (ch->race == race_lookup("kobold"));
+        
+        /* Kobolds get a bonus and always succeed if they have the skill */
+        if (is_kobold || number_percent() < peek_skill)
+        {
+            if (is_kobold)
+                send_to_char ("\n\r{DYour kobold cunning reveals their belongings:{x\n\r", ch);
+            else
+                send_to_char ("\n\rYou peek at the inventory:\n\r", ch);
+            
+            show_list_to_char (victim->carrying, ch, TRUE, TRUE);
+            
+            if (!is_kobold)
+                check_improve (ch, gsn_peek, TRUE, 4);
+        }
+        else if (!is_kobold)
+        {
+            /* Failed peek attempt for non-kobolds */
+            check_improve (ch, gsn_peek, FALSE, 4);
+        }
     }
 
     return;
