@@ -1809,12 +1809,21 @@ void do_common (CHAR_DATA *ch, char *argument)
     message[sizeof(message) - 1] = '\0';
     
     if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
-        makedrunk(message, ch);
+    {
+        char *result = makedrunk(message, ch);
+        /* DEBUG: Check return value */
+        {
+            extern char log_buf[];
+            sprintf(log_buf, "COMMON DEBUG: makedrunk returned, result ptr=%p, result='%s', message='%s'", 
+                    (void*)result, result, message);
+            log_string(log_buf);
+        }
+    }
 
     /* DEBUG: Log what we're about to send */
     {
         extern char log_buf[];
-        sprintf(log_buf, "COMMON DEBUG: About to send message='%s'", message);
+        sprintf(log_buf, "COMMON DEBUG: Final message about to send='%s'", message);
         log_string(log_buf);
     }
 
