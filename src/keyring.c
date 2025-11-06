@@ -309,10 +309,7 @@ void do_keyring( CHAR_DATA * ch, char *argument )
     // no arguments ? just show list of the keys on the keyring then.
     if (argument[0] == '\0')
     {
-	// yes i know, this is really filthy way to do this, but this way it 
-	// will show the same stuff like if people examine normal object
-	// every mud is little different :)
-	do_examine(ch, keyring->name);
+	list_keys(ch, keyring);
 	return;
     }
 
