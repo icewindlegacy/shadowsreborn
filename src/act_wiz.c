@@ -4025,9 +4025,9 @@ void do_mset (CHAR_DATA * ch, char *argument)
 
     if (!str_prefix (arg2, "hp"))
     {
-        if (value < -10 || value > 30000)
+        if (value < -10 || value > 100000)
         {
-            send_to_char ("Hp range is -10 to 30,000 hit points.\n\r", ch);
+            send_to_char ("Hp range is -10 to 100,000 hit points.\n\r", ch);
             return;
         }
         victim->max_hit = value;
@@ -4038,9 +4038,9 @@ void do_mset (CHAR_DATA * ch, char *argument)
 
     if (!str_prefix (arg2, "mana"))
     {
-        if (value < 0 || value > 30000)
+        if (value < 0 || value > 100000)
         {
-            send_to_char ("Mana range is 0 to 30,000 mana points.\n\r", ch);
+            send_to_char ("Mana range is 0 to 100,000 mana points.\n\r", ch);
             return;
         }
         victim->max_mana = value;
@@ -4051,9 +4051,9 @@ void do_mset (CHAR_DATA * ch, char *argument)
 
     if (!str_prefix (arg2, "move"))
     {
-        if (value < 0 || value > 30000)
+        if (value < 0 || value > 100000)
         {
-            send_to_char ("Move range is 0 to 30,000 move points.\n\r", ch);
+            send_to_char ("Move range is 0 to 100,000 move points.\n\r", ch);
             return;
         }
         victim->max_move = value;

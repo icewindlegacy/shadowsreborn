@@ -1240,7 +1240,7 @@ void do_mpcall (CHAR_DATA * ch, char *argument)
     CHAR_DATA *vch;
     OBJ_DATA *obj1, *obj2;
     MPROG_CODE *prg;
-    extern void program_flow (sh_int, char *, CHAR_DATA *, CHAR_DATA *,
+    extern void program_flow (int, char *, CHAR_DATA *, CHAR_DATA *,
                               const void *, const void *);
 
     argument = one_argument (argument, arg);

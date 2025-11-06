@@ -14,8 +14,8 @@ End
 #MOBILES
 #2400
 Clan Guead Test~
-Immortals clan guard~
-A clan guard is here
+a Clan Guard <{bIm{Bmo{cr{Bta{bls{x>~
+A Clan Guard <{bIm{Bmo{cr{Bta{bls{x> is patrolling the hall
 ~
 ~
 human~
@@ -53,7 +53,7 @@ S
 
 
 #RESETS
-M 0 2400 1 2400 1 Load Immortals clan guard
+M 0 2400 1 2400 1 Load a Clan Guard <{bIm{Bmo{cr{Bta{bls{x>
 S
 
 

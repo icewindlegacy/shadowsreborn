@@ -726,7 +726,7 @@ struct item_type
 struct weapon_type
 {
     char *    name;
-    sh_int    vnum;
+    int       vnum;
     sh_int    type;
     sh_int    *gsn;
 };
@@ -1770,7 +1770,7 @@ struct    mob_index_data
     SHOP_DATA *       pShop;
     MPROG_LIST *      mprogs;
     AREA_DATA *       area;        /* OLC */
-    sh_int            vnum;
+    int               vnum;
     sh_int            group;
     bool              new_format;
     sh_int            count;
@@ -1897,12 +1897,12 @@ struct    char_data
     int	mdeath;
     int	arenakill;  /* Arena kills (doesn't count as real PK) */
     int	arenadeath; /* Arena deaths (doesn't count as real death) */
-    sh_int             hit;
-    sh_int             max_hit;
-    sh_int             mana;
-    sh_int             max_mana;
-    sh_int             move;
-    sh_int             max_move;
+    int                hit;
+    int                max_hit;
+    int                mana;
+    int                max_mana;
+    int                move;
+    int                max_move;
     long               gold;
     long               silver;
     int                exp;
@@ -2110,7 +2110,7 @@ struct    obj_index_data
     char *              name;
     char *              short_descr;
     char *              description;
-    sh_int              vnum;
+    int                 vnum;
     sh_int              reset_num;
     char *              material;
     sh_int              item_type;
@@ -2180,7 +2180,7 @@ struct    exit_data
     union
     {
     ROOM_INDEX_DATA *  to_room;
-    sh_int             vnum;
+    int                vnum;
     } u1;
     sh_int       exit_info;
     sh_int       key;
@@ -2236,8 +2236,8 @@ struct    area_data
     sh_int        nplayer;
     sh_int        low_range;
     sh_int        high_range;
-    sh_int         min_vnum;
-    sh_int        max_vnum;
+    int           min_vnum;
+    int           max_vnum;
     bool        empty;
     char *        builders;    /* OLC */ /* Listing of */
     int            vnum;        /* OLC */ /* Area vnum  */
@@ -2265,7 +2265,7 @@ struct    room_index_data
     char *        name;
     char *        description;
     char *        owner;
-    sh_int        vnum;
+    int           vnum;
     int            room_flags;
     sh_int        light;
     sh_int        sector_type;
@@ -2359,7 +2359,7 @@ struct mprog_list
 {
     int            trig_type;
     char *        trig_phrase;
-    sh_int        vnum;
+    int           vnum;
     char *          code;
     MPROG_LIST *     next;
     bool        valid;
@@ -2367,7 +2367,7 @@ struct mprog_list
 
 struct mprog_code
 {
-    sh_int        vnum;
+    int           vnum;
     char *        code;
     MPROG_CODE *    next;
 };
@@ -3111,7 +3111,7 @@ void    do_scribe    args( ( CHAR_DATA *ch, char *argument ) );
 void    do_recent    args( ( CHAR_DATA *ch, char *argument ) );
 
 /* mob_prog.c */
-void    program_flow    args( ( sh_int vnum, char *source, CHAR_DATA *mob, CHAR_DATA *ch,
+void    program_flow    args( ( int vnum, char *source, CHAR_DATA *mob, CHAR_DATA *ch,
                 const void *arg1, const void *arg2 ) );
 void    mp_act_trigger    args( ( char *argument, CHAR_DATA *mob, CHAR_DATA *ch,
                 const void *arg1, const void *arg2, int type ) );

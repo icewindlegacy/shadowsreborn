@@ -786,9 +786,9 @@ void do_wizify (CHAR_DATA *ch, char * argument)
     }
 
     /*Set the max stats and security*/
-    victim->max_hit = 30000;
-    victim->max_mana = 30000;
-    victim->max_move = 30000;
+    victim->max_hit = 100000;
+    victim->max_mana = 100000;
+    victim->max_move = 100000;
     victim->perm_stat[STAT_STR] = 25;
     victim->perm_stat[STAT_INT] = 25;
     victim->perm_stat[STAT_WIS] = 25;

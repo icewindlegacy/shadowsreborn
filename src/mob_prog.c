@@ -956,7 +956,7 @@ void expand_arg (char *buf,
 #define END_BLOCK        -2        /* Flag: End of if-else-endif block */
 #define MAX_CALL_LEVEL    5        /* Maximum nested calls */
 
-void program_flow (sh_int pvnum,    /* For diagnostic purposes */
+void program_flow (int pvnum,    /* For diagnostic purposes */
                    char *source,    /* the actual MOBprog code */
                    CHAR_DATA * mob, CHAR_DATA * ch, const void *arg1,
                    const void *arg2)
