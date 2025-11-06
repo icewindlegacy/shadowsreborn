@@ -1892,6 +1892,948 @@ You can butcher a corpse to produce steaks or
 a fish to produce filets. These are inedible by themselves
 but you can cook (help cook) them over a campfire.
 ~
+0 AUTODAMAGE~
+
+AUTODAMAGE
+
+****************************
+
+Syntax: autodamage
+
+Toggles the automatic display of damage dealt in combat. When enabled,
+you will see exact damage numbers during fights. When disabled, you'll
+only see the standard damage messages (scratches, bruises, etc.).
+
+This is useful for players who want detailed combat information without
+needing to manually check after each round.
+
+****************************
+
+~
+
+0 AUTOTICK~
+
+AUTOTICK
+
+****************************
+
+Syntax: autotick
+
+Toggles automatic notification when game ticks occur. When enabled, you
+will receive a message each time the game advances a tick (typically every
+60 seconds). This helps track regeneration, spell durations, and other
+time-based effects.
+
+Useful for players who want to know exactly when their health, mana, and
+movement points regenerate.
+
+****************************
+
+~
+
+0 BANDAGE~
+
+BANDAGE
+
+****************************
+
+Syntax: bandage <target>
+
+Attempt to bandage yourself or another character to stop bleeding and restore
+some health. This skill requires you to be at rest or better, and costs movement
+points to perform.
+
+Successful bandaging will:
+- Stop bleeding conditions
+- Restore approximately 200 hit points
+- Cost 200 movement points
+
+This is a useful skill for extended adventures when healing magic is not
+available or to conserve mana between fights.
+
+****************************
+
+~
+
+0 'BANK' 'BANKING'~
+
+BANK
+
+****************************
+
+Syntax: deposit <amount> <gold|silver>
+        withdraw <amount> <gold|silver>
+        balance
+        account
+        change <amount> <gold|silver>
+        share buy <amount>
+        share sell <amount>
+        share value
+
+The banking system allows you to safely store your wealth and even invest
+it for profit. Banks can be found in major cities throughout the realm.
+
+DEPOSIT - Store gold or silver coins in your account
+WITHDRAW - Retrieve coins from your account
+BALANCE - Check your current account balance
+ACCOUNT - View detailed account information
+CHANGE - Convert gold to silver or silver to gold
+SHARE - Buy and sell bank shares to earn interest on your wealth
+
+Shares earn interest over time and can be sold back for profit. The value
+of shares fluctuates based on your level and the game economy.
+
+****************************
+
+~
+
+0 MOUNTS MOUNT RIDING~
+
+MOUNTS
+
+****************************
+
+Syntax: mount <creature>
+        dismount
+        ride <direction>
+
+Mounts allow you to travel more quickly and may provide combat benefits.
+Some creatures in the world can be tamed and used as mounts.
+
+MOUNT - Attempt to mount a tamed or friendly creature
+DISMOUNT - Get off your current mount
+RIDE - Move in a direction while mounted
+
+While mounted, your movement is shared with your mount. Some mounts may
+provide additional benefits such as increased carrying capacity, combat
+bonuses, or special abilities.
+
+Note: Not all creatures can be mounted, and some may require special
+skills or items to ride safely.
+
+****************************
+
+~
+
+0 HISTORY~
+
+HISTORY
+
+****************************
+
+Syntax: history
+
+Displays a list of recently issued commands. This allows you to review
+what you've typed recently, which is useful for repeating complex
+commands or reviewing your recent actions.
+
+The history list typically shows the last 10-20 commands you've entered,
+depending on your client settings.
+
+****************************
+
+~
+
+0 LORE~
+
+LORE
+
+****************************
+
+Syntax: lore <object>
+
+Attempt to identify the properties and history of a magical item. This
+skill reveals information about an object's enchantments, curses, and
+special properties without requiring the identify spell.
+
+The amount of information revealed depends on your lore skill level. Higher
+skill levels provide more detailed information about:
+- Item type and level
+- Magical affects and bonuses
+- Special flags and restrictions
+- Item history and origin
+
+Lore is particularly useful for adventurers who lack magical ability but
+still need to evaluate treasure and equipment.
+
+****************************
+
+~
+
+0 MUDINFO~
+
+MUDINFO
+
+****************************
+
+Syntax: mudinfo
+        mudinfo reset (immortals only)
+
+Displays statistical information about the MUD, including:
+- Current number of players online
+- Average players since last reboot
+- Peak player count since reboot
+- Total logins since boot
+- System performance metrics
+- Network traffic statistics
+- Memory usage information
+
+Immortals can use 'mudinfo reset' to reset the statistics tracking.
+
+This command is useful for tracking server performance and player activity
+patterns over time.
+
+****************************
+
+~
+
+0 CONDITIONS CONDITION~
+
+CONDITIONS
+
+****************************
+
+Syntax: conditions
+        conditions <player> (immortals only)
+
+Displays your current physical conditions, including:
+- Hunger level
+- Thirst level
+- Intoxication (drunk) level
+- Caffeine level
+- Bleeding status
+- Other status effects
+
+Immortals can check the conditions of any player in the game.
+
+Mortals see descriptive messages:
+- "You are starving!" vs numeric values
+- "You are parched!" vs thirst numbers
+
+Immortals see exact numeric values for precise debugging and monitoring.
+
+Pay attention to your conditions - severe hunger or thirst can lead to
+weakness and eventually death. Visit inns and taverns to maintain your
+character's wellbeing.
+
+****************************
+
+~
+
+0 PROTOCOL~
+
+PROTOCOL
+
+****************************
+
+Syntax: protocol
+
+Displays information about the MUD protocol settings currently in use by
+your connection. This includes:
+- TELNET protocol options
+- MCCP compression status
+- MXP (MUD eXtension Protocol) status
+- GMCP (Generic MUD Communication Protocol) status
+- Character encoding settings
+
+This command is primarily useful for debugging connection issues or
+verifying that your client is communicating properly with the server.
+
+****************************
+
+~
+
+0 REPAIR~
+
+REPAIR
+
+****************************
+
+Syntax: repair <item>
+        repair all
+
+Attempt to repair damaged equipment. Items in the game can degrade through
+use, and the repair command allows you to restore their condition at a
+blacksmith or craftsman.
+
+REPAIR <item> - Repair a specific piece of equipment
+REPAIR ALL - Repair all damaged items in your inventory
+
+The cost of repairs depends on:
+- Item quality and level
+- Extent of damage
+- Your reputation with the craftsman
+
+Severely damaged items may be beyond repair. Regular maintenance of your
+equipment is recommended to avoid total loss.
+
+****************************
+
+~
+
+
+0 'COMM STONES' COMMSTONES COMMSTONE FREQUENCIES TUNE~
+
+COMM STONES
+
+****************************
+
+Syntax: <frequency> <message>
+        <frequency> emote <action>
+        freq <channel> <frequency>
+        freq <channel> off
+
+Commstones are magical devices that allow long-distance communication on
+specific frequencies. You can have up to 4 commstone channels active at
+once.
+
+TRANSMIT: Simply type the frequency number followed by your message:
+  Example: 1 Hello everyone on frequency 0!
+
+EMOTE: You can also send emotes through commstones:
+  Example: 1 emote waves enthusiastically
+
+TUNE: Configure your commstone channels:
+  tune 1 42    - Set channel 1 to frequency 42
+
+
+Each character can tune their commstones to different frequencies (0-99999),
+allowing for private group communication. Drunk speech and common language
+effects apply to commstone communications!
+
+****************************
+
+~
+
+0 'RUNIC CIRCLES' WINDGATES WINDGATE RUNEGATE~
+
+RUNIC CIRCLES
+
+****************************
+
+Syntax: runegate
+
+Runic circles are ancient magical portals that
+allow instant transportation between fixed locations throughout the realm.
+
+Type 'runegate' to see a list of all known runic circle destinations and
+their access requirements.
+
+To use a runic circle:
+1. Find a runic circle location (marked in room descriptions)
+2. Type 'runegate' to see available destinations
+3. Enter the runic combination to activate the circle
+4. Enter the circle and it will transport you
+
+Some runic circles may have level restrictions or other requirements.
+These magical gateways are invaluable for quick travel across vast
+distances.
+
+****************************
+
+~
+
+0 AUTOALL~
+
+AUTOALL
+
+****************************
+
+Syntax: autoall
+
+Toggles ALL automatic settings at once. This is a master switch that
+enables or disables:
+- Autoloot
+- Autogold
+- Autosac
+- Autosplit
+- Autoexit
+- Autodamage
+- And other auto-functions
+
+This is convenient when you want to quickly enable or disable all your
+automation preferences without toggling each one individually.
+
+Type 'autolist' to see which auto-settings are currently enabled.
+
+****************************
+
+~
+
+0 'LONG AFFECTS'~
+
+LONG AFFECTS
+
+****************************
+
+Syntax: long
+
+Toggles between brief and detailed affect display formats.
+
+BRIEF MODE: Shows short flag indicators like [T.S.] for translucent
+and sanctuary.
+
+LONG MODE: Shows full descriptions like "(Translucent) (White Aura)"
+for all magical effects and auras.
+
+The COMM_LONG flag controls this setting and affects how you see
+other characters' magical affects in the room.
+
+****************************
+
+~
+
+0 NOEXP~
+
+NOEXP
+
+****************************
+
+Syntax: noexp
+
+Toggles experience gain on or off. When NOEXP is enabled, you will not
+gain any experience points from kills or other actions.
+
+This is useful for:
+- Staying at a specific level for PvP brackets
+- Helping lower level players without outleveling content
+- Roleplaying a character at a fixed power level
+- Avoiding accidental leveling before you're ready
+
+You can turn experience gain back on at any time by typing 'noexp' again.
+
+****************************
+
+~
+
+0 ENGAGE~
+
+ENGAGE
+
+****************************
+
+Syntax: engage <target>
+
+Initiate combat with a target that is fighting someone else or switch 
+to another enemy that is attacking you. This allows you to join an
+an ongoing battle and attack a specific enemy or change targets to a
+more deadly foe to kill it first. 
+
+ENGAGE is particularly useful when:
+- Assisting groupmates in combat
+- Switching targets mid-fight
+- Intervening in battles
+- Tactical combat management
+
+Unlike a simple attack, engage ensures you're actively fighting the
+specified target rather than just waiting for your turn.
+
+****************************
+
+~
+
+0 TRACK~
+
+TRACK
+
+****************************
+
+Syntax: track <target>
+
+Attempt to track down the location of a mobile or player. If successful,
+you'll determine which direction to travel to reach your target.
+
+The success of tracking depends on:
+- Your tracking skill level
+- The target's stealth abilities
+- Environmental conditions
+- Distance to target
+
+Tracking is an essential skill for rangers, hunters, and bounty seekers.
+Follow the indicated direction to pursue your quarry, and track again
+when you reach a new location to continue following the trail.
+
+****************************
+
+~
+
+0 STUDY~
+
+STUDY
+
+****************************
+
+Syntax: study <manual/scroll/staff/wand>
+
+You may learn additional skills and spells by finding items that contain
+them and studying those items.
+
+
+****************************
+
+~
+
+0 ADDAPPLY~
+
+ADDAPPLY
+
+****************************
+
+Syntax: addapply <object> <apply type> <modifier>
+
+(Immortal Command - Level 56+)
+
+Add a magical affect or stat modifier to an item. This command allows
+immortals to enhance objects with various bonuses.
+
+Apply types include:
+- STR, INT, WIS, DEX, CON (stat bonuses)
+- HP, MANA, MOVE (pool bonuses)
+- HIT, DAM (combat bonuses)
+- AC (armor class)
+- SAVES (saving throws)
+- And many more...
+
+Example: addapply sword hit 5
+         (Adds +5 hitroll to a sword)
+
+This is a powerful OLC command for creating balanced magical items.
+
+****************************
+
+~
+
+0 'DISABLE COMMANDS' DISABLE~
+
+DISABLE COMMANDS
+
+****************************
+
+Syntax: disable
+        disable <command>
+        enable <command>
+
+(Immortal Command - Level 58+)
+
+Disable or enable specific game commands globally. This is used for
+maintenance, testing, or temporarily removing problematic features.
+
+DISABLE - List all currently disabled commands
+DISABLE <command> - Disable a specific command
+ENABLE <command> - Re-enable a previously disabled command
+
+When a command is disabled, attempting to use it will display a message
+indicating the command is unavailable. This is useful for:
+- Emergency bug fixes
+- Preventing exploit abuse
+- Testing new features
+- Event management
+
+****************************
+
+~
+
+0 AUCTION~
+
+AUCTION
+
+****************************
+
+Syntax: auction <item>
+        auction info
+        auction cancel
+        bid <amount>
+
+Auction allows you to sell items to other players through a public bidding
+system. Auctions are announced on the auction channel.
+
+AUCTION <item> - Put an item up for auction
+AUCTION INFO - Check current auction status
+AUCTION CANCEL - Cancel your active auction (may have penalties)
+BID <amount> - Place a bid on the current auction
+
+Auctions run for a limited time, and the highest bidder wins. The seller
+receives the winning bid amount, and the auction house may take a small
+commission.
+
+****************************
+
+~
+
+0 FORGET~
+
+FORGET
+
+****************************
+
+Syntax: forget <player>
+        remember <player>
+        
+FORGET allows you to place another player on ignore where they will
+be unable to send you tells, and you will not see their messages on
+communication channels or say, yell, etc.
+
+REMEMBER reverses this and takes them fo
+
+****************************
+
+~
+
+0 FINGER~
+
+FINGER
+
+****************************
+
+Syntax: finger <player>
+        finger real <real name>
+        finger email <email address>
+
+Display detailed information about a player, including:
+- Character name and title
+- Player's real name and email if specified
+- Last login time and date
+- How long ago that was.
+
+You can set your email address and real name with the finger command
+but be aware that this is public information that anyone who logs in
+can see using the FINGER command.
+
+FINGER works on both online and offline players. This is useful for
+checking on friends, verifying character information, or researching
+other players before interaction.
+
+****************************
+
+~
+
+0 'HINT CHANNEL' HINT~
+
+HINT CHANNEL
+
+****************************
+
+Syntax: hint
+
+Toggles the hint channel on or off. When enabled, you'll receive helpful
+tips and suggestions about game mechanics, available features, and gameplay
+strategies.
+
+Hints are designed to help new players learn the game, but even experienced
+players may discover features they didn't know about. Hints appear
+periodically and are context-sensitive based on your actions and level.
+
+To turn hints off: hint
+To turn hints on: hint
+
+****************************
+
+~
+
+0 RELICS~
+
+RELICS
+
+****************************
+
+Relics are extremely rare and powerful artifacts that provide significant
+bonuses to their wielders.  Some quest items are relics by dafault, while
+other relics may be hidden in the game world, or held by a particularly
+powerful mobile that will take many players a long time and a lot of effort
+to take down.
+
+Relics gain experience points with you, and as they level up they become more
+powerful. They have no level cap, so as long as you can gain exp, they do too.
+
+****************************
+
+~
+
+0 QUESTING QUEST~
+
+QUESTING
+
+****************************
+
+Syntax: quest info
+        quest list
+        quest buy <item>
+        quest request
+        quest complete
+        quest points
+        quest transfer <amount> <player>
+        quest quit
+
+The questing system allows you to undertake special missions for rewards.
+Quest masters can be found in major cities and will offer tasks suitable
+to your level.
+
+Certain characters in the game will allow you to go on quests to recover an
+item or kill another mob. To go on a quest, you must be in the same room with
+a questmaster. When you successfully complete a quest, you will receive a
+certain number of quest points. These points may be saved up and used to buy
+incredible items from the questmaster.
+
+QUEST INFO - If you are on a quest, this will remind you who or what you are
+after.
+
+QUEST LIST - Displays the list of fabulous items for sale by the questmaster.
+These items are not buyable via gold, they must be purchased with quest points.
+
+QUEST BUY <item> - Purchases an item from the questmaster and deducts the cost
+of the item from your quest points.
+
+QUEST REQUEST - Petitions the questmaster to send you on a quest. If you
+accept the quest, you will be given a realtime limit (in minutes) in which you
+must complete the quest. If you are on a quest to kill a creature, when you
+come across that creature you will see a [TARGET] notice before it. This is
+the creature you are to kill.
+
+QUEST COMPLETE - Once you have completed your quest and recovered the item or
+killed the mob or whatever, you must return to the questmaster who sent you on
+the quest and use this command. If you have successfully completed your quest,
+he will reward you with gold and quest points. Once you complete a quest you
+cannot request another for 10 minutes.
+
+QUEST POINTS - Gives your current number of quest points. This command may be
+used anywhere.
+
+QUEST TRANSFER - Transfers a number of quest points from you to another player.
+
+QUEST TIME - Gives the amount of time remaining on your current quest, or the
+amount of time until you can request another quest. This command may be used
+anywhere.
+
+QUEST QUIT - Abandon your current quest (with penalty)
+
+Quest rewards include:
+- Quest points (QP)
+- Gold and experience
+
+Quest points can be spent at quest shops for unique items not available
+elsewhere in the game.
+
+LOOSELY based on Vassago's Quest Code
+****************************
+
+~
+
+0 KEYRING~
+
+KEYRING
+
+****************************
+
+Syntax: keyring
+        keyring add <key>
+        keyring remove <key>
+
+Keyrings are special containers that store keys without taking up
+inventory space. Once a key is added to your keyring, it will
+automatically work for locks without needing to get it from your pack.
+
+KEYRING - Display all keys on your keyring
+KEYRING ADD <key> - Add a key to your keyring
+KEYRING REMOVE <key> - Remove a key from your keyring
+
+Keys on your keyring are virtual copies - the physical key is destroyed
+when added. Keys remain on your keyring even if you die, making them
+a secure way to store important keys.
+
+Keyrings can be purchased from general stores in major cities.
+
+****************************
+
+~
+
+0 CIRCLE~
+
+CIRCLE
+
+****************************
+
+Syntax: circle
+        circle <target>
+
+A thief's special combat technique that allows you to maneuver behind
+an opponent for a devastating attack. Circle requires you to be in
+active combat to use.
+
+CIRCLE (no target) - Circle behind your current opponent
+CIRCLE <target> - Circle behind a specific enemy in combat
+
+Success depends on:
+- Your circle skill level
+- Target's awareness and dexterity
+- Whether the target is distracted by other combatants
+
+A successful circle inflicts significant damage with your piercing weapon.
+Missed circles may leave you vulnerable to counterattack.
+
+Note: You must wield a weapon to use circle.
+
+****************************
+
+~
+
+0 'SMOKING PIPES' 'CHEWING TOBACCO' TOBACCO TABAC SMOKE CHEW LIGHT PACK~
+
+SMOKING PIPES AND CHEWING TOBACCO
+
+****************************
+
+Syntax: smoke <pipe>
+        light <pipe>
+        chew <tobacco>
+        pack <pipe> <tobacco>
+        scrape <pipe>
+
+Tobacco products provide various benefits and social features:
+
+PIPES:
+- PACK <pipe> <tobacco> - Fill your pipe with tobacco
+- LIGHT <pipe> - Light your packed pipe (requires tinderbox)
+- SMOKE <pipe> - Smoke from your lit pipe
+
+CHEWING TOBACCO:
+- CHEW <tobacco> - Chew a plug of tobacco
+- TASTE <tobacco> - Sample the tobacco's quality
+
+Effects vary by tobacco type and quality:
+- Relaxation and stress relief
+- Temporary stat bonuses
+- Social interaction bonuses
+- Potential addiction effects
+
+Different tobacco blends provide different benefits. Experiment to find
+your favorite! Quality pipes and tobacco can be purchased from tobacconists
+in major cities.
+
+****************************
+
+~
+
+0 NUKE~
+
+NUKE
+
+****************************
+
+Syntax: nuke <player>
+
+(Immortal Command - Level 60+)
+
+Permanently delete a player character from the game. This is the most
+severe disciplinary action available and should only be used for:
+- Serious rule violations
+- Banned players returning on new characters
+- Database corruption requiring character deletion
+- Legal compliance requirements
+
+WARNING: This action is PERMANENT and IRREVERSIBLE. All character data,
+equipment, and progress is completely destroyed.
+
+A complete backup and log entry should be made before using NUKE. Always
+confirm the target player name carefully.
+
+****************************
+
+~
+
+52 PLOAD PUNLOAD~
+
+PLOAD / PUNLOAD
+
+****************************
+
+Syntax: pload <player>
+        punload <player>
+
+(Immortal Command - Level 52+)
+
+PLOAD - Load an offline player's character data into memory for editing
+or inspection. This allows immortals to modify offline characters or
+investigate issues without requiring the player to be online.
+
+PUNLOAD - Unload a player that was loaded with PLOAD, saving any changes
+made while they were loaded.
+
+WARNING: Be extremely careful when using these commands! Modifying offline
+characters can cause serious problems if not done correctly. Always:
+- Note what changes you make
+- Save the character after modifications
+- Unload the character when finished
+- Never leave characters loaded indefinitely
+
+These commands are essential tools for customer service and administration.
+
+****************************
+
+~
+
+52 PLIST~
+
+PLIST
+
+****************************
+
+Syntax: plist
+        plist <name pattern>
+
+(Immortal Command - Level 52+)
+
+Display a list of player characters matching the given pattern. Without
+arguments, shows all player characters in the database.
+
+Examples:
+- plist          (shows all players)
+- plist bob      (shows all players starting with 'bob')
+- plist *smith   (shows all players ending with 'smith')
+
+Information displayed includes:
+- Character name
+- Level and class
+- Last login date
+- Play time statistics
+
+This command is useful for:
+- Finding characters for administration
+- Checking for multi accounts
+- Database auditing
+- Player demographic research
+
+****************************
+
+~
+
+0 RECENT~
+
+RECENT
+
+****************************
+
+Syntax: recent
+
+Displays a list of players who have recently logged in or out of the game,
+showing:
+- Character name and level
+- Login or logout action
+- Time since the action occurred
+
+This command helps you:
+- See who was recently online when you missed them
+- Track friend activity patterns
+- Identify peak play times
+- Know when specific players were last seen
+
+The recent list typically shows the last 20-50 login/logout events,
+depending on server configuration.
+
+****************************
+
+~
+
+
 
 -1 $~
 
