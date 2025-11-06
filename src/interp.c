@@ -373,7 +373,7 @@ const struct cmd_type cmd_table[] = {
     {"chant", do_chant, POS_STANDING, 0, LOG_NORMAL, 1},
     {"warcry", do_warcry, POS_FIGHTING, 0, LOG_NORMAL, 1},
     {"where", do_where, POS_RESTING, 0, LOG_NORMAL, 1},
-
+    {"runegate",	cmd_windgate,	POS_DEAD, L6, LOG_NORMAL, 1},
     {"tune", do_tune, POS_RESTING, 0, LOG_NORMAL, 1},
     {"1", do_comm1, POS_RESTING, 0, LOG_NORMAL, 1},
     {"2", do_comm2, POS_RESTING, 0, LOG_NORMAL, 1},
@@ -471,7 +471,6 @@ const struct cmd_type cmd_table[] = {
     {"wizinvis",	do_invis,	POS_DEAD, IM, LOG_NORMAL, 1},
     {"wizify",		do_wizify,	POS_DEAD, ML, LOG_ALWAYS, 1},
     {"vnum",		do_vnum,	POS_DEAD, L4, LOG_NORMAL, 1},
-    {"runegate",	cmd_windgate,	POS_DEAD, L6, LOG_NORMAL, 1},
     {"zecho",		do_zecho,	POS_DEAD, L4, LOG_ALWAYS, 1},
 
     {"clone",		do_clone,	POS_DEAD, L5, LOG_ALWAYS, 1},
