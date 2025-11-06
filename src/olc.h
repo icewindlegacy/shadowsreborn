@@ -196,6 +196,10 @@ DECLARE_OLC_FUN( aedit_vnum		);
 DECLARE_OLC_FUN( aedit_lvnum		);
 DECLARE_OLC_FUN( aedit_uvnum		);
 DECLARE_OLC_FUN( aedit_credits		);
+DECLARE_OLC_FUN( aedit_authors		);
+DECLARE_OLC_FUN( aedit_game		);
+DECLARE_OLC_FUN( aedit_hrange		);
+DECLARE_OLC_FUN( aedit_lrange		);
 
 
 /*

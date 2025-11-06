@@ -93,6 +93,21 @@ ACGT 0 0 -1  -500 0
 CJR 0 Q S
 stand stand either 120
 AHMV ABCDEFGHIJK medium unknown
+#4006
+tracksworth trackerson~
+.~
+.
+~
+~
+human~
+AB 0 0 -1  0 0
+0 0 0d0+0 0d0+0 0d0+0 none
+0 0 0 0
+0 0 0 0
+stand stand none 0
+0 0 medium unknown
+F for AHMV
+F par ABCDEFGHIJK
 #4050
 warrior~
 the warrior~
@@ -2433,6 +2448,10 @@ D0
 ~
 ~
 0 0 4036
+D1
+~
+~
+0 0 477
 D2
 ~
 ~
@@ -3036,6 +3055,7 @@ M 0 4000 1 4030 1 Load the huge python
 G 0 4001 0 A corpse is given to the huge python
 P 0 4002 -1 4001 1 Some coins put inside some coins
 G 0 4154 0 A map of the second level of moria is given to the huge python
+M 0 4006 1 4035 1 Load .
 M 0 4057 2 4042 2 Load the mountain lion
 M 0 4058 1 4044 1 Load the hill giant
 E 0 4005 0 16 A huge club is loaded wielded of the hill giant

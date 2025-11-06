@@ -256,6 +256,10 @@ const struct olc_cmd_type aedit_table[] = {
     {"lvnum", aedit_lvnum},
     {"uvnum", aedit_uvnum},
     {"credits", aedit_credits},
+    {"authors", aedit_authors},
+    {"game", aedit_game},
+    {"hrange", aedit_hrange},
+    {"lrange", aedit_lrange},
 
     {"?", show_help},
     {"version", show_version},

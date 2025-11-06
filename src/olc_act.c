@@ -646,10 +646,10 @@ AEDIT (aedit_show)
     sprintf (buf, "Vnums:    [%d-%d]\n\r", pArea->min_vnum, pArea->max_vnum);
     send_to_char (buf, ch);
 
-    sprintf (buf, "Age:      [%d]\n\r", pArea->age);
+    sprintf (buf, "Range:    [%d-%d]\n\r", pArea->low_range, pArea->high_range);
     send_to_char (buf, ch);
 
-    sprintf (buf, "Players:  [%d]\n\r", pArea->nplayer);
+    sprintf (buf, "Game:     [%s]\n\r", pArea->game);
     send_to_char (buf, ch);
 
     sprintf (buf, "Security: [%d]\n\r", pArea->security);
@@ -658,7 +658,16 @@ AEDIT (aedit_show)
     sprintf (buf, "Builders: [%s]\n\r", pArea->builders);
     send_to_char (buf, ch);
 
-    sprintf (buf, "Credits : [%s]\n\r", pArea->credits);
+    sprintf (buf, "Authors:  [%s]\n\r", pArea->authors);
+    send_to_char (buf, ch);
+
+    sprintf (buf, "Finished?:[%s]\n\r", pArea->credits);
+    send_to_char (buf, ch);
+
+    sprintf (buf, "Age:      [%d]\n\r", pArea->age);
+    send_to_char (buf, ch);
+
+    sprintf (buf, "Players:  [%d]\n\r", pArea->nplayer);
     send_to_char (buf, ch);
 
     sprintf (buf, "Flags:    [%s]\n\r",
@@ -722,19 +731,40 @@ AEDIT (aedit_name)
 AEDIT (aedit_credits)
 {
     AREA_DATA *pArea;
+    char arg[MAX_INPUT_LENGTH];
 
     EDIT_AREA (ch, pArea);
 
-    if (argument[0] == '\0')
+    one_argument (argument, arg);
+
+    if (arg[0] == '\0')
     {
-        send_to_char ("Syntax:   credits [$credits]\n\r", ch);
+        send_to_char ("Syntax:   finished <yes/no/null>\n\r", ch);
         return FALSE;
     }
 
-    free_string (pArea->credits);
-    pArea->credits = str_dup (argument);
+    if (!str_prefix (arg, "yes"))
+    {
+        free_string (pArea->credits);
+        pArea->credits = str_dup ("FINISHED!!");
+    }
+    else if (!str_prefix (arg, "no"))
+    {
+        free_string (pArea->credits);
+        pArea->credits = str_dup ("");
+    }
+    else if (!str_prefix (arg, "null"))
+    {
+        free_string (pArea->credits);
+        pArea->credits = str_dup ("(null)");
+    }
+    else
+    {
+        send_to_char ("Syntax:   finished <yes/no/null>\n\r", ch);
+        return FALSE;
+    }
 
-    send_to_char ("Credits set.\n\r", ch);
+    send_to_char ("Finished status set.\n\r", ch);
     return TRUE;
 }
 
@@ -1077,6 +1107,122 @@ AEDIT (aedit_uvnum)
     pArea->max_vnum = iupper;
     send_to_char ("Upper vnum set.\n\r", ch);
 
+    return TRUE;
+}
+
+AEDIT (aedit_authors)
+{
+    AREA_DATA *pArea;
+    int length;
+
+    EDIT_AREA (ch, pArea);
+
+    if (argument[0] == '\0')
+    {
+        send_to_char ("Syntax:   authors [$authors]\n\r", ch);
+        return FALSE;
+    }
+
+    length = strlen (argument);
+    if (length > 19)
+    {
+        send_to_char ("No more than 19 characters allowed.\n\r", ch);
+        return FALSE;
+    }
+
+    free_string (pArea->authors);
+    pArea->authors = str_dup (argument);
+
+    send_to_char ("Authors set.\n\r", ch);
+    return TRUE;
+}
+
+AEDIT (aedit_game)
+{
+    AREA_DATA *pArea;
+    int length;
+
+    EDIT_AREA (ch, pArea);
+
+    if (argument[0] == '\0')
+    {
+        send_to_char ("Syntax:   game [$game]\n\rie: 'game FF07'\n\r", ch);
+        return FALSE;
+    }
+
+    length = strlen (argument);
+    if (length > 4)
+    {
+        send_to_char ("No more than four characters allowed.\n\r", ch);
+        return FALSE;
+    }
+
+    free_string (pArea->game);
+    pArea->game = str_dup (argument);
+
+    send_to_char ("Game set.\n\r", ch);
+    return TRUE;
+}
+
+AEDIT (aedit_hrange)
+{
+    AREA_DATA *pArea;
+    char hrange[MAX_STRING_LENGTH];
+    int value, length;
+
+    EDIT_AREA (ch, pArea);
+
+    one_argument (argument, hrange);
+
+    if (!is_number (hrange) || hrange[0] == '\0')
+    {
+        send_to_char ("Syntax:  hrange [#xlevel]\n\r", ch);
+        return FALSE;
+    }
+
+    length = strlen (argument);
+    if (length > 3)
+    {
+        send_to_char ("No more than three numbers allowed.", ch);
+        return FALSE;
+    }
+
+    value = atoi (hrange);
+
+    pArea->high_range = value;
+
+    send_to_char ("Higher Level Range set.\n\r", ch);
+    return TRUE;
+}
+
+AEDIT (aedit_lrange)
+{
+    AREA_DATA *pArea;
+    char lrange[MAX_STRING_LENGTH];
+    int value, length;
+
+    EDIT_AREA (ch, pArea);
+
+    one_argument (argument, lrange);
+
+    if (!is_number (lrange) || lrange[0] == '\0')
+    {
+        send_to_char ("Syntax:  lrange [#xlevel]\n\r", ch);
+        return FALSE;
+    }
+
+    length = strlen (argument);
+    if (length > 3)
+    {
+        send_to_char ("No more than three numbers allowed.", ch);
+        return FALSE;
+    }
+
+    value = atoi (lrange);
+
+    pArea->low_range = value;
+
+    send_to_char ("Lower Level Range set.\n\r", ch);
     return TRUE;
 }
 

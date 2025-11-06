@@ -2242,6 +2242,8 @@ struct    area_data
     int            vnum;        /* OLC */ /* Area vnum  */
     int            area_flags;    /* OLC */
     int            security;    /* OLC */ /* Value 1-9  */
+    char *        game;        /* Game/category for areas command */
+    char *        authors;     /* Author credits for areas command */
 };
 
 

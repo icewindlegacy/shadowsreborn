@@ -546,6 +546,10 @@ void load_area (FILE * fp)
     pArea->age = 15;
     pArea->nplayer = 0;
     pArea->empty = FALSE;
+    pArea->game = str_dup ("");
+    pArea->authors = str_dup ("");
+    pArea->low_range = 1;
+    pArea->high_range = MAX_LEVEL;
 
     if (!area_first)
         area_first = pArea;
@@ -618,6 +622,10 @@ void new_load_area (FILE * fp)
     pArea->min_vnum = 0;
     pArea->max_vnum = 0;
     pArea->area_flags = 0;
+    pArea->game = str_dup ("");
+    pArea->authors = str_dup ("");
+    pArea->low_range = 1;
+    pArea->high_range = MAX_LEVEL;
 /*  pArea->recall       = ROOM_VNUM_TEMPLE;        ROM OLC */
 
     for (;;)
@@ -627,6 +635,9 @@ void new_load_area (FILE * fp)
 
         switch (UPPER (word[0]))
         {
+            case 'A':
+                SKEY ("Authors", pArea->authors);
+                break;
             case 'N':
                 SKEY ("Name", pArea->name);
                 break;
@@ -638,6 +649,16 @@ void new_load_area (FILE * fp)
                 {
                     pArea->min_vnum = fread_number (fp);
                     pArea->max_vnum = fread_number (fp);
+                }
+                break;
+            case 'G':
+                SKEY ("Game", pArea->game);
+                break;
+            case 'L':
+                if (!str_cmp (word, "Levels"))
+                {
+                    pArea->low_range = fread_number (fp);
+                    pArea->high_range = fread_number (fp);
                 }
                 break;
             case 'E':
@@ -2532,6 +2553,7 @@ OBJ_DATA *create_object (OBJ_INDEX_DATA * pObjIndex, int level)
         case ITEM_GEM:
         case ITEM_JEWELRY:
         case ITEM_WINDOW:
+        case ITEM_WINDGATE:
         case ITEM_BAIT:
         case ITEM_FISHING_POLE:
             break;
@@ -3414,33 +3436,301 @@ void free_string (char *pstr)
 void do_areas (CHAR_DATA * ch, char *argument)
 {
     char buf[MAX_STRING_LENGTH];
-    AREA_DATA *pArea1;
-    AREA_DATA *pArea2;
-    int iArea;
-    int iAreaHalf;
+    AREA_DATA *pArea;
+    int iArea, value, value2, count = 0;
+    BUFFER *output;
+    char cmd[MAX_INPUT_LENGTH];
 
-    if (argument[0] != '\0')
+    output = new_buf ();
+
+    argument = one_argument (argument, cmd);
+
+    if (cmd[0] == '\0')
     {
-        send_to_char ("No argument is used with this command.\n\r", ch);
+        iArea = top_area;
+        pArea = area_first;
+
+        for (iArea = 0; pArea != NULL; iArea++)
+        {
+            if (pArea == NULL
+                || pArea->credits == '\0'
+                || !(strcmp (pArea->credits, "(null)")))
+            {
+                ;
+            }
+            else
+            {
+                if (pArea->low_range == 52 && pArea->high_range == 57)
+                {
+                    sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                             pArea->game, pArea->name, pArea->authors,
+                             (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                    add_buf (output, buf);
+                }
+                else
+                {
+                    sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                             pArea->game,
+                             (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
+                             pArea->low_range,
+                             (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
+                             pArea->high_range, pArea->name, pArea->authors,
+                             (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                    add_buf (output, buf);
+                }
+            }
+            pArea = pArea->next;
+        }
+    }
+    else if (!str_prefix (cmd, "range"))
+    {
+        char max[MAX_INPUT_LENGTH];
+        argument = one_argument (argument, max);
+        if (argument[0] == '\0' || max[0] == '\0')
+        {
+            send_to_char ("Syntax: areas range <level1> <level2>\n\r", ch);
+            free_buf (output);
+            return;
+        }
+
+        if (!is_number (argument) || !is_number (max))
+        {
+            send_to_char ("That's not a number!\n\r", ch);
+            free_buf (output);
+            return;
+        }
+
+        value = atoi (argument);
+        value2 = atoi (max);
+
+        iArea = top_area;
+        pArea = area_first;
+
+        for (iArea = 0; pArea != NULL; iArea++)
+        {
+            if (pArea == NULL
+                || pArea->credits == '\0'
+                || !(strcmp (pArea->credits, "(null)")))
+            {
+                ;
+            }
+            else
+            {
+                if (value >= pArea->low_range && value2 <= pArea->high_range)
+                {
+                    if (pArea->low_range == 52 && pArea->high_range == 57)
+                    {
+                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                    else
+                    {
+                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game,
+                                 (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
+                                 pArea->low_range,
+                                 (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
+                                 pArea->high_range, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                }
+            }
+            pArea = pArea->next;
+        }
+    }
+    else if (!str_prefix (cmd, "game"))
+    {
+        if (argument[0] == '\0')
+        {
+            send_to_char ("Syntax: areas game <game>\n\rie: 'areas game FF05'\n\r", ch);
+            free_buf (output);
+            return;
+        }
+
+        iArea = top_area;
+        pArea = area_first;
+
+        for (iArea = 0; pArea != NULL; iArea++)
+        {
+            if (pArea == NULL
+                || pArea->credits == '\0'
+                || !(strcmp (pArea->credits, "(null)")))
+            {
+                ;
+            }
+            else
+            {
+                if (str_infix (argument, pArea->game))
+                {
+                    if (pArea->low_range == 52 && pArea->high_range == 57)
+                    {
+                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                    else
+                    {
+                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game,
+                                 (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
+                                 pArea->low_range,
+                                 (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
+                                 pArea->high_range, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                }
+            }
+            pArea = pArea->next;
+        }
+    }
+    else if (!str_prefix (cmd, "author"))
+    {
+        if (argument[0] == '\0')
+        {
+            send_to_char ("Syntax: areas author <author>\n\rie: 'areas author Diablos'\n\r", ch);
+            free_buf (output);
+            return;
+        }
+
+        iArea = top_area;
+        pArea = area_first;
+
+        for (iArea = 0; pArea != NULL; iArea++)
+        {
+            if (pArea == NULL
+                || pArea->credits == '\0'
+                || !(strcmp (pArea->credits, "(null)")))
+            {
+                ;
+            }
+            else
+            {
+                if (str_infix (argument, pArea->authors))
+                {
+                    if (pArea->low_range == 52 && pArea->high_range == 57)
+                    {
+                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                    else
+                    {
+                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game,
+                                 (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
+                                 pArea->low_range,
+                                 (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
+                                 pArea->high_range, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                }
+            }
+            pArea = pArea->next;
+        }
+    }
+    else if (!str_prefix (cmd, "finished"))
+    {
+        if (argument[0] == '\0')
+        {
+            send_to_char ("Syntax: areas finished <yes|no>\n\rie: 'areas finished yes'\n\r", ch);
+            free_buf (output);
+            return;
+        }
+
+        iArea = top_area;
+        pArea = area_first;
+
+        for (iArea = 0; pArea != NULL; iArea++)
+        {
+            if (pArea == NULL
+                || pArea->credits == '\0'
+                || !(strcmp (pArea->credits, "(null)")))
+            {
+                ;
+            }
+            else
+            {
+                if (!str_cmp (argument, "yes") && !str_cmp (pArea->credits, "FINISHED!!"))
+                {
+                    if (pArea->low_range == 52 && pArea->high_range == 57)
+                    {
+                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                    else
+                    {
+                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game,
+                                 (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
+                                 pArea->low_range,
+                                 (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
+                                 pArea->high_range, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                }
+                else if (!str_cmp (argument, "no") && str_cmp (pArea->credits, "FINISHED!!"))
+                {
+                    if (pArea->low_range == 52 && pArea->high_range == 57)
+                    {
+                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                    else
+                    {
+                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 pArea->game,
+                                 (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
+                                 pArea->low_range,
+                                 (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
+                                 pArea->high_range, pArea->name, pArea->authors,
+                                 (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
+                        count++;
+                        add_buf (output, buf);
+                    }
+                }
+            }
+            pArea = pArea->next;
+        }
+    }
+    else
+    {
+        send_to_char ("Syntax: areas [game|range|author|finished] <game|range|author|(yes/no)>\n\r", ch);
+        free_buf (output);
         return;
     }
 
-    iAreaHalf = (top_area + 1) / 2;
-    pArea1 = area_first;
-    pArea2 = area_first;
-    for (iArea = 0; iArea < iAreaHalf; iArea++)
-        pArea2 = pArea2->next;
 
-    for (iArea = 0; iArea < iAreaHalf; iArea++)
+    send_to_char ("{DGAME [ {wLEVEL {D]  {WAREA NAME                         "
+                  "{rBUILDER(S)          {RFINISHED?!{x\n\r"
+                  "{D--------------------------------------------------------------------------------{w\n\r", ch);
+    if (count > 0)
     {
-        sprintf (buf, "%-39s%-39s\n\r",
-                 pArea1->credits, (pArea2 != NULL) ? pArea2->credits : "");
-        send_to_char (buf, ch);
-        pArea1 = pArea1->next;
-        if (pArea2 != NULL)
-            pArea2 = pArea2->next;
+        sprintf (buf, "Areas found: %d\n\r", count);
+        add_buf (output, buf);
     }
-
+    page_to_char (buf_string (output), ch);
+    free_buf (output);
     return;
 }
 

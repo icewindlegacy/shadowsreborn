@@ -2983,7 +2983,7 @@ void do_who( CHAR_DATA *ch, char *argument )
             wch->level, wch->pcdata->pretit, wch->name, wch->pcdata->title);
 	players++;
 	} else {
-		sprintf(buf, "{x[%3d  %3s] {W%s%s{x {W%s{x",
+		sprintf(buf, "{x[%3d  %3s] {W%s {W%s{x{W%s{x",
 		    wch->level,
 		    wch->race < MAX_PC_RACE ? pc_race_table[wch->race].who_name 
 		    : "NULL",

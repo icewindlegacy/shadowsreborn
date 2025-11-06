@@ -957,6 +957,9 @@ void save_other_helps (CHAR_DATA * ch)
      fprintf (fp, "VNUMs %d %d\n", pArea->min_vnum, pArea->max_vnum);
      fprintf (fp, "Credits %s~\n", pArea->credits);
      fprintf (fp, "Security %d\n", pArea->security);
+     fprintf (fp, "Authors %s~\n", fix_string (pArea->authors));
+     fprintf (fp, "Game %s~\n", fix_string (pArea->game));
+     fprintf (fp, "Levels %d %d\n", pArea->low_range, pArea->high_range);
      fprintf (fp, "End\n\n\n\n");
  
      save_mobiles (fp, pArea);
