@@ -3445,6 +3445,11 @@ void do_areas (CHAR_DATA * ch, char *argument)
 
     argument = one_argument (argument, cmd);
 
+    /* Add header to buffer first */
+    add_buf (output, "{DGAME [ {wLEVEL {D]  {WAREA NAME                         "
+                     "{rBUILDER(S)          {RFINISHED?!{x\n\r"
+                     "{D--------------------------------------------------------------------------------{w\n\r");
+
     if (cmd[0] == '\0')
     {
         iArea = top_area;
@@ -3737,11 +3742,6 @@ void do_areas (CHAR_DATA * ch, char *argument)
         free_buf (output);
         return;
     }
-
-    /* Add header to buffer first */
-    add_buf (output, "{DGAME [ {wLEVEL {D]  {WAREA NAME                         "
-                     "{rBUILDER(S)          {RFINISHED?!{x\n\r"
-                     "{D--------------------------------------------------------------------------------{w\n\r");
     
     /* Add count at the end if searching */
     if (count > 0)
