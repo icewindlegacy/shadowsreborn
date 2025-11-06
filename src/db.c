@@ -3738,15 +3738,18 @@ void do_areas (CHAR_DATA * ch, char *argument)
         return;
     }
 
-
-    send_to_char ("{DGAME [ {wLEVEL {D]  {WAREA NAME                         "
-                  "{rBUILDER(S)          {RFINISHED?!{x\n\r"
-                  "{D--------------------------------------------------------------------------------{w\n\r", ch);
+    /* Add header to buffer first */
+    add_buf (output, "{DGAME [ {wLEVEL {D]  {WAREA NAME                         "
+                     "{rBUILDER(S)          {RFINISHED?!{x\n\r"
+                     "{D--------------------------------------------------------------------------------{w\n\r");
+    
+    /* Add count at the end if searching */
     if (count > 0)
     {
-        sprintf (buf, "Areas found: %d\n\r", count);
+        sprintf (buf, "\n\r{YAreas found: %d{x\n\r", count);
         add_buf (output, buf);
     }
+    
     page_to_char (buf_string (output), ch);
     free_buf (output);
     return;
