@@ -1853,15 +1853,18 @@ void reset_room (ROOM_INDEX_DATA * pRoom)
                     continue;
                 }
 
+                /* Check limit from arg2 */
+                int limit;
+                if (pReset->arg2 > 50)    /* old format */
+                    limit = 6;
+                else if (pReset->arg2 == -1 || pReset->arg2 == 0)    /* no limit or single */
+                    limit = 1;
+                else
+                    limit = pReset->arg2;
+                
                 int existing_count = count_obj_list (pObjIndex, pRoomIndex->contents);
-                if (pRoom->area->nplayer > 0 || existing_count > 0)
+                if (pRoom->area->nplayer > 0 || existing_count >= limit)
                 {
-                    if (existing_count > 0)
-                    {
-                        sprintf(buf, "Reset: Skipping %s (vnum %d) in room %d - already %d exist", 
-                                pObjIndex->short_descr, pObjIndex->vnum, pRoomIndex->vnum, existing_count);
-                        bug(buf, 0);
-                    }
                     last = FALSE;
                     break;
                 }
