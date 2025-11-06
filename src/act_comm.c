@@ -610,17 +610,26 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
         return;
     }
 
+    /* DEBUG: Check if we reach regular transmission code */
+    sprintf(log_buf, "COMMSTONE DEBUG: Reached regular transmission block, is_emote=%d, is_social=%d", 
+            is_emote, is_social);
+    log_string(log_buf);
+
     {
         char message[MAX_STRING_LENGTH];
 
         strncpy(message, original_argument, sizeof(message) - 1);
         message[sizeof(message) - 1] = '\0';
 
+        /* DEBUG: Show message before makedrunk */
+        sprintf(log_buf, "COMMSTONE DEBUG: Before makedrunk, message='%s'", message);
+        log_string(log_buf);
+
         if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
             makedrunk(message, ch);
 
         /* DEBUG: Log what we're about to send */
-        sprintf(log_buf, "COMMSTONE DEBUG: About to send message='%s'", message);
+        sprintf(log_buf, "COMMSTONE DEBUG: After makedrunk, about to send message='%s'", message);
         log_string(log_buf);
 
         printf_to_char(ch, "%s You transmit: '%s'\n\r", sender_prefix,
@@ -4049,6 +4058,7 @@ char * makedrunk (char *string, CHAR_DATA * ch)
   int drunklevel;
   int randomnum;
   char original[1024];
+  char *string_start = string;  /* BUGFIX: Save original pointer! */
 
   /* Check how drunk a person is... */
   if (IS_NPC(ch))
@@ -4093,13 +4103,13 @@ char * makedrunk (char *string, CHAR_DATA * ch)
         }
       while (*string++);
       buf[pos] = '\0';          /* Mark end of the string... */
-      strcpy(string, buf);
+      strcpy(string_start, buf);  /* BUGFIX: Use saved pointer! */
       
       /* DEBUG: Log modified string */
-      sprintf(log_buf, "MAKEDRUNK DEBUG: Output='%s'", string);
+      sprintf(log_buf, "MAKEDRUNK DEBUG: Output='%s'", string_start);
       log_string(log_buf);
       
-      return(string);
+      return(string_start);  /* BUGFIX: Return saved pointer! */
     }
     
   /* DEBUG: drunk level was 0 or less, returning unchanged */
