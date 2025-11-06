@@ -1789,6 +1789,8 @@ void do_common (CHAR_DATA *ch, char *argument)
     int chance;
     int chance2;
     char *translated;
+    char message[MAX_STRING_LENGTH];
+    extern char *makedrunk(char *string, CHAR_DATA *ch);
 
     if ((chance = ch->pcdata->learned[skill_lookup("common")]) == 0)
     {
@@ -1802,9 +1804,16 @@ void do_common (CHAR_DATA *ch, char *argument)
         return;
     }
 
+    /* Apply drunk speech if applicable */
+    strncpy(message, argument, sizeof(message) - 1);
+    message[sizeof(message) - 1] = '\0';
+    
+    if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
+        makedrunk(message, ch);
+
     if (number_percent() < chance)
     {
-        act("In Common, you say '$t'", ch, argument, NULL, TO_CHAR);
+        act("In Common, you say '$t'", ch, message, NULL, TO_CHAR);
 
         for (och = ch->in_room->people; och != NULL; och = och->next_in_room)
         {
@@ -1814,20 +1823,20 @@ void do_common (CHAR_DATA *ch, char *argument)
             if (IS_NPC(och) || (chance2 = och->pcdata->learned[skill_lookup("common")]) == 0)
             {
                 /* NPCs or those with no skill see translated text */
-                translated = translate_text(argument, LANG_HUMAN, 0);
+                translated = translate_text(message, LANG_HUMAN, 0);
                 act("In Common, $n says '$t'", ch, translated, och, TO_VICT);
                 free_mem(translated, strlen(translated) + 1);
             }
             else if (number_percent() < chance2)
             {
                 /* Those with skill see original text */
-                act("In Common, $n says '$t'", ch, argument, och, TO_VICT);
+                act("In Common, $n says '$t'", ch, message, och, TO_VICT);
                 check_improve(och, skill_lookup("common"), TRUE, 4);
             }
             else
             {
                 /* Failed skill check - see translated text */
-                translated = translate_text(argument, LANG_HUMAN, chance2);
+                translated = translate_text(message, LANG_HUMAN, chance2);
                 act("In Common, $n says '$t'", ch, translated, och, TO_VICT);
                 free_mem(translated, strlen(translated) + 1);
                 check_improve(och, skill_lookup("common"), FALSE, 4);
