@@ -4044,12 +4044,21 @@ char * makedrunk (char *string, CHAR_DATA * ch)
   int pos = 0;
   int drunklevel;
   int randomnum;
+  char original[1024];
 
   /* Check how drunk a person is... */
   if (IS_NPC(ch))
         drunklevel = 0;
   else
         drunklevel = ch->pcdata->condition[COND_DRUNK];
+
+  /* DEBUG: Log makedrunk calls */
+  strncpy(original, string, sizeof(original) - 1);
+  original[sizeof(original) - 1] = '\0';
+  
+  sprintf(log_buf, "MAKEDRUNK DEBUG: Called for %s, drunk=%d, input='%s'", 
+          ch->name, drunklevel, original);
+  log_string(log_buf);
 
   if (drunklevel > 0)
     {
@@ -4081,7 +4090,17 @@ char * makedrunk (char *string, CHAR_DATA * ch)
       while (*string++);
       buf[pos] = '\0';          /* Mark end of the string... */
       strcpy(string, buf);
+      
+      /* DEBUG: Log modified string */
+      sprintf(log_buf, "MAKEDRUNK DEBUG: Output='%s'", string);
+      log_string(log_buf);
+      
       return(string);
     }
+    
+  /* DEBUG: drunk level was 0 or less, returning unchanged */
+  sprintf(log_buf, "MAKEDRUNK DEBUG: Drunk level %d <= 0, returning unchanged", drunklevel);
+  log_string(log_buf);
+  
   return (string);
 }
