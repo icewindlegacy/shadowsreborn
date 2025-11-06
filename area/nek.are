@@ -1,12 +1,12 @@
 #AREADATA
-Name fuckit~
+Name Nek~
 Builders None~
-VNUMs 700 799
-Credits (null)~
+VNUMs 200 299
+Credits ~
 Security 1
-Authors ~
-Game ~
-Levels 1 60
+Authors Om~
+Game SR~
+Levels 1 5
 End
 
 
@@ -22,12 +22,6 @@ End
 
 
 #ROOMS
-#700
-~
-fuck it
-~
-0 4 0
-S
 #0
 
 

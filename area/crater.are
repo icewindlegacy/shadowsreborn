@@ -1,12 +1,12 @@
 #AREADATA
-Name fuckit~
+Name crater~
 Builders None~
-VNUMs 700 799
-Credits (null)~
+VNUMs 6400 6499
+Credits ~
 Security 1
-Authors ~
-Game ~
-Levels 1 60
+Authors Om~
+Game SR~
+Levels 30 40
 End
 
 
@@ -22,12 +22,6 @@ End
 
 
 #ROOMS
-#700
-~
-fuck it
-~
-0 4 0
-S
 #0
 
 

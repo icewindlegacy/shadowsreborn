@@ -398,6 +398,7 @@ const struct olc_cmd_type medit_table[] = {
     {"copy", medit_copy},
     {"?", show_help},
     {"version", show_version},
+    {"clan", medit_clan},
 
     {NULL, 0,}
 };

@@ -326,6 +326,17 @@ void load_mobiles (FILE * fp)
         CHECK_POS (pMobIndex->size, size_lookup (fread_word (fp)), "size");
 /*    pMobIndex->size            = size_lookup(fread_word(fp)); */
         pMobIndex->material = str_dup (fread_word (fp));
+        letter = fread_letter( fp );  /* Feydrex - clan guards */
+
+	if (letter == 'C') /* Feydrex - clan guards */
+	{
+	    pMobIndex->clan             = clan_lookup(fread_string(fp));
+	}
+	else
+	{
+	    pMobIndex->clan             = 0;
+	    ungetc( letter, fp );
+	}
 
         for (;;)
         {

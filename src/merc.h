@@ -1803,6 +1803,7 @@ struct    mob_index_data
     sh_int            size;
     char *            material;
     long              mprog_flags;
+    sh_int            clan;
 };
 
 

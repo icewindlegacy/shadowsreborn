@@ -2226,6 +2226,7 @@ CHAR_DATA *create_mobile (MOB_INDEX_DATA * pMobIndex)
         mob->parts = pMobIndex->parts;
         mob->size = pMobIndex->size;
         mob->material = str_dup (pMobIndex->material);
+        mob->clan = pMobIndex->clan;
 
         /* computed on the spot */
 

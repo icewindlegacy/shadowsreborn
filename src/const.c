@@ -1502,9 +1502,9 @@ const struct con_app_type con_app[26] = {
  */
 const struct liq_type liq_table[] = {
 /*    name            color    proof, full, thirst, food, ssize */
-    {"water", "clear", {0, 1, 10, 0, 16}},
-    {"beer", "amber", {12, 1, 8, 1, 12}},
-    {"red wine", "burgundy", {30, 1, 8, 1, 5}},
+    {"water",        "clear", {0,        1,     10,    0,   16}},
+    {"beer",         "amber", {12,       1,      8,    1,   12}},
+    {"red wine",  "burgundy", {30,       1,      8,    1,    5}},
     {"ale", "brown", {15, 1, 8, 1, 12}},
     {"dark ale", "dark", {16, 1, 8, 1, 12}},
 
@@ -1543,7 +1543,7 @@ const struct liq_type liq_table[] = {
     {"sherry", "red", {38, 2, 7, 1, 5}},
     {"framboise", "red", {50, 1, 7, 1, 5}},
     {"rum", "amber", {151, 1, 4, 0, 2}},
-
+    {"Liquid {MD{co{Mn{cu{Mt{cs{x", "pink", {0, 2, 8, 8, 12}},
     {"cordial", "clear", {100, 1, 5, 0, 2}},
     {NULL, NULL, {0, 0, 0, 0, 0}}
 };

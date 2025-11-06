@@ -2,8 +2,11 @@
 Name Gnome Village~
 Builders None~
 VNUMs 1500 1599
-Credits { 5 15} Vougon  Gnome Village~
+Credits FINISHED!!~
 Security 9
+Authors Vougon~
+Game ~
+Levels 5 15
 End
 
 
@@ -1416,6 +1419,10 @@ You are wandering in a dark, damp, twisting hallway.  The temperature
 seems to be greater here, as well as your fear.
 ~
 0 8201 2
+D0
+~
+~
+0 -1 1547
 D1
 ~
 ~
@@ -1424,10 +1431,6 @@ D3
 ~
 ~
 0 -1 1551
-D0
-~
-~
-0 -1 1547
 S
 #1549
 A Damp Hallway~
@@ -1465,14 +1468,14 @@ You are wandering in a dark, damp, twisting hallway.  The temperature
 seems to be greater here, as well as your fear.
 ~
 0 8201 2
-D1
-~
-~
-0 -1 1548
 D2
 ~
 ~
 0 -1 1552
+D1
+~
+~
+0 -1 1548
 S
 #1552
 A Damp Hallway~
@@ -1495,14 +1498,14 @@ You are wandering in a dark, damp, twisting hallway.  The temperature
 seems to be greater here, as well as your fear.
 ~
 0 8201 2
-D0
-~
-~
-0 -1 1552
 D1
 ~
 ~
 0 -1 1554
+D0
+~
+~
+0 -1 1552
 S
 #1554
 A Damp Hallway~
@@ -1510,10 +1513,6 @@ You are wandering in a dark, damp, twisting hallway.  The temperature
 seems to be greater here, as well as your fear.
 ~
 0 8201 2
-D3
-~
-~
-0 -1 1553
 D1
 ~
 ~
@@ -1522,6 +1521,10 @@ D0
 ~
 ~
 0 -1 1556
+D3
+~
+~
+0 -1 1553
 S
 #1555
 A Damp Hallway~

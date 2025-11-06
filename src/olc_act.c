@@ -4235,7 +4235,11 @@ MEDIT (medit_show)
         sprintf (buf, "Spec fun:    [%s]\n\r", spec_name (pMob->spec_fun));
         send_to_char (buf, ch);
     }
-
+    if ( pMob->clan )
+        {
+            sprintf( buf, "Clan:        [%s]\n\r", clan_table[pMob->clan].name );
+    	send_to_char( buf, ch );
+        }
     sprintf (buf, "Short descr: %s\n\rLong descr:\n\r%s",
              pMob->short_descr, pMob->long_descr);
     send_to_char (buf, ch);
@@ -5312,7 +5316,6 @@ MEDIT (medit_gold)
 MEDIT (medit_hitroll)
 {
     MOB_INDEX_DATA *pMob;
-
     EDIT_MOB (ch, pMob);
 
     if (argument[0] == '\0' || !is_number (argument))
@@ -5326,6 +5329,55 @@ MEDIT (medit_hitroll)
     send_to_char ("Hitroll set.\n\r", ch);
     return TRUE;
 }
+
+MEDIT( medit_clan )  /* Feydrex - clan guards */
+{
+    MOB_INDEX_DATA *pMob;
+    int clan;
+
+    if (!str_prefix(argument,"none"))
+    {
+        EDIT_MOB( ch, pMob );
+
+	send_to_char("They are now clanless.\n\r",ch);
+        pMob->clan = 0;
+	return TRUE;
+    }
+
+    if ( argument[0] != '\0'
+    && ( clan = clan_lookup( argument ) ) != 0 )
+    {
+        EDIT_MOB( ch, pMob );
+
+	pMob->clan = clan_lookup(argument);
+
+	send_to_char( "Clan set.\n\r", ch );
+	return TRUE;
+    }
+
+    if ( argument[0] == '?' )
+    {
+	char buf[MAX_STRING_LENGTH];
+
+        send_to_char( "Available clans are:", ch );
+
+	for ( clan = 0; clan < MAX_CLAN; clan++ )
+	{
+            if ( ( clan % 3 ) == 0 )
+		send_to_char( "\n\r", ch );
+	    sprintf( buf, " %-15s", clan_table[clan].name );
+	    send_to_char( buf, ch );
+	}
+
+        send_to_char( "\n\r", ch );
+	return FALSE;
+    }
+
+    send_to_char( "Syntax:  clan [clan]\n\r"
+		  "Type 'clan ?' for a list of clans.\n\r", ch );
+    return FALSE;
+}
+
 
 void show_liqlist (CHAR_DATA * ch)
 {

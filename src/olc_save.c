@@ -252,6 +252,10 @@ void save_mobile (FILE * fp, MOB_INDEX_DATA * pMobIndex)
     fprintf (fp, "%s\n",
              IS_NULLSTR (pMobIndex->
                          material) ? pMobIndex->material : "unknown");
+     if (pMobIndex->clan)  /* Feydrex - For clan hall guards */
+        {
+            fprintf( fp, "C %s~\n", clan_table[pMobIndex->clan].name );
+        }
 
     if ((temp = DIF (race_table[race].act, pMobIndex->act)))
         fprintf (fp, "F act %s\n", fwrite_flag (temp, buf));

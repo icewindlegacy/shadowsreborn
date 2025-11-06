@@ -1420,7 +1420,8 @@ void aggr_update (void)
                     && vch->level < LEVEL_IMMORTAL
                     && ch->level >= vch->level - 5
                     && (!IS_SET (ch->act, ACT_WIMPY) || !IS_AWAKE (vch))
-                    && can_see (ch, vch))
+                    &&   can_see( ch, vch )
+         	        &&   ch->clan != vch->clan )	
                 {
                     if (number_range (0, count) == 0)
                         victim = vch;

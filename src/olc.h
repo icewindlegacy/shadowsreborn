@@ -310,6 +310,7 @@ DECLARE_OLC_FUN( medit_autohard );
 DECLARE_OLC_FUN( medit_autoeasy );
 DECLARE_OLC_FUN( medit_delete		);
 DECLARE_OLC_FUN( medit_copy		);
+DECLARE_OLC_FUN( medit_clan		);
 
 /* Mobprog editor */
 DECLARE_OLC_FUN( mpedit_create		);

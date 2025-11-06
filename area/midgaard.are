@@ -2,8 +2,11 @@
 Name Midgaard~
 Builders None~
 VNUMs 3000 3399
-Credits { All } Diku    Midgaard~
+Credits FINISHED!!~
 Security 9
+Authors Diku Team~
+Game ~
+Levels 1 60
 End
 
 
@@ -1950,6 +1953,14 @@ marble~
 fountain 0 0
 999999 999999 'water' 0 0
 0 9999 0 P
+#3094
+bottle of liquid donuts~
+a bottle of liquid {Md{co{Mn{cu{Mt{cs{x~
+A bottle of liquid {Md{co{Mn{cu{Mt{cs{x lies here~
+unknown~
+drink 0 A
+100 100 'Liquid {MD{co{Mn{cu{Mt{cs{x' 0 0
+0 0 0 P
 #3097
 shield small metal~
 a small metal shield~

@@ -428,6 +428,7 @@ MOB_INDEX_DATA *new_mob_index (void)
     pMob->material = str_dup ("unknown");    /* -- Hugin */
     pMob->off_flags = 0;        /* ROM patch -- Hugin */
     pMob->size = SIZE_MEDIUM;    /* ROM patch -- Hugin */
+    pMob->clan = 0;                /* Feydrex - clan guards */
     pMob->ac[AC_PIERCE] = 0;    /* ROM patch -- Hugin */
     pMob->ac[AC_BASH] = 0;        /* ROM patch -- Hugin */
     pMob->ac[AC_SLASH] = 0;        /* ROM patch -- Hugin */

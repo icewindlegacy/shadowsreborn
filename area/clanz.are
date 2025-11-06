@@ -2,13 +2,32 @@
 Name Clan Halls~
 Builders Om~
 VNUMs 2400 2499
-Credits Om~
+Credits ~
 Security 9
+Authors Om~
+Game ~
+Levels 10 50
 End
 
 
 
 #MOBILES
+#2400
+Clan Guead Test~
+Immortals clan guard~
+A clan guard is here
+~
+~
+human~
+ABF 0 0 -1  0 0
+60 60 124d21+1213 60d11+95 21d2+47 wrath
+-37 -37 -37 -24
+0 0 0 0
+stand stand male 0
+0 0 medium unknown
+C Immortal~
+F for AHMV
+F par ABCDEFGHIJK
 #0
 
 
@@ -34,6 +53,7 @@ S
 
 
 #RESETS
+M 0 2400 1 2400 1 Load Immortals clan guard
 S
 
 
