@@ -4572,10 +4572,11 @@ void do_damage_item (CHAR_DATA * ch, char *argument)
     return;
 }
 
-/* Debug command to check condition values */
+/* Command to check condition values */
 void do_conditions (CHAR_DATA * ch, char *argument)
 {
     char buf[MAX_STRING_LENGTH];
+    int hunger, thirst, drunk, bleeding;
     
     if (IS_NPC (ch))
     {
@@ -4583,17 +4584,88 @@ void do_conditions (CHAR_DATA * ch, char *argument)
         return;
     }
     
-    send_to_char ("Your current condition values:\n\r", ch);
-    sprintf (buf, "  Drunk:    %d\n\r", ch->pcdata->condition[COND_DRUNK]);
-    send_to_char (buf, ch);
-    sprintf (buf, "  Full:     %d\n\r", ch->pcdata->condition[COND_FULL]);
-    send_to_char (buf, ch);
-    sprintf (buf, "  Thirst:   %d (max 48)\n\r", ch->pcdata->condition[COND_THIRST]);
-    send_to_char (buf, ch);
-    sprintf (buf, "  Hunger:   %d (max 48)\n\r", ch->pcdata->condition[COND_HUNGER]);
-    send_to_char (buf, ch);
-    sprintf (buf, "  Bleeding: %d (0=not bleeding, >0=bleeding)\n\r", ch->pcdata->condition[COND_BLEEDING]);
-    send_to_char (buf, ch);
+    hunger = ch->pcdata->condition[COND_HUNGER];
+    thirst = ch->pcdata->condition[COND_THIRST];
+    drunk = ch->pcdata->condition[COND_DRUNK];
+    bleeding = ch->pcdata->condition[COND_BLEEDING];
+    
+    /* Immortals see detailed numerical data */
+    if (ch->level >= LEVEL_IMMORTAL)
+    {
+        send_to_char ("Your current condition values:\n\r", ch);
+        sprintf (buf, "  Drunk:    %d\n\r", drunk);
+        send_to_char (buf, ch);
+        sprintf (buf, "  Full:     %d\n\r", ch->pcdata->condition[COND_FULL]);
+        send_to_char (buf, ch);
+        sprintf (buf, "  Thirst:   %d (max 48)\n\r", thirst);
+        send_to_char (buf, ch);
+        sprintf (buf, "  Hunger:   %d (max 48)\n\r", hunger);
+        send_to_char (buf, ch);
+        sprintf (buf, "  Bleeding: %d (0=not bleeding, >0=bleeding)\n\r", bleeding);
+        send_to_char (buf, ch);
+        return;
+    }
+    
+    /* Mortals get descriptive messages */
+    send_to_char ("\n\r{CYour current condition:{x\n\r", ch);
+    
+    /* Hunger messages */
+    if (hunger > 40)
+        send_to_char ("  You are completely satisfied.\n\r", ch);
+    else if (hunger > 30)
+        send_to_char ("  You are full.\n\r", ch);
+    else if (hunger > 20)
+        send_to_char ("  You feel a bit peckish.\n\r", ch);
+    else if (hunger > 10)
+        send_to_char ("  {yYou are getting hungry.{x\n\r", ch);
+    else if (hunger > 5)
+        send_to_char ("  {YYou are quite hungry.{x\n\r", ch);
+    else if (hunger > 2)
+        send_to_char ("  {RYou are famished!{x\n\r", ch);
+    else if (hunger > 0)
+        send_to_char ("  {RYou are STARVING!{x\n\r", ch);
+    else
+        send_to_char ("  {RYou are dying of starvation!{x\n\r", ch);
+    
+    /* Thirst messages */
+    if (thirst > 40)
+        send_to_char ("  Your thirst is quenched.\n\r", ch);
+    else if (thirst > 30)
+        send_to_char ("  You are well hydrated.\n\r", ch);
+    else if (thirst > 20)
+        send_to_char ("  Your throat feels a little dry.\n\r", ch);
+    else if (thirst > 10)
+        send_to_char ("  {yYou are getting thirsty.{x\n\r", ch);
+    else if (thirst > 5)
+        send_to_char ("  {YYou are quite thirsty.{x\n\r", ch);
+    else if (thirst > 2)
+        send_to_char ("  {RYou are parched!{x\n\r", ch);
+    else if (thirst > 0)
+        send_to_char ("  {RYour throat burns with thirst!{x\n\r", ch);
+    else
+        send_to_char ("  {RYou are dying of thirst!{x\n\r", ch);
+    
+    /* Drunk messages */
+    if (drunk == 0)
+        send_to_char ("  You are completely sober.\n\r", ch);
+    else if (drunk <= 5)
+        send_to_char ("  You feel a slight buzz.\n\r", ch);
+    else if (drunk <= 10)
+        send_to_char ("  {yYou are a little tipsy.{x\n\r", ch);
+    else if (drunk <= 20)
+        send_to_char ("  {YYou are feeling drunk.{x\n\r", ch);
+    else if (drunk <= 30)
+        send_to_char ("  {RThe room is beginning to spin.{x\n\r", ch);
+    else if (drunk <= 40)
+        send_to_char ("  {RYou are very drunk and stumbling.{x\n\r", ch);
+    else
+        send_to_char ("  {RYou can barely stand!{x\n\r", ch);
+    
+    /* Bleeding */
+    if (bleeding > 0)
+        send_to_char ("  {RYou are bleeding!{x\n\r", ch);
+    
+    send_to_char ("\n\r", ch);
     return;
 }
 
