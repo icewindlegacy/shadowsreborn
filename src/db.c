@@ -3462,19 +3462,22 @@ void do_areas (CHAR_DATA * ch, char *argument)
             {
                 if (pArea->low_range == 52 && pArea->high_range == 57)
                 {
-                    sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                             pArea->game, pArea->name, pArea->authors,
+                    sprintf (buf, "{D%-4s{D [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                             (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
+                             pArea->name,
+                             (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                              (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                     add_buf (output, buf);
                 }
                 else
                 {
-                    sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                             pArea->game,
+                    sprintf (buf, "{D%-4s{D [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                             (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
                              (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
                              pArea->low_range,
                              (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
-                             pArea->high_range, pArea->name, pArea->authors,
+                             pArea->high_range, pArea->name,
+                             (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                              (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                     add_buf (output, buf);
                 }
@@ -3520,20 +3523,23 @@ void do_areas (CHAR_DATA * ch, char *argument)
                 {
                     if (pArea->low_range == 52 && pArea->high_range == 57)
                     {
-                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game, pArea->name, pArea->authors,
+                        sprintf (buf, "{D%-4s{D [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
+                                 pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
                     }
                     else
                     {
-                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game,
+                        sprintf (buf, "{D%-4s{D [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
                                  (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
                                  pArea->low_range,
                                  (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
-                                 pArea->high_range, pArea->name, pArea->authors,
+                                 pArea->high_range, pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
@@ -3569,20 +3575,23 @@ void do_areas (CHAR_DATA * ch, char *argument)
                 {
                     if (pArea->low_range == 52 && pArea->high_range == 57)
                     {
-                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game, pArea->name, pArea->authors,
+                        sprintf (buf, "{D%-4s{D [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
+                                 pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
                     }
                     else
                     {
-                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game,
+                        sprintf (buf, "{D%-4s{D [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
                                  (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
                                  pArea->low_range,
                                  (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
-                                 pArea->high_range, pArea->name, pArea->authors,
+                                 pArea->high_range, pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
@@ -3618,20 +3627,23 @@ void do_areas (CHAR_DATA * ch, char *argument)
                 {
                     if (pArea->low_range == 52 && pArea->high_range == 57)
                     {
-                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game, pArea->name, pArea->authors,
+                        sprintf (buf, "{D%-4s{D [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
+                                 pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
                     }
                     else
                     {
-                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game,
+                        sprintf (buf, "{D%-4s{D [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
                                  (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
                                  pArea->low_range,
                                  (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
-                                 pArea->high_range, pArea->name, pArea->authors,
+                                 pArea->high_range, pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
@@ -3667,20 +3679,23 @@ void do_areas (CHAR_DATA * ch, char *argument)
                 {
                     if (pArea->low_range == 52 && pArea->high_range == 57)
                     {
-                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game, pArea->name, pArea->authors,
+                        sprintf (buf, "{D%-4s{D [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
+                                 pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
                     }
                     else
                     {
-                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game,
+                        sprintf (buf, "{D%-4s{D [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
                                  (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
                                  pArea->low_range,
                                  (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
-                                 pArea->high_range, pArea->name, pArea->authors,
+                                 pArea->high_range, pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
@@ -3690,20 +3705,23 @@ void do_areas (CHAR_DATA * ch, char *argument)
                 {
                     if (pArea->low_range == 52 && pArea->high_range == 57)
                     {
-                        sprintf (buf, "{D%s [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game, pArea->name, pArea->authors,
+                        sprintf (buf, "{D%-4s{D [{wPROMOTE{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
+                                 pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
                     }
                     else
                     {
-                        sprintf (buf, "{D%s [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
-                                 pArea->game,
+                        sprintf (buf, "{D%-4s{D [{w%s%d-%s%d{D]  {W%-33s {r%-19s {R%s{x\n\r",
+                                 (pArea->game && pArea->game[0] != '\0') ? pArea->game : "----",
                                  (pArea->low_range < 10) ? "00" : (pArea->low_range > 9 && pArea->low_range < 100) ? "0" : "",
                                  pArea->low_range,
                                  (pArea->high_range < 10) ? "00" : (pArea->high_range > 9 && pArea->high_range < 100) ? "0" : "",
-                                 pArea->high_range, pArea->name, pArea->authors,
+                                 pArea->high_range, pArea->name,
+                                 (pArea->authors && pArea->authors[0] != '\0') ? pArea->authors : "",
                                  (!str_cmp (pArea->credits, "FINISHED!!")) ? "FINISHED!!" : "");
                         count++;
                         add_buf (output, buf);
