@@ -319,6 +319,7 @@ const struct cmd_type cmd_table[] = {
     {"flee", do_flee, POS_FIGHTING, 0, LOG_NORMAL, 1},
     {"goblinmob", do_goblinmob, POS_STANDING, 0, LOG_NORMAL, 1},
     {"kick", do_kick, POS_FIGHTING, 0, LOG_NORMAL, 1},
+    {"lunge", do_lunge, POS_FIGHTING, 0, LOG_NORMAL, 1},
     {"murde", do_murde, POS_FIGHTING, 0, LOG_NORMAL, 0},
     {"murder", do_murder, POS_FIGHTING, 5, LOG_ALWAYS, 1},
     { "shoot",		do_shoot,	POS_RESTING,	 0,  LOG_NORMAL, 1 },

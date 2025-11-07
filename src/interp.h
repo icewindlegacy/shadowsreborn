@@ -407,6 +407,7 @@ DECLARE_DO_FUN( do_auction		);
 DECLARE_DO_FUN( do_quest		);
 DECLARE_DO_FUN( do_bounty );
 DECLARE_DO_FUN( do_long );
+DECLARE_DO_FUN( do_lunge );
 
 /* External functions from fight.c */
 void set_fighting args ((CHAR_DATA * ch, CHAR_DATA * victim));
