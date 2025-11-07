@@ -217,6 +217,35 @@ map 0 A
 0 0 0 P
 E
 map~
+,        * Dushgoi *                      +-Sorcerers
+,        ***********                      | Guild
+,                                         |
+,                                 Martial-+-Berserkers
+, Whares   Tralls    Trulls       Academy | Guild     Slave  Jewelry  Magic
+,         Armour    Supplies             |          Auction  Store   Shop
+,            |          |          Center               |       |      |
+,ChuKaal +----+----------+------    Tunnel  -------------+-------+------+-
+,Rocks  /     |          |       Intersection            |       |      | \
+,      /  Kruels       Butcher    /       |          Bruths   Graks   Maps \ 
+,Leather Weapons MUD    Shop     /        |          Vessels  Elixirs      |
+,Shop           School          /  Black -+-Knaves                         |
+,                             /   Dragon | Guild                       Orc
+,           Portal--- Battle  /           |                          Invasion
+,           Room      School /            |                           Highway
+,                       |   /             +-Shamans
+,         Quest ---- Circle of--Donation    Guild
+,         Room         Power      Room
+,                    /(recall)
+,                   /   |
+,                  /   Orc
+,            Morgue   Temple
+,                       |
+,                     Great
+,                   Necromancer
+ 
+~
+E
+map~
 {W        ***********
 {W        * Dushgoi *                      +-Sorcerers
 {W        ***********                      | Guild
@@ -246,35 +275,6 @@ map~
 {W                   Necromancer
  
 ~
-E
-map~
-,        * Dushgoi *                      +-Sorcerers
-,        ***********                      | Guild
-,                                         |
-,                                 Martial-+-Berserkers
-, Whares   Tralls    Trulls       Academy | Guild     Slave  Jewelry  Magic
-,         Armour    Supplies             |          Auction  Store   Shop
-,            |          |          Center               |       |      |
-,ChuKaal +----+----------+------    Tunnel  -------------+-------+------+-
-,Rocks  /     |          |       Intersection            |       |      | \
-,      /  Kruels       Butcher    /       |          Bruths   Graks   Maps \ 
-,Leather Weapons MUD    Shop     /        |          Vessels  Elixirs      |
-,Shop           School          /  Black -+-Knaves                         |
-,                             /   Dragon | Guild                       Orc
-,           Portal--- Battle  /           |                          Invasion
-,           Room      School /            |                           Highway
-,                       |   /             +-Shamans
-,         Quest ---- Circle of--Donation    Guild
-,         Room         Power      Room
-,                    /(recall)
-,                   /   |
-,                  /   Orc
-,            Morgue   Temple
-,                       |
-,                     Great
-,                   Necromancer
- 
-~
 #413
 orc school newbie commstone comm stone~
 a newbie comm stone~
@@ -291,9 +291,6 @@ unknown~
 map 0 A
 0 0 0 0 0
 0 0 0 P
-E
-map~
-~
 E
 map~
 ,                {WWizards
@@ -319,6 +316,9 @@ map~
 ,              {yv{B.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B         {yv{B.,.,.,.,.,.,
 ,      {yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B{yv{B.,.,.,.,.,.,.{x
  
+~
+E
+map~
 ~
 #415
 hole donation pit~
@@ -519,11 +519,7 @@ D4
 0 0 436
 S
 #407
-West Tunnel~
-This narrow tunnel runs east-west through the bedrock, carved out by generations
-of orcish miners. The walls are rough-hewn and uneven, with occasional support
-beams of thick timber propping up the ceiling. The air is stale and thick with
-the smell of unwashed bodies and cooking meat.
+~
 ~
 0 0 0
 D1
@@ -541,11 +537,7 @@ D1
 0 0 400
 S
 #409
-South Tunnel Junction~
-The tunnel opens up slightly here where multiple passages converge. The stone
-floor is worn smooth from countless orcish boots trampling through on their way
-to the markets and guilds. Crude torches mounted in {wiron{x brackets cast
-flickering shadows on the walls. The sounds of commerce echo from the east.
+~
 ~
 0 0 0
 D0
@@ -567,11 +559,6 @@ D3
 S
 #410
 Knave's Guild~
-The air in this shadowy chamber reeks of smoke and cheap ale. Rough-looking orcs
-lounge in corners, practicing sleight of hand tricks and sharpening daggers. The
-walls are covered with crude maps of various settlements, with notes scrawled in
-orcish about guard patrols and valuables. A scarred wooden table dominates the
-center, covered in lockpicks, poison vials, and other tools of the trade.
 ~
 0 0 0
 D1
@@ -585,12 +572,6 @@ D3
 S
 #411
 Black Dragon~
-This dingy tavern reeks of spilled ale, vomit, and violence. Crude wooden tables
-are bolted to the stone floor, their surfaces scarred with knife marks and old
-bloodstains. The bar itself is a massive slab of blackened oak, behind which
-shelves hold clay jugs of various brews. Fights break out here nightly, and the
-floor shows permanent stains from those who didn't walk away. A sign proclaims
-this establishment as the "Black Dragon."
 ~
 0 0 0
 D1
@@ -600,11 +581,6 @@ D1
 S
 #412
 Shaman's Guild~
-Smoke from burning herbs fills this cave-like chamber, creating a hazy atmosphere
-that stings the eyes. Animal bones hang from the ceiling on {yleather{x cords,
-clattering softly in the air currents. The walls are painted with crude but
-powerful-looking symbols in {Rblood{x and ochre. A fire pit in the center holds
-glowing coals, and around it sit shamans in various states of meditation or trance.
 ~
 0 0 0
 D0
@@ -684,11 +660,7 @@ D2
 0 0 413
 S
 #417
-West Market Tunnel~
-This section of tunnel serves as the western market district. The ceiling is
-slightly higher here to accommodate the constant flow of orcish traders hauling
-their wares. The walls are lined with crude shelves and alcoves where merchants
-display goods. The smell of meat, leather, and metal fills the air.
+~
 ~
 0 0 0
 D0
@@ -710,12 +682,6 @@ D3
 S
 #418
 Butcher Shop~
-This chamber is a nightmare of blood and meat. Carcasses of various beasts hang
-from {wiron{x hooks embedded in the ceiling - some recognizable, others decidedly
-not. A massive stone slab serves as the butcher's block, its surface permanently
-stained {Rred{x despite regular scraping. The floor is slick with blood and fat,
-and flies buzz constantly around the hanging meat. The orcish butcher's cleaver
-work is brutal but effective.
 ~
 0 0 0
 D0
@@ -725,11 +691,6 @@ D0
 S
 #419
 Trull's Supplies~
-This cramped supply shop is packed floor to ceiling with adventuring gear. Coils
-of {yrope{x hang from pegs, alongside bundles of torches, sacks of dried rations,
-and various tools. The proprietor, presumably Trull, has organized everything with
-surprising efficiency - each item has a crude price tag dangling from it. The air
-smells of canvas, {yleather{x, and the lamp oil that lights the shelves.
 ~
 0 0 0
 D2
@@ -738,11 +699,7 @@ D2
 0 0 417
 S
 #420
-West Market Crossroads~
-This busy intersection sees constant traffic as orcs move between the various
-western shops. The stone floor is worn smooth from centuries of footfalls. Crude
-signs hang from the ceiling pointing to the different establishments: armor north,
-weapons south, the docks west. The din of bargaining and arguing fills the air.
+~
 ~
 0 0 0
 D0
@@ -764,12 +721,6 @@ D3
 S
 #421
 Trall's Armour~
-The clang of hammer on metal echoes through this workshop-turned-shop. Suits of
-armor in various states of completion hang from the walls - some {yleather{x, some
-chainmail, some plate. Most show the brutal, functional style favored by orcs:
-heavy, protective, and intimidating. A forge in the corner still glows hot, and
-an anvil shows the scars of thousands of hammer blows. The air is thick with heat
-and the smell of hot metal.
 ~
 0 0 0
 D2
@@ -779,11 +730,6 @@ D2
 S
 #422
 Kruel's Weapons~
-Weapons of every brutal variety line the walls of this armory. Axes, swords,
-maces, spears, and more exotic implements of destruction are displayed on crude
-wooden racks. Some gleam with recent sharpening, others are notched and stained
-from heavy use. Kruel clearly believes in quantity over quality - there must be
-hundreds of weapons here. The smell of weapon oil and {wsteel{x fills the air.
 ~
 0 0 0
 D0
@@ -793,12 +739,6 @@ D0
 S
 #423
 ChuKaal Docks~
-This cavern opens onto an underground river, the legendary ChuKaal. Crude wooden
-docks extend into the black water, where flat-bottomed boats are tied up with
-thick {yrope{x. The river flows swiftly, disappearing into tunnels both upstream
-and down. Goods are stacked on the docks awaiting transport - crates, barrels,
-and bound cargo. The air is damp and cool, and the sound of rushing water echoes
-through the cavern.
 ~
 0 0 0
 D1
@@ -812,12 +752,6 @@ D5
 S
 #424
 Leather Shop~
-The pungent smell of tanning chemicals and curing leather dominates this workshop.
-Hides of various creatures are stretched on frames along the walls, while finished
-{yleather{x goods hang from hooks - vests, pants, boots, belts, and backpacks.
-A large vat in the corner holds the foul-smelling tanning solution. The floor is
-covered in leather scraps and animal hair. An orcish leatherworker's tools lie
-scattered on a workbench.
 ~
 0 0 0
 D4
@@ -826,13 +760,7 @@ D4
 0 0 423
 S
 #425
-East Market Tunnel~
-This main thoroughfare runs east-west through the commercial heart of Dushgoi.
-The tunnel is wider here to accommodate the heavy traffic of merchants and
-shoppers. Market stalls line the walls, though the proper shops branch off in
-various directions. The noise is constant - haggling, arguing, the clatter of
-goods being moved. Torches burn in regular intervals, their smoke staining the
-ceiling black.
+~
 ~
 0 0 0
 D0
@@ -854,11 +782,6 @@ D3
 S
 #426
 Slave auction~
-This grim chamber features a raised stone platform in the center where slaves are
-displayed for sale. Heavy {wiron{x chains are embedded in the walls and floor for
-securing the merchandise. The room smells of fear, sweat, and despair. Crude
-benches line the walls where buyers sit during auctions. Bloodstains on the
-platform tell of slaves who resisted too vigorously.
 ~
 0 0 0
 D2
@@ -868,11 +791,6 @@ D2
 S
 #427
 Bruth's Vessels~
-This cluttered shop sells containers of all types - jugs, bottles, barrels, casks,
-vials, and flasks. They're stacked precariously on shelves and piled on the floor.
-Some are {yclay{x, others {wglass{x or {ywood{x, each suited for different purposes.
-The shopkeeper Bruth tests each vessel's seal personally, as evidenced by the
-puddles of various liquids on the floor. The air smells of wine, oil, and water.
 ~
 0 0 0
 D0
@@ -881,12 +799,7 @@ D0
 0 0 425
 S
 #428
-East Market Intersection~
-This busy crossroads sees traffic from all directions as orcs navigate between
-the eastern shops. The ceiling is slightly higher here, with a crude ventilation
-shaft that lets in a bit of fresh air. Merchants call out their wares, and the
-constant flow of customers creates a steady din. The stone walls are covered with
-notices, advertisements, and wanted posters.
+~
 ~
 0 0 0
 D0
@@ -908,12 +821,6 @@ D3
 S
 #429
 Jewlery Shop~
-This surprisingly refined establishment displays rings, necklaces, and other
-adornments on {wvelvet{x-lined trays. Most pieces are crafted from bone, bronze,
-or stolen precious metals. The proprietor has surprisingly good taste for an orc,
-though the jewelry still tends toward the brutal and oversized. A small forge in
-the corner allows for repairs and custom work. The room smells of hot metal and
-polishing compounds.
 ~
 0 0 0
 D2
@@ -923,12 +830,6 @@ D2
 S
 #430
 Grak's Elixers~
-Hundreds of bottles, vials, and flasks line the shelves of this apothecary shop,
-each containing liquids of dubious origin and questionable safety. Some {Rglow{x,
-others {Bbubble{x, a few even seem to {gmove{x on their own. The proprietor Grak
-has labeled most with crude orcish script indicating their supposed effects. The
-air is thick with chemical fumes that make your eyes water. A workbench holds
-bubbling alembics and mortar-and-pestle sets.
 ~
 0 0 0
 D0
@@ -937,11 +838,7 @@ D0
 0 0 428
 S
 #431
-East Market Corner~
-This corner of the eastern market sees less traffic than the main intersection,
-making it slightly quieter. A few smaller merchants have set up permanent stalls
-here, selling odds and ends that don't warrant a full shop. The tunnel continues
-north toward the specialty shops and down into what smells like a refuse pit.
+~
 ~
 0 0 0
 D0
@@ -963,12 +860,6 @@ D5
 S
 #432
 Baggh's Magic Shop~
-Arcane energy crackles through this chamber, making your hair stand on end. Shelves
-hold spell components - dried herbs, powdered minerals, preserved animal parts, and
-stranger things. {Bglowing{x crystals provide illumination, casting eerie shadows.
-Scrolls and tomes are stacked haphazardly, some appearing to whisper when you pass.
-The proprietor Baggh has warded the more dangerous items with glowing {mrunes{x.
-The air tastes of ozone and magic.
 ~
 0 0 0
 D2
@@ -978,12 +869,6 @@ D2
 S
 #433
 Mikk's Maps~
-Maps cover every available surface in this small chamber - pinned to walls, spread
-across tables, rolled in cubbyholes. Some show local tunnels, others distant
-kingdoms ripe for raiding. Mikk has marked many with annotations in orcish about
-treasure locations, troop movements, and strategic weaknesses. A desk holds
-cartography tools - compasses, measuring strings, quills, and ink. The room smells
-of parchment and ink.
 ~
 0 0 0
 D0
@@ -1486,13 +1371,7 @@ D3
 0 0 456
 S
 #460
-Sorcerer's Sanctum~
-This chamber branches off from the main Sorcerer's Guild, serving as a private
-study area. The walls pulse with contained magical energy, and arcane symbols
-have been carved into every surface. A lectern holds an ancient tome open to a
-page of complex spell formulas. The air shimmers with residual magic from
-countless castings. Only the most dedicated sorcerers venture this deep into
-the guild.
+~
 ~
 0 0 0
 D3
@@ -1501,13 +1380,7 @@ D3
 0 0 416
 S
 #461
-Shaman's Ritual Chamber~
-This sacred chamber lies beneath the main Shaman's Guild. The walls are covered
-in primitive paintings depicting orcish creation myths and spiritual journeys.
-A circle of standing stones dominates the center, each carved with ancient runes.
-The air is thick with incense smoke, and strange whispers seem to emanate from
-the stones themselves. This is where shamans commune with the spirits of their
-ancestors.
+~
 ~
 0 0 0
 D4
@@ -1516,12 +1389,7 @@ D4
 0 0 412
 S
 #462
-Knave's Cache~
-This hidden chamber serves as the secret treasury for the Knave's Guild. Locked
-chests line the walls, each containing the ill-gotten gains of various thieving
-operations. The room is trapped extensively - pressure plates, tripwires, and
-poisoned needles protect the valuables. Only guild members know the safe path
-through. The air smells of old coins and paranoia.
+~
 ~
 0 0 0
 D3
@@ -1530,12 +1398,7 @@ D3
 0 0 410
 S
 #463
-Refuse Pit~
-This disgusting chamber serves as Dushgoi's garbage dump. Refuse of all types is
-simply thrown down here to rot - spoiled food, broken goods, and worse. The smell
-is absolutely overwhelming, a mixture of decay, excrement, and things better left
-unidentified. Rats the size of small dogs scurry through the piles. The floor is
-slick with unidentifiable muck. Only the desperate or foolish venture here.
+~
 ~
 0 0 0
 D3
@@ -1548,12 +1411,7 @@ D4
 0 0 431
 S
 #464
-Orc Invasion Highway - West Section~
-This wide tunnel has been expanded to allow large war parties to march through.
-The walls show marks from weapon and armor scraping against them during troop
-movements. The floor is packed hard from thousands of marching boots. Crude
-slogans of war and conquest have been painted on the walls in {Rblood{x. This
-highway connects Dushgoi to the outside world and hostile territory beyond.
+~
 ~
 0 0 0
 D1
@@ -1566,12 +1424,7 @@ D3
 0 0 465
 S
 #465
-Orc Invasion Highway - Middle Section~
-The invasion highway continues here, wide enough for four orcs to march abreast
-in full battle gear. Weapons racks line the walls, holding spare arms for warriors
-heading out to raid. The ceiling is reinforced with {wiron{x beams to prevent
-collapse from surface impacts. War drums can be heard echoing from somewhere
-distant, keeping marching time for troops on the move.
+~
 ~
 0 0 0
 D1
@@ -1584,12 +1437,7 @@ D3
 0 0 466
 S
 #466
-Orc Invasion Highway - Junction~
-The highway splits here, with one branch heading north toward the surface exit
-and another continuing east deeper into enemy territory. A guard post has been
-established in the corner, where an orcish sergeant checks troops moving through.
-Supply crates are stacked against the walls - arrows, rations, bandages, and other
-war materiel. The floor shows drag marks from wounded being brought back.
+~
 ~
 0 0 0
 D0
@@ -1602,12 +1450,7 @@ D1
 0 0 465
 S
 #467
-Orc Invasion Highway - North Approach~
-This section of the highway angles upward slightly, heading toward the surface
-exit to the north. Fresh air trickles down from above, a welcome relief from the
-stale tunnel atmosphere. The walls here are reinforced with {wsteel{x plates,
-suggesting this is a defensible position if the stronghold is ever breached.
-Murder holes in the ceiling allow defenders to rain death on invaders.
+~
 ~
 0 0 0
 D0
@@ -1620,12 +1463,7 @@ D2
 0 0 466
 S
 #468
-Orc Invasion Highway - Approach to Surface~
-The upward slope becomes steeper here as the tunnel climbs toward the surface.
-You can smell fresh air mixed with the scent of the outside world - trees, grass,
-and freedom. The walls transition from carved stone to a mixture of stone and
-packed earth. Roots dangle from the ceiling. This is the last stretch before
-emerging into hostile territory.
+~
 ~
 0 0 0
 D0
@@ -1638,12 +1476,7 @@ D2
 0 0 467
 S
 #469
-Orc Invasion Highway - Near Surface~
-Sunlight (or moonlight) filters down from the exit above, creating a dim glow in
-this section of the tunnel. The air is noticeably fresher and cooler. Muddy
-footprints track back and forth - raiding parties heading out and returning. The
-walls here show damage from the outside - claw marks from defenders trying to dig
-in, scorch marks from siege weapons. This is the threshold between safety and war.
+~
 ~
 0 0 0
 D0
@@ -1656,12 +1489,7 @@ D2
 0 0 468
 S
 #470
-Orc Invasion Highway - Surface Guardpost~
-This fortified position sits just inside the surface exit, serving as the last
-line of defense for Dushgoi. Heavy {wiron{x gates can be lowered to seal the
-tunnel in emergencies. Arrow slits are carved into the walls, and oil vats sit
-ready to be heated and poured on invaders. Orcish guards are always stationed
-here, watching for threats from the surface.
+~
 ~
 0 0 0
 D0
@@ -1674,13 +1502,7 @@ D2
 0 0 469
 S
 #471
-Surface Exit~
-You stand at the surface exit of the Orc Invasion Highway. The tunnel mouth is
-disguised by hanging vines and carefully positioned boulders, making it nearly
-invisible from a distance. The area around the exit is cleared of vegetation,
-giving guards a clear view of approaching threats. Fresh air and natural light
-are a stark contrast to the tunnels below. Orcish war parties gather here before
-raids.
+~
 ~
 0 0 0
 D2
@@ -1693,12 +1515,7 @@ D3
 0 0 472
 S
 #472
-Western Forest Edge~
-The forest begins here at the edge of the cleared zone around the tunnel exit.
-Thick undergrowth and towering trees provide cover for orcish scouts watching for
-enemy movements. The ground is soft with fallen leaves and pine needles. Animal
-tracks crisscross the area - deer, rabbits, and larger predators. This forest
-serves as hunting grounds and early warning system for Dushgoi.
+~
 ~
 0 0 0
 D0
@@ -1711,12 +1528,7 @@ D1
 0 0 471
 S
 #473
-Deep Forest~
-You're deep in the forest surrounding the orc stronghold. Thick canopy blocks
-most sunlight, creating a perpetual twilight. The undergrowth is dense with thorny
-bushes and tangled vines. Trees grow close together, their gnarled roots creating
-natural tripping hazards. The forest is eerily quiet - most animals have learned
-to avoid this area haunted by orcish war parties.
+~
 ~
 0 0 0
 D0
@@ -1729,13 +1541,7 @@ D2
 0 0 472
 S
 #474
-Forest Clearing~
-A small clearing breaks the density of the forest here. The grass is trampled flat
-from orcish camps - fire pits mark where raiding parties have rested before
-attacking nearby settlements. The trees around the clearing's edge show axe marks
-where firewood was harvested. This is a staging area for violence, not a peaceful
-glade. The ground is littered with discarded bones and equipment too damaged to
-carry back.
+~
 ~
 0 0 0
 D2
@@ -1748,12 +1554,7 @@ D3
 0 0 475
 S
 #475
-Forest Path~
-A crude path has been beaten through the forest here from repeated orcish patrols.
-The undergrowth has been trampled down, making travel easier but also more obvious.
-Broken branches and footprints in the mud show recent passage. Trees on either
-side of the path have been marked with orcish symbols - probably trail markers
-for war parties navigating in the dark.
+~
 ~
 0 0 0
 D1
@@ -1766,12 +1567,7 @@ D2
 0 0 476
 S
 #476
-Dense Thicket~
-The forest becomes nearly impassable here with thick brambles and thorny bushes
-blocking easy movement. You have to push through the vegetation, getting scratched
-and snagged in the process. The orcs have left this section deliberately wild to
-deter casual exploration. Hidden within the thorns are crude traps - sharpened
-stakes and snares meant to slow pursuers.
+~
 ~
 0 0 0
 D0
@@ -1784,12 +1580,7 @@ D2
 0 0 477
 S
 #477
-Forest Border~
-The forest transitions here to more open terrain. Trees thin out, and patches of
-grassland become visible through the remaining foliage. This marks the edge of the
-orcish-controlled territory - beyond here lies lands claimed by other races. Scouts
-report enemy movements from this vantage point. The air feels less oppressive, and
-bird songs can actually be heard in the distance.
+~
 ~
 0 0 0
 D0

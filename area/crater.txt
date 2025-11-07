@@ -1,0 +1,68 @@
+#AREADATA
+Name crater~
+Builders None~
+VNUMs 5600 5699
+Credits (null)~
+Security 1
+Authors (null)~
+Game (null)~
+Levels 0 0
+End
+
+
+
+#MOBILES
+#5600
+Test Mobile~
+test mobile short description - what players see in combat and interactions~
+Test mobile long description - what players see in the room
+~
+The mobile's actual description - what players see when typing 'look <mobile>"
+~
+human~
+A 0 0 -1  0 0
+22 22 45d7+201 22d9+60 6d3+12 none
+-4 -4 -4 0
+0 0 0 0
+stand stand none 0
+0 0 medium unknown
+F for AHMV
+F par ABCDEFGHIJK
+#0
+
+
+
+#OBJECTS
+#0
+
+
+
+#ROOMS
+#5600
+tip of the crater~
+~
+0 0 0
+S
+#0
+
+
+
+#SPECIALS
+S
+
+
+
+#RESETS
+S
+
+
+
+#SHOPS
+0
+
+
+
+#MOBPROGS
+#0
+
+#$

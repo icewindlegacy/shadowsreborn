@@ -12,6 +12,22 @@ End
 
 
 #MOBILES
+#5500
+Test Mobile~
+test mobile short description - what players see in combat and interactions~
+Test mobile long description - what players see in the room
+~
+The mobile's actual description - what players see when typing 'look <mobile>"
+~
+human~
+A 0 0 -1  0 0
+22 22 45d7+201 22d9+60 6d3+12 none
+-4 -4 -4 0
+0 0 0 0
+stand stand none 0
+0 0 medium unknown
+F for AHMV
+F par ABCDEFGHIJK
 #0
 
 
@@ -22,6 +38,11 @@ End
 
 
 #ROOMS
+#5500
+tip of the crater~
+~
+0 0 0
+S
 #5550
 Village street~
 You stand at the small village street in Ofcol.
@@ -159,10 +180,9 @@ You notice that there are no exits from this room.
 ~
 0 4 0
 E
-pictures picture decoration~
-These pictures show the friend's and foe's of Ravan.
-They are easy to separate, as most of the foe's have the letters
-R.I.P. inscripted underneath them.
+friend friends~
+The list include such prominent names as : God, Lottie, Kurgan,
+Ezzard, Mike, Sprocket and Stormbringer.
 ~
 E
 foe foes enemies~
@@ -171,9 +191,10 @@ It pictures him hanging from a gallow, north of the town.
 It has the letters R.I.P. inscripted underneath.
 ~
 E
-friend friends~
-The list include such prominent names as : God, Lottie, Kurgan,
-Ezzard, Mike, Sprocket and Stormbringer.
+pictures picture decoration~
+These pictures show the friend's and foe's of Ravan.
+They are easy to separate, as most of the foe's have the letters
+R.I.P. inscripted underneath them.
 ~
 S
 #0
