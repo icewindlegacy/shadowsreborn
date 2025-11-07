@@ -79,7 +79,13 @@ NOTE: This code leaves the the IS_CHANGER stuff in do_give
 #ifndef ROOM_VNUM_BANK_THIEF
 #define ROOM_VNUM_BANK_THIEF  3029 
 #endif
-                              /* pick any room in the thieves guild */
+#ifndef ROOM_VNUM_ORC_BANK
+#define ROOM_VNUM_ORC_BANK  4000
+#endif
+#ifndef ROOM_VNUM_ORC_BANK_THIEF
+#define ROOM_VNUM_ORC_BANK_THIEF  462
+#endif
+/* pick any room in the thieves guild */
 
 #define SHARE_MAX	5 /* max shares per level */
 
@@ -94,6 +100,15 @@ void do_account (CHAR_DATA *ch, char *argument)
    char buf[MAX_STRING_LENGTH];
    char const *class = class_table[ch->class].name;
 
+  /* No NPC's, No pets, No imms,
+   * No chainmail, No service! 
+   */
+   if( IS_NPC(ch) || IS_IMMORTAL(ch) )
+   {
+      send_to_char("Only players need money!\n\r", ch);
+      return;
+   }
+
    gold = ch->pcdata->gold_bank;
    silver = ch->pcdata->silver_bank;
    shares = ch->pcdata->shares;
@@ -101,16 +116,6 @@ void do_account (CHAR_DATA *ch, char *argument)
    if( ch->pcdata->shares / 4 != 0)
       bonus = shares / 4;
    ch->pcdata->duration = bonus;
-
-  /* No NPC's, No pets, No imms,
-   * No chainmail, No service! 
-   */
-   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
-   //     || (IS_IMMORTAL(ch)) )
-   {
-      send_to_char("Only players need money!\n\r", ch);
-      return;
-   }
    if(!str_cmp(class, "thief"))
    {
       sprintf( buf,"Your guild's fence tells you.\n\rYou have in your beltpouch:\n\r"
@@ -145,11 +150,10 @@ void do_deposit (CHAR_DATA *ch, char *argument)
    char arg2[MAX_INPUT_LENGTH];
    char buf[MAX_STRING_LENGTH];
 
-   /* No NPC's, No pets, No imms,
+   /* No NPC's, No imms,
     * No chainmail, No service! 
     */
-   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
-   //    || (IS_IMMORTAL(ch)) )
+   if( IS_NPC(ch) || IS_IMMORTAL(ch) )
    {
       send_to_char("Only players need money!\n\r", ch);
       return;
@@ -324,11 +328,10 @@ void do_withdraw (CHAR_DATA *ch, char *argument)
    char arg2[MAX_INPUT_LENGTH];
    char buf[MAX_STRING_LENGTH];
 
-   /* No NPC's, No pets, No imms,
+   /* No NPC's, No imms,
     * No chainmail, No service! 
     */
-   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
-   //    || (IS_IMMORTAL(ch)) )
+   if( IS_NPC(ch) || IS_IMMORTAL(ch) )
    {
       send_to_char("Only players need money!\n\r", ch);
       return;
@@ -516,8 +519,8 @@ void do_change (CHAR_DATA *ch, char *argument)
       /* No NPC's, No pets, No imms,
        * No chainmail, No service! 
        */
-      if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
-      //    || (IS_IMMORTAL(ch)) )
+      if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) 
+          || (IS_IMMORTAL(ch)) )
       {
          send_to_char("Only players need to change currency!\n\r", ch);
          return;
@@ -674,8 +677,8 @@ void do_share (CHAR_DATA *ch, char *argument)
        * No chainmail, No service! 
        */
       argument = one_argument( argument, arg );
-         if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
-      //    || (IS_IMMORTAL(ch)) )
+         if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) 
+          || (IS_IMMORTAL(ch)) )
       {
          send_to_char("Only players need shares!\n\r", ch);
          return;
