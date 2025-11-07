@@ -5,7 +5,17 @@ Nest 0
 Cond 0
 Wear -1
 Plev 0
-Time 166
+Time 158
+Cost 0
+Qcost 0
+End
+
+#O
+Vnum 3399
+Nest 0
+Wear -1
+Plev 0
+Time 196
 Cost 0
 Qcost 0
 End

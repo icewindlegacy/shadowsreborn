@@ -4868,7 +4868,9 @@ void load_storages( void )
     dentry = readdir( dp );
     while ( dentry )
     {
-        if ( dentry->d_name[0] != '.' && !str_suffix(".vault", dentry->d_name) )
+        /* Skip pit vault files - they're loaded separately by load_pits() */
+        if ( dentry->d_name[0] != '.' && !str_suffix(".vault", dentry->d_name) 
+             && str_prefix("pit_", dentry->d_name) )
             load_storage( dentry->d_name );
 
         dentry = readdir( dp );
