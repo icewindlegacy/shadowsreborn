@@ -293,18 +293,14 @@ static int commstone_find_slot(OBJ_DATA *stone, int freq)
 
 static void commstone_build_prefix(char *buffer, size_t length, OBJ_DATA *stone, int freq, int fallback_channel, CHAR_DATA *listener)
 {
-    int slot = commstone_find_slot(stone, freq);
     char color_code[64] = "";
     int channel_num;
 
-    if (slot >= 0)
-        channel_num = slot + 1;
-    else
-    {
-        if (fallback_channel < 0)
-            fallback_channel = 0;
-        channel_num = fallback_channel + 1;
-    }
+    /* Use fallback_channel directly - don't search, as multiple channels 
+       can have the same frequency! */
+    if (fallback_channel < 0)
+        fallback_channel = 0;
+    channel_num = fallback_channel + 1;
 
     /* Add color codes based on listener's preferences */
     if (listener && !IS_NPC(listener) && IS_SET(listener->act, PLR_COLOUR))
