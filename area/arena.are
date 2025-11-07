@@ -18,7 +18,7 @@ End
 
 #OBJECTS
 #2500
-Arena Gate~
+arena gate doors wooden large~
 the Arena Gates~
 The Arena Gates - large {ywooden{x doors~
 unknown~
@@ -37,7 +37,12 @@ This is a room description.
 0 4 0
 S
 #2501
-~
+The Northwestern Corner~
+You stand in the northwestern corner of the blood-soaked arena floor. The
+{ysandy{x ground beneath your feet is stained dark with the blood of countless
+combatants. High walls of weathered stone surround the fighting pit, and above
+you can hear the distant roar of spectators eager for violence. Weapon racks
+line the western wall, their contents long since claimed by previous fighters.
 ~
 0 4194304 0
 D1
@@ -50,7 +55,12 @@ D2
 0 0 2502
 S
 #2502
-~
+Scattered Boulders~
+Large grey boulders are scattered across the arena floor here, providing cover
+for those quick enough to use them. The rocks show deep gouges and scorch marks
+from previous battles, testament to the fierce combat that rages in this pit.
+Fresh blood splatter decorates several of the stones, still wet and gleaming in
+the harsh sunlight that beats down from above.
 ~
 0 4194304 0
 D0
@@ -67,7 +77,12 @@ D2
 0 0 2503
 S
 #2503
-~
+The Western Killing Floor~
+The western section of the arena floor is a flat expanse of {ysand{x and {Rblood{x,
+offering no cover or tactical advantage. This is where gladiators meet face to
+face, with nowhere to hide and nowhere to run. The ground is churned up from
+countless boots and bodies hitting the dirt. Dried bloodstains create dark
+patterns across the sand like some macabre artwork.
 ~
 0 4194304 0
 D0
@@ -84,7 +99,12 @@ D2
 0 0 2504
 S
 #2504
-~
+The Spike Pit~
+A shallow pit dominates this section of the arena, its floor lined with {wblunted{x
+{wmetal{x spikes. While no longer sharp enough to impale, they make footing treacherous
+and falls painful. The western wall behind you shows deep scratches where desperate
+fighters have clawed at the stone, seeking escape from superior opponents. The
+{ysandy{x ground around the pit's edge is littered with broken weapons and armor.
 ~
 0 4194304 0
 D0
@@ -101,7 +121,12 @@ D2
 0 0 2505
 S
 #2505
-~
+The Southwestern Corner~
+The southwestern corner of the arena is dominated by a massive {wiron{x grate set
+into the floor. Below it, you can hear the snarls and growls of caged beasts,
+though they're not released during gladiatorial combat. The {ysand{x here is
+relatively clean compared to other sections, suggesting fighters tend to avoid
+this ominous corner. The southern wall bears scorch marks from magical duels.
 ~
 0 4194304 0
 D0
@@ -114,7 +139,12 @@ D1
 0 0 2510
 S
 #2506
-~
+Broken Pillars~
+Three shattered stone pillars rise from the arena floor here, their tops broken
+off at varying heights. They provide partial cover and tactical high ground for
+those agile enough to climb them. The bases are scarred with weapon strikes and
+decorated with {Rblood{x splatter. Chunks of {wfallen masonry{x lie scattered about,
+creating an uneven and treacherous fighting surface.
 ~
 0 4194304 0
 D1
@@ -131,7 +161,12 @@ D3
 0 0 2501
 S
 #2507
-~
+The Stained Sand~
+The {ysand{x in this section of the arena is so thoroughly soaked with blood that
+it has turned a permanent rusty {rbrown{x color. This is clearly a popular fighting
+location, perhaps due to its central-ish position with good sightlines in all
+directions. Old bones, likely from defeated combatants, protrude from the sand
+at odd angles, never fully buried by the arena keepers.
 ~
 0 4194304 0
 D0
@@ -152,7 +187,12 @@ D3
 0 0 2502
 S
 #2508
-~
+The Open Arena Floor~
+This section of the arena offers wide open space with excellent visibility in all
+directions. There's nowhere to hide here - just {yclean{x {ysand{x and brutal honesty.
+Experienced gladiators know to keep moving through this area or risk being caught
+in a crossfire. The ground shows tracks leading in multiple directions, evidence
+of the constant traffic through this central killing ground.
 ~
 0 4194304 0
 D0
@@ -173,7 +213,12 @@ D3
 0 0 2503
 S
 #2509
-~
+Near the Chains~
+Heavy iron chains hang from mounting points on the arena walls here, swaying
+slightly in the breeze. They were once used to restrain prisoners or beasts for
+execution, but now serve as obstacles during combat. Skilled fighters use them
+for cover or even as improvised weapons. The {ysand{x beneath them is darker,
+stained by the final moments of those who died in shackles.
 ~
 0 4194304 0
 D0
@@ -194,7 +239,12 @@ D3
 0 0 2504
 S
 #2510
-~
+The Champion's Stand~
+A raised platform of {ywood{x and stone, about two feet high, provides tactical
+advantage to whoever controls it. This is known as the Champion's Stand, where
+victorious gladiators would display their defeated foes. The platform's surface
+is scarred and splintered from countless battles, and the {ysand{x below is piled
+with the remnants of those who tried and failed to hold this position.
 ~
 0 4194304 0
 D0
@@ -211,7 +261,12 @@ D3
 0 0 2505
 S
 #2511
-~
+The Northern Approach~
+This section lies just south of the northern wall, where spectators would throw
+debris and insults down upon the fighters. The {ysand{x is littered with rotten
+fruit, broken pottery, and other refuse from the crowds above. The shadow of the
+wall provides brief respite from the sun, making this a slightly more comfortable
+position than the exposed center of the arena.
 ~
 0 4194304 0
 D1
@@ -228,7 +283,12 @@ D3
 0 0 2506
 S
 #2512
-~
+The Blood Pool~
+A shallow depression in the arena floor has filled with {Rblood{x and rainwater,
+creating a gruesome crimson pool that never fully drains. The footing here is
+treacherous - the {ymud{x beneath the pool is slick and unstable. The metallic
+stench of old blood is overwhelming. Wise fighters skirt around this hazard, but
+desperate ones use it to their advantage, splashing blood to blind opponents.
 ~
 0 4194308 0
 D0
@@ -249,7 +309,12 @@ D3
 0 0 2507
 S
 #2513
-~
+The Heart of Battle~
+This is the very center of the arena, equidistant from all walls. Blood has been
+spilled here more than anywhere else - the {ysand{x is permanently {rdarkened{x and
+hard-packed from countless boots trampling it during combat. Visibility is perfect
+in all directions, making this both the most dangerous and most strategic position.
+Champions are crowned here. Cowards die here.
 ~
 0 4194308 0
 D0
@@ -270,7 +335,12 @@ D3
 0 0 2508
 S
 #2514
-~
+The Spear Forest~
+A cluster of broken spears and pikes have been driven into the ground here,
+creating a dangerous obstacle course. Some stand upright, others lean at odd
+angles, all covered in {yrust{x and {Rblood{x. Navigating through them requires
+care, but they offer excellent cover for ambushes. The {ysand{x around their bases
+is littered with scraps of cloth and leather from torn armor.
 ~
 0 4194308 0
 D0
@@ -291,7 +361,12 @@ D3
 0 0 2509
 S
 #2515
-~
+The Execution Corner~
+The southeastern approach to this corner is marked by a blackened patch of
+ground where oil fires were once set during execution ceremonies. The acrid smell
+of old smoke still clings to the area. The eastern wall shows impact craters from
+catapult stones used in siege demonstrations. This corner offers tactical advantage
+with walls on two sides, but also serves as a potential death trap.
 ~
 0 4194308 0
 D0
@@ -308,7 +383,12 @@ D3
 0 0 2510
 S
 #2516
-~
+The Skeletal Gateway~
+A macabre archway constructed from the bones of fallen gladiators marks this
+section of the arena. Skulls grin down from the top of the arch, while femurs
+and rib bones form the sides. This monument to death serves as a psychological
+weapon as much as a landmark. The {ysand{x beneath is relatively clean, as if
+even blood refuses to linger in this cursed place.
 ~
 0 4194308 0
 D1
@@ -325,7 +405,12 @@ D3
 0 0 2511
 S
 #2517
-~
+The Shield Wall~
+Dozens of broken shields have been mounted on the northern wall here, creating
+a strange metallic monument to defeated warriors. Some are {ywood{x, some {wiron{x,
+some even {ymithril{x or {radamantite{x - all shattered and useless. They rattle
+and clang when the wind blows, creating an eerie symphony of past defeats. The
+{ysand{x below is littered with shield fragments and rusted buckles.
 ~
 0 4194308 0
 D0
@@ -346,7 +431,12 @@ D3
 0 0 2512
 S
 #2518
-~
+The Sunken Arena~
+The ground dips down slightly here, creating a shallow bowl where water and blood
+collect after rain. When dry, the {ysand{x is hard-packed and solid - excellent
+footing for combat. The depression provides slight cover from ranged attacks, but
+also makes you vulnerable to enemies on higher ground. Experienced fighters use
+this terrain wisely, knowing when to advance and when to retreat.
 ~
 0 4194308 0
 D0
@@ -367,7 +457,12 @@ D3
 0 0 2513
 S
 #2519
-~
+The Scorched Earth~
+This section of the arena floor is charred black from magical fire that was
+unleashed during a legendary duel between two powerful mages. The sand has been
+fused into {Cglass{x in some spots, creating jagged, sharp patches. Even years
+later, the ground still feels warm to the touch. Some say the spirits of those
+incinerated mages still linger here, watching new battles with envious eyes.
 ~
 0 4194308 0
 D0
@@ -388,7 +483,12 @@ D3
 0 0 2514
 S
 #2520
-~
+The Bone Yard~
+Piles of {wbleached bones{x are heaped against the southeastern wall, sorted into
+morbid categories by the arena keepers. Skulls here, femurs there, ribs in another
+pile. Whether this is meant to unnerve combatants or simply a convenient disposal
+method is unclear. The {ysand{x is {Wwhite{x with bone dust, and your every step
+crunches on fragments too small to collect.
 ~
 0 4194308 0
 D0
@@ -405,7 +505,12 @@ D3
 0 0 2515
 S
 #2521
-~
+The Northeastern Corner~
+The northeastern corner features a raised wooden platform built against the wall,
+once used by archers during siege reenactments. Now it serves as a vantage point
+for combatants who can climb the {yweathered{x {ywood{x. The platform creaks
+ominously under weight, threatening to collapse at any moment. Below it, the
+{ysand{x is dark with old blood and decorated with broken arrows.
 ~
 0 4194308 0
 D2
@@ -418,7 +523,12 @@ D3
 0 0 2516
 S
 #2522
-~
+The Weapon Cemetery~
+Broken swords, shattered axes, and splintered spears litter this section of the
+arena, creating a graveyard of failed ambitions. The arena keepers leave them here
+as a reminder of mortality. Some weapons are so embedded in the {ysand{x they stand
+upright like {wiron{x gravestones. Fresh bloodstains mix with old rust, creating
+layers of history with each passing battle.
 ~
 0 4194308 0
 D0
@@ -435,7 +545,12 @@ D3
 0 0 2517
 S
 #2523
-~
+The Champion's Circle~
+A circular pattern of {Wwhite{x stones has been laid into the {ysand{x here,
+marking the Champion's Circle. Legend says that whoever holds this position when
+the battle ends claims victory, though in practice it's just another patch of
+blood-soaked ground. The stones themselves are stained {rpink{x from years of
+violence. Spectators above have the best view of this spot.
 ~
 0 4194308 0
 D0
@@ -452,7 +567,12 @@ D3
 0 0 2518
 S
 #2524
-~
+The Narrow Pass~
+Two large stone blocks have been positioned to create a narrow passage through
+this section of the arena. Only one person can comfortably pass through at a time,
+making it a perfect choke point for tactical combat. The walls of the passage are
+covered in {Rblood{x spray and deep gouges from weapons that missed their targets.
+Many fights end in this brutal corridor.
 ~
 0 4194308 0
 D0
@@ -469,7 +589,12 @@ D3
 0 0 2519
 S
 #2525
-~
+The Eastern Trench~
+A deep trench runs along the eastern wall, barely visible until you're at its edge.
+It's about six feet deep, filled with {ysand{x and the occasional {wbone{x. Falling
+in isn't fatal, but climbing out while being attacked is nearly impossible. Cunning
+fighters lure opponents toward the edge, then sidestep at the last moment. The
+bottom of the trench is dark with {Rblood{x that has pooled and dried over time.
 ~
 0 4194308 0
 D0
