@@ -458,8 +458,36 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
             if (command[0] == social_table[idx].name[0]
                 && !str_prefix(command, social_table[idx].name))
             {
-                is_social = TRUE;
-                social_index = idx;
+                /* Check if there's a target and if it's a valid connected player */
+                char temp_arg[MAX_INPUT_LENGTH];
+                char target_name[MAX_INPUT_LENGTH];
+                char *temp_ptr;
+                CHAR_DATA *potential_victim;
+                
+                strcpy(temp_arg, argument);
+                temp_ptr = temp_arg;
+                while (*temp_ptr == ' ')
+                    temp_ptr++;
+                one_argument(temp_ptr, target_name);
+                
+                /* If there's a target argument */
+                if (target_name[0] != '\0')
+                {
+                    potential_victim = get_char_world(ch, target_name);
+                    /* Only treat as social if target is found OR no target given */
+                    if (potential_victim != NULL || target_name[0] == '\0')
+                    {
+                        is_social = TRUE;
+                        social_index = idx;
+                    }
+                    /* else: target not found, treat as regular message */
+                }
+                else
+                {
+                    /* No target given, it's a valid no-arg social */
+                    is_social = TRUE;
+                    social_index = idx;
+                }
                 break;
             }
         }
@@ -551,7 +579,47 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
         }
         else if ((victim = get_char_world(ch, arg)) == NULL)
         {
-            send_to_char("They aren't here.\n\r", ch);
+            /* This shouldn't happen as we pre-validated, but just in case send as message */
+            char message[MAX_STRING_LENGTH];
+            sprintf(message, "%s %s", command, arg);
+            if (argument[0] != '\0')
+            {
+                strcat(message, " ");
+                strcat(message, argument);
+            }
+            
+            if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
+                makedrunk(message, ch);
+            
+            printf_to_char(ch, "%s You transmit: '%s'\n\r", sender_prefix, message);
+            transmitted = TRUE;
+            
+            for (d = descriptor_list; d != NULL; d = d->next)
+            {
+                CHAR_DATA *vch = d->original ? d->original : d->character;
+                OBJ_DATA *listener_stone;
+                char listener_prefix[64];
+                
+                if (d->connected != CON_PLAYING || vch == ch)
+                    continue;
+                
+                if (!commstone_can_hear(vch, channel, freq))
+                    continue;
+                
+                listener_stone = get_commstone(vch);
+                commstone_build_prefix(listener_prefix, sizeof(listener_prefix),
+                                       listener_stone, freq, channel, vch);
+                
+                if (d->character == NULL)
+                    continue;
+                
+                printf_to_char(vch, "%s %s transmits: '%s'\n\r",
+                               listener_prefix, PERS(ch, vch), message);
+            }
+            
+            if (transmitted)
+                commstone_spend_charge(ch, stone);
+            
             return;
         }
         else if (victim == ch)
