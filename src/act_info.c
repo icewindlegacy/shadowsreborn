@@ -1699,6 +1699,7 @@ void do_examine (CHAR_DATA * ch, char *argument)
  {
      extern char *const dir_name[];
      char buf[MAX_STRING_LENGTH];
+     char buf2[MAX_STRING_LENGTH];
      EXIT_DATA *pexit;
      bool found;
      bool fAuto;
@@ -1721,13 +1722,22 @@ void do_examine (CHAR_DATA * ch, char *argument)
      {
          if ((pexit = ch->in_room->exit[door]) != NULL
              && pexit->u1.to_room != NULL
-             && can_see_room (ch, pexit->u1.to_room)
-             && !IS_SET (pexit->exit_info, EX_CLOSED))
+             && can_see_room (ch, pexit->u1.to_room))
+             
          {
              found = TRUE;
+             if ( IS_SET(pexit->exit_info, EX_CLOSED) )
+             {
+                sprintf( buf2, "(%s)", dir_name[door] );
+             }
              if (fAuto)
              {
                  strcat (buf, " ");
+                 if ( IS_SET(pexit->exit_info, EX_CLOSED) )
+                 {
+                  strcat( buf, buf2 );
+                  continue;
+                 }
                  strcat (buf, dir_name[door]);
              }
              else
