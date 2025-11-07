@@ -31,7 +31,8 @@ portal 0 0
 
 #ROOMS
 #2500
-~
+This is the room name.~
+This is a room description.
 ~
 0 4 0
 S
@@ -495,7 +496,7 @@ S
 
 
 #RESETS
-O 0 2500 0 2500 The arena gates loaded to 
+O 0 2500 0 2500 The arena gates loaded to This is the room name.
 S
 
 
