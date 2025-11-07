@@ -1252,14 +1252,14 @@ void do_lunge( CHAR_DATA *ch, char *argument)
         
         chance += ch->carry_weight / 25;
         chance -= victim->carry_weight / 20;
-        chance += (ch->size - victim->size) * 20;
-        chance -= get_curr_stat(victim, STAT_DEX);
-        chance += get_curr_stat(ch, STAT_STR) / 3;
-        chance += get_curr_stat(ch, STAT_DEX) / 2;
+        chance += (ch->size - victim->size) * 10;  /* Reduced from 20 to 10 */
+        chance -= (get_curr_stat(victim, STAT_DEX) - 13) * 2;  /* Only penalize if DEX > 13 */
+        chance += (get_curr_stat(ch, STAT_STR) - 13);  /* Bonus if STR > 13 */
+        chance += (get_curr_stat(ch, STAT_DEX) - 13);  /* Bonus if DEX > 13 */
         if (IS_AFFECTED(ch, AFF_HASTE))
             chance += 10;
         if (IS_AFFECTED(victim, AFF_HASTE))
-            chance -= 20;
+            chance -= 10;  /* Reduced from 20 to 10 */
         
         roll = number_percent();
         sprintf(log_buf, "LUNGE DEBUG: %s lunging at %s, base_skill=%d, final_chance=%d, roll=%d, success=%s", 
