@@ -2507,14 +2507,7 @@ void fread_obj (CHAR_DATA * ch, FILE * fp)
                             if (ch)
                                 obj_to_char (obj, ch);
                             else
-                            {
-                                /* DEBUG: Log ground object placement */
-                                bugf("OBJLOAD: Placing %s (vnum %d) in room %d",
-                                     obj->short_descr,
-                                     obj->pIndexData ? obj->pIndexData->vnum : -1,
-                                     obj->in_room ? obj->in_room->vnum : -1);
                                 obj_to_room (obj, obj->in_room);
-                            }
                         }
                         else
                             obj_to_obj (obj, rgObjNest[iNest - 1]);

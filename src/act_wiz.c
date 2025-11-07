@@ -5199,34 +5199,9 @@ void do_copyover (CHAR_DATA * ch, char *argument)
     RESET_DATA *pReset;
     bool is_reset_object;
 
-    bug("Copyover: Starting ground object save", 0);
-    
-    /* Debug: Check pit contents before save */
-    for (obj = object_list; obj != NULL; obj = obj->next)
-    {
-        if (obj->pIndexData->vnum == OBJ_VNUM_PIT || 
-            obj->pIndexData->vnum == OBJ_VNUM_ORC_PIT)
-        {
-            OBJ_DATA *content;
-            int count = 0;
-            sprintf(buf, "Copyover: Found pit container vnum %d", obj->pIndexData->vnum);
-            bug(buf, 0);
-            for (content = obj->contains; content != NULL; content = content->next_content)
-            {
-                count++;
-                sprintf(buf, "Copyover:   Pit contains: %s (vnum %d)", 
-                        content->short_descr, content->pIndexData->vnum);
-                bug(buf, 0);
-            }
-            sprintf(buf, "Copyover: Pit %d has %d objects", obj->pIndexData->vnum, count);
-            bug(buf, 0);
-        }
-    }
-    
     fpObj = fopen("../area/objcopy.txt", "w");
     if (fpObj)
     {
-        bug("Copyover: objcopy.txt opened successfully", 0);
         for (obj = object_list; obj != NULL; obj = obj->next)
         {   
             is_reset_object = FALSE;
@@ -5237,44 +5212,22 @@ void do_copyover (CHAR_DATA * ch, char *argument)
             
             // Skip objects in containers (including pits - they have their own vault files)
             if (obj->in_obj)
-            {
-                sprintf(buf, "Copyover: Skipping contained object %s (vnum %d) in container vnum %d", 
-                        obj->short_descr, obj->pIndexData->vnum, 
-                        obj->in_obj->pIndexData ? obj->in_obj->pIndexData->vnum : -1);
-                bug(buf, 0);
                 continue;
-            }
             
             // Skip pit objects themselves (they're containers with their own vault files)
             if (obj->pIndexData->vnum == OBJ_VNUM_PIT || 
                 obj->pIndexData->vnum == OBJ_VNUM_ORC_PIT)
-            {
-                sprintf(buf, "Copyover: Skipping pit container (vnum %d)", obj->pIndexData->vnum);
-                bug(buf, 0);
                 continue;
-            }
             
             // Skip objects not in a room
             if (!obj->in_room)
-            {
-                sprintf(buf, "Copyover: Skipping object %s (vnum %d) - not in a room (in_obj=%d, carried_by=%s)", 
-                        obj->short_descr, obj->pIndexData->vnum,
-                        obj->in_obj ? obj->in_obj->pIndexData->vnum : 0,
-                        obj->carried_by ? obj->carried_by->name : "none");
-                bug(buf, 0);
                 continue;
-            }
             
             // Skip objects in rooms that match pit container vnums (to prevent duplication)
             // These objects are likely dropped in the same room as the pit container
             if (obj->in_room->vnum == OBJ_VNUM_PIT || 
                 obj->in_room->vnum == OBJ_VNUM_ORC_PIT)
-            {
-                sprintf(buf, "Copyover: Skipping object %s (vnum %d) in pit room %d", 
-                        obj->short_descr, obj->pIndexData->vnum, obj->in_room->vnum);
-                bug(buf, 0);
                 continue;
-            }
             
             // Skip limbo or special rooms
             if (obj->in_room->vnum == ROOM_VNUM_LIMBO)
@@ -5302,10 +5255,6 @@ void do_copyover (CHAR_DATA * ch, char *argument)
                 continue;
             
             // Save the object
-            sprintf(buf, "Copyover: Saving object %s (vnum %d) in room %d", 
-                    obj->short_descr, obj->pIndexData->vnum, obj->in_room->vnum);
-            bug(buf, 0);
-            
             #undef fwrite_obj
             fwrite_obj(NULL, obj, fpObj, 0, FALSE);
             #define fwrite_obj fwrite_obj_compat
@@ -5313,11 +5262,6 @@ void do_copyover (CHAR_DATA * ch, char *argument)
 
         fprintf(fpObj, "#END\n");
         fclose(fpObj);
-        bug("Copyover: Ground object save complete", 0);
-    }
-    else
-    {
-        bug("Copyover: FAILED to open objcopy.txt for writing!", 0);
     }
 }
 
