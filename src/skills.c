@@ -1245,17 +1245,25 @@ void do_lunge( CHAR_DATA *ch, char *argument)
         return;
 
     /* Calculate success chance */
-    chance += ch->carry_weight / 25;
-    chance -= victim->carry_weight / 20;
-    chance += (ch->size - victim->size) * 20;
-    chance -= get_curr_stat(victim, STAT_DEX);
-    chance += get_curr_stat(ch, STAT_STR) / 3;
-    chance += get_curr_stat(ch, STAT_DEX) / 2;
-    if (IS_AFFECTED(ch, AFF_HASTE))
-        chance += 10;
-    if (IS_AFFECTED(victim, AFF_HASTE))
-        chance -= 20;  /* Fixed: was setting to 20 instead of reducing */
-
+    {
+        int base_chance = chance;
+        char log_buf[MAX_STRING_LENGTH];
+        
+        chance += ch->carry_weight / 25;
+        chance -= victim->carry_weight / 20;
+        chance += (ch->size - victim->size) * 20;
+        chance -= get_curr_stat(victim, STAT_DEX);
+        chance += get_curr_stat(ch, STAT_STR) / 3;
+        chance += get_curr_stat(ch, STAT_DEX) / 2;
+        if (IS_AFFECTED(ch, AFF_HASTE))
+            chance += 10;
+        if (IS_AFFECTED(victim, AFF_HASTE))
+            chance -= 20;
+        
+        sprintf(log_buf, "LUNGE DEBUG: %s lunging at %s, base_skill=%d, final_chance=%d, roll=%d", 
+                ch->name, victim->short_descr, base_chance, chance, number_percent());
+        log_string(log_buf);
+    }
 
     act("$n attempts to impale $N with a quick lunge!", ch, 0, victim, TO_NOTVICT);
     act("You attempt to impale $N with a quick lunge!", ch, 0, victim, TO_CHAR);
