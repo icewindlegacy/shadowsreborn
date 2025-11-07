@@ -4803,6 +4803,14 @@ void load_pit( int vnum )
                 {
                     obj = temp_ch.carrying;
                     obj_from_char(obj);
+                    
+                    /* DEBUG: Log object state before placing in pit */
+                    bugf("PITLOAD: Loading %s (vnum %d) into pit %d, in_room was %d", 
+                         obj->short_descr, 
+                         obj->pIndexData ? obj->pIndexData->vnum : -1,
+                         vnum,
+                         obj->in_room ? obj->in_room->vnum : 0);
+                    
                     /* Clear in_room to prevent vnum collision with room vnums */
                     obj->in_room = NULL;
                     obj_to_obj(obj, pit);
