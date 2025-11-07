@@ -5214,6 +5214,11 @@ void do_copyover (CHAR_DATA * ch, char *argument)
             if (obj->in_obj)
                 continue;
             
+            // Skip pit objects themselves (they're containers with their own vault files)
+            if (obj->pIndexData->vnum == OBJ_VNUM_PIT || 
+                obj->pIndexData->vnum == OBJ_VNUM_ORC_PIT)
+                continue;
+            
             // Skip objects not in a room
             if (!obj->in_room)
                 continue;

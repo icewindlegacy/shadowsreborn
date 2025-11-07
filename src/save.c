@@ -723,7 +723,8 @@ if (recurse_next && obj->next_content != NULL)
     fprintf (fp, "Nest %d\n", iNest);
     
     /* Save room information for objects not carried by characters */
-    if (!ch && obj->in_room)
+    /* BUT: Never save Inrm for objects inside pit containers */
+    if (!ch && obj->in_room && !obj->in_obj)
         fprintf (fp, "Inrm %d\n", obj->in_room->vnum);
 
     /* these data are only used if they do not match the defaults */
