@@ -2047,6 +2047,10 @@ struct    pc_data
     int				fight_ohit[3];          /* {3 */
     int				fight_thit[3];          /* {4 */
     int				fight_skill[3];         /* {5 */
+    int				comm1[3];               /* Commstone channel 1 */
+    int				comm2[3];               /* Commstone channel 2 */
+    int				comm3[3];               /* Commstone channel 3 */
+    int				comm4[3];               /* Commstone channel 4 */
     long			gold_bank;              /* Gold in bank */
     long			silver_bank;            /* Silver in bank */
     int				shares;                 /* Shares owned */

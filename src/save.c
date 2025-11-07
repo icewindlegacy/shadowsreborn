@@ -464,6 +464,19 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
                  ch->pcdata->question_text[1],
                  ch->pcdata->answer_text[2],
                  ch->pcdata->answer_text[0], ch->pcdata->answer_text[1]);
+        fprintf (fp, "Colourh     %d%d%d %d%d%d %d%d%d %d%d%d\n",
+                 ch->pcdata->comm1[2],
+                 ch->pcdata->comm1[0],
+                 ch->pcdata->comm1[1],
+                 ch->pcdata->comm2[2],
+                 ch->pcdata->comm2[0],
+                 ch->pcdata->comm2[1],
+                 ch->pcdata->comm3[2],
+                 ch->pcdata->comm3[0],
+                 ch->pcdata->comm3[1],
+                 ch->pcdata->comm4[2],
+                 ch->pcdata->comm4[0],
+                 ch->pcdata->comm4[1]);
 
         /* write alias */
         for (pos = 0; pos < MAX_ALIAS; pos++)
@@ -1536,6 +1549,14 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
 						LOAD_COLOUR (music_text)
                         LOAD_COLOUR (question_text)
                         LOAD_COLOUR (answer_text) fMatch = TRUE;
+                    break;
+                }
+                if (!str_cmp (word, "Colourh"))
+                {
+                    LOAD_COLOUR (comm1)
+                        LOAD_COLOUR (comm2)
+                        LOAD_COLOUR (comm3)
+                        LOAD_COLOUR (comm4) fMatch = TRUE;
                     break;
                 }
                 

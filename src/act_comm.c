@@ -70,7 +70,7 @@ static OBJ_DATA *get_commstone(CHAR_DATA *ch);
 static bool commstone_can_hear(CHAR_DATA *listener, int channel, int freq);
 static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument);
 static int commstone_find_slot(OBJ_DATA *stone, int freq);
-static void commstone_build_prefix(char *buffer, size_t length, OBJ_DATA *stone, int freq, int fallback_channel);
+static void commstone_build_prefix(char *buffer, size_t length, OBJ_DATA *stone, int freq, int fallback_channel, CHAR_DATA *listener);
 
 /* RT code to delete yourself */
 
@@ -291,20 +291,46 @@ static int commstone_find_slot(OBJ_DATA *stone, int freq)
     return -1;
 }
 
-static void commstone_build_prefix(char *buffer, size_t length, OBJ_DATA *stone, int freq, int fallback_channel)
+static void commstone_build_prefix(char *buffer, size_t length, OBJ_DATA *stone, int freq, int fallback_channel, CHAR_DATA *listener)
 {
     int slot = commstone_find_slot(stone, freq);
+    char color_code[64] = "";
+    int channel_num;
 
     if (slot >= 0)
-    {
-        snprintf(buffer, length, "[Freq %d on Comm%d]", freq, slot + 1);
-    }
+        channel_num = slot + 1;
     else
     {
         if (fallback_channel < 0)
             fallback_channel = 0;
-        snprintf(buffer, length, "[Freq %d on Comm%d]", freq, fallback_channel + 1);
+        channel_num = fallback_channel + 1;
     }
+
+    /* Add color codes based on listener's preferences */
+    if (listener && !IS_NPC(listener) && IS_SET(listener->act, PLR_COLOUR))
+    {
+        int *color_pref;
+        
+        switch (channel_num)
+        {
+            case 1: color_pref = listener->pcdata->comm1; break;
+            case 2: color_pref = listener->pcdata->comm2; break;
+            case 3: color_pref = listener->pcdata->comm3; break;
+            case 4: color_pref = listener->pcdata->comm4; break;
+            default: color_pref = NULL; break;
+        }
+        
+        if (color_pref != NULL)
+        {
+            /* Build ANSI color code: \e[brightness;3color_numm */
+            if (color_pref[2])  /* Beep enabled */
+                sprintf(color_code, "\e[%d;3%dm\a", color_pref[0], color_pref[1]);
+            else
+                sprintf(color_code, "\e[%d;3%dm", color_pref[0], color_pref[1]);
+        }
+    }
+
+    snprintf(buffer, length, "%s[Freq %d on Comm%d]\e[0m", color_code, freq, channel_num);
 }
 
 static bool commstone_can_hear(CHAR_DATA *listener, int channel, int freq)
@@ -408,7 +434,7 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
         REMOVE_BIT(ch->comm, COMM_NOGOSSIP);
 
     commstone_build_prefix(sender_prefix, sizeof(sender_prefix), stone, freq,
-                           channel);
+                           channel, ch);
 
     strncpy(original_argument, argument, sizeof(original_argument) - 1);
     original_argument[sizeof(original_argument) - 1] = '\0';
@@ -475,7 +501,7 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
 
             listener_stone = get_commstone(vch);
             commstone_build_prefix(listener_prefix, sizeof(listener_prefix),
-                                   listener_stone, freq, channel);
+                                   listener_stone, freq, channel, vch);
 
             sprintf(buf, "%s %s %s\n\r", listener_prefix, ch->name, message);
             send_to_char(buf, vch);
@@ -516,7 +542,7 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
 
                 listener_stone = get_commstone(vch);
                 commstone_build_prefix(listener_prefix, sizeof(listener_prefix),
-                                       listener_stone, freq, channel);
+                                       listener_stone, freq, channel, vch);
 
                 sprintf(buf, "%s %s", listener_prefix,
                         social_table[social_index].others_no_arg);
@@ -549,7 +575,7 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
 
                 listener_stone = get_commstone(vch);
                 commstone_build_prefix(listener_prefix, sizeof(listener_prefix),
-                                       listener_stone, freq, channel);
+                                       listener_stone, freq, channel, vch);
 
                 sprintf(buf, "%s %s", listener_prefix,
                         social_table[social_index].others_auto);
@@ -570,7 +596,7 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
             {
                 listener_stone = get_commstone(victim);
                 commstone_build_prefix(listener_prefix, sizeof(listener_prefix),
-                                       listener_stone, freq, channel);
+                                       listener_stone, freq, channel, victim);
                 sprintf(buf, "%s %s", listener_prefix,
                         social_table[social_index].vict_found);
                 act_new(buf, ch, NULL, victim, TO_VICT, POS_DEAD);
@@ -596,7 +622,7 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
 
                 stone_listener = get_commstone(vch);
                 commstone_build_prefix(recv_prefix, sizeof(recv_prefix),
-                                       stone_listener, freq, channel);
+                                       stone_listener, freq, channel, vch);
 
                 sprintf(buf, "%s %s", recv_prefix,
                         social_table[social_index].others_found);
@@ -637,7 +663,7 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
 
             listener_stone = get_commstone(vch);
             commstone_build_prefix(listener_prefix, sizeof(listener_prefix),
-                                   listener_stone, freq, channel);
+                                   listener_stone, freq, channel, vch);
 
             if (d->character == NULL)
                 continue;
@@ -3936,6 +3962,18 @@ void do_colour (CHAR_DATA * ch, char *argument)
     else if (!str_cmp (arg, "fight_skill"))
     {
     ALTER_COLOUR (fight_skill)}
+    else if (!str_cmp (arg, "comm1"))
+    {
+    ALTER_COLOUR (comm1)}
+    else if (!str_cmp (arg, "comm2"))
+    {
+    ALTER_COLOUR (comm2)}
+    else if (!str_cmp (arg, "comm3"))
+    {
+    ALTER_COLOUR (comm3)}
+    else if (!str_cmp (arg, "comm4"))
+    {
+    ALTER_COLOUR (comm4)}
     else
     {
         send_to_char_bw ("Unrecognised Colour Parameter Not Set.\n\r", ch);

@@ -3635,6 +3635,10 @@ void default_colour (CHAR_DATA * ch)
     ch->pcdata->fight_ohit[1] = (YELLOW);
     ch->pcdata->fight_thit[1] = (RED);
     ch->pcdata->fight_skill[1] = (WHITE);
+    ch->pcdata->comm1[1] = (CYAN);
+    ch->pcdata->comm2[1] = (MAGENTA);
+    ch->pcdata->comm3[1] = (YELLOW);
+    ch->pcdata->comm4[1] = (GREEN);
     ch->pcdata->text[0] = (NORMAL);
     ch->pcdata->auction[0] = (BRIGHT);
     ch->pcdata->auction_text[0] = (BRIGHT);
@@ -3670,6 +3674,10 @@ void default_colour (CHAR_DATA * ch)
     ch->pcdata->fight_ohit[0] = (NORMAL);
     ch->pcdata->fight_thit[0] = (NORMAL);
     ch->pcdata->fight_skill[0] = (NORMAL);
+    ch->pcdata->comm1[0] = (NORMAL);
+    ch->pcdata->comm2[0] = (NORMAL);
+    ch->pcdata->comm3[0] = (NORMAL);
+    ch->pcdata->comm4[0] = (NORMAL);
     ch->pcdata->text[2] = 0;
     ch->pcdata->auction[2] = 0;
     ch->pcdata->auction_text[2] = 0;
@@ -3705,6 +3713,10 @@ void default_colour (CHAR_DATA * ch)
     ch->pcdata->fight_ohit[2] = 0;
     ch->pcdata->fight_thit[2] = 0;
     ch->pcdata->fight_skill[2] = 0;
+    ch->pcdata->comm1[2] = 0;
+    ch->pcdata->comm2[2] = 0;
+    ch->pcdata->comm3[2] = 0;
+    ch->pcdata->comm4[2] = 0;
 
     return;
 }
