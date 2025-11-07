@@ -4803,6 +4803,8 @@ void load_pit( int vnum )
                 {
                     obj = temp_ch.carrying;
                     obj_from_char(obj);
+                    /* Clear in_room to prevent vnum collision with room vnums */
+                    obj->in_room = NULL;
                     obj_to_obj(obj, pit);
                 }
             }
