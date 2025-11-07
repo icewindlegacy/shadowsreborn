@@ -44,7 +44,7 @@ whatever limbs happen to be on the bottom, attacking in desperate madness.
 The creature begs for death even as it kills.
 ~
 unique~
-ABFG 0 0 -1000 0 0
+ABFG 0 0 -1 -1000 0
 48 20 99d15+465 48d10+95 15d3+32 pound
 -18 -18 -18 -12
 ABDEFGH 0 QS B
@@ -63,7 +63,7 @@ the crystal structure. It makes no sound when it moves. When struck, it rings
 like a bell. Cracks spread across its surface but never fully shatter.
 ~
 unique~
-AB 0 0 0 0 0
+AB 0 0 -1 0 0
 42 16 87d13+382 42d10+84 13d3+28 slash
 -12 -12 -12 -8
 BCFGH CD N AB
@@ -82,7 +82,7 @@ still reacts. If you interrupt the loop by attacking, they'll fight with the
 desperate fury of someone who wants the loop to end, even if it means true death.
 ~
 human~
-ABG 0 C -500 0 0
+ABG 0 C -1 -500 0
 40 14 83d12+356 40d10+80 12d3+26 pierce
 -10 -10 -10 -6
 BCFGH C 0 0
@@ -101,7 +101,7 @@ When threatened, the corpse can weaponize its gravity distortion, making
 attackers float helplessly or crushing them with localized gravity wells.
 ~
 orc~
-ABG 0 0 -800 0 0
+ABG 0 0 -1 -800 0
 44 17 90d14+405 44d10+88 14d3+29 pound
 -14 -14 -14 -9
 BCFGH 0 P M
@@ -120,7 +120,7 @@ pain from existing in too many places simultaneously, making it violently
 hostile. Its attacks come from impossible angles.
 ~
 dragon~
-ABFG 0 0 -1000 0 0
+ABFG 0 0 -1 -1000 0
 50 22 103d17+506 50d11+100 17d3+35 claw
 -20 -20 -20 -14
 ABCDEFGH A M DE
@@ -139,7 +139,7 @@ constant. They attack anything that approaches, driven mad by years of
 slowly melting. When struck, salt crystals spray from their wounds.
 ~
 human~
-ABG 0 0 -600 0 0
+ABG 0 0 -1 -600 0
 43 16 88d13+390 43d10+86 13d3+28 pound
 -13 -13 -13 -8
 BCFGH C 0 AB
@@ -158,7 +158,7 @@ even to close their mouth. The horror has driven them insane. They can only
 attack with magic, their mind the only weapon left to them.
 ~
 dragon~
-ABQ 0 0 -1000 0 0
+ABQ 0 0 -1 -1000 0
 52 24 107d18+534 52d11+104 18d3+36 magic
 -22 -22 -22 -15
 BCDFGH ABC N 0
@@ -177,7 +177,7 @@ the haft. They exist only to kill, their entire being reduced to a single
 purpose. The weapon swings itself, attacks autonomously, and bleeds when damaged.
 ~
 orc~
-ABG 0 0 -1000 0 0
+ABG 0 0 -1 -1000 0
 46 19 94d15+431 46d10+92 15d3+31 slash
 -16 -16 -16 -11
 BCFGH P 0 M
@@ -196,7 +196,7 @@ Its attacks don't damage - they {werase{x. Wounds from it don't bleed, they
 simply cease to be. Dying to it means complete obliteration.
 ~
 unique~
-ABFG 0 CFGIKLMN -1000 0 0
+ABFG 0 CFGIKLMN -1 -1000 0
 55 25 113d19+572 55d11+110 19d3+38 negative
 -25 -25 -25 -17
 ABCDEFGH ABCDEFGHIJKLM 0 0
@@ -216,7 +216,7 @@ that exist outside normal time. They can't be killed because they're already
 dead - but they can kill you.
 ~
 unique~
-ABG 0 C -750 0 0
+ABG 0 C -1 -750 0
 47 20 96d15+450 47d10+94 15d3+32 slash
 -17 -17 -17 -12
 BCFGH C M 0
@@ -236,7 +236,7 @@ out at anything that moves, trying to drag prey underground to feed the
 garden's hungry roots.
 ~
 unique~
-ABG 0 0 -1000 0 0
+ABG 0 0 -1 -1000 0
 41 15 85d13+370 41d10+82 13d3+27 whip
 -11 -11 -11 -7
 BCFGH 0 P AB
@@ -256,7 +256,7 @@ trying to "heal" you with glass shards and medical procedures that no
 longer make sense. Their touch cuts. Their mercy kills.
 ~
 dragon~
-ABQ 0 0 500 0 0
+ABQ 0 0 -1 500 0
 39 14 81d12+348 39d10+78 12d3+25 pound
 -9 -9 -9 -6
 BCFGH CD N AB
