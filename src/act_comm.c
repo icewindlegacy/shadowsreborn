@@ -388,12 +388,16 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
     bool is_social = FALSE;
     int social_index = -1;
     char sender_prefix[64];
+    char log_buf[MAX_STRING_LENGTH];
 
     if (ch == NULL)
         return;
 
     if (channel < 0 || channel >= COMMSTONE_MAX_CHANNELS)
         return;
+
+    sprintf(log_buf, "COMMSTONE DEBUG: do_comm%d called, channel parameter=%d", channel + 1, channel);
+    log_string(log_buf);
 
     stone = get_commstone(ch);
 
