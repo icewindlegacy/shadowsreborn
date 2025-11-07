@@ -25,7 +25,7 @@ at its reversed flesh, causing constant agony, yet it cannot die. It attacks
 anything nearby in mindless pain-driven rage.
 ~
 dragon~
-ABFG 0 0 -1000 0 0
+ABFG 0 0 -1 -1000 0
 45 18 92d14+412 45d10+90 14d3+30 claw
 -15 -15 -15 -10
 BCFGH A 0 DE
