@@ -2387,6 +2387,12 @@ struct skill_type skill_table[MAX_SKILL] = {
      "kick", "!Kick!", ""},
 
     {
+     "lunge", {53, 5, 10, 53}, {0, 0, 0, 0},
+     spell_null, TAR_CHAR_OFFENSIVE, POS_FIGHTING,
+     &gsn_lunge, SLOT (0), 0, 12,
+     "lunge", "!Lunge!", ""},
+
+    {
      "parry", {22, 20, 13, 1}, {8, 8, 6, 4},
      spell_null, TAR_IGNORE, POS_FIGHTING,
      &gsn_parry, SLOT (0), 0, 0,

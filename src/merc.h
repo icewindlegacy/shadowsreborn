@@ -2400,7 +2400,7 @@ extern    sh_int    gsn_counter;
 extern    sh_int    gsn_circle;
 extern    sh_int    gsn_critical;
 extern    sh_int    gsn_phase;
-
+extern    sh_int    gsn_lunge;
 extern    sh_int    gsn_blindness;
 
 extern			DISABLED_DATA	  *		disabled_first; /* interp.c */

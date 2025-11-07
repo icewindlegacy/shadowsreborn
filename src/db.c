@@ -183,6 +183,7 @@ sh_int gsn_hand_to_hand;
 sh_int gsn_trip;
 sh_int gsn_ohshit;
 sh_int gsn_tune;
+sh_int gsn_lunge;
 
 sh_int gsn_fast_healing;
 sh_int gsn_haggle;
