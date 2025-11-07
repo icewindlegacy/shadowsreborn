@@ -1,0 +1,82 @@
+#AREADATA
+Name crater~
+Builders None~
+VNUMs 5600 5699
+Credits (null)~
+Security 1
+Authors (null)~
+Game (null)~
+Levels 0 0
+End
+
+
+
+#MOBILES
+#5600
+Test Mobile~
+test mobile short description - what players see in combat and interactions~
+Test mobile long description - what players see in the room
+~
+The mobile's actual description - what players see when typing 'look <mobile>"
+~
+orc~
+AB 0 8192 -1  666 23
+16 22 45d7+201 22d9+60 6d3+12 slap
+-4 -4 -4 0
+I B AQ ES
+stand stand female 999
+ABHMV ABCDEFGHIJKM medium unknown
+#5601
+test2~
+(no short description)~
+(no long description)
+~
+~
+human~
+A 0 0 -1  0 0
+0 0 0d0+0 0d0+0 0d0+0 none
+0 0 0 0
+0 0 0 0
+stand stand none 0
+0 0 medium unknown
+F for AHMV
+F par ABCDEFGHIJK
+#0
+
+
+
+#OBJECTS
+#0
+
+
+
+#ROOMS
+#5600
+tip of the crater~
+~
+0 4 0
+S
+#0
+
+
+
+#SPECIALS
+M 5600 spec_guard
+S
+
+
+
+#RESETS
+S
+
+
+
+#SHOPS
+0
+
+
+
+#MOBPROGS
+#0
+
+#$
