@@ -74,7 +74,7 @@ NOTE: This code leaves the the IS_CHANGER stuff in do_give
  *  These are defined in merc.h - update them there if needed
  */
 #ifndef ROOM_VNUM_BANK
-#define ROOM_VNUM_BANK	      3001 
+#define ROOM_VNUM_BANK	      3008 
 #endif
 #ifndef ROOM_VNUM_BANK_THIEF
 #define ROOM_VNUM_BANK_THIEF  3029 
@@ -105,8 +105,8 @@ void do_account (CHAR_DATA *ch, char *argument)
   /* No NPC's, No pets, No imms,
    * No chainmail, No service! 
    */
-   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) 
-        || (IS_IMMORTAL(ch)) )
+   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
+   //     || (IS_IMMORTAL(ch)) )
    {
       send_to_char("Only players need money!\n\r", ch);
       return;
@@ -148,8 +148,8 @@ void do_deposit (CHAR_DATA *ch, char *argument)
    /* No NPC's, No pets, No imms,
     * No chainmail, No service! 
     */
-   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) 
-        || (IS_IMMORTAL(ch)) )
+   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
+   //    || (IS_IMMORTAL(ch)) )
    {
       send_to_char("Only players need money!\n\r", ch);
       return;
@@ -327,8 +327,8 @@ void do_withdraw (CHAR_DATA *ch, char *argument)
    /* No NPC's, No pets, No imms,
     * No chainmail, No service! 
     */
-   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) 
-        || (IS_IMMORTAL(ch)) )
+   if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
+   //    || (IS_IMMORTAL(ch)) )
    {
       send_to_char("Only players need money!\n\r", ch);
       return;
@@ -516,8 +516,8 @@ void do_change (CHAR_DATA *ch, char *argument)
       /* No NPC's, No pets, No imms,
        * No chainmail, No service! 
        */
-      if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) 
-           || (IS_IMMORTAL(ch)) )
+      if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
+      //    || (IS_IMMORTAL(ch)) )
       {
          send_to_char("Only players need to change currency!\n\r", ch);
          return;
@@ -674,8 +674,8 @@ void do_share (CHAR_DATA *ch, char *argument)
        * No chainmail, No service! 
        */
       argument = one_argument( argument, arg );
-      if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) 
-           || (IS_IMMORTAL(ch)) )
+         if( (IS_NPC(ch) || IS_SET(ch->act,ACT_PET)) )
+      //    || (IS_IMMORTAL(ch)) )
       {
          send_to_char("Only players need shares!\n\r", ch);
          return;

@@ -474,13 +474,15 @@ static void commstone_transmit(CHAR_DATA *ch, int channel, char *argument)
                 if (target_name[0] != '\0')
                 {
                     potential_victim = get_char_world(ch, target_name);
-                    /* Only treat as social if target is found OR no target given */
-                    if (potential_victim != NULL || target_name[0] == '\0')
+                    /* Only treat as social if target is a connected PLAYER */
+                    if (potential_victim != NULL 
+                        && !IS_NPC(potential_victim) 
+                        && potential_victim->desc != NULL)
                     {
                         is_social = TRUE;
                         social_index = idx;
                     }
-                    /* else: target not found, treat as regular message */
+                    /* else: not a connected player, treat as regular message */
                 }
                 else
                 {
