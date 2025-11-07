@@ -1248,6 +1248,7 @@ void do_lunge( CHAR_DATA *ch, char *argument)
     {
         int base_chance = chance;
         char log_buf[MAX_STRING_LENGTH];
+        int roll;
         
         chance += ch->carry_weight / 25;
         chance -= victim->carry_weight / 20;
@@ -1260,16 +1261,17 @@ void do_lunge( CHAR_DATA *ch, char *argument)
         if (IS_AFFECTED(victim, AFF_HASTE))
             chance -= 20;
         
-        sprintf(log_buf, "LUNGE DEBUG: %s lunging at %s, base_skill=%d, final_chance=%d, roll=%d", 
-                ch->name, victim->short_descr, base_chance, chance, number_percent());
+        roll = number_percent();
+        sprintf(log_buf, "LUNGE DEBUG: %s lunging at %s, base_skill=%d, final_chance=%d, roll=%d, success=%s", 
+                ch->name, victim->short_descr, base_chance, chance, roll, (roll < chance) ? "YES" : "NO");
         log_string(log_buf);
-    }
 
     act("$n attempts to impale $N with a quick lunge!", ch, 0, victim, TO_NOTVICT);
     act("You attempt to impale $N with a quick lunge!", ch, 0, victim, TO_CHAR);
     act("$n attempts to impale you with a quick lunge!", ch, 0, victim, TO_VICT);
 
-    if (number_percent() < chance)
+    /* Use the roll we already calculated */
+    if (roll < chance)
     {
         check_improve(ch, gsn_lunge, TRUE, 1);
         WAIT_STATE(ch, skill_table[gsn_lunge].beats);
@@ -1309,5 +1311,6 @@ void do_lunge( CHAR_DATA *ch, char *argument)
         check_improve(ch, gsn_lunge, FALSE, 1);
         WAIT_STATE(ch, skill_table[gsn_lunge].beats);
     }
+    }  /* Close the chance calculation scope */
     return;
 }
