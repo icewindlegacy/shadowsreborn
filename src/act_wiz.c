@@ -5223,12 +5223,6 @@ void do_copyover (CHAR_DATA * ch, char *argument)
             if (!obj->in_room)
                 continue;
             
-            // Skip objects in rooms that match pit container vnums (to prevent duplication)
-            // These objects are likely dropped in the same room as the pit container
-            if (obj->in_room->vnum == OBJ_VNUM_PIT || 
-                obj->in_room->vnum == OBJ_VNUM_ORC_PIT)
-                continue;
-            
             // Skip limbo or special rooms
             if (obj->in_room->vnum == ROOM_VNUM_LIMBO)
                 continue;
