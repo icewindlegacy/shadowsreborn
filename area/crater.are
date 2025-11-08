@@ -82,7 +82,7 @@ still reacts. If you interrupt the loop by attacking, they'll fight with the
 desperate fury of someone who wants the loop to end, even if it means true death.
 ~
 human~
-ABG 0 11 -1  -500 0
+ABG 0 0 -1  -500 0
 40 14 83d12+356 40d10+80 12d3+26 pierce
 -10 -10 -10 -6
 BCFGH C 0 0
@@ -216,7 +216,7 @@ that exist outside normal time. They can't be killed because they're already
 dead - but they can kill you.
 ~
 unique~
-ABG 0 11 -1  -750 0
+ABG 0 0 -1  -750 0
 47 20 96d15+450 47d10+94 15d3+32 slash
 -17 -17 -17 -12
 BCFGH C M 0
