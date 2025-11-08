@@ -2540,11 +2540,16 @@ void check_room_bugs(CHAR_DATA *ch, char *message, char *type)
                 /* Check if they have a commstone tuned to this frequency */
                 for (comm = victim->carrying; comm != NULL; comm = comm->next_content)
                 {
-                    if (comm->item_type == ITEM_COMM && comm->value[0] == frequency)
+                    if (comm->item_type == ITEM_COMM)
                     {
-                        send_to_char(buf, victim);
-                        send_to_char("\n\r", victim);
-                        break;
+                        /* Check all 4 frequency slots */
+                        if (comm->value[0] == frequency || comm->value[1] == frequency ||
+                            comm->value[2] == frequency || comm->value[3] == frequency)
+                        {
+                            send_to_char(buf, victim);
+                            send_to_char("\n\r", victim);
+                            break;
+                        }
                     }
                 }
             }
