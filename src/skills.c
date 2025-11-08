@@ -1380,7 +1380,7 @@ void do_plant(CHAR_DATA *ch, char *argument)
     /* Create and configure the bug */
     bug = create_object(pObjIndex, 0);
     bug->value[0] = frequency;  /* Store the frequency */
-    bug->timer = 24 + ch->level; /* Lasts 24+ hours */
+    bug->timer = 10;  /* Lasts 10 ticks */
     SET_BIT(bug->extra_flags, ITEM_HIDDEN);
     
     obj_to_room(bug, ch->in_room);
