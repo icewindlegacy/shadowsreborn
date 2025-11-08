@@ -5366,6 +5366,9 @@ void copyover_recover ()
                 char_to_room (d->character->mount, d->character->in_room);
                 act ("$n materializes!.", d->character->mount, NULL, NULL,
                      TO_ROOM);
+                /* Restore riding state if player was mounted */
+                if (d->character->riding)
+                    d->character->mount->riding = TRUE;
             }
         }
 

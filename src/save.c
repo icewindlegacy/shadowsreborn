@@ -241,6 +241,8 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
                                && ch->was_in_room != NULL)
              ? ch->was_in_room->vnum
              : ch->in_room == NULL ? 3001 : ch->in_room->vnum);
+    if (ch->riding)
+        fprintf(fp, "Riding %d\n", ch->riding);
              fprintf( fp, "PkPdMkMd %d %d %d %d %d %d %d\n",
                 ch->pkill, ch->pdeath, ch->pkattempt, ch->mkill, ch->mdeath, 
                 ch->arenakill, ch->arenadeath );
@@ -1727,6 +1729,7 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
             case 'R':
                 KEY ("Real_name", ch->pcdata->real_name, fread_string (fp));
                 KEY ("Race", ch->race, race_lookup (fread_string (fp)));
+                KEY ("Riding", ch->riding, fread_number (fp));
 
                 if (!str_cmp (word, "Room"))
                 {

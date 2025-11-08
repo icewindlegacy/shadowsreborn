@@ -1035,6 +1035,9 @@ void nanny (DESCRIPTOR_DATA * d, char *argument)
                 char_to_room (ch->mount, ch->in_room);
                 act ("$n has entered the game.", ch->mount, NULL, NULL,
                      TO_ROOM);
+                /* Restore riding state if player was mounted */
+                if (ch->riding)
+                    ch->mount->riding = TRUE;
             }
 
 			send_to_char("\n", ch);
