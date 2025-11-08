@@ -47,7 +47,7 @@ unique~
 ABFG 0 0 -1 -1000 0
 48 20 99d15+465 48d10+95 15d3+32 pound
 -18 -18 -18 -12
-ABDEFGH 0 QS B
+BFG 0 Q B
 stand stand none 3000
 ABCDEFHJKMX ABCDEFGHIJKLM huge unknown
 #12002
@@ -123,7 +123,7 @@ dragon~
 ABFG 0 0 -1 -1000 0
 50 22 103d17+506 50d11+100 17d3+35 claw
 -20 -20 -20 -14
-ABCDEFGH A M DE
+BCG A 0 D
 stand stand none 6000
 CDEFHJKVX ABCDEFGHIJKLM huge unknown
 #12006
@@ -199,9 +199,9 @@ unique~
 ABFG 0 0 -1 -1000 0
 55 25 113d19+572 55d11+110 19d3+38 negative
 -25 -25 -25 -17
-ABCDEFGH ABCDEFGHIJKLM 0 0
+BC 0 0 0
 stand stand none 0
-X none none unknown
+CHIL 0 huge unknown
 #12010
 horror temporal-stasis frozen-moment combat~
 a frozen combat echo~
@@ -406,6 +406,10 @@ several yards before simply ceasing to exist. Fragments of drake architecture
 float in mid-air nearby, defying gravity and sense.
 ~
 0 0 0
+D0
+~
+~
+0 0 12000
 D1
 ~
 ~
@@ -427,7 +431,7 @@ entropy accelerated to centuries in a single moment.
 D0
 ~
 ~
-0 0 12000
+0 0 12001
 D1
 ~
 ~
@@ -453,7 +457,7 @@ they were pulled apart by invisible hands. The Pattern didn't discriminate.
 D0
 ~
 ~
-0 0 12001
+0 0 12002
 D1
 ~
 ~
@@ -479,7 +483,7 @@ the crater.
 D0
 ~
 ~
-0 0 12002
+0 0 12003
 D1
 ~
 ~
@@ -505,7 +509,7 @@ running for years.
 D0
 ~
 ~
-0 0 12003
+0 0 12004
 D1
 ~
 ~
@@ -531,7 +535,7 @@ were trying to open an escape route when they died.
 D0
 ~
 ~
-0 0 12004
+0 0 12005
 D1
 ~
 ~
@@ -557,7 +561,7 @@ died as warriors, at least.
 D0
 ~
 ~
-0 0 12005
+0 0 12006
 D1
 ~
 ~
@@ -598,6 +602,10 @@ books, and body parts pressed against the translucent walls of the cube like ins
 in amber. The cube hums with trapped magical energy.
 ~
 0 0 0
+D0
+~
+~
+0 0 12006
 D1
 ~
 ~
@@ -605,7 +613,7 @@ D1
 D2
 ~
 ~
-0 0 12025
+0 0 12026
 S
 #12015
 Middle Rim - North~
@@ -619,7 +627,7 @@ on them is disturbingly crunchy.
 D0
 ~
 ~
-0 0 12006
+0 0 12007
 D1
 ~
 ~
@@ -627,7 +635,7 @@ D1
 D2
 ~
 ~
-0 0 12026
+0 0 12027
 D3
 ~
 ~
@@ -645,7 +653,7 @@ is exquisite and horrifying.
 D0
 ~
 ~
-0 0 12007
+0 0 12008
 D1
 ~
 ~
@@ -653,7 +661,7 @@ D1
 D2
 ~
 ~
-0 0 12027
+0 0 12028
 D3
 ~
 ~
@@ -671,7 +679,7 @@ feel weightless and nauseous simultaneously.
 D0
 ~
 ~
-0 0 12008
+0 0 12009
 D1
 ~
 ~
@@ -679,7 +687,7 @@ D1
 D2
 ~
 ~
-0 0 12028
+0 0 12029
 D3
 ~
 ~
@@ -697,7 +705,7 @@ carefully.
 D0
 ~
 ~
-0 0 12009
+0 0 12010
 D1
 ~
 ~
@@ -705,7 +713,7 @@ D1
 D2
 ~
 ~
-0 0 12029
+0 0 12030
 D3
 ~
 ~
@@ -723,7 +731,7 @@ heartbeat can still be faintly heard if you press your ear to the mass.
 D0
 ~
 ~
-0 0 12010
+0 0 12011
 D1
 ~
 ~
@@ -731,7 +739,7 @@ D1
 D2
 ~
 ~
-0 0 12030
+0 0 12031
 D3
 ~
 ~
@@ -749,7 +757,7 @@ impossibility.
 D0
 ~
 ~
-0 0 12011
+0 0 12012
 D1
 ~
 ~
@@ -757,7 +765,7 @@ D1
 D2
 ~
 ~
-0 0 12031
+0 0 12032
 D3
 ~
 ~
@@ -775,7 +783,7 @@ movement. They've been dying of thirst for years but can't finish the process.
 D0
 ~
 ~
-0 0 12012
+0 0 12013
 D1
 ~
 ~
@@ -783,7 +791,7 @@ D1
 D2
 ~
 ~
-0 0 12032
+0 0 12033
 D3
 ~
 ~
@@ -801,7 +809,7 @@ of the dying, preserved forever in crystalline horror.
 D0
 ~
 ~
-0 0 12013
+0 0 12014
 D1
 ~
 ~
@@ -809,7 +817,7 @@ D1
 D2
 ~
 ~
-0 0 12033
+0 0 12034
 D3
 ~
 ~
@@ -827,7 +835,7 @@ persist for centuries.
 D2
 ~
 ~
-0 0 12034
+0 0 12035
 D3
 ~
 ~
@@ -842,6 +850,10 @@ Pattern Reave transformed the inorganic into organic, creating this pulsing,
 breathing structure. It's technically dead, but it still {gmoves{x.
 ~
 0 0 0
+D0
+~
+~
+0 0 12014
 D1
 ~
 ~
@@ -849,7 +861,7 @@ D1
 D2
 ~
 ~
-0 0 12036
+0 0 12038
 S
 #12025
 Lower Rim - North-Northwest~
@@ -863,7 +875,7 @@ died. The Pattern broke even the fundamental laws of matter.
 D0
 ~
 ~
-0 0 12014
+0 0 12015
 D1
 ~
 ~
@@ -871,7 +883,7 @@ D1
 D2
 ~
 ~
-0 0 12037
+0 0 12039
 D3
 ~
 ~
@@ -889,7 +901,7 @@ from watching their home reality invert itself.
 D0
 ~
 ~
-0 0 12015
+0 0 12016
 D1
 ~
 ~
@@ -897,7 +909,7 @@ D1
 D2
 ~
 ~
-0 0 12038
+0 0 12040
 D3
 ~
 ~
@@ -915,7 +927,7 @@ crystallized air. Their faces are {Bblue{x and {wprismatic{x.
 D0
 ~
 ~
-0 0 12016
+0 0 12017
 D1
 ~
 ~
@@ -923,7 +935,7 @@ D1
 D2
 ~
 ~
-0 0 12039
+0 0 12041
 D3
 ~
 ~
@@ -941,7 +953,7 @@ every few seconds, keeping time for a body that no longer exists.
 D0
 ~
 ~
-0 0 12017
+0 0 12018
 D1
 ~
 ~
@@ -949,7 +961,7 @@ D1
 D2
 ~
 ~
-0 0 12040
+0 0 12042
 D3
 ~
 ~
@@ -967,7 +979,7 @@ or you might see your own death reflected back.
 D0
 ~
 ~
-0 0 12018
+0 0 12019
 D1
 ~
 ~
@@ -975,7 +987,7 @@ D1
 D2
 ~
 ~
-0 0 12041
+0 0 12043
 D3
 ~
 ~
@@ -993,7 +1005,7 @@ a haunting melody of the dead singing their own dirge.
 D0
 ~
 ~
-0 0 12019
+0 0 12020
 D1
 ~
 ~
@@ -1001,7 +1013,7 @@ D1
 D2
 ~
 ~
-0 0 12042
+0 0 12044
 D3
 ~
 ~
@@ -1019,7 +1031,7 @@ of the dead. They turn to watch you as you pass.
 D0
 ~
 ~
-0 0 12020
+0 0 12021
 D1
 ~
 ~
@@ -1027,7 +1039,7 @@ D1
 D2
 ~
 ~
-0 0 12043
+0 0 12045
 D3
 ~
 ~
@@ -1045,7 +1057,7 @@ grove, a final act of life magic twisted by the Pattern.
 D0
 ~
 ~
-0 0 12021
+0 0 12022
 D1
 ~
 ~
@@ -1053,7 +1065,7 @@ D1
 D2
 ~
 ~
-0 0 12044
+0 0 12046
 D3
 ~
 ~
@@ -1071,7 +1083,7 @@ taffy across impossible geometries.
 D0
 ~
 ~
-0 0 12022
+0 0 12023
 D1
 ~
 ~
@@ -1079,7 +1091,7 @@ D1
 D2
 ~
 ~
-0 0 12045
+0 0 12047
 D3
 ~
 ~
@@ -1097,7 +1109,7 @@ not the bodies moving - it's the ground itself, possessed by mass death.
 D0
 ~
 ~
-0 0 12023
+0 0 12024
 D1
 ~
 ~
@@ -1105,7 +1117,7 @@ D1
 D2
 ~
 ~
-0 0 12046
+0 0 12048
 D3
 ~
 ~
@@ -1120,10 +1132,14 @@ weapons, not transformed into singing nightmares. The return to normal physics i
 jarring after the impossible devastation of the inner crater.
 ~
 0 0 0
+D0
+~
+~
+0 0 12025
 D2
 ~
 ~
-0 0 12047
+0 0 12049
 D3
 ~
 ~
@@ -1141,11 +1157,15 @@ that already ended. They don't acknowledge your presence.
 D0
 ~
 ~
-0 0 12024
+0 0 12026
 D1
 ~
 ~
 0 0 12037
+D2
+~
+~
+0 0 12050
 S
 #12037
 Deep Crater - North-Northwest~
@@ -1159,7 +1179,7 @@ long go mad from experiencing thousands of deaths.
 D0
 ~
 ~
-0 0 12025
+0 0 12027
 D1
 ~
 ~
@@ -1167,7 +1187,7 @@ D1
 D2
 ~
 ~
-0 0 12048
+0 0 12051
 D3
 ~
 ~
@@ -1185,7 +1205,7 @@ suggest reading materials here take that term literally.
 D0
 ~
 ~
-0 0 12026
+0 0 12028
 D1
 ~
 ~
@@ -1193,7 +1213,7 @@ D1
 D2
 ~
 ~
-0 0 12049
+0 0 12052
 D3
 ~
 ~
@@ -1211,7 +1231,7 @@ physical half is petrified in agony. The energy half crackles and pulses with
 D0
 ~
 ~
-0 0 12027
+0 0 12029
 D1
 ~
 ~
@@ -1219,7 +1239,7 @@ D1
 D2
 ~
 ~
-0 0 12050
+0 0 12053
 D3
 ~
 ~
@@ -1237,7 +1257,7 @@ as if one wrong move might unmake you entirely.
 D0
 ~
 ~
-0 0 12028
+0 0 12030
 D1
 ~
 ~
@@ -1245,7 +1265,7 @@ D1
 D2
 ~
 ~
-0 0 12051
+0 0 12054
 D3
 ~
 ~
@@ -1263,7 +1283,7 @@ landed. Their enemy died anyway. Pattern Reave made all their power irrelevant.
 D0
 ~
 ~
-0 0 12029
+0 0 12031
 D1
 ~
 ~
@@ -1271,7 +1291,7 @@ D1
 D2
 ~
 ~
-0 0 12052
+0 0 12055
 D3
 ~
 ~
@@ -1289,7 +1309,7 @@ acknowledgment, forever fighting a battle they already lost.
 D0
 ~
 ~
-0 0 12030
+0 0 12032
 D1
 ~
 ~
@@ -1297,7 +1317,7 @@ D1
 D2
 ~
 ~
-0 0 12053
+0 0 12056
 D3
 ~
 ~
@@ -1315,7 +1335,7 @@ if your heart synchronizes with it, you'll be absorbed into the crater.
 D0
 ~
 ~
-0 0 12031
+0 0 12033
 D1
 ~
 ~
@@ -1323,7 +1343,7 @@ D1
 D2
 ~
 ~
-0 0 12054
+0 0 12057
 D3
 ~
 ~
@@ -1341,7 +1361,7 @@ their discipline even in death.
 D0
 ~
 ~
-0 0 12032
+0 0 12034
 D1
 ~
 ~
@@ -1349,7 +1369,7 @@ D1
 D2
 ~
 ~
-0 0 12055
+0 0 12058
 D3
 ~
 ~
@@ -1367,7 +1387,7 @@ them crying from inside their prisons.
 D0
 ~
 ~
-0 0 12033
+0 0 12035
 D1
 ~
 ~
@@ -1375,7 +1395,7 @@ D1
 D2
 ~
 ~
-0 0 12056
+0 0 12059
 D3
 ~
 ~
@@ -1393,7 +1413,7 @@ unable to die. It's perhaps the cruelest fate the Pattern Reave inflicted.
 D0
 ~
 ~
-0 0 12034
+0 0 12036
 D1
 ~
 ~
@@ -1401,7 +1421,7 @@ D1
 D2
 ~
 ~
-0 0 12057
+0 0 12060
 D3
 ~
 ~
@@ -1419,7 +1439,11 @@ became a rout became a massacre became a reality-warping apocalypse.
 D0
 ~
 ~
-0 0 12035
+0 0 12037
+D2
+~
+~
+0 0 12061
 D3
 ~
 ~
@@ -1437,11 +1461,15 @@ weep. It's an abomination that refuses to fully die.
 D0
 ~
 ~
-0 0 12037
+0 0 12026
 D1
 ~
 ~
 0 0 12049
+D2
+~
+~
+0 0 12060
 S
 #12049
 Lower Rim - South-Southwest~
@@ -1455,7 +1483,7 @@ your corpse among the others. Best not to look too closely.
 D0
 ~
 ~
-0 0 12038
+0 0 12027
 D1
 ~
 ~
@@ -1463,7 +1491,7 @@ D1
 D2
 ~
 ~
-0 0 12058
+0 0 12061
 D3
 ~
 ~
@@ -1481,7 +1509,7 @@ turning against them, slowly and agonizingly.
 D0
 ~
 ~
-0 0 12039
+0 0 12028
 D1
 ~
 ~
@@ -1489,7 +1517,7 @@ D1
 D2
 ~
 ~
-0 0 12059
+0 0 12062
 D3
 ~
 ~
@@ -1507,7 +1535,7 @@ of the world in slow motion, over and over.
 D0
 ~
 ~
-0 0 12040
+0 0 12029
 D1
 ~
 ~
@@ -1515,7 +1543,7 @@ D1
 D2
 ~
 ~
-0 0 12060
+0 0 12063
 D3
 ~
 ~
@@ -1533,7 +1561,7 @@ just... {wgone{x. Not destroyed. {wUnmade{x.
 D0
 ~
 ~
-0 0 12041
+0 0 12030
 D1
 ~
 ~
@@ -1541,7 +1569,7 @@ D1
 D2
 ~
 ~
-0 0 12061
+0 0 12064
 D3
 ~
 ~
@@ -1559,7 +1587,7 @@ bends in impossible curves. This is what happens when Pattern is broken.
 D0
 ~
 ~
-0 0 12042
+0 0 12031
 D1
 ~
 ~
@@ -1567,7 +1595,7 @@ D1
 D2
 ~
 ~
-0 0 12062
+0 0 12065
 D3
 ~
 ~
@@ -1585,7 +1613,7 @@ that hurt to perceive. The Pattern Reave opened doors that should stay closed.
 D0
 ~
 ~
-0 0 12043
+0 0 12032
 D1
 ~
 ~
@@ -1593,7 +1621,7 @@ D1
 D2
 ~
 ~
-0 0 12063
+0 0 12066
 D3
 ~
 ~
@@ -1611,7 +1639,7 @@ lives lived in seconds - infants aged to ancients, ancients regressed to childre
 D0
 ~
 ~
-0 0 12044
+0 0 12033
 D1
 ~
 ~
@@ -1619,7 +1647,7 @@ D1
 D2
 ~
 ~
-0 0 12064
+0 0 12067
 D3
 ~
 ~
@@ -1637,7 +1665,7 @@ water collect around their bases, filled with dissolved soldiers.
 D0
 ~
 ~
-0 0 12045
+0 0 12034
 D1
 ~
 ~
@@ -1645,7 +1673,7 @@ D1
 D2
 ~
 ~
-0 0 12065
+0 0 12068
 D3
 ~
 ~
@@ -1663,7 +1691,11 @@ slowly moving across the ground to spell out warnings and epitaphs.
 D0
 ~
 ~
-0 0 12046
+0 0 12035
+D2
+~
+~
+0 0 12069
 D3
 ~
 ~
@@ -1681,11 +1713,15 @@ shoppers reached for goods that have fused into their hands.
 D0
 ~
 ~
-0 0 12049
+0 0 12036
 D1
 ~
 ~
 0 0 12059
+D2
+~
+~
+0 0 12070
 S
 #12059
 Middle Rim - South-Southwest~
@@ -1699,7 +1735,7 @@ dimensional displacement - some exist in only two dimensions, others in four.
 D0
 ~
 ~
-0 0 12050
+0 0 12037
 D1
 ~
 ~
@@ -1707,7 +1743,7 @@ D1
 D2
 ~
 ~
-0 0 12066
+0 0 12071
 D3
 ~
 ~
@@ -1725,7 +1761,7 @@ The field is tended by a ghostly drake farmer who doesn't realize they're dead.
 D0
 ~
 ~
-0 0 12051
+0 0 12038
 D1
 ~
 ~
@@ -1733,7 +1769,7 @@ D1
 D2
 ~
 ~
-0 0 12067
+0 0 12072
 D3
 ~
 ~
@@ -1752,7 +1788,7 @@ enemies that exist only in memory.
 D0
 ~
 ~
-0 0 12052
+0 0 12039
 D1
 ~
 ~
@@ -1760,7 +1796,7 @@ D1
 D2
 ~
 ~
-0 0 12068
+0 0 12073
 D3
 ~
 ~
@@ -1778,7 +1814,7 @@ are alive while others are dead. Some scream. Some laugh. None are quite real.
 D0
 ~
 ~
-0 0 12053
+0 0 12040
 D1
 ~
 ~
@@ -1786,7 +1822,7 @@ D1
 D2
 ~
 ~
-0 0 12069
+0 0 12074
 D3
 ~
 ~
@@ -1804,7 +1840,7 @@ random angles. The cube occasionally {gshifts{x, rearranging its contents.
 D0
 ~
 ~
-0 0 12054
+0 0 12041
 D1
 ~
 ~
@@ -1812,7 +1848,7 @@ D1
 D2
 ~
 ~
-0 0 12070
+0 0 12075
 D3
 ~
 ~
@@ -1830,7 +1866,7 @@ painting completed with their own dissolved flesh.
 D0
 ~
 ~
-0 0 12055
+0 0 12042
 D1
 ~
 ~
@@ -1838,7 +1874,7 @@ D1
 D2
 ~
 ~
-0 0 12071
+0 0 12076
 D3
 ~
 ~
@@ -1856,7 +1892,15 @@ moment from the battle. Most are traumatic. All are final.
 D0
 ~
 ~
-0 0 12056
+0 0 12043
+D1
+~
+~
+0 0 12066
+D2
+~
+~
+0 0 12077
 D3
 ~
 ~
@@ -1874,11 +1918,19 @@ nauseating. They've been begging for death for years with no voice to carry the 
 D0
 ~
 ~
-0 0 12059
+0 0 12044
 D1
 ~
 ~
 0 0 12067
+D2
+~
+~
+0 0 12078
+D3
+~
+~
+0 0 12065
 S
 #12067
 Middle Rim - East~
@@ -1892,11 +1944,15 @@ crew merged into it, their screaming faces visible in the flesh-wood hybrid.
 D0
 ~
 ~
-0 0 12060
+0 0 12045
 D1
 ~
 ~
 0 0 12068
+D2
+~
+~
+0 0 12079
 D3
 ~
 ~
@@ -1914,11 +1970,15 @@ shouldn't be able to exist. They've made a home in the chaplain's faith.
 D0
 ~
 ~
-0 0 12061
+0 0 12046
 D1
 ~
 ~
 0 0 12069
+D2
+~
+~
+0 0 12080
 D3
 ~
 ~
@@ -1936,11 +1996,11 @@ the normal rules of destruction. The mind can process this.
 D0
 ~
 ~
-0 0 12062
-D1
+0 0 12047
+D2
 ~
 ~
-0 0 12070
+0 0 12081
 D3
 ~
 ~
@@ -1958,15 +2018,11 @@ pace, still consuming. In a thousand years it might reach them.
 D0
 ~
 ~
-0 0 12063
+0 0 12048
 D1
 ~
 ~
 0 0 12071
-D3
-~
-~
-0 0 12069
 S
 #12071
 Upper Rim - South-Southwest~
@@ -1981,12 +2037,384 @@ already dead.
 D0
 ~
 ~
-0 0 12064
+0 0 12049
+D1
+~
+~
+0 0 12072
 D3
 ~
 ~
 0 0 12070
 S
+#12072
+Upper Rim - South-South~
+The southern upper rim features a disturbing art installation created by the Pattern
+itself: weapons arranged in mandala patterns, each made from the bones of those who
+wielded them. Swords of femur and finger bone, shields of ribcage and skull. The
+arrangement is mathematically perfect, suggesting some intelligence behind the
+Pattern's madness. It's beautiful and absolutely horrifying.
+~
+0 0 0
+D0
+~
+~
+0 0 12050
+D1
+~
+~
+0 0 12073
+D3
+~
+~
+0 0 12071
+S
+#12073
+Upper Rim - South Center~
+A drake monument once stood here - some hero or leader commemorated in stone. The
+Pattern Reave transformed it into {wliving flesh{x while maintaining its statue
+shape. The monument breathes. It bleeds. It feels pain. Its eyes follow you with
+a consciousness that shouldn't exist in stone-shaped meat. This might be the cruelest
+joke the Pattern played - eternal awareness in an immobile prison.
+~
+0 0 0
+D0
+~
+~
+0 0 12051
+D1
+~
+~
+0 0 12074
+D3
+~
+~
+0 0 12072
+S
+#12074
+Upper Rim - South Center East~
+An orc warlord's command tent remains here, but time passes differently inside it.
+Peer through the entrance and you see the warlord and their advisors moving in
+{wextreme slow motion{x, still planning a battle that ended years ago. Their words
+take hours to speak. A gesture might take days. Outside, normal time passes. The
+tent is a bubble of decelerated existence.
+~
+0 0 0
+D0
+~
+~
+0 0 12052
+D1
+~
+~
+0 0 12075
+D3
+~
+~
+0 0 12073
+S
+#12075
+Upper Rim - Southeast~
+The southeastern upper rim shows where drake architects tried to build reality-
+stabilizing wards as the Pattern unraveled. Their efforts failed, but the wards
+remain - {Cglowing{x runic circles that now do the opposite, actively {wdestabilizing{x
+anything within them. The architects' bodies lie in the circles' centers, their
+forms cycling through every possible state: alive, dead, never-born, ancient, young.
+~
+0 0 0
+D0
+~
+~
+0 0 12053
+D1
+~
+~
+0 0 12076
+D3
+~
+~
+0 0 12074
+S
+#12076
+Upper Rim - East-Southeast~
+A human chaplain tried to perform last rites for the dying here. The Pattern Reave
+caught them mid-prayer and transformed their {wholy words{x into physical objects
+- crystallized syllables that float in the air spelling out blessings that couldn't
+save anyone. The chaplain's body is mostly normal, except their mouth has been
+replaced by a {wvoid{x that occasionally whispers prayers in reverse.
+~
+0 0 0
+D0
+~
+~
+0 0 12054
+D1
+~
+~
+0 0 12077
+D3
+~
+~
+0 0 12075
+S
+#12077
+Upper Rim - East~
+The eastern upper rim shows the last defensive position of the drake city guard.
+They formed a shield wall here - and the Pattern Reave fused them together with
+their shields into a single {wmetal-flesh barrier{x. The wall still stands, a
+horrible amalgamation of drake bodies and bronze shields, all screaming silently.
+Their discipline held even as their bodies merged. Duty persisted past death.
+~
+0 0 0
+D0
+~
+~
+0 0 12055
+D1
+~
+~
+0 0 12078
+D3
+~
+~
+0 0 12076
+S
+#12078
+Upper Rim - East-East~
+This section marks where the Pattern Reave's reality distortion begins to weaken.
+Bodies are still transformed - turned to {wglass{x, {wstone{x, {wice{x, {wmetal{x -
+but at least they maintain their basic shapes. A human archer is frozen mid-draw,
+their body now {Ccrystal{x, arrow nocked in a bow that has become {yliving wood{x,
+still growing leaves. The arrow is a {wray of light{x. Nothing is quite right.
+~
+0 0 0
+D0
+~
+~
+0 0 12056
+D1
+~
+~
+0 0 12079
+D3
+~
+~
+0 0 12077
+S
+#12079
+Upper Rim - East-East-East~
+Here lies a section of drake residential housing, the homes still standing but
+{wtransformed{x. Walls are permeable, allowing you to walk through them like mist.
+Furniture floats randomly. Drake families are frozen in domestic scenes - eating
+meals of {wpetrified food{x, playing with {wcrystallized toys{x. Everything normal,
+everything wrong. The normalcy makes it worse somehow.
+~
+0 0 0
+D0
+~
+~
+0 0 12057
+D1
+~
+~
+0 0 12080
+D3
+~
+~
+0 0 12078
+S
+#12080
+Upper Rim - Easternmost~
+The easternmost section of the upper rim marks the crater's edge, where devastation
+gives way to merely destroyed landscape. Trees are burned but recognizable as trees.
+Earth is scorched but still earth. Bodies are corpses, not reality-warped nightmares.
+After the horrors of the crater's depths, conventional death is almost comforting.
+The Pattern's influence ends here, leaving only the memory of madness.
+~
+0 0 0
+D0
+~
+~
+0 0 12058
+D3
+~
+~
+0 0 12079
+S
+#12081
+Southern Crater Rim - Westernmost~
+The southern rim shows where the combined armies made their final stand. Thousands
+died here in conventional battle before Pattern Reave ended everything. The ground
+is littered with weapons, armor, and bones that haven't been warped - just broken
+by honest warfare. It's a mass grave on a staggering scale, but at least it makes
+sense. The dead here died by steel and fire, not by having reality rewritten.
+~
+0 0 0
+D0
+~
+~
+0 0 12059
+D1
+~
+~
+0 0 12082
+S
+#12082
+Southern Crater Rim - West-Southwest~
+A memorial cairn has been erected here by survivors - a pile of stones marking the
+fallen. Someone comes regularly to maintain it, adding stones and leaving offerings.
+Fresh flowers rest against the cairn, a touching gesture in this place of ultimate
+death. The memorial doesn't specify race - orc, human, and drake are all remembered
+here. Death made them equal.
+~
+0 0 0
+D0
+~
+~
+0 0 12060
+D1
+~
+~
+0 0 12083
+D3
+~
+~
+0 0 12081
+S
+#12083
+Southern Crater Rim - South-Southwest~
+The southern rim overlooks the full scope of the devastation. From here you can
+see the entire crater - the impossible geometries, the reality distortions, the
+frozen horrors. It's overwhelming in scale. Tens of thousands died here. A city
+was unmade. Reality itself was {wbroken{x. And for what? Pride. War. The refusal
+to surrender. The crater is a monument to the cost of absolute victory.
+~
+0 0 0
+D0
+~
+~
+0 0 12061
+D1
+~
+~
+0 0 12084
+D3
+~
+~
+0 0 12082
+S
+#12084
+Southern Crater Rim - South-South~
+Here on the southern rim stands a single intact drake building - a small shrine
+to their god of war. It was spared by pure chance, the Pattern Reave's wave stopping
+just short. Inside, religious texts describe drake philosophy on honorable combat.
+The irony is crushing. Their god didn't save them. Their honor didn't matter.
+Pattern Reave ended them all the same.
+~
+0 0 0
+D0
+~
+~
+0 0 12062
+D1
+~
+~
+0 0 12085
+D3
+~
+~
+0 0 12083
+S
+#12085
+Southern Crater Rim - South Center~
+The southern center of the rim is the traditional viewing point for those who come
+to witness the crater. A worn path leads here from distant settlements. People
+come to remember, to mourn, to understand the scale of magical catastrophe. Some
+come to loot, though most don't return - the crater's anomalies claim the greedy.
+The view is simultaneously awe-inspiring and soul-crushing.
+~
+0 0 0
+D0
+~
+~
+0 0 12063
+D1
+~
+~
+0 0 12086
+D3
+~
+~
+0 0 12084
+S
+#12086
+Southern Crater Rim - South-Southeast~
+A survivor's camp was established here years ago by those searching for lost loved
+ones. The camp is long abandoned now - most never found who they sought, or found
+them transformed into horrors they wished they hadn't. Empty tents flutter in the
+wind. Excavation tools lie scattered about. Messages carved into rocks: "Father,
+forgive me for surviving." "Why did I live when they all died?"
+~
+0 0 0
+D0
+~
+~
+0 0 12064
+D1
+~
+~
+0 0 12087
+D3
+~
+~
+0 0 12085
+S
+#12087
+Southern Crater Rim - Southeast~
+The southeastern rim features a small shrine maintained by drake survivors - there
+are a few, scattered across the world, refugees from Belaanir. They leave scales
+here, shed in mourning. Candles burn eternally, lit by magic that survived when
+so much else didn't. Names are carved into the rock face - thousands of names,
+the remembered dead. Adding new names takes years. They're only halfway through
+the casualties.
+~
+0 0 0
+D0
+~
+~
+0 0 12065
+D1
+~
+~
+0 0 12088
+D3
+~
+~
+0 0 12086
+S
+#12088
+Southern Crater Rim - East~
+The eastern southern rim is quiet compared to the crater's depths. Birds have
+started returning to the area, though they avoid the crater itself. Grass grows
+in patches between the scorched earth. Life, slowly and tentatively, is trying
+to reclaim the wasteland. But at night, the crater {Cglows{x with unnatural light,
+and the screams of the dead echo from below. Nature may return, but this place
+will never truly heal.
+~
+0 0 0
+D0
+~
+~
+0 0 12066
+D3
+~
+~
+0 0 12087
+S
+#0
+
+
+
 #SPECIALS
 S
 
