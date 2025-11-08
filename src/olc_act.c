@@ -3066,6 +3066,26 @@ bool set_obj_values (CHAR_DATA * ch, OBJ_INDEX_DATA * pObj, int value_num,
             }
             break;
 
+        case ITEM_PYLON:
+            switch (value_num)
+            {
+                default:
+                    send_to_char("Pylon values:\n\r", ch);
+                    send_to_char("  [v0] Charges (0 = infinite/permanent)\n\r", ch);
+                    send_to_char("  [v2] Clan number (required)\n\r", ch);
+                    return FALSE;
+
+                case 0:
+                    send_to_char ("CHARGES SET.\n\r\n\r", ch);
+                    pObj->value[0] = atoi (argument);
+                    break;
+                case 2:
+                    send_to_char ("CLAN NUMBER SET.\n\r\n\r", ch);
+                    pObj->value[2] = atoi (argument);
+                    break;
+            }
+            break;
+
         case ITEM_FURNITURE:
             switch (value_num)
             {
