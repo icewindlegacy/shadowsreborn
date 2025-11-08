@@ -300,13 +300,26 @@ void spell_pylon(int sn, int level, CHAR_DATA *ch, void *vo, int target)
     /* Create portal at caster's location */
     portal = create_object(get_obj_index(OBJ_VNUM_PORTAL), 0);
     portal->timer = 2 + level / 10;
-    portal->value[0] = pylon_room->vnum;
-    portal->value[3] = ch->in_room->vnum;
+    portal->value[0] = -1;  /* Infinite charges */
+    portal->value[3] = pylon_room->vnum;  /* Destination vnum */
     
-    free_string(portal->short_descr);
-    portal->short_descr = str_dup("a shimmering pylon portal");
-    free_string(portal->description);
-    portal->description = str_dup("A shimmering pylon portal rises from the ground here.");
+    /* Set descriptive names based on clan and area */
+    {
+        char short_buf[MAX_STRING_LENGTH];
+        char long_buf[MAX_STRING_LENGTH];
+        char name_buf[MAX_STRING_LENGTH];
+        
+        sprintf(name_buf, "%s pylon %s", clan_table[ch->clan].name, area->name);
+        sprintf(short_buf, "a pylon to %s", area->name);
+        sprintf(long_buf, "A {Mpylon{x to %s hums with energy here.", area->name);
+        
+        free_string(portal->name);
+        portal->name = str_dup(name_buf);
+        free_string(portal->short_descr);
+        portal->short_descr = str_dup(short_buf);
+        free_string(portal->description);
+        portal->description = str_dup(long_buf);
+    }
     
     obj_to_room(portal, ch->in_room);
     
