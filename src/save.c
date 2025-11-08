@@ -184,7 +184,8 @@ void save_char_obj (CHAR_DATA * ch)
         /* save the pets */
         if (ch->pet != NULL && ch->pet->in_room == ch->in_room)
             fwrite_pet (ch->pet, fp);
-        if (ch->mount && ch->mount->in_room == ch->in_room)
+        /* save mount if it's in same room OR if we're currently riding it */
+        if (ch->mount && (ch->mount->in_room == ch->in_room || ch->riding))
             fwrite_mount(ch->mount, fp);
 
         fprintf (fp, "#END\n");
