@@ -663,7 +663,9 @@ void show_char_to_char (CHAR_DATA * list, CHAR_DATA * ch)
         if (can_see (ch, rch))
         {
             show_char_to_char_0 (rch, ch);
-            /* Mount is already shown in rider's description, no need to show separately */
+            /* If this character is riding a mount, show the mount too */
+            if( MOUNTED(rch) && (rch->in_room == MOUNTED(rch)->in_room) )
+                show_char_to_char_0 ( MOUNTED(rch), ch );
         }
         else if (room_is_dark (ch->in_room)
                  && IS_AFFECTED (rch, AFF_INFRARED))
