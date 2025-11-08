@@ -436,6 +436,10 @@ typedef int		FLAG;
  #define stc send_to_char
  #define MIL MAX_INPUT_LENGTH
  #define MSL MAX_STRING_LENGTH
+ #define ANSI_KEY "{"
+ #define ANSI_END "{x"
+ #define ANSI_COLOR_CODE(color) (color < 10 ? color : color - 10)
+ 
 
 /*
  * Site ban structure.
