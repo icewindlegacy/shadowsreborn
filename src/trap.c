@@ -599,6 +599,9 @@ void trapdamage(CHAR_DATA *ch, OBJ_DATA *obj)
         {
             for (wch = ch->in_room->people; wch != NULL; wch = wch->next_in_room)
             {
+                /* Skip clan members in clan rooms */
+                if (is_clan_immune(wch))
+                    continue;
 
                 if (IS_AFFECTED(wch, AFF_SLEEP))
                     continue;
@@ -648,6 +651,10 @@ void trapdamage(CHAR_DATA *ch, OBJ_DATA *obj)
         {
             for (wch = ch->in_room->people; wch != NULL; wch = wch->next_in_room)
             {
+                /* Skip clan members in clan rooms */
+                if (is_clan_immune(wch))
+                    continue;
+                    
                 if (wch->in_room == NULL || IS_SET(wch->in_room->room_flags, ROOM_NO_RECALL) || (!IS_NPC(wch) && wch->fighting != NULL))
                 {
                     send_to_char("Wow that was close...A trap was set off and malfunctioned!\n\r", wch);
@@ -889,6 +896,10 @@ void trapdamage(CHAR_DATA *ch, OBJ_DATA *obj)
         {
             if (wch == NULL)
                 break;
+                
+            /* Skip clan members in clan rooms */
+            if (is_clan_immune(wch))
+                continue;
 
             if (obj->trap_dam == TRAP_DAM_BLUNT || obj->trap_dam == TRAP_DAM_PIERCE || obj->trap_dam == TRAP_DAM_SLASH)
             {

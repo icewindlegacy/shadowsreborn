@@ -1550,11 +1550,6 @@ portal B 0
 0 0 A BCGHIKLN 0
 0 0 0 P
 E
-counter black stone~
-The counter seems to stand on nothing at all.  Your reflection in
-    the polished stone counter top seems slightly transparent.
-    ~
-E
 sign~
 The sign reads:
      
@@ -1562,6 +1557,11 @@ The sign reads:
      
     Type list to list items.
     Type buy to buy something.
+    ~
+E
+counter black stone~
+The counter seems to stand on nothing at all.  Your reflection in
+    the polished stone counter top seems slightly transparent.
     ~
 #11707
 shimmering curtain light~
@@ -1598,13 +1598,13 @@ armor AI AC
 BE ABE CE AE 0
 97 30 10000 P
 A
-3 5
-A
-12 125
+19 7
 A
 18 7
 A
-19 7
+12 125
+A
+3 5
 E
 mithril ((+*+)) torque deriki~
 An inscription along the edge reads:
@@ -1620,9 +1620,9 @@ armor A AK
 AE ABE ACE E 0
 97 50 10000 P
 A
-3 3
-A
 12 130
+A
+3 3
 E
 shimmering blue robe~
 An inscription along the edge reads:
@@ -1638,9 +1638,9 @@ light A A
 0 0 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef 0 0
 97 0 10000 P
 A
-12 115
-A
 19 5
+A
+12 115
 #11712
 engraved ((+*+)) ring deriki~
 an engraved {B((+*+)){x ring~
@@ -1650,13 +1650,13 @@ armor B AB
 BE CE ABE E 0
 97 10 10000 P
 A
-1 3
-A
-12 110
+18 10
 A
 13 90
 A
-18 10
+12 110
+A
+1 3
 E
 engraved ((+*+)) ring deriki~
 An inscription along the inside of the band reads:
@@ -1672,15 +1672,15 @@ armor A AO
 CE CE ACE BCD 0
 97 20 10000 P
 A
-2 1
-A
-3 2
-A
-4 1
+17 -10
 A
 12 100
 A
-17 -10
+4 1
+A
+3 2
+A
+2 1
 E
 ((+*+)) crest deriki~
 An inscription along the inside of the band reads:
@@ -1696,9 +1696,9 @@ armor A AM
 BE CE BE AE 0
 95 20 9500 P
 A
-12 90
-A
 19 6
+A
+12 90
 #11715
 ((+*+)) chain belt deriki~
 a {B((+*+)){x chain belt~
@@ -1708,11 +1708,11 @@ armor A AL
 AE BE CE ABCD 0
 92 50 9000 P
 A
-5 -2
+19 6
 A
 12 100
 A
-19 6
+5 -2
 #11716
 ((+*+)) shoes deriki~
 a pair of {B((+*+)){x shoes~
@@ -1722,15 +1722,15 @@ armor A AG
 ABE CE ABE ACD 0
 90 50 11100 P
 A
-2 2
-A
-3 2
-A
-12 95
+18 -2
 A
 13 30
 A
-18 -2
+12 95
+A
+3 2
+A
+2 2
 #11717
 ((+*+)) armbands arm bands deriki~
 some {B((+*+)){x armbands~
@@ -1740,13 +1740,13 @@ armor AI AI
 BE E AE ACD 0
 92 50 11000 P
 A
-4 2
-A
-6 -1
+19 5
 A
 12 75
 A
-19 5
+6 -1
+A
+4 2
 #11718
 glittering ((+*+)) earring deriki~
 a glittering {B((+*+)){x earring~
@@ -1756,15 +1756,15 @@ armor AG AR
 ABE BE CE ABCD 0
 90 10 12400 P
 A
-1 1
-A
-5 -2
-A
-12 100
+19 6
 A
 13 50
 A
-19 6
+12 100
+A
+5 -2
+A
+1 1
 #11719
 glowing ((+*+)) sphere deriki~
 a glowing {B((+*+)){x sphere~
@@ -1774,15 +1774,15 @@ armor ABI AQ
 BE ACE ACE BCD 0
 90 10 10000 P
 A
-6 -1
-A
-9 -5
-A
-12 100
+19 6
 A
 18 5
 A
-19 6
+12 100
+A
+9 -5
+A
+6 -1
 #11720
 ((+*+)) tunic deriki~
 a {B((+*+)){x tunic~
@@ -1792,13 +1792,13 @@ armor 0 AD
 BE BE ABE ACD 0
 90 40 10000 P
 A
-3 3
-A
-12 80
+20 -5
 A
 13 60
 A
-20 -5
+12 80
+A
+3 3
 #11721
 owl eyes feather~
 Owl eyes~
@@ -1808,13 +1808,13 @@ armor GI AR
 AE BE CE AE 0
 95 10 9000 P
 A
-4 4
-A
-12 100
+20 -5
 A
 18 5
 A
-20 -5
+12 100
+A
+4 4
 #11722
 staff guarding mithril~
 a staff of guarding~
@@ -1834,13 +1834,13 @@ armor AIKL AE
 BE CE CE ABCD 0
 95 20 10500 P
 A
-3 3
-A
-4 3
+19 7
 A
 18 6
 A
-19 7
+4 3
+A
+3 3
 #11724
 ((-*-)) set chain armor treniste~
 a set of {Y((-*-)){x chain armor~
@@ -1850,13 +1850,13 @@ armor IKL AD
 CE BCE CE E 0
 95 100 15000 P
 A
-1 3
-A
-2 2
+19 6
 A
 13 110
 A
-19 6
+2 2
+A
+1 3
 #11725
 white ((-*-)) belt treniste~
 a white {Y((-*-)){x belt~
@@ -1866,13 +1866,13 @@ armor IKL AL
 CE ACE ABE ABCD 0
 95 30 10000 P
 A
-4 3
-A
-12 50
+19 6
 A
 13 75
 A
-19 6
+12 50
+A
+4 3
 #11726
 pair ((-*-)) gauntlets treniste~
 a pair of {Y((-*-)){x gauntlets~
@@ -1882,13 +1882,13 @@ armor IKL AH
 ABE ABCE CE BE 0
 93 50 10150 P
 A
-4 -2
-A
-13 105
+19 6
 A
 18 7
 A
-19 6
+13 105
+A
+4 -2
 #11727
 pair ((-*-)) leggings treniste~
 a pair of {Y((-*-)){x leggings~
@@ -1898,13 +1898,13 @@ armor IKL AF
 BE ABE ABE E 0
 92 50 12000 P
 A
-1 3
-A
-12 80
+14 60
 A
 13 80
 A
-14 60
+12 80
+A
+1 3
 #11728
 white ((-*-)) visor treniste~
 a white {Y((-*-)){x visor~
@@ -1914,13 +1914,13 @@ armor AIKL AR
 ABE ABE BE BCD 0
 88 30 9000 P
 A
-2 2
-A
-4 3
+19 6
 A
 13 90
 A
-19 6
+4 3
+A
+2 2
 #11729
 golden ((-*-)) bracer treniste~
 a golden {Y((-*-)){x bracer~
@@ -1930,13 +1930,13 @@ armor IKL AM
 AE BE CE BCD 0
 93 20 11000 P
 A
-5 3
-A
-12 75
+19 6
 A
 13 75
 A
-19 6
+12 75
+A
+5 3
 #11730
 embroidered ((-*-)) cape treniste~
 an embroidered {Y((-*-)){x cape~
@@ -1946,17 +1946,17 @@ armor IKL AK
 BE BE ABE BCD 0
 89 40 11200 P
 A
-3 2
-A
-6 -1
-A
-12 105
-A
-13 -20
+19 6
 A
 18 4
 A
-19 6
+13 -20
+A
+12 105
+A
+6 -1
+A
+3 2
 #11731
 ancient tome~
 an ancient tome~
@@ -1976,15 +1976,15 @@ armor BFI AR
 AE CE ABE BCD 0
 88 20 11000 P
 A
-6 -1
-A
-8 2
-A
-9 6
+19 5
 A
 13 95
 A
-19 5
+9 6
+A
+8 2
+A
+6 -1
 #11733
 ((-*-)) sleeves pair golden treniste~
 some {Y((-*-)){x sleeves~
@@ -1994,13 +1994,13 @@ armor IKL AI
 ABE BE E ABCD 0
 89 40 10000 P
 A
-2 2
-A
-4 3
+19 6
 A
 13 85
 A
-19 6
+4 3
+A
+2 2
 #11734
 gleaming white sword~
 a gleaming white sword~
@@ -2010,9 +2010,9 @@ weapon IK AN
 sword 4 35 cleave 0
 90 200 10000 P
 A
-18 10
-A
 19 15
+A
+18 10
 #11735
 gleaming white shield~
 a gleaming white shield~
@@ -2022,11 +2022,11 @@ armor IK AJ
 ABE BCE E ABCD 0
 91 50 10000 P
 A
-1 5
+19 6
 A
 2 5
 A
-19 6
+1 5
 #11736
 deep indigo pill~
 a deep indigo pill~
@@ -2044,13 +2044,13 @@ armor CJL AE
 BE CE ACE AE 0
 95 40 10000 P
 A
-1 3
-A
-13 100
+19 7
 A
 18 6
 A
-19 7
+13 100
+A
+1 3
 #11738
 taloned gloves~
 a pair of taloned gloves~
@@ -2060,11 +2060,11 @@ armor JL AH
 ABE ACE ACE E 0
 95 30 10000 P
 A
-12 85
+19 9
 A
 18 7
 A
-19 9
+12 85
 #11739
 ->*<- breast plate reykaris~
 a  {D->*<-{x  breast plate~
@@ -2074,13 +2074,13 @@ armor EJL AD
 AE CE ACE AE 0
 95 100 15000 P
 A
-1 2
-A
-2 2
+19 7
 A
 13 90
 A
-19 7
+2 2
+A
+1 2
 #11740
 dark ->*<- orb reykaris~
 a dark  {D->*<-{x  orb~
@@ -2090,13 +2090,13 @@ armor CEJL AQ
 BE ACE AE ACD 0
 93 0 10000 P
 A
-3 2
-A
-12 60
+19 6
 A
 13 75
 A
-19 6
+12 60
+A
+3 2
 #11741
 ->*<- legplates leg plates reykaris~
 some  {D->*<-{x  legplates~
@@ -2106,13 +2106,13 @@ armor EJLM AF
 BE ABE ABE ABCD 0
 92 50 10200 P
 A
-2 2
-A
-5 2
+19 6
 A
 13 80
 A
-19 6
+5 2
+A
+2 2
 #11742
 carved ->*<- ring reykaris~
 a carved  {D->*<-{x  ring~
@@ -2122,13 +2122,13 @@ armor EJLM AB
 AE ACE BE ABCD 0
 89 10 10000 P
 A
-3 3
-A
-13 85
+19 6
 A
 18 4
 A
-19 6
+13 85
+A
+3 3
 #11743
 cloak nightmares black~
 a cloak of nightmares~
@@ -2138,19 +2138,19 @@ armor CEFJ AK
 ABE BE BE BCD 0
 89 20 10000 P
 A
-2 4
-A
-3 -2
-A
-5 -3
-A
-9 15
-A
-12 85
+19 6
 A
 13 60
 A
-19 6
+12 85
+A
+9 15
+A
+5 -3
+A
+3 -2
+A
+2 4
 #11744
 ebony ->*<- bracer reykaris~
 an ebony  {D->*<-{x  bracer~
@@ -2160,11 +2160,11 @@ armor EJL AM
 ABE ABE BE ABCD 0
 92 20 12500 P
 A
-3 5
+5 5
 A
 4 5
 A
-5 5
+3 5
 #11745
 dark ->*<- necklace reykaris~
 a dark  {D->*<-{x  necklace~
@@ -2174,13 +2174,13 @@ treasure EL AC
 0 0 0 0 0
 88 20 25000 P
 A
-2 3
-A
-9 5
+13 75
 A
 12 75
 A
-13 75
+9 5
+A
+2 3
 #11746
 humanoid skull~
 a humanoid skull~
@@ -2190,13 +2190,13 @@ treasure E AO
 0 0 0 0 0
 88 20 5000 P
 A
-1 3
-A
-2 3
+19 5
 A
 12 95
 A
-19 5
+2 3
+A
+1 3
 #11747
 pair obsidian ->*<- boots reykaris~
 a pair of  {D->*<-{x  boots~
@@ -2206,11 +2206,11 @@ armor EJL AG
 ABCD E BE BCD 0
 85 30 11000 P
 A
-2 4
+13 75
 A
 12 70
 A
-13 75
+2 4
 #11748
 tempered silver throwing dagger~
 a tempered throwing dagger~
@@ -2220,9 +2220,9 @@ weapon CE AN
 dagger 7 19 pierce DH
 90 200 15000 P
 A
-18 20
-A
 19 25
+A
+18 20
 #11749
 ->*<- sleeves obsidian reykaris~
 some  {D->*<-{x  sleeves~
@@ -2232,13 +2232,13 @@ armor EJL AI
 E E ABE E 0
 88 30 10000 P
 A
-1 3
-A
-3 3
+19 6
 A
 18 6
 A
-19 6
+3 3
+A
+1 3
 #11750
 black collar runes runed leather~
 a black runed collar~
@@ -2248,19 +2248,19 @@ armor BEGHM AC
 ABE CE AE ABCD 0
 85 30 5500 P
 A
-1 2
-A
-4 -1
-A
-5 -2
-A
-12 65
-A
-13 70
+19 6
 A
 18 -2
 A
-19 6
+13 70
+A
+12 65
+A
+5 -2
+A
+4 -1
+A
+1 2
 E
 runes~
 The runes are in no language that you recognize.  As you gaze at them,
@@ -2275,21 +2275,21 @@ armor BE AI
 ABE ACE CE BE 0
 99 50 15000 P
 A
-1 4
-A
-5 4
-A
-6 1
-A
-9 20
-A
-12 95
-A
-13 100
+19 7
 A
 18 6
 A
-19 7
+13 100
+A
+12 95
+A
+9 20
+A
+6 1
+A
+5 4
+A
+1 4
 #11752
 onyx -=+)> earring myrxes~
 an onyx {W-=+)>{x earring~
@@ -2299,13 +2299,13 @@ armor CFI AR
 E BCD E ACD 0
 78 10 10000 P
 A
-2 4
-A
-12 75
+19 6
 A
 13 80
 A
-19 6
+12 75
+A
+2 4
 E
 onyx -=+)> earring myrxes~
 Below the Myrxes crest is the inscription:
@@ -2321,13 +2321,13 @@ armor CFI AH
 E AE E CD 0
 78 30 10000 P
 A
-1 2
-A
-2 2
+19 6
 A
 18 6
 A
-19 6
+2 2
+A
+1 2
 #11754
 sharpened stiletto sharp~
 a sharpened stiletto~
@@ -2337,9 +2337,9 @@ weapon CHI AN
 dagger 7 17 pierce DH
 80 200 12500 P
 A
-18 20
-A
 19 25
+A
+18 20
 #11755
 invisible flame~
 an invisible flame~
@@ -2349,11 +2349,11 @@ light CF A
 0 0 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef 0 0
 80 0 11500 P
 A
-2 3
+19 5
 A
 12 80
 A
-19 5
+2 3
 #11756
 pair -=+)> sleeves myrxes~
 a pair of {W-=+)>{x sleeves~
@@ -2363,13 +2363,13 @@ armor CFI AI
 BE E AE ABD 0
 78 30 9900 P
 A
-2 3
-A
-3 2
+19 5
 A
 18 5
 A
-19 5
+3 2
+A
+2 3
 #11757
 engraved platinum ][+][ ring xaek~
 an engraved platinum {w][+][{x ring~
@@ -2379,13 +2379,13 @@ armor 0 AB
 ABCD AE E ABD 0
 69 20 12000 P
 A
-1 1
-A
-2 1
+19 4
 A
 13 70
 A
-19 4
+2 1
+A
+1 1
 #11758
 dark -=+)> shroud shadows myrxes~
 a dark {W-=+)>{x shroud~
@@ -2395,11 +2395,11 @@ armor CFI AK
 BCD BCD BCD AD 0
 75 10 10000 P
 A
-13 70
+19 5
 A
 18 5
 A
-19 5
+13 70
 #11759
 black slim -=+)> bracer myrxes~
 a slim {W-=+)>{x bracer~
@@ -2409,13 +2409,13 @@ armor CFI AM
 ABCD E ABE CD 0
 73 20 8000 P
 A
-2 3
-A
-17 -15
+19 5
 A
 18 5
 A
-19 5
+17 -15
+A
+2 3
 #11760
 shadowy -=+)> neckchain neck chain myrxes~
 a shadowy {W-=+)>{x neckchain~
@@ -2425,13 +2425,13 @@ armor CFI AC
 ABCD ABCD BCD ABD 0
 72 20 12000 P
 A
-1 1
-A
-12 60
+19 4
 A
 13 60
 A
-19 4
+12 60
+A
+1 1
 #11761
 black -=+)> leggings leather pair myrxes~
 a pair of black {W-=+)>{x leggings~
@@ -2441,13 +2441,13 @@ armor CFI AF
 ABCD BCD AE CD 0
 77 40 10000 P
 A
-2 3
-A
-13 85
+19 5
 A
 18 5
 A
-19 5
+13 85
+A
+2 3
 #11762
 silent -=+)> boots myrxes~
 silent {W-=+)>{x boots~
@@ -2457,11 +2457,11 @@ armor CFI AG
 BCD E E BCD 0
 75 20 8900 P
 A
-2 4
+19 5
 A
 18 5
 A
-19 5
+2 4
 #11763
 hair ring panther black~
 a ring of the panther~
@@ -2471,13 +2471,13 @@ armor CFI AB
 ABCD ABCD BCD ACD 0
 75 10 10000 P
 A
-2 3
-A
-12 80
+19 5
 A
 18 5
 A
-19 5
+12 80
+A
+2 3
 #11764
 black -=+)> belt myrxes~
 a black {W-=+)>{x belt~
@@ -2487,9 +2487,9 @@ armor CFI AL
 BCD ABCD AE ABD 0
 75 40 7900 P
 A
-1 5
-A
 2 5
+A
+1 5
 #11765
 ring lynx~
 a ring of the lynx~
@@ -2499,13 +2499,13 @@ armor CFI AB
 ACD E BCD BD 0
 75 10 10000 P
 A
-1 3
-A
-13 80
+19 5
 A
 18 5
 A
-19 5
+13 80
+A
+1 3
 #11766
 night hawk talons~
 night hawk talons~
@@ -2515,11 +2515,11 @@ armor CFI AH
 ACD AE ABCD BD 0
 73 40 9000 P
 A
-1 2
+19 5
 A
 2 2
 A
-19 5
+1 2
 #11767
 hunter's hunters hunter arrow mithril~
 a hunter's arrow~
@@ -2529,9 +2529,9 @@ weapon A AN
 exotic 2 51 pierce E
 70 200 10000 P
 A
-18 15
-A
 19 15
+A
+18 15
 #11768
 set ][+][ platemail plate mail xaek~
 a set of {w][+][{x platemail~
@@ -2541,13 +2541,13 @@ armor 0 AD
 BE AE AE ABD 0
 78 100 10000 P
 A
-1 4
-A
-13 100
+19 6
 A
 18 6
 A
-19 6
+13 100
+A
+1 4
 #11769
 bracer power~
 a bracer of power~
@@ -2557,11 +2557,11 @@ armor B AM
 E ABCD E BCD 0
 78 20 9900 P
 A
-1 4
+19 6
 A
 13 75
 A
-19 6
+1 4
 #11770
 ][+][ shield xaek~
 a {w][+][{x shield~
@@ -2571,11 +2571,11 @@ armor 0 AJ
 AE BE BCD ABCD 0
 77 50 10000 P
 A
-1 2
+19 6
 A
 5 3
 A
-19 6
+1 2
 #11771
 grey ][+][ legplates leg plates xaek~
 some grey {w][+][{x legplates~
@@ -2585,13 +2585,13 @@ armor 0 AF
 E AE E BD 0
 75 90 10000 P
 A
-1 2
-A
-5 2
+19 4
 A
 13 75
 A
-19 4
+5 2
+A
+1 2
 #11772
 ][+][ helm xaek~
 a {w][+][{x helm~
@@ -2601,13 +2601,13 @@ armor 0 AE
 CD E CD CD 0
 71 50 8000 P
 A
-5 2
-A
-13 80
+19 5
 A
 18 4
 A
-19 5
+13 80
+A
+5 2
 #11773
 engraved ][+][ crest xaek~
 an engraved {w][+][{x crest~
@@ -2617,11 +2617,11 @@ armor 0 AO
 ABCD ABCD ACD ABD 0
 68 50 11000 P
 A
-1 3
+19 4
 A
 13 65
 A
-19 4
+1 3
 #11774
 ][+][ armplates arm plates xaek~
 strong {w][+][{x armplates~
@@ -2631,13 +2631,13 @@ armor 0 AI
 ABCD AE BCD BD 0
 73 50 10000 P
 A
-5 3
-A
-13 50
+19 5
 A
 18 5
 A
-19 5
+13 50
+A
+5 3
 #11775
 balanced adamantite longsword long sword~
 a finely balance adamantite longsword~
@@ -2647,9 +2647,9 @@ weapon AI AN
 sword 8 11 cleave D
 70 300 17800 P
 A
-18 15
-A
 19 15
+A
+18 15
 #11776
 silver carven -(+)- ring noriva~
 a carven {G-(+)-{x signet ring~
@@ -2659,13 +2659,13 @@ armor AI AB
 E ABCD E ABD 0
 78 10 10000 P
 A
-3 3
-A
-4 3
+13 80
 A
 12 80
 A
-13 80
+4 3
+A
+3 3
 #11777
 niobium -(+)- circlet noriva~
 a niobium {G-(+)-{x circlet~
@@ -2675,11 +2675,11 @@ armor AI AE
 BE E E ABCD 0
 78 20 21500 P
 A
-4 4
+18 5
 A
 12 100
 A
-18 5
+4 4
 #11778
 light shimmering -(+)- sphere noriva~
 a shimmering {G-(+)-{x sphere~
@@ -2689,13 +2689,13 @@ armor ABI AQ
 ABCD E BE ABD 0
 77 0 15500 P
 A
-3 3
-A
-4 3
+13 50
 A
 12 85
 A
-13 50
+4 3
+A
+3 3
 #11779
 inlaid silver -(+)- bracelet noriva~
 an inlaid silver {G-(+)-{x bracelet~
@@ -2705,11 +2705,11 @@ armor AI AM
 BCD ABCD E CD 0
 74 20 12200 P
 A
-4 2
+12 95
 A
 5 2
 A
-12 95
+4 2
 #11780
 -(+)- girth noriva~
 a beautiful {G-(+)-{x girth~
@@ -2719,13 +2719,13 @@ armor AI AL
 CD E AE AD 0
 71 50 10000 P
 A
-1 2
-A
-12 75
+18 5
 A
 13 50
 A
-18 5
+12 75
+A
+1 2
 #11781
 pair -(+)- sleeves noriva~
 a pair of {G-(+)-{x sleeves~
@@ -2735,11 +2735,11 @@ armor AI AI
 BCD ABCD ABCD ABD 0
 69 50 9900 P
 A
-5 3
+19 3
 A
 13 85
 A
-19 3
+5 3
 #11782
 pair -(+)- gloves noriva~
 some finely crafted {G-(+)-{x gloves~
@@ -2749,13 +2749,13 @@ armor I AH
 BCD AE AE BCD 0
 73 30 11250 P
 A
-2 2
-A
-5 2
+18 5
 A
 12 75
 A
-18 5
+5 2
+A
+2 2
 #11783
 filligree -(+)- necklace noriva~
 a filligree {G-(+)-{x necklace~
@@ -2765,11 +2765,11 @@ armor AI AC
 ABCD ABCD BCD BD 0
 68 20 25500 P
 A
-3 4
+5 4
 A
 4 4
 A
-5 4
+3 4
 #11784
 tooled -(+)- boots noriva~
 some tooled {G-(+)-{x boots~
@@ -2779,13 +2779,13 @@ armor I AG
 CD ABCD BCD CD 0
 68 60 11200 P
 A
-5 3
-A
-12 75
+19 4
 A
 18 5
 A
-19 4
+12 75
+A
+5 3
 #11785
 laerkai fury rage~
 laerkai fury~
@@ -2795,11 +2795,11 @@ armor AI AQ
 CE ACE CE ABCD 0
 99 0 50000 P
 A
-3 6
+19 6
 A
 12 250
 A
-19 6
+3 6
 #11786
 laerkai justice shield~
 laerkai justice~
@@ -2809,13 +2809,13 @@ armor AI AJ
 ABE CE CE AE 0
 99 50 50000 P
 A
-5 6
-A
-13 110
+20 -15
 A
 17 -25
 A
-20 -15
+13 110
+A
+5 6
 #11787
 laerkai pain~
 laerkai pain~
@@ -2825,13 +2825,13 @@ armor BI AH
 CE ABCE BCE BE 0
 99 0 50000 P
 A
-1 4
-A
-13 100
+19 15
 A
 18 10
 A
-19 15
+13 100
+A
+1 4
 #11788
 shadows laerkai stealth~
 laerkai stealth~
@@ -2841,11 +2841,11 @@ armor CI AG
 ACE ABE ABE E 0
 99 0 50000 P
 A
-2 6
+18 10
 A
 12 100
 A
-18 10
+2 6
 #11789
 laerkai might platemail plate mail~
 laerkai might~
@@ -2855,13 +2855,13 @@ armor BI AD
 CE ACE ACE AE 0
 99 100 50000 P
 A
-1 6
-A
-13 100
+19 15
 A
 18 10
 A
-19 15
+13 100
+A
+1 6
 #11790
 laerkai life health aura~
 laerkai life~
@@ -2871,11 +2871,11 @@ armor AI AC
 ACE ABE CE BE 0
 99 0 50000 P
 A
-5 6
+18 8
 A
 13 250
 A
-18 8
+5 6
 #11791
 laerkai power presense~
 laerkai power~
@@ -2885,9 +2885,9 @@ armor BI AM
 BCE ACE ABE ABCD 0
 99 0 55000 P
 A
-1 4
-A
 2 4
+A
+1 4
 E
 laerkai power presense~
 As you focus on the presense, a thundering voice booms through your
@@ -2911,9 +2911,9 @@ weapon BCI AN
 sword 12 12 pierce ADH
 99 250 55000 P
 A
-18 40
-A
 19 50
+A
+18 40
 E
 honed shortsword zedraikis~
 A wickedly sharp silvery blue blade gleams above a black wrapped leather
@@ -2933,23 +2933,23 @@ light AFIJK A
 0 0 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef 0 0
 99 0 55000 P
 A
-1 2
-A
-2 2
-A
-3 2
-A
-4 2
-A
-5 2
-A
-12 175
-A
-13 175
+19 12
 A
 18 12
 A
-19 12
+13 175
+A
+12 175
+A
+5 2
+A
+4 2
+A
+3 2
+A
+2 2
+A
+1 2
 E
 flame balance silver~
 The flame flickers blindingly, and you are forced to look away.
@@ -2963,11 +2963,11 @@ armor A AI
 ACD ABCD BCD AD 0
 62 40 7500 P
 A
-1 2
+19 4
 A
 2 2
 A
-19 4
+1 2
 #11795
 drakyri girth silvery~
 a drakyri girth~
@@ -2977,11 +2977,11 @@ armor AI AL
 CD E ACD BD 0
 62 40 7500 P
 A
-3 3
+19 4
 A
 12 70
 A
-19 4
+3 3
 #11796
 drakyri wrist guard~
 a drakyri wrist guard~
@@ -2991,13 +2991,13 @@ armor AI AM
 ACD BCD ACD ABD 0
 62 20 7500 P
 A
-5 2
-A
-13 70
+19 4
 A
 18 4
 A
-19 4
+13 70
+A
+5 2
 #11797
 drakyri dagger mithril~
 a drakyri dagger~
@@ -3007,11 +3007,11 @@ weapon AI AN
 dagger 4 21 pierce 0
 62 200 7500 P
 A
-2 2
+19 5
 A
 18 5
 A
-19 5
+2 2
 #11798
 green greenish energy pill~
 an energy pill~
@@ -3621,12 +3621,12 @@ Shelves line the east and west walls, filled to overflowing with dusty
     ~
 0 9 1
 E
-tomes parchment shelves shelf~
-A magical barrier shocks you as you reach towards the shelves.
-    ~
-E
 implements documents~
 It appears that some sort of arcane studies are in progress here.
+    ~
+E
+tomes parchment shelves shelf~
+A magical barrier shocks you as you reach towards the shelves.
     ~
 D1
 A long bookshelf lines the eastern wall, filled with books.
@@ -3866,16 +3866,16 @@ A crystal chandelier hangs suspended in the center of the room, its
     ~
 0 8 1
 E
-golden crest~
-Sculpted gold forms the symbol:
-     
-                               {Y((-*-)){x
-    ~
-E
 silvery lettering~
 The lettering reads:
      
                         - She'vale Treniste -
+    ~
+E
+golden crest~
+Sculpted gold forms the symbol:
+     
+                               {Y((-*-)){x
     ~
 D0
 A large room is visible to the north.
@@ -3902,14 +3902,14 @@ Shallow niches, spaced evenly along the long white walls of the gallery,
     ~
 0 8 1
 E
-figurines sculptures~
-Figurines and larger sculptures, intricately carved from precious metals,
-    stones, and rare woods, grace the niches and pedestals.
-    ~
-E
 portraits~
 The portraits depict everthing from battle scenes to flowers, all painted
     by the hands of master artists and probably worth a fortune.
+    ~
+E
+figurines sculptures~
+Figurines and larger sculptures, intricately carved from precious metals,
+    stones, and rare woods, grace the niches and pedestals.
     ~
 D2
 An ivory foyer is visible through the southern archway.
@@ -4156,10 +4156,9 @@ Varnished white ashwood walls frame a large, well decorated bedroom.
     ~
 0 8 1
 E
-ashwood door inscription~
-Inscribed in the ashwood door to the east are the words:
-     
-                  She'vale Treniste Josreke Ira'deian
+collection masks~
+Strange masks, carved mostly of dark wood and painted a variety of
+    colors.
     ~
 E
 tapestries tapestry heroes~
@@ -4167,9 +4166,10 @@ The warriors all appear to be of slender elven build.  All winged, some
     of the warriors battle in midair.
     ~
 E
-collection masks~
-Strange masks, carved mostly of dark wood and painted a variety of
-    colors.
+ashwood door inscription~
+Inscribed in the ashwood door to the east are the words:
+     
+                  She'vale Treniste Josreke Ira'deian
     ~
 D1
 Inscribed in the ashwood door to the east are the words:
@@ -4189,19 +4189,19 @@ The light from several torches in golden sconces spaced along the oak
     ~
 0 8 1
 E
-collection swords~
-The swords all appear finely tempered mithril or silver, each bearing
-    a different design as well as the Treniste crest.
+oaken dark door inscription~
+Inscribed in the dark oaken door to the south are the words:
+     
+                   She'vale Treniste Rodwen Ira'deia
     ~
 E
 crest~
 {Y((-*-)){x
     ~
 E
-oaken dark door inscription~
-Inscribed in the dark oaken door to the south are the words:
-     
-                   She'vale Treniste Rodwen Ira'deia
+collection swords~
+The swords all appear finely tempered mithril or silver, each bearing
+    a different design as well as the Treniste crest.
     ~
 D2
 Inscribed in the dark oaken door to the south are the words:
@@ -4252,6 +4252,12 @@ Shimmering golden tapestries hang from the walls, reflecting the torchlight
     ~
 0 8 1
 E
+gold design north~
+The design depicts a winged woman garbed in white wielding a blade in
+    one hand and holding a set of scales in the other.  The face, intricately
+    carven, is elven in shape.
+    ~
+E
 double golden doors ornate letters inscription~
 An inscription in the golden doors to the south reads:
      
@@ -4260,12 +4266,6 @@ An inscription in the golden doors to the south reads:
                               {Y((-*-)){x
      
                   She'vale Treniste Denylis Deiayan
-    ~
-E
-gold design north~
-The design depicts a winged woman garbed in white wielding a blade in
-    one hand and holding a set of scales in the other.  The face, intricately
-    carven, is elven in shape.
     ~
 D2
 An inscription in the golden doors to the south reads:
@@ -4449,17 +4449,17 @@ You stand in a dark, narrow niche carved of plain black stone.  A
     ~
 0 521 1
 E
+crack~
+Peering through the crack, you can make out a small carved slot, faintly
+    resembling a keyhole.
+    ~
+E
 marble pedestal~
 A low, wide pedestal carved of black marble.  Scratches and worn patches
     mar the polished top of the pedestal.  Strangely, along the sides, you
     notice offwhite streaks of what appears to be wax and darker splotches
     of something very like dried blood..  A crack runs down the eastern
     side of the pedestal.
-    ~
-E
-crack~
-Peering through the crack, you can make out a small carved slot, faintly
-    resembling a keyhole.
     ~
 D0
 A dark tunnel is visible to the north.
@@ -4505,15 +4505,15 @@ You find yourself in a large chamber hewn of black stone.  A huge
     ~
 0 8201 1
 E
+pentagram~
+A huge pentagram etched into the floor of the room.  Strange glyphs and
+    runes have been carved in the spaces between the defining lines.
+    ~
+E
 altar~
 Strange runes are engraved in the sides and face of the altar.  The
     top of the altar is permanently stained with ingrained blood, and fresher
     blood dribbles in streaks down the sides.
-    ~
-E
-pentagram~
-A huge pentagram etched into the floor of the room.  Strange glyphs and
-    runes have been carved in the spaces between the defining lines.
     ~
 D0
 Huge black double doors loom to the north.
@@ -4584,15 +4584,15 @@ A single blood red candle in the center of the room bathes the room in
     ~
 0 8 1
 E
-candle blood red~
-A single blood red candle balances on a nightstand in the center of the
-    room.
-    ~
-E
 golden lettering~
 Lettering above the doorway reads:
      
                       She'vale Reykaris Sorina Ira'deia
+    ~
+E
+candle blood red~
+A single blood red candle balances on a nightstand in the center of the
+    room.
     ~
 D0
 Lettering above the doorway reads:
@@ -4611,14 +4611,14 @@ Black oak wall panels seem to absorb the dim light of the few torches
     ~
 0 8 1
 E
+braces throwing daggers collection~
+The daggers appear finely tempered and quite lethal..
+    ~
+E
 golden inscription~
 A golden inscription above the door reads:
      
                       She'vale Reykaris Loryn Ira'deia
-    ~
-E
-braces throwing daggers collection~
-The daggers appear finely tempered and quite lethal..
     ~
 D2
 A golden inscription above the door reads:
@@ -4638,15 +4638,15 @@ The tall black marble walls are broken to the north, east, and south
     ~
 0 9 1
 E
-humanoid skull~
-The skull gleams whitely against the dark marble archway, its mouth
-    seemingly fixed in a permanent feral grin.
-    ~
-E
 gold lettering~
 The lettering reads:
      
        She'vale Reykaris Rachal Deia  {D->*<-{x  She'vale Reykaris Toryan Deiayan
+    ~
+E
+humanoid skull~
+The skull gleams whitely against the dark marble archway, its mouth
+    seemingly fixed in a permanent feral grin.
     ~
 D0
 The mahogany door sports streaks of blackened wood.  Engraved above
@@ -4682,19 +4682,19 @@ A humanoid skull hangs suspended from the center of the ceiling, an inner
     ~
 0 8 1
 E
-humanoid skull~
-A reddish light glows from within the skull, beaming eerily from the emtpy
-    eye sockets and lipless mouth to bathe the room in a dim, bloody glow.
+inscription gold~
+The inscription above the door reads:
+     
+                      She'vale Reykaris Chake Ira'deian
     ~
 E
 strange figures~
 Intricately carved, the figures depict weird, hellish creatures.
     ~
 E
-inscription gold~
-The inscription above the door reads:
-     
-                      She'vale Reykaris Chake Ira'deian
+humanoid skull~
+A reddish light glows from within the skull, beaming eerily from the emtpy
+    eye sockets and lipless mouth to bathe the room in a dim, bloody glow.
     ~
 D0
 The inscription above the door reads:
@@ -4737,17 +4737,17 @@ Black obsidian walls seem to absorb all light in the room, leaving a
     ~
 0 9 1
 E
+humanoid skeletons~
+You notice bones rising from the shoulder blades, probably to support
+    wings.
+    ~
+E
 inscription~
 Above the dark doorway is the inscription:
      
      She'vale Reykaris Rachal Deia
                                     {D->*<-{x
                                            She'vale Reykaris Toryan Deiayan
-    ~
-E
-humanoid skeletons~
-You notice bones rising from the shoulder blades, probably to support
-    wings.
     ~
 D3
 Above the dark doorway is the inscription:
@@ -4941,13 +4941,6 @@ Grey streaked black marble walls gleam coldly in the dim light, broken
     ~
 0 9 1
 E
-dagger~
-An engraving of a thrown dagger arcs across the northern wall.
-    Carved along the hilt of the dagger are the words:
-     
-                        Myr'vale Myrxes Dyraena Na'deia
-    ~
-E
 glass case daggers~
 You see three daggers, covered by a low glass case.  The central dagger is
     thin with a narrow hilt, probably for throwing.  It gleams the silver-blue
@@ -4957,6 +4950,13 @@ You see three daggers, covered by a low glass case.  The central dagger is
     steel forms the third blade, longer than the other two, almost a shortsword.
     Carved above the dark grip is a striking lynx.  The shimmer of some sort
     of protective magic shield surrounds the case and supporting table.
+    ~
+E
+dagger~
+An engraving of a thrown dagger arcs across the northern wall.
+    Carved along the hilt of the dagger are the words:
+     
+                        Myr'vale Myrxes Dyraena Na'deia
     ~
 D2
 You see smooth grey streaked black marble.
@@ -5420,18 +5420,18 @@ Light from a single white candle, supported on a table in the center
     ~
 0 8 1
 E
-candle white~
-A tall white candle glows brightly.
+inscription golden~
+The inscription reads:
+     
+                     Myr'vale Noriva Dryna Ira'deia
     ~
 E
 depiction hand~
 Beneath the hand is the crest of house Noriva.
     ~
 E
-inscription golden~
-The inscription reads:
-     
-                     Myr'vale Noriva Dryna Ira'deia
+candle white~
+A tall white candle glows brightly.
     ~
 D2
 An ashwood doors exits the room to the south.  A golden inscription
@@ -5450,14 +5450,14 @@ The golden grains of teak wall panels glow warmly in the torchlight.
     ~
 0 8 1
 E
-leaf~
-A strange five-pointed leaf is carved in the golden wood above the doorway.
-    ~
-E
 inscription gold~
 The inscription reads:
      
                      Myr'vale Noriva Yllyra Na'deia
+    ~
+E
+leaf~
+A strange five-pointed leaf is carved in the golden wood above the doorway.
     ~
 D1
 Above the teakwood door to the east is an inscription:
