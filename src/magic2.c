@@ -316,7 +316,7 @@ void spell_pylon(int sn, int level, CHAR_DATA *ch, void *vo, int target)
     /* Create portal at caster's location */
     portal = create_object(get_obj_index(OBJ_VNUM_PORTAL), 0);
     portal->timer = 20;
-    portal->value[0] = -1;  /* Infinite charges */
+    portal->value[0] = 100;  /* High charges - lasts until timer expires */
     portal->value[3] = pylon_room->vnum;  /* Destination vnum */
     
     /* Set descriptive names based on clan and area */
