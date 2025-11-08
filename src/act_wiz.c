@@ -5360,6 +5360,13 @@ void copyover_recover ()
                 act ("$n materializes!.", d->character->pet, NULL, NULL,
                      TO_ROOM);
             }
+
+            if (d->character->mount != NULL)
+            {
+                char_to_room (d->character->mount, d->character->in_room);
+                act ("$n materializes!.", d->character->mount, NULL, NULL,
+                     TO_ROOM);
+            }
         }
 
     }
