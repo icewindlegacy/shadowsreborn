@@ -228,7 +228,7 @@ void spell_marque(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 void spell_pylon(int sn, int level, CHAR_DATA *ch, void *vo, int target)
 {
     OBJ_DATA *pylon = NULL;
-    OBJ_DATA *portal;
+    OBJ_DATA *portal, *stone;
     ROOM_INDEX_DATA *pylon_room;
     AREA_DATA *area;
     char arg[MAX_INPUT_LENGTH];
@@ -250,6 +250,14 @@ void spell_pylon(int sn, int level, CHAR_DATA *ch, void *vo, int target)
     if (arg[0] == '\0')
     {
         send_to_char("Which area's pylon do you wish to connect to?\n\r", ch);
+        return;
+    }
+    
+    /* Check for warp stone */
+    stone = get_eq_char(ch, WEAR_HOLD);
+    if (!IS_IMMORTAL(ch) && (stone == NULL || stone->item_type != ITEM_WARP_STONE))
+    {
+        send_to_char("You lack the proper component for this spell.\n\r", ch);
         return;
     }
     
@@ -297,9 +305,17 @@ void spell_pylon(int sn, int level, CHAR_DATA *ch, void *vo, int target)
         return;
     }
     
+    /* Consume the warp stone */
+    if (stone != NULL && stone->item_type == ITEM_WARP_STONE)
+    {
+        act("You draw upon the power of $p.", ch, stone, NULL, TO_CHAR);
+        act("It flares brightly and vanishes!", ch, stone, NULL, TO_CHAR);
+        extract_obj(stone);
+    }
+    
     /* Create portal at caster's location */
     portal = create_object(get_obj_index(OBJ_VNUM_PORTAL), 0);
-    portal->timer = 2 + level / 10;
+    portal->timer = 20;
     portal->value[0] = -1;  /* Infinite charges */
     portal->value[3] = pylon_room->vnum;  /* Destination vnum */
     
