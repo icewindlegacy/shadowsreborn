@@ -2550,6 +2550,7 @@ OBJ_DATA *create_object (OBJ_INDEX_DATA * pObjIndex, int level)
         case ITEM_MAP:
         case ITEM_CLOTHING:
         case ITEM_PORTAL:
+        case ITEM_PYLON:
             if (!pObjIndex->new_format)
                 obj->cost /= 5;
             break;

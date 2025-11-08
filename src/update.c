@@ -1246,6 +1246,9 @@ void obj_update (void)
             case ITEM_PORTAL:
                 message = "$p fades out of existence.";
                 break;
+            case ITEM_PYLON:
+                message = "$p crumbles to dust.";
+                break;
             case ITEM_CONTAINER:
                 if (CAN_WEAR (obj, ITEM_WEAR_FLOAT))
                     if (obj->contains)

@@ -2478,6 +2478,19 @@ void show_obj_values (CHAR_DATA * ch, OBJ_INDEX_DATA * obj)
             send_to_char (buf, ch);
             break;
 
+        case ITEM_PYLON:
+            sprintf (buf,
+                     "[v0] Charges:        [%d] (0 = infinite)\n\r"
+                     "[v1] Unused\n\r"
+                     "[v2] Clan Number:    [%d] %s\n\r"
+                     "[v3] Unused\n\r",
+                     obj->value[0],
+                     obj->value[2],
+                     obj->value[2] > 0 && obj->value[2] < MAX_CLAN ? 
+                         clan_table[obj->value[2]].name : "(None)");
+            send_to_char (buf, ch);
+            break;
+
         case ITEM_FURNITURE:
             sprintf (buf,
                      "[v0] Max people:      [%d]\n\r"
