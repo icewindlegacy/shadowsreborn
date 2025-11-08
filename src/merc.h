@@ -2167,6 +2167,7 @@ struct    obj_index_data
     sh_int              trap_eff;       /* trap effect flags */
     sh_int              trap_dam;       /* trap damage type */
     sh_int              trap_charge;    /* trap charges */
+    bool                trap_enabled;   /* trap is active */
 };
 
 
@@ -2211,6 +2212,7 @@ struct    obj_data
     sh_int              trap_eff;       /* trap effect flags */
     sh_int              trap_dam;       /* trap damage type */
     sh_int              trap_charge;    /* trap charges */
+    bool                trap_enabled;   /* trap is active */
 };
 
 

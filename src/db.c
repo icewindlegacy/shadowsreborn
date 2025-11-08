@@ -999,12 +999,14 @@ void load_old_obj (FILE * fp)
             pObjIndex->trap_eff = fread_number(fp);
             pObjIndex->trap_dam = fread_number(fp);
             pObjIndex->trap_charge = fread_number(fp);
+            pObjIndex->trap_enabled = TRUE;  /* Traps are enabled by default */
         }
         else
         {
             pObjIndex->trap_eff = 0;
             pObjIndex->trap_dam = 0;
             pObjIndex->trap_charge = 0;
+            pObjIndex->trap_enabled = FALSE;
         }
         
         pObjIndex->wear_flags = fread_flag (fp);
@@ -2512,6 +2514,7 @@ OBJ_DATA *create_object (OBJ_INDEX_DATA * pObjIndex, int level)
     obj->trap_eff = pObjIndex->trap_eff;
     obj->trap_dam = pObjIndex->trap_dam;
     obj->trap_charge = pObjIndex->trap_charge;
+    obj->trap_enabled = pObjIndex->trap_enabled;
     obj->value[0] = pObjIndex->value[0];
     obj->value[1] = pObjIndex->value[1];
     obj->value[2] = pObjIndex->value[2];

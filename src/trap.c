@@ -167,6 +167,12 @@ void do_trapstat(CHAR_DATA *ch, char *argument)
     }
     sprintf(buf, "Trap Charges left: %d.\n\r", obj->trap_charge);
     send_to_char(buf, ch);
+    
+    if (obj->trap_enabled)
+        send_to_char("Trap is ENABLED.\n\r", ch);
+    else
+        send_to_char("Trap is DISABLED.\n\r", ch);
+    
     return;
 }
 
@@ -218,6 +224,8 @@ void do_trapset(CHAR_DATA *ch, char *argument)
     char arg2[MAX_INPUT_LENGTH];
     char arg3[MAX_INPUT_LENGTH];
     int val = 0;
+    int qp_cost;
+    bool is_immortal = (get_trust(ch) >= GOD);  /* GOD = MAX_LEVEL - 4 */
 
     argument = one_argument(argument, arg1);
     argument = one_argument(argument, arg2);
@@ -225,12 +233,21 @@ void do_trapset(CHAR_DATA *ch, char *argument)
 
     if (arg1[0] == '\0' || arg2[0] == '\0')
     {
-        send_to_char("Syntax: trapset <object> <field> <value>\n\r\n\r", ch);
-        send_to_char("Field: move, object(get and put), room, open, damage, charge\n\r\n\r", ch);
-        send_to_char("Values: Move> north, south, east, west, up, down, and all.\n\r\n\r", ch);
-        send_to_char("        Damage> sleep, teleport, fire, cold, acid, energy,\n\r", ch);
-        send_to_char("                blunt, pierce, slash.\n\r\n\r", ch);
-        send_to_char("        Object, open, room> no values\n\r", ch);
+        if (is_immortal)
+        {
+            send_to_char("Syntax: trapset <object> <field> <value>\n\r\n\r", ch);
+            send_to_char("Field: move, object(get and put), room, open, damage, charge, enable, disable\n\r\n\r", ch);
+            send_to_char("Values: Move> north, south, east, west, up, down, and all.\n\r\n\r", ch);
+            send_to_char("        Damage> sleep, teleport, fire, cold, acid, energy,\n\r", ch);
+            send_to_char("                blunt, pierce, slash.\n\r\n\r", ch);
+            send_to_char("        Object, open, room, enable, disable> no values\n\r", ch);
+        }
+        else
+        {
+            send_to_char("Syntax: trapset <object> <field> <value>\n\r\n\r", ch);
+            send_to_char("Field: charge, enable, disable\n\r\n\r", ch);
+            send_to_char("Note: Charges cost 10 quest points each.\n\r", ch);
+        }
         return;
     }
 
@@ -239,11 +256,32 @@ void do_trapset(CHAR_DATA *ch, char *argument)
         send_to_char("Nothing like that here!\n\r", ch);
         return;
     }
+    
     if (!IS_SET(obj->extra_flags, ITEM_TRAP))
-        SET_BIT(obj->extra_flags, ITEM_TRAP);
+    {
+        if (is_immortal)
+            SET_BIT(obj->extra_flags, ITEM_TRAP);
+        else
+        {
+            send_to_char("That's not a trap!\n\r", ch);
+            return;
+        }
+    }
+    
+    /* Check if player is trying to use immortal-only options */
+    if (!is_immortal && str_cmp(arg2, "charge") && str_cmp(arg2, "enable") && str_cmp(arg2, "disable"))
+    {
+        send_to_char("You can only use: charge, enable, or disable.\n\r", ch);
+        return;
+    }
 
     if (!str_cmp(arg2, "move"))
     {
+        if (!is_immortal)
+        {
+            send_to_char("Only immortals can set trap movement types.\n\r", ch);
+            return;
+        }
         if (arg3[0] == '\0')
         {
             send_to_char("Syntax: trapset <object> <field> <value>\n\r\n\r", ch);
@@ -338,6 +376,11 @@ void do_trapset(CHAR_DATA *ch, char *argument)
     }
     if (!str_cmp(arg2, "object"))
     {
+        if (!is_immortal)
+        {
+            send_to_char("Only immortals can set trap trigger types.\n\r", ch);
+            return;
+        }
         if (!IS_SET(obj->trap_eff, TRAP_EFF_OBJECT))
             SET_BIT(obj->trap_eff, TRAP_EFF_OBJECT);
         send_to_char("You have set an object(get or put) trap!\n\r", ch);
@@ -346,6 +389,11 @@ void do_trapset(CHAR_DATA *ch, char *argument)
 
     if (!str_cmp(arg2, "room"))
     {
+        if (!is_immortal)
+        {
+            send_to_char("Only immortals can set trap effect types.\n\r", ch);
+            return;
+        }
         if (!IS_SET(obj->trap_eff, TRAP_EFF_ROOM))
             SET_BIT(obj->trap_eff, TRAP_EFF_ROOM);
         send_to_char("You have made the trap affect the whole room!\n\r", ch);
@@ -354,6 +402,11 @@ void do_trapset(CHAR_DATA *ch, char *argument)
 
     if (!str_cmp(arg2, "open"))
     {
+        if (!is_immortal)
+        {
+            send_to_char("Only immortals can set trap trigger types.\n\r", ch);
+            return;
+        }
         if (!IS_SET(obj->trap_eff, TRAP_EFF_OPEN))
             SET_BIT(obj->trap_eff, TRAP_EFF_OPEN);
         send_to_char("You have made the trap spring when opened!\n\r", ch);
@@ -362,6 +415,11 @@ void do_trapset(CHAR_DATA *ch, char *argument)
 
     if (!str_cmp(arg2, "damage"))
     {
+        if (!is_immortal)
+        {
+            send_to_char("Only immortals can set trap damage types.\n\r", ch);
+            return;
+        }
         if (arg3[0] == '\0')
         {
             send_to_char("You need to specify a value!\n\r", ch);
@@ -440,13 +498,59 @@ void do_trapset(CHAR_DATA *ch, char *argument)
             send_to_char("You need to specify how many charges.\n\r", ch);
             return;
         }
-        if ((val = atoi(arg3)) > 100 || val < 0)
+        if ((val = atoi(arg3)) > 100 || val < 1)
         {
             send_to_char("Current allowed range is 1 to 100.\n\r", ch);
             return;
         }
+        
+        /* Players must pay quest points */
+        if (!is_immortal)
+        {
+            if (IS_NPC(ch))
+            {
+                send_to_char("NPCs cannot recharge traps.\n\r", ch);
+                return;
+            }
+            
+            qp_cost = val * 10;  /* 10 qp per charge */
+            
+            if (ch->pcdata->questpoints < qp_cost)
+            {
+                char buf[MAX_STRING_LENGTH];
+                sprintf(buf, "You need %d quest points to add %d charges (10 qp each).\n\r", 
+                        qp_cost, val);
+                send_to_char(buf, ch);
+                return;
+            }
+            
+            ch->pcdata->questpoints -= qp_cost;
+            obj->trap_charge = val;
+            
+            char buf[MAX_STRING_LENGTH];
+            sprintf(buf, "You recharge the trap to %d charges for %d quest points.\n\r", 
+                    val, qp_cost);
+            send_to_char(buf, ch);
+            return;
+        }
+        
+        /* Immortals set charges for free */
         obj->trap_charge = val;
         send_to_char("Charge value set.\n\r", ch);
+        return;
+    }
+    
+    if (!str_cmp(arg2, "enable"))
+    {
+        obj->trap_enabled = TRUE;
+        send_to_char("Trap enabled.\n\r", ch);
+        return;
+    }
+    
+    if (!str_cmp(arg2, "disable"))
+    {
+        obj->trap_enabled = FALSE;
+        send_to_char("Trap disabled.\n\r", ch);
         return;
     }
 
@@ -471,7 +575,8 @@ bool checkmovetrap(CHAR_DATA *ch, int dir)
     {
         obj_next = obj->next_content;
 
-        if (IS_SET(obj->extra_flags, ITEM_TRAP) && IS_SET(obj->trap_eff, TRAP_EFF_MOVE) && obj->trap_charge > 0)
+        if (IS_SET(obj->extra_flags, ITEM_TRAP) && IS_SET(obj->trap_eff, TRAP_EFF_MOVE) 
+            && obj->trap_charge > 0 && obj->trap_enabled)
             found = TRUE;
         else
             found = FALSE;
@@ -530,7 +635,7 @@ bool checkgetput(CHAR_DATA *ch, OBJ_DATA *obj)
     if (!IS_SET(obj->extra_flags, ITEM_TRAP))
         return FALSE;
 
-    if (IS_SET(obj->trap_eff, TRAP_EFF_OBJECT) && obj->trap_charge > 0)
+    if (IS_SET(obj->trap_eff, TRAP_EFF_OBJECT) && obj->trap_charge > 0 && obj->trap_enabled)
     {
         trapdamage(ch, obj);
         return TRUE;
@@ -550,7 +655,7 @@ bool checkopen(CHAR_DATA *ch, OBJ_DATA *obj)
     if (!IS_SET(obj->extra_flags, ITEM_TRAP))
         return FALSE;
 
-    if (IS_SET(obj->trap_eff, TRAP_EFF_OPEN) && obj->trap_charge > 0)
+    if (IS_SET(obj->trap_eff, TRAP_EFF_OPEN) && obj->trap_charge > 0 && obj->trap_enabled)
     {
         trapdamage(ch, obj);
         return TRUE;
