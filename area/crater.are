@@ -1997,35 +1997,46 @@ S
 
 
 #RESETS
-M 0 12000 1 12000 5 Load an inside-out drake
-M 0 12010 2 12005 5 Load a frozen combat echo
-M 0 12009 2 12005 5 Load a void-thing
-M 0 12000 1 12006 5 Load an inside-out drake
-M 0 12000 1 12007 5 Load an inside-out drake
-M 0 12000 1 12009 5 Load an inside-out drake
-M 0 12000 1 12010 5 Load an inside-out drake
-M 0 12012 2 12012 5 Load a crystalline healer
-M 0 12006 2 12012 5 Load a dissolving salt-cavalry
-M 0 12001 1 12019 5 Load a writhing flesh-mass
-M 0 12002 1 12019 5 Load a crystallized glass-knight
-M 0 12006 2 12021 5 Load a dissolving salt-cavalry
-M 0 12012 2 12021 5 Load a crystalline healer
-M 0 12011 2 12032 5 Load a flesh-garden tentacle
-M 0 12012 2 12032 5 Load a crystalline healer
-M 0 12003 1 12040 5 Load a temporally-looped soldier
-M 0 12002 1 12042 5 Load a crystallized glass-knight
-M 0 12003 1 12042 5 Load a temporally-looped soldier
-M 0 12008 2 12044 5 Load a living bone-weapon
-M 0 12009 2 12044 5 Load a void-thing
-M 0 12010 2 12044 5 Load a frozen combat echo
-M 0 12006 2 12054 5 Load a dissolving salt-cavalry
-M 0 12006 2 12054 5 Load a dissolving salt-cavalry
-M 0 12007 2 12055 5 Load a petrified screaming drake
-M 0 12007 2 12055 5 Load a petrified screaming drake
-M 0 12004 2 12060 5 Load a gravity-defying corpse
-M 0 12004 2 12060 5 Load a gravity-defying corpse
-M 0 12005 2 12062 5 Load a dimensionally-displaced thing
-M 0 12005 2 12062 5 Load a dimensionally-displaced thing
+* Northern rim - reality-warped drakes and horrors
+M 0 12000 1 12002 3        Load an inside-out drake
+M 0 12005 1 12004 3        Load a dimensionally-displaced thing
+* Upper rim - time anomalies and early devastation  
+M 0 12003 1 12010 4        Load a temporally-looped soldier
+M 0 12010 2 12011 4        Load a frozen combat echo
+M 0 12010 2 12011 4        Load a frozen combat echo
+M 0 12004 1 12013 4        Load a gravity-defying corpse
+* Middle rim - dense horror concentration
+M 0 12001 2 12019 3        Load a writhing flesh-mass
+M 0 12001 2 12019 3        Load a writhing flesh-mass
+M 0 12002 1 12020 4        Load a crystallized glass-knight
+M 0 12006 1 12021 5        Load a dissolving salt-cavalry
+M 0 12011 2 12031 3        Load a flesh-garden tentacle
+M 0 12011 2 12031 3        Load a flesh-garden tentacle
+M 0 12012 1 12032 4        Load a crystalline healer
+* Lower rim - deepest horrors near blast epicenter
+M 0 12009 1 12039 2        Load a void-thing
+M 0 12000 1 12040 3        Load an inside-out drake
+M 0 12008 2 12041 4        Load a living bone-weapon
+M 0 12008 2 12041 4        Load a living bone-weapon
+M 0 12003 1 12042 4        Load a temporally-looped soldier
+M 0 12007 1 12043 3        Load a petrified screaming drake
+M 0 12010 1 12044 4        Load a frozen combat echo
+* Deep crater - maximum reality distortion
+M 0 12009 2 12053 2        Load a void-thing
+M 0 12009 2 12053 2        Load a void-thing
+M 0 12001 1 12054 3        Load a writhing flesh-mass
+M 0 12005 1 12055 3        Load a dimensionally-displaced thing
+M 0 12004 2 12056 4        Load a gravity-defying corpse
+M 0 12004 2 12056 4        Load a gravity-defying corpse
+M 0 12007 1 12057 3        Load a petrified screaming drake
+* Southern rim - dissolving and transitional horrors
+M 0 12006 2 12059 5        Load a dissolving salt-cavalry
+M 0 12006 2 12059 5        Load a dissolving salt-cavalry
+M 0 12002 1 12063 4        Load a crystallized glass-knight
+M 0 12012 2 12065 4        Load a crystalline healer
+M 0 12012 2 12065 4        Load a crystalline healer
+M 0 12011 1 12068 3        Load a flesh-garden tentacle
+M 0 12008 1 12070 4        Load a living bone-weapon
 S
 
 
