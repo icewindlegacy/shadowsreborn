@@ -1792,6 +1792,13 @@ void do_common (CHAR_DATA *ch, char *argument)
     char message[MAX_STRING_LENGTH];
     extern char *makedrunk(char *string, CHAR_DATA *ch);
 
+    /* NPCs can't use language commands */
+    if (IS_NPC(ch))
+    {
+        do_say(ch, argument);
+        return;
+    }
+
     if ((chance = ch->pcdata->learned[skill_lookup("common")]) == 0)
     {
         send_to_char("You don't know how to speak Common.\n\r", ch);
@@ -1858,6 +1865,13 @@ void do_human (CHAR_DATA *ch, char *argument)
     int chance2;
     char *translated;
 
+    /* NPCs can't use language commands */
+    if (IS_NPC(ch))
+    {
+        do_say(ch, argument);
+        return;
+    }
+
     if ((chance = ch->pcdata->learned[skill_lookup("human")]) == 0)
     {
         send_to_char("You don't know how to speak Human.\n\r", ch);
@@ -1916,6 +1930,13 @@ void do_elvish (CHAR_DATA *ch, char *argument)
     int chance;
     int chance2;
     char *translated;
+
+    /* NPCs can't use language commands */
+    if (IS_NPC(ch))
+    {
+        do_say(ch, argument);
+        return;
+    }
 
     if ((chance = ch->pcdata->learned[skill_lookup("elvish")]) == 0)
     {
@@ -1976,6 +1997,13 @@ void do_dwarvish (CHAR_DATA *ch, char *argument)
     int chance2;
     char *translated;
 
+    /* NPCs can't use language commands */
+    if (IS_NPC(ch))
+    {
+        do_say(ch, argument);
+        return;
+    }
+
     if ((chance = ch->pcdata->learned[skill_lookup("dwarvish")]) == 0)
     {
         send_to_char("You don't know how to speak Dwarvish.\n\r", ch);
@@ -2034,6 +2062,13 @@ void do_verbeeg (CHAR_DATA *ch, char *argument)
     int chance;
     int chance2;
     char *translated;
+
+    /* NPCs can't use language commands */
+    if (IS_NPC(ch))
+    {
+        do_say(ch, argument);
+        return;
+    }
 
     if ((chance = ch->pcdata->learned[skill_lookup("verbeeg")]) == 0)
     {
