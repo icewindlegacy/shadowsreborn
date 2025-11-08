@@ -2063,6 +2063,7 @@ struct    pc_data
     int				duration;               /* Duration of investment */
     char *			history;                /* Character history */
     time_t			login_time;             /* Session login time for mudinfo */
+    sh_int			marqued_room;           /* Room vnum for word of recall */
 
 };
 

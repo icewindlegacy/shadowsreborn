@@ -243,6 +243,8 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
              : ch->in_room == NULL ? 3001 : ch->in_room->vnum);
     if (ch->riding)
         fprintf(fp, "Riding %d\n", ch->riding);
+    if (ch->pcdata->marqued_room != 0)
+        fprintf(fp, "Marqued %d\n", ch->pcdata->marqued_room);
              fprintf( fp, "PkPdMkMd %d %d %d %d %d %d %d\n",
                 ch->pkill, ch->pdeath, ch->pkattempt, ch->mkill, ch->mdeath, 
                 ch->arenakill, ch->arenadeath );
@@ -1724,6 +1726,10 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
                 KEY ("Quest_Accum", ch->pcdata->quest_accum, fread_number (fp));
                 KEY ("QuestNext", ch->pcdata->nextquest, fread_number (fp));
                 KEY ("QuestNext", ch->pcdata->countdown, fread_number (fp));
+                break;
+
+            case 'M':
+                KEY ("Marqued", ch->pcdata->marqued_room, fread_number (fp));
                 break;
 
             case 'R':

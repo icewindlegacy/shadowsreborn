@@ -456,6 +456,7 @@ PC_DATA *new_pcdata (void)
     pcdata->share_level = 0;
     pcdata->shares_bought = 0;
     pcdata->duration = 0;
+    pcdata->marqued_room = 0;
 
     pcdata->buffer = new_buf ();
 

@@ -1976,6 +1976,12 @@ struct skill_type skill_table[MAX_SKILL] = {
      "", "!Locate Object!", ""},
 
     {
+     "marque", {25, 22, 35, 28}, {1, 1, 2, 2},
+     spell_marque, TAR_IGNORE, POS_STANDING,
+     NULL, SLOT (721), 25, 12,
+     "", "!Marque!", ""},
+
+    {
      "magic missile", {1, 53, 2, 2}, {1, 1, 2, 2},
      spell_magic_missile, TAR_CHAR_OFFENSIVE, POS_FIGHTING,
      NULL, SLOT (32), 15, 12,

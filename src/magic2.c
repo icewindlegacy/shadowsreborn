@@ -194,3 +194,32 @@ void spell_nexus (int sn, int level, CHAR_DATA * ch, void *vo, int target)
              TO_CHAR);
     }
 }
+
+/* Marque - mark a room for word of recall */
+void spell_marque(int sn, int level, CHAR_DATA *ch, void *vo, int target)
+{
+    if (IS_NPC(ch))
+    {
+        send_to_char("NPCs cannot marque locations.\n\r", ch);
+        return;
+    }
+
+    if (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL))
+    {
+        send_to_char("This room cannot be marqued.\n\r", ch);
+        return;
+    }
+
+    if (IS_SET(ch->in_room->room_flags, ROOM_PRIVATE) ||
+        IS_SET(ch->in_room->room_flags, ROOM_SOLITARY))
+    {
+        send_to_char("You cannot marque a private location.\n\r", ch);
+        return;
+    }
+
+    ch->pcdata->marqued_room = ch->in_room->vnum;
+    
+    act("You marque this location with mystical energy.", ch, NULL, NULL, TO_CHAR);
+    act("$n traces glowing runes in the air that fade into nothingness.", ch, NULL, NULL, TO_ROOM);
+    send_to_char("You may now use 'word of recall' to return here.\n\r", ch);
+}
