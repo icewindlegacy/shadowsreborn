@@ -386,6 +386,8 @@ DECLARE_DO_FUN(	do_display		);
 DECLARE_DO_FUN( do_finger		);
 DECLARE_DO_FUN( do_forget		);
 DECLARE_DO_FUN( do_remember		);
+DECLARE_DO_FUN( do_petname		);
+DECLARE_DO_FUN( do_mountname		);
 DECLARE_DO_FUN( do_award		);
 DECLARE_DO_FUN( do_avatar		);
 DECLARE_DO_FUN( do_secset		);

@@ -218,6 +218,7 @@ const struct cmd_type cmd_table[] = {
     {"nosummon",	do_nosummon,	POS_DEAD,	0, LOG_NORMAL, 1},
     {"outfit",		do_backpack,	POS_RESTING,	0, LOG_NORMAL, 1},
     {"password",	do_password,	POS_DEAD,	0, LOG_NEVER,  1},
+    {"petname",		do_petname,	POS_RESTING,	0, LOG_NORMAL, 1},
     {"prompt",		do_prompt,	POS_DEAD,	0, LOG_NORMAL, 1},
     {"scroll",		do_scroll,	POS_DEAD,	0, LOG_NORMAL, 1},
     {"telnetga",	do_telnetga,	POS_DEAD,	0, LOG_NORMAL, 1},
@@ -383,6 +384,7 @@ const struct cmd_type cmd_table[] = {
 
     {"mount", do_mount, POS_FIGHTING, 0, LOG_NORMAL, 1},
     {"dismount", do_dismount, POS_FIGHTING, 0, LOG_NORMAL, 1},
+    {"mountname", do_mountname, POS_RESTING, 0, LOG_NORMAL, 1},
 
 
 

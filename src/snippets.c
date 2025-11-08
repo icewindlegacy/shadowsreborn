@@ -2759,3 +2759,167 @@ void do_campfire(CHAR_DATA *ch, char *argument)
     act("{c$n builds a campfire using firewood and $s tinderbox.", ch, NULL, tinderbox, TO_ROOM);
     act("{cYou build a campfire using firewood and your tinderbox.", ch, NULL, tinderbox, TO_CHAR);
 }
+
+/* Petname - by Gary McNickle (dharvest) - adapted for Shadows Reborn */
+void do_petname(CHAR_DATA *ch, char *argument)
+{
+    char buf[MAX_STRING_LENGTH];
+    char command[MAX_INPUT_LENGTH], arg2[MAX_INPUT_LENGTH];
+
+    /* smash all tilde's right away. */
+    smash_tilde(argument);
+
+    if (ch->pet == NULL)
+    {
+        send_to_char("You don't have a pet!\n\r", ch);
+        return;
+    }
+
+    if (ch->in_room != ch->pet->in_room)
+    {
+        send_to_char("Your pet needs to be with you to learn its new name!\n\r", ch);
+        return;
+    }
+
+    argument = one_argument(argument, command);
+
+    if (command[0] == '\0' || argument[0] == '\0')
+    {
+        send_to_char("\n\rsyntax: petname [name|short|long|desc] <argument>\n\r", ch);
+        send_to_char("\n\r  example: \"petname name fido\"\n\r", ch);
+        send_to_char("            \"petname short a hungry dog\"\n\r", ch);
+        send_to_char("            \"petname long A hungry dog is here.\"\n\r", ch);
+        send_to_char("\n\rTry using color in the descriptions!\n\r\n\r", ch);
+        send_to_char("See \"help petname\" and \"help color\" for more information.\n\r", ch);
+        return;
+    }
+
+    if (!str_prefix(command, "name"))
+    {
+        if (argument[0] == '{')  /* remove color codes from name */
+        {
+            argument++; 
+            argument++;
+        }
+
+        argument = one_argument(argument, arg2);
+        free_string(ch->pet->name);
+        ch->pet->name = str_dup(arg2);
+        sprintf(buf, "Your pet has been renamed to: %s\n\r", ch->pet->name);
+        send_to_char(buf, ch);
+    }
+    else if (!str_prefix(command, "short"))
+    {
+        if (argument[0] == '\0') return;
+        free_string(ch->pet->short_descr);
+        ch->pet->short_descr = str_dup(argument);
+        sprintf(buf, "%s's short description set to: \n\r%s\n\r",
+                ch->pet->name, ch->pet->short_descr);
+        send_to_char(buf, ch);
+    }
+    else if (!str_prefix(command, "long"))
+    {
+        if (argument[0] == '\0') return;
+        free_string(ch->pet->long_descr);
+        sprintf(buf, "%s\n\r", argument);
+        ch->pet->long_descr = str_dup(buf);
+        sprintf(buf, "%s's long description set to: \n\r%s\n\r",
+                ch->pet->name, ch->pet->long_descr);
+        send_to_char(buf, ch);
+    }
+    else if (!str_prefix(command, "description") || !str_prefix(command, "desc"))
+    {
+        if (argument[0] == '\0')
+        {
+            string_append(ch, &ch->pet->description);
+            return;
+        }
+        send_to_char("Use 'petname desc' with no argument to enter the editor.\n\r", ch);
+    }
+    else
+    {
+        send_to_char("Invalid option. Use: name, short, long, or desc.\n\r", ch);
+    }
+}
+
+/* Mountname - adapted from petname for mounts */
+void do_mountname(CHAR_DATA *ch, char *argument)
+{
+    char buf[MAX_STRING_LENGTH];
+    char command[MAX_INPUT_LENGTH], arg2[MAX_INPUT_LENGTH];
+
+    /* smash all tilde's right away. */
+    smash_tilde(argument);
+
+    if (ch->mount == NULL)
+    {
+        send_to_char("You don't have a mount!\n\r", ch);
+        return;
+    }
+
+    if (ch->in_room != ch->mount->in_room)
+    {
+        send_to_char("Your mount needs to be with you to learn its new name!\n\r", ch);
+        return;
+    }
+
+    argument = one_argument(argument, command);
+
+    if (command[0] == '\0' || argument[0] == '\0')
+    {
+        send_to_char("\n\rsyntax: mountname [name|short|long|desc] <argument>\n\r", ch);
+        send_to_char("\n\r  example: \"mountname name shadowfax\"\n\r", ch);
+        send_to_char("            \"mountname short a swift stallion\"\n\r", ch);
+        send_to_char("            \"mountname long A swift stallion stands here.\"\n\r", ch);
+        send_to_char("\n\rTry using color in the descriptions!\n\r\n\r", ch);
+        send_to_char("See \"help mountname\" and \"help color\" for more information.\n\r", ch);
+        return;
+    }
+
+    if (!str_prefix(command, "name"))
+    {
+        if (argument[0] == '{')  /* remove color codes from name */
+        {
+            argument++; 
+            argument++;
+        }
+
+        argument = one_argument(argument, arg2);
+        free_string(ch->mount->name);
+        ch->mount->name = str_dup(arg2);
+        sprintf(buf, "Your mount has been renamed to: %s\n\r", ch->mount->name);
+        send_to_char(buf, ch);
+    }
+    else if (!str_prefix(command, "short"))
+    {
+        if (argument[0] == '\0') return;
+        free_string(ch->mount->short_descr);
+        ch->mount->short_descr = str_dup(argument);
+        sprintf(buf, "%s's short description set to: \n\r%s\n\r",
+                ch->mount->name, ch->mount->short_descr);
+        send_to_char(buf, ch);
+    }
+    else if (!str_prefix(command, "long"))
+    {
+        if (argument[0] == '\0') return;
+        free_string(ch->mount->long_descr);
+        sprintf(buf, "%s\n\r", argument);
+        ch->mount->long_descr = str_dup(buf);
+        sprintf(buf, "%s's long description set to: \n\r%s\n\r",
+                ch->mount->name, ch->mount->long_descr);
+        send_to_char(buf, ch);
+    }
+    else if (!str_prefix(command, "description") || !str_prefix(command, "desc"))
+    {
+        if (argument[0] == '\0')
+        {
+            string_append(ch, &ch->mount->description);
+            return;
+        }
+        send_to_char("Use 'mountname desc' with no argument to enter the editor.\n\r", ch);
+    }
+    else
+    {
+        send_to_char("Invalid option. Use: name, short, long, or desc.\n\r", ch);
+    }
+}
