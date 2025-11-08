@@ -312,7 +312,7 @@ void show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
 
     if (!IS_SET(ch->comm, COMM_LONG) )
     {
-	strcat( buf, "{x[{y.{D.{M.{b.{m.{R.{Y.{W.{G.{x]");
+	strcat( buf, "{x[{y.{w.{M.{b.{m.{R.{Y.{W.{G.{x]");
 	if ( IS_AFFECTED(victim, AFF_INVISIBLE)   ) buf[5] = 'V';
 	if ( IS_AFFECTED(victim, AFF_HIDE)        ) buf[8] = 'H';
 	if ( IS_AFFECTED(victim, AFF_CHARM)       ) buf[11] = 'C';
@@ -328,7 +328,7 @@ void show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
 	    if (!IS_NPC(victim) || IS_IMMORTAL(ch))
 		buf[38] = 'Q';
 	}*/
-	if (!strcmp(buf, "{x[{y.{D.{M.{b.{m.{R.{Y.{W.{G.{x]") )
+	if (!strcmp(buf, "{x[{y.{w.{M.{b.{m.{R.{Y.{W.{G.{x]") )
 	    buf[0] = '\0';
 	if ( IS_SET(victim->comm,COMM_AFK  )      ) strcat( buf, "[{yAFK{x]");
 	if ( victim->invis_level >= LEVEL_HERO    ) strcat( buf, "({WWizi{x)");
@@ -342,7 +342,7 @@ void show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
         if (victim->invis_level >= LEVEL_HERO)
             strcat (buf, "{W({CWizi{W){x ");
         if (IS_AFFECTED (victim, AFF_HIDE))
-            strcat (buf, "{W({DHide{W){x ");
+            strcat (buf, "{W({wHidden{W){x ");
         if (IS_AFFECTED (victim, AFF_CHARM))
             strcat (buf, "{W({mCharmed{W){x ");
         if (IS_AFFECTED (victim, AFF_PASS_DOOR))
@@ -364,9 +364,9 @@ void show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
     }
     if ( RIDDEN(victim) )
         if ( ch != RIDDEN(victim) )
-            strcat( buf, "(Ridden) " );
+            strcat( buf, "{W({gRidden{W){x " );
         else
-            strcat( buf, "(Your mount) " );
+            strcat( buf, "{W({gYour mount{W){x " );
 
     /* Show Quest Mob targets in the room -Koqlb*/
     if (IS_NPC(victim) && !IS_NPC(ch) && ch->pcdata && ch->pcdata->questmob > 0 
@@ -388,117 +388,117 @@ void show_char_to_char_0 (CHAR_DATA * victim, CHAR_DATA * ch)
     switch (victim->position)
     {
         case POS_DEAD:
-            strcat (buf, " is DEAD!!");
+            strcat (buf, " is {rDEAD!!{x");
             break;
         case POS_MORTAL:
-            strcat (buf, " is mortally wounded.");
+            strcat (buf, " is {Rmortally wounded{x.");
             break;
         case POS_INCAP:
-            strcat (buf, " is incapacitated.");
+            strcat (buf, " is {Bincapacitated{x.");
             break;
         case POS_STUNNED:
-            strcat (buf, " is lying here stunned.");
+            strcat (buf, " is lying here {Wstunned{x.");
             break;
         case POS_SLEEPING:
             if (victim->on != NULL)
             {
                 if (IS_SET (victim->on->value[2], SLEEP_AT))
                 {
-                    sprintf (message, " is sleeping at %s.",
+                    sprintf (message, " is {ysleeping at {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
                 else if (IS_SET (victim->on->value[2], SLEEP_ON))
                 {
-                    sprintf (message, " is sleeping on %s.",
+                    sprintf (message, " is {ysleeping on {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
                 else
                 {
-                    sprintf (message, " is sleeping in %s.",
+                    sprintf (message, " is {ysleeping in {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
             }
             else
-                strcat (buf, " is sleeping here.");
+                strcat (buf, " is {ysleeping here{x.");
             break;
         case POS_RESTING:
             if (victim->on != NULL)
             {
                 if (IS_SET (victim->on->value[2], REST_AT))
                 {
-                    sprintf (message, " is resting at %s.",
+                    sprintf (message, " is {yresting at {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
                 else if (IS_SET (victim->on->value[2], REST_ON))
                 {
-                    sprintf (message, " is resting on %s.",
+                    sprintf (message, " is {yresting on {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
                 else
                 {
-                    sprintf (message, " is resting in %s.",
+                    sprintf (message, " is {yresting in {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
             }
             else
-                strcat (buf, " is resting here.");
+                strcat (buf, " is {yresting here{x.");
             break;
         case POS_SITTING:
             if (victim->on != NULL)
             {
                 if (IS_SET (victim->on->value[2], SIT_AT))
                 {
-                    sprintf (message, " is sitting at %s.",
+                    sprintf (message, " is {ysitting at {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
                 else if (IS_SET (victim->on->value[2], SIT_ON))
                 {
-                    sprintf (message, " is sitting on %s.",
+                    sprintf (message, " is {ysitting on {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
                 else
                 {
-                    sprintf (message, " is sitting in %s.",
+                    sprintf (message, " is {ysitting in {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
             }
             else
-                strcat (buf, " is sitting here.");
+                strcat (buf, " is {ysitting here{x.");
             break;
         case POS_STANDING:
             if (victim->on != NULL)
             {
                 if (IS_SET (victim->on->value[2], STAND_AT))
                 {
-                    sprintf (message, " is standing at %s.",
+                    sprintf (message, " is {ystanding at {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
                 else if (IS_SET (victim->on->value[2], STAND_ON))
                 {
-                    sprintf (message, " is standing on %s.",
+                    sprintf (message, " is {ystanding on {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
                 else
                 {
-                    sprintf (message, " is standing in %s.",
+                    sprintf (message, " is {ystanding in {W%s{y.{x",
                              victim->on->short_descr);
                     strcat (buf, message);
                 }
             }
             else if ( MOUNTED(victim) )
             {
-                strcat( buf, " is here, riding " );
+                strcat( buf, " is here, riding {W" );
                 strcat( buf, MOUNTED(victim)->short_descr );
                 strcat( buf, ".");
             }
@@ -656,11 +656,14 @@ void show_char_to_char (CHAR_DATA * list, CHAR_DATA * ch)
         if (get_trust (ch) < rch->invis_level)
             continue;
 
+        /* Skip mounts that are being ridden - they'll be shown with their rider */
+        if (RIDDEN(rch))
+            continue;
+
         if (can_see (ch, rch))
         {
             show_char_to_char_0 (rch, ch);
-            if( MOUNTED(rch) && (rch->in_room == MOUNTED(rch)->in_room) )
-                show_char_to_char_0 ( MOUNTED(rch), ch );
+            /* Mount is already shown in rider's description, no need to show separately */
         }
         else if (room_is_dark (ch->in_room)
                  && IS_AFFECTED (rch, AFF_INFRARED))
