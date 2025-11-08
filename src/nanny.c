@@ -1030,6 +1030,13 @@ void nanny (DESCRIPTOR_DATA * d, char *argument)
                      TO_ROOM);
             }
 
+            if (ch->mount != NULL)
+            {
+                char_to_room (ch->mount, ch->in_room);
+                act ("$n has entered the game.", ch->mount, NULL, NULL,
+                     TO_ROOM);
+            }
+
 			send_to_char("\n", ch);
             do_function (ch, &do_board, "");
             break;
