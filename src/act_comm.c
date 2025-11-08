@@ -2509,6 +2509,49 @@ else
   }
 }
 
+/* Check for bugs in room and broadcast message */
+void check_room_bugs(CHAR_DATA *ch, char *message, char *type)
+{
+    OBJ_DATA *obj;
+    DESCRIPTOR_DATA *d;
+    char buf[MAX_STRING_LENGTH];
+    int frequency;
+    
+    for (obj = ch->in_room->contents; obj != NULL; obj = obj->next_content)
+    {
+        if (obj->pIndexData->vnum == OBJ_VNUM_BUG)
+        {
+            frequency = obj->value[0];
+            sprintf(buf, "{W[{YBUG %d{W]{x %s %s: %s", 
+                    frequency, ch->name, type, message);
+            
+            /* Broadcast to everyone with a commstone tuned to this frequency */
+            for (d = descriptor_list; d != NULL; d = d->next)
+            {
+                CHAR_DATA *victim = d->character;
+                OBJ_DATA *comm;
+                
+                if (d->connected != CON_PLAYING)
+                    continue;
+                    
+                if (victim == NULL)
+                    continue;
+                    
+                /* Check if they have a commstone tuned to this frequency */
+                for (comm = victim->carrying; comm != NULL; comm = comm->next_content)
+                {
+                    if (comm->item_type == ITEM_COMM && comm->value[0] == frequency)
+                    {
+                        send_to_char(buf, victim);
+                        send_to_char("\n\r", victim);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+
 void do_say (CHAR_DATA * ch, char *argument)
 {
     if (argument[0] == '\0')
@@ -2519,6 +2562,9 @@ void do_say (CHAR_DATA * ch, char *argument)
 
     act ("{6$n says '{7$T{6'{x", ch, NULL, argument, TO_ROOM);
     act ("{6You say '{7$T{6'{x", ch, NULL, argument, TO_CHAR);
+
+    /* Check for listening devices */
+    check_room_bugs(ch, argument, "says");
 
     if (!IS_NPC (ch))
     {
@@ -2835,6 +2881,10 @@ void do_emote (CHAR_DATA * ch, char *argument)
     act ("$n $T", ch, NULL, argument, TO_ROOM);
     act ("$n $T", ch, NULL, argument, TO_CHAR);
     MOBtrigger = TRUE;
+    
+    /* Check for listening devices */
+    check_room_bugs(ch, argument, "emotes");
+    
     return;
 }
 

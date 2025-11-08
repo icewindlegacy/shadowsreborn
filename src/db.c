@@ -120,6 +120,7 @@ TIME_INFO_DATA time_info;
 WEATHER_DATA weather_info[SECT_MAX];
 
 sh_int gsn_backstab;
+sh_int gsn_plant;
 sh_int gsn_charge;
 sh_int gsn_dodge;
 sh_int gsn_envenom;

@@ -1314,3 +1314,78 @@ void do_lunge( CHAR_DATA *ch, char *argument)
     }  /* Close the chance calculation scope */
     return;
 }
+
+/* Plant - plant listening device in room */
+void do_plant(CHAR_DATA *ch, char *argument)
+{
+    OBJ_DATA *bug;
+    OBJ_INDEX_DATA *pObjIndex;
+    char arg[MAX_INPUT_LENGTH];
+    int frequency;
+    int chance;
+
+    if (IS_NPC(ch))
+        return;
+
+    if ((chance = get_skill(ch, gsn_plant)) == 0)
+    {
+        send_to_char("You don't know how to plant bugs.\n\r", ch);
+        return;
+    }
+
+    one_argument(argument, arg);
+
+    if (arg[0] == '\0' || !is_number(arg))
+    {
+        send_to_char("Syntax: plant <frequency>\n\r", ch);
+        send_to_char("Plant a listening device that broadcasts to a commstone frequency.\n\r", ch);
+        return;
+    }
+
+    frequency = atoi(arg);
+
+    if (frequency < 1 || frequency > 99999)
+    {
+        send_to_char("Frequency must be between 1 and 99999.\n\r", ch);
+        return;
+    }
+
+    /* Check for existing bugs in this room */
+    for (bug = ch->in_room->contents; bug != NULL; bug = bug->next_content)
+    {
+        if (bug->pIndexData->vnum == OBJ_VNUM_BUG)
+        {
+            send_to_char("There's already a bug planted in this room.\n\r", ch);
+            return;
+        }
+    }
+
+    /* Skill check */
+    if (number_percent() > chance)
+    {
+        send_to_char("You fumble and fail to plant the bug.\n\r", ch);
+        check_improve(ch, gsn_plant, FALSE, 2);
+        WAIT_STATE(ch, PULSE_VIOLENCE);
+        return;
+    }
+
+    /* Get the bug object */
+    pObjIndex = get_obj_index(OBJ_VNUM_BUG);
+    if (pObjIndex == NULL)
+    {
+        send_to_char("Bug: OBJ_VNUM_BUG not found. Contact an immortal.\n\r", ch);
+        return;
+    }
+
+    /* Create and configure the bug */
+    bug = create_object(pObjIndex, 0);
+    bug->value[0] = frequency;  /* Store the frequency */
+    bug->timer = 24 + ch->level; /* Lasts 24+ hours */
+    SET_BIT(bug->extra_flags, ITEM_HIDDEN);
+    
+    obj_to_room(bug, ch->in_room);
+
+    act("You carefully plant a listening device in the room.", ch, NULL, NULL, TO_CHAR);
+    check_improve(ch, gsn_plant, TRUE, 2);
+    WAIT_STATE(ch, PULSE_VIOLENCE);
+}

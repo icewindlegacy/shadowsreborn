@@ -108,6 +108,7 @@ DECLARE_DO_FUN( do_autosplit	);
 DECLARE_DO_FUN( do_autotick 	);
 DECLARE_DO_FUN(	do_backstab		);
 DECLARE_DO_FUN( do_bandage		);
+DECLARE_DO_FUN( do_plant		);
 DECLARE_DO_FUN( do_rake			);
 DECLARE_DO_FUN( do_bleeding		);
 DECLARE_DO_FUN( do_brawl		);

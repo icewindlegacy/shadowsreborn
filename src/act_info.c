@@ -221,7 +221,8 @@ void show_list_to_char (OBJ_DATA * list, CHAR_DATA * ch, bool fShort,
      */
     for (obj = list; obj != NULL; obj = obj->next_content)
     {
-        if (obj->wear_loc == WEAR_NONE && can_see_obj (ch, obj))
+        if (obj->wear_loc == WEAR_NONE && can_see_obj (ch, obj) 
+            && !IS_OBJ_STAT(obj, ITEM_HIDDEN))
         {
             pstrShow = format_obj_to_char (obj, ch, fShort);
 

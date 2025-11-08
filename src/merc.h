@@ -1242,6 +1242,7 @@ struct    kill_data
 #define OBJ_VNUM_SPRING            22
 #define OBJ_VNUM_DISC              23
 #define OBJ_VNUM_PORTAL            25
+#define OBJ_VNUM_BUG               26
 
 #define OBJ_VNUM_GRUBS             420
 #define OBJ_VNUM_ROSE              1001
@@ -1372,6 +1373,7 @@ struct    kill_data
 #define ITEM_NOPURGE       (O)
 #define ITEM_ROT_DEATH     (P)
 #define ITEM_VIS_DEATH     (Q)
+#define ITEM_HIDDEN        (R)
 #define ITEM_NONMETAL      (S)
 #define ITEM_NOLOCATE      (T)
 #define ITEM_MELT_DROP     (U)
@@ -2386,6 +2388,7 @@ struct mprog_code
  * These are skill_lookup return values for common skills and spells.
  */
 extern    sh_int    gsn_backstab;
+extern    sh_int    gsn_plant;
 extern    sh_int    gsn_charge;
 extern    sh_int    gsn_dodge;
 extern  sh_int  gsn_envenom;

@@ -253,8 +253,8 @@ const struct cmd_type cmd_table[] = {
     {"quiet", do_quiet, POS_SLEEPING, 0, LOG_NORMAL, 1},
     {"reply", do_reply, POS_SLEEPING, 0, LOG_NORMAL, 1},
     {"replay", do_replay, POS_SLEEPING, 0, LOG_NORMAL, 1},
-    {"say", do_common, POS_RESTING, 0, LOG_NORMAL, 1},
-    {"'", do_common, POS_RESTING, 0, LOG_NORMAL, 0},
+    {"say", do_say, POS_RESTING, 0, LOG_NORMAL, 1},
+    {"'", do_say, POS_RESTING, 0, LOG_NORMAL, 0},
     {"shout", do_shout, POS_RESTING, 3, LOG_NORMAL, 1},
     {"yell", do_yell, POS_RESTING, 0, LOG_NORMAL, 1},
 
@@ -307,6 +307,7 @@ const struct cmd_type cmd_table[] = {
     {"bite", do_bite, POS_FIGHTING, 0, LOG_NORMAL, 1},
     {"bloodlust", do_bloodlust, POS_FIGHTING, 0, LOG_NORMAL, 1},
     {"bs", do_backstab, POS_FIGHTING, 0, LOG_NORMAL, 0},
+    {"plant", do_plant, POS_STANDING, 0, LOG_NORMAL, 1},
     {"rake", do_rake, POS_FIGHTING, 0, LOG_NORMAL, 1},
     {"berserk", do_berserk, POS_FIGHTING, 0, LOG_NORMAL, 1},
     {"charge", do_charge, POS_STANDING, 0, LOG_NORMAL, 1},

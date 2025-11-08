@@ -2538,6 +2538,12 @@ struct skill_type skill_table[MAX_SKILL] = {
      "", "!Steal!", ""},
 
     {
+     "plant", {53, 53, 15, 53}, {0, 0, 6, 0},
+     spell_null, TAR_IGNORE, POS_STANDING,
+     &gsn_plant, SLOT (0), 0, 24,
+     "", "!Plant!", ""},
+
+    {
      "scrolls", {1, 1, 1, 1}, {2, 3, 5, 8},
      spell_null, TAR_IGNORE, POS_STANDING,
      &gsn_scrolls, SLOT (0), 0, 24,

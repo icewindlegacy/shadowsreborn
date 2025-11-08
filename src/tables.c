@@ -465,6 +465,7 @@ const struct flag_type type_flags[] = {
     {"manual", ITEM_MANUAL, TRUE},
     {"commstone", ITEM_COMM, TRUE},
     {"windgate", ITEM_WINDGATE, TRUE},
+    {"pylon", ITEM_PYLON, TRUE},
     {NULL, 0, 0}
 };
 
@@ -488,6 +489,7 @@ const struct flag_type extra_flags[] = {
     {"rotdeath", ITEM_ROT_DEATH, TRUE},
     {"relic", ITEM_RELIC, TRUE},
     {"visdeath", ITEM_VIS_DEATH, TRUE},
+    {"hidden", ITEM_HIDDEN, TRUE},
     {"nonmetal", ITEM_NONMETAL, TRUE},
     {"meltdrop", ITEM_MELT_DROP, TRUE},
     {"hadtimer", ITEM_HAD_TIMER, TRUE},
