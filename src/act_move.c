@@ -383,6 +383,10 @@ void move_char (CHAR_DATA * ch, int door, bool follow)
             act ("$n leaves $T.", ch, NULL, dir_name[door], TO_ROOM);
     }
 
+    /* Check for movement traps */
+    if (checkmovetrap(ch, door))
+        return;
+
     char_from_room (ch);
     char_to_room (ch, to_room);
     if (!IS_AFFECTED (ch, AFF_SNEAK) && ch->invis_level < LEVEL_HERO)
@@ -635,6 +639,10 @@ void do_open (CHAR_DATA * ch, char *argument)
             send_to_char ("It's locked.\n\r", ch);
             return;
         }
+
+        /* Check for open traps on containers */
+        if (checkopen(ch, obj))
+            return;
 
         REMOVE_BIT (obj->value[1], CONT_CLOSED);
         act ("You open $p.", ch, obj, NULL, TO_CHAR);

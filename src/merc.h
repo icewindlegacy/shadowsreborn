@@ -1350,6 +1350,30 @@ struct    kill_data
 /* Quest item cost - stored in value[4] */
 #define QUEST_COST(obj)  ((obj)->cost)
 
+/*
+ * Trap types
+ */
+#define TRAP_DAM_SLEEP      -1
+#define TRAP_DAM_TELEPORT    0
+#define TRAP_DAM_FIRE        1
+#define TRAP_DAM_COLD        2
+#define TRAP_DAM_ACID        3
+#define TRAP_DAM_ENERGY      4
+#define TRAP_DAM_BLUNT       5
+#define TRAP_DAM_PIERCE      6
+#define TRAP_DAM_SLASH       7
+
+#define TRAP_EFF_MOVE        1   /* trigger on movement */
+#define TRAP_EFF_OBJECT      2   /* trigger on get or put */
+#define TRAP_EFF_ROOM        4   /* affect all in room */
+#define TRAP_EFF_NORTH       8   /* movement in this direction */
+#define TRAP_EFF_EAST       16
+#define TRAP_EFF_SOUTH      32
+#define TRAP_EFF_WEST       64
+#define TRAP_EFF_UP        128
+#define TRAP_EFF_DOWN      256
+#define TRAP_EFF_OPEN      512   /* trigger on open */
+
 
 
 /*
@@ -1381,6 +1405,7 @@ struct    kill_data
 #define ITEM_SELL_EXTRACT  (W)
 #define ITEM_BURN_PROOF    (Y)
 #define ITEM_NOUNCURSE     (Z)
+#define ITEM_TRAP          (X)
 #define ITEM_QUESTITEM     (aa) /* Quest Item flag */
 #define ITEM_GROTH_SKIHEA  ITEM_BLESS
 #define ITEM_GOOD          ITEM_BLESS
@@ -2139,6 +2164,9 @@ struct    obj_index_data
     int                 exp;
     sh_int              timer;
     int                 value[5];
+    sh_int              trap_eff;       /* trap effect flags */
+    sh_int              trap_dam;       /* trap damage type */
+    sh_int              trap_charge;    /* trap charges */
 };
 
 
@@ -2180,6 +2208,9 @@ struct    obj_data
     sh_int              timer;
     int                 value [5];
     KEY_DATA *          keys;           /* keyring */
+    sh_int              trap_eff;       /* trap effect flags */
+    sh_int              trap_dam;       /* trap damage type */
+    sh_int              trap_charge;    /* trap charges */
 };
 
 
@@ -3429,6 +3460,11 @@ KEY_DATA *new_key args((void));
 void free_key args((KEY_DATA *key));
 void save_keyring args((FILE *fp, OBJ_DATA *obj));
 void load_keyring args((FILE *fp, OBJ_DATA *obj));
+
+/* trap.c */
+bool checkmovetrap args((CHAR_DATA *ch, int dir));
+bool checkgetput args((CHAR_DATA *ch, OBJ_DATA *obj));
+bool checkopen args((CHAR_DATA *ch, OBJ_DATA *obj));
 
 #include "clan.h"
 #include "lookup.h"

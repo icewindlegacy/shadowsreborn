@@ -1,0 +1,15 @@
+#MOBILES
+#5600
+Test Mobile~ #name
+test mobile short description - what players see in combat and interactions~ #short_descr
+Test mobile long description - what players see in the room #long_descr
+~
+The mobile's actual description - what players see when typing 'look <mobile>" #desc
+~
+human~ #race 
+AB 0 819s2 -1  666 0  #act   0  aff  -1  align group
+22 2244b 45d7+201 22d9+60 6d3+12 slap # level hitroll hit_dice mana_dice dam_dice dam_type
+-4 -4 -4 0 # AC
+I B A E # OFF IMM RES VULN
+stand stand male 999 # START_POS  POS  SEX  WEALTH
+ABHMV ACDEFGHIM medium unknown #FORM PARTS SIZE unknown

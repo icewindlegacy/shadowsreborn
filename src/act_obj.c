@@ -170,6 +170,9 @@ void get_obj (CHAR_DATA * ch, OBJ_DATA * obj, OBJ_DATA * container)
             }
     }
 
+    /* Check for get/put traps */
+    if (checkgetput(ch, obj))
+        return;
 
     if (container != NULL)
     {
@@ -506,6 +509,10 @@ void do_put (CHAR_DATA * ch, char *argument)
         act ("The $d is closed.", ch, NULL, container->name, TO_CHAR);
         return;
     }
+
+    /* Check for container traps */
+    if (checkgetput(ch, container))
+        return;
 
     if (str_cmp (arg1, "all") && str_prefix ("all.", arg1)
         && (number == 1))

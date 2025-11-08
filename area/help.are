@@ -148,7 +148,6 @@ Example:  PROMPT <%hhp %mm %vmv>
 ~
 
 0 STORY~
-
 The before...
 -------------------
 The tall Silvery Blue figure watched silently as the orb depicted the
@@ -208,7 +207,6 @@ knowing that the Humans and Orcs had paid for what they had done, and paid dearl
 ~
 
 0 BTVOS GENESIS~
-
 Beyond the Veil of Shadows was the brainchild of Paingate ( aka Jim Hodgson)
 and was first brought into existence sometime in November 1995, with the idea
 of creating the first Gothic/Cyber MUD on the Net. Enlisting the help of UNIX
@@ -1892,8 +1890,8 @@ You can butcher a corpse to produce steaks or
 a fish to produce filets. These are inedible by themselves
 but you can cook (help cook) them over a campfire.
 ~
-0 AUTODAMAGE~
 
+0 AUTODAMAGE~
 AUTODAMAGE
 
 ****************************
@@ -1912,7 +1910,6 @@ needing to manually check after each round.
 ~
 
 0 AUTOTICK~
-
 AUTOTICK
 
 ****************************
@@ -1932,7 +1929,6 @@ movement points regenerate.
 ~
 
 0 BANDAGE~
-
 BANDAGE
 
 ****************************
@@ -1956,7 +1952,6 @@ available or to conserve mana between fights.
 ~
 
 0 'BANK' 'BANKING'~
-
 BANK
 
 ****************************
@@ -1988,7 +1983,6 @@ of shares fluctuates based on your level and the game economy.
 ~
 
 0 MOUNTS MOUNT RIDING~
-
 MOUNTS
 
 ****************************
@@ -2016,7 +2010,6 @@ skills or items to ride safely.
 ~
 
 0 HISTORY~
-
 HISTORY
 
 ****************************
@@ -2035,7 +2028,6 @@ depending on your client settings.
 ~
 
 0 LORE~
-
 LORE
 
 ****************************
@@ -2061,7 +2053,6 @@ still need to evaluate treasure and equipment.
 ~
 
 0 MUDINFO~
-
 MUDINFO
 
 ****************************
@@ -2088,7 +2079,6 @@ patterns over time.
 ~
 
 0 CONDITIONS CONDITION~
-
 CONDITIONS
 
 ****************************
@@ -2121,7 +2111,6 @@ character's wellbeing.
 ~
 
 0 PROTOCOL~
-
 PROTOCOL
 
 ****************************
@@ -2144,7 +2133,6 @@ verifying that your client is communicating properly with the server.
 ~
 
 0 REPAIR~
-
 REPAIR
 
 ****************************
@@ -2171,9 +2159,7 @@ equipment is recommended to avoid total loss.
 
 ~
 
-
 0 'COMM STONES' COMMSTONES COMMSTONE FREQUENCIES TUNE~
-
 COMM STONES
 
 ****************************
@@ -2206,7 +2192,6 @@ effects apply to commstone communications!
 ~
 
 0 'RUNIC CIRCLES' WINDGATES WINDGATE RUNEGATE~
-
 RUNIC CIRCLES
 
 ****************************
@@ -2234,7 +2219,6 @@ distances.
 ~
 
 0 AUTOALL~
-
 AUTOALL
 
 ****************************
@@ -2261,7 +2245,6 @@ Type 'autolist' to see which auto-settings are currently enabled.
 ~
 
 0 'LONG AFFECTS'~
-
 LONG AFFECTS
 
 ****************************
@@ -2284,7 +2267,6 @@ other characters' magical affects in the room.
 ~
 
 0 NOEXP~
-
 NOEXP
 
 ****************************
@@ -2307,7 +2289,6 @@ You can turn experience gain back on at any time by typing 'noexp' again.
 ~
 
 0 ENGAGE~
-
 ENGAGE
 
 ****************************
@@ -2333,7 +2314,6 @@ specified target rather than just waiting for your turn.
 ~
 
 0 TRACK~
-
 TRACK
 
 ****************************
@@ -2358,7 +2338,6 @@ when you reach a new location to continue following the trail.
 ~
 
 0 STUDY~
-
 STUDY
 
 ****************************
@@ -2374,7 +2353,6 @@ them and studying those items.
 ~
 
 0 ADDAPPLY~
-
 ADDAPPLY
 
 ****************************
@@ -2404,7 +2382,6 @@ This is a powerful OLC command for creating balanced magical items.
 ~
 
 0 'DISABLE COMMANDS' DISABLE~
-
 DISABLE COMMANDS
 
 ****************************
@@ -2434,7 +2411,6 @@ indicating the command is unavailable. This is useful for:
 ~
 
 0 AUCTION~
-
 AUCTION
 
 ****************************
@@ -2461,7 +2437,6 @@ commission.
 ~
 
 0 FORGET~
-
 FORGET
 
 ****************************
@@ -2480,7 +2455,6 @@ REMEMBER reverses this and takes them fo
 ~
 
 0 FINGER~
-
 FINGER
 
 ****************************
@@ -2508,7 +2482,6 @@ other players before interaction.
 ~
 
 0 'HINT CHANNEL' HINT~
-
 HINT CHANNEL
 
 ****************************
@@ -2531,7 +2504,6 @@ To turn hints on: hint
 ~
 
 0 RELICS~
-
 RELICS
 
 ****************************
@@ -2550,7 +2522,6 @@ powerful. They have no level cap, so as long as you can gain exp, they do too.
 ~
 
 0 QUESTING QUEST~
-
 QUESTING
 
 ****************************
@@ -2619,7 +2590,6 @@ LOOSELY based on Vassago's Quest Code
 ~
 
 0 KEYRING~
-
 KEYRING
 
 ****************************
@@ -2647,7 +2617,6 @@ Keyrings can be purchased from general stores in major cities.
 ~
 
 0 CIRCLE~
-
 CIRCLE
 
 ****************************
@@ -2677,7 +2646,6 @@ Note: You must wield a weapon to use circle.
 ~
 
 0 'SMOKING PIPES' 'CHEWING TOBACCO' TOBACCO TABAC SMOKE CHEW LIGHT PACK~
-
 SMOKING PIPES AND CHEWING TOBACCO
 
 ****************************
@@ -2714,7 +2682,6 @@ in major cities.
 ~
 
 0 NUKE~
-
 NUKE
 
 ****************************
@@ -2741,7 +2708,6 @@ confirm the target player name carefully.
 ~
 
 52 PLOAD PUNLOAD~
-
 PLOAD / PUNLOAD
 
 ****************************
@@ -2772,7 +2738,6 @@ These commands are essential tools for customer service and administration.
 ~
 
 52 PLIST~
-
 PLIST
 
 ****************************
@@ -2807,7 +2772,6 @@ This command is useful for:
 ~
 
 0 RECENT~
-
 RECENT
 
 ****************************
@@ -2833,7 +2797,48 @@ depending on server configuration.
 
 ~
 
+0 petname~
+  This command allows you to rename your pets!  The syntax is really quite
+simple, you have four options; [name|short|long|desc] and they work like
+this.
+examples:
 
+  petname name dino  (renames your pet to "dino")
+  petname short a fierce, mottled mutt!
+  petname long Dino, the stalwart companion of (your name) is here.
+
+The "desc" command works just like it does for setting your own
+description.  Use the same command syntax for this option. See "help
+description" for more information on the "petname desc" option.
+
+A word about {Bc{Ro{Yl{Mo{Wr{x.
+Dont try to put colors in your pets name! *boggle* It wont work, trust me.
+However, colors work fine for any of the descriptions.
+[Coded by Dark Harvest gary@dharvest.com]
+-
+~
+
+0 mountname~
+  This command allows you to rename your mounts!  The syntax is really quite
+simple, you have four options; [name|short|long|desc] and they work like
+this.
+ 
+examples:
+ 
+  mountname name bessy  (renames your mount to "bessy")
+  mountname short a spotted, hefty cow!
+  mountname long Bessy, the riding warcow of (your name) is here.
+ 
+The "desc" command works just like it does for setting your own
+description.  Use the same command syntax for this option. See "help
+description" for more information on the "mountname desc" option.
+ 
+A word about {Bc{Ro{Yl{Mo{Wr{x.
+Dont try to put colors in your mount's name! *boggle* It wont work, trust me.
+However, colors work fine for any of the descriptions.
+ 
+[based upon petname code by Dark Harvest gary@dharvest.com]
+~
 
 -1 $~
 

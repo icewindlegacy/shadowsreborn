@@ -992,6 +992,21 @@ void load_old_obj (FILE * fp)
 
         pObjIndex->item_type = fread_number (fp);
         pObjIndex->extra_flags = fread_flag (fp);
+        
+        /* Load trap data if this is a trap */
+        if (IS_SET(pObjIndex->extra_flags, ITEM_TRAP))
+        {
+            pObjIndex->trap_eff = fread_number(fp);
+            pObjIndex->trap_dam = fread_number(fp);
+            pObjIndex->trap_charge = fread_number(fp);
+        }
+        else
+        {
+            pObjIndex->trap_eff = 0;
+            pObjIndex->trap_dam = 0;
+            pObjIndex->trap_charge = 0;
+        }
+        
         pObjIndex->wear_flags = fread_flag (fp);
         pObjIndex->value[0] = fread_number (fp);
         pObjIndex->value[1] = fread_number (fp);
@@ -2494,6 +2509,9 @@ OBJ_DATA *create_object (OBJ_INDEX_DATA * pObjIndex, int level)
     obj->item_type = pObjIndex->item_type;
     obj->extra_flags = pObjIndex->extra_flags;
     obj->wear_flags = pObjIndex->wear_flags;
+    obj->trap_eff = pObjIndex->trap_eff;
+    obj->trap_dam = pObjIndex->trap_dam;
+    obj->trap_charge = pObjIndex->trap_charge;
     obj->value[0] = pObjIndex->value[0];
     obj->value[1] = pObjIndex->value[1];
     obj->value[2] = pObjIndex->value[2];

@@ -496,6 +496,7 @@ const struct flag_type extra_flags[] = {
     {"sellextract", ITEM_SELL_EXTRACT, TRUE},
     {"burnproof", ITEM_BURN_PROOF, TRUE},
     {"nouncurse", ITEM_NOUNCURSE, TRUE},
+    {"trap", ITEM_TRAP, TRUE},
     {"questitem", ITEM_QUESTITEM, TRUE},
     {"quest", ITEM_QUEST, TRUE},
     {"grothskihea", ITEM_GROTH_SKIHEA, TRUE},

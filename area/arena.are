@@ -25,6 +25,30 @@ unknown~
 portal 0 0
 0 0 0 ACGHIL 0
 0 0 0 P
+#2501
+arena gate doors wooden large~
+the Arena Gates~
+The Arena Gates - large {ywooden{x doors~
+unknown~
+portal 0 0
+0 0 0 CGHIL 0
+0 0 0 P
+#2502
+a portal to dushgoi~
+a portal to dushgoi~
+A portal to {GDushgoi{x glows a sickly {GGr{ge{Gen{x~
+unknown~
+portal 0 0
+0 0 0 EHI B
+0 0 0 P
+#2503
+a portal to midgaard~
+a portal to midgaard~
+A portal to {BMidgaard{x glows a faint {bb{Clu{be{x~
+unknown~
+portal 0 0
+0 0 0 ADEFHIJL A
+0 0 0 P
 #0
 
 
@@ -622,6 +646,9 @@ S
 
 #RESETS
 O 0 2500 0 2500 The arena gates loaded to This is the room name.
+O 0 2502 0 2500 A portal to dushgoi loaded to This is the room name.
+O 0 2503 0 2500 A portal to midgaard loaded to This is the room name.
+O 0 2501 0 2501 The arena gates loaded to The Northwestern Corner
 S
 
 

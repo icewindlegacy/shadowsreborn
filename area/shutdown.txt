@@ -18,3 +18,7 @@
 [ 3001] Om:  Ansuz      Fehu       | 16  | FALSE | FALSE | -1/-1
 
 [  415] Om: Shutdown by Om.
+[12058] Om: Shutdown by Om.
+[12039] Om: Shutdown by Om.
+[12044] Om: Shutdown by Om.
+[ 6701] Om: Shutdown by Om.

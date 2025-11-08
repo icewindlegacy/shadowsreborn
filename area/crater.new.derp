@@ -1,0 +1,2013 @@
+#AREADATA
+Name The Crater of Belaanir~
+Builders Om~
+VNUMs 12000 12099
+Credits ~
+Security 9
+Authors Om~
+Game ~
+Levels 50 60
+End
+
+
+
+#MOBILES
+#12000
+horror inverted inside-out drake~
+an inside-out drake~
+An inside-out drake writhes in agony here, its organs exposed.
+~
+This drake's entire body has been turned inside-out by the Pattern Reave.
+Its skin is on the inside, organs and musculature on the outside, yet somehow
+it still lives. Blood vessels pulse visibly. The heart beats exposed in the
+chest cavity. Its eyes are inverted in their sockets. Every movement tears
+at its reversed flesh, causing constant agony, yet it cannot die. It attacks
+anything nearby in mindless pain-driven rage.
+~
+dragon~
+ABFG 0 0 -1 -1000 0
+45 18 92d14+412 45d10+90 14d3+30 claw
+-15 -15 -15 -10
+BCFGH A 0 DE
+stand stand none 5000
+CDEFHJKVX ABCDEFGHIJKLM huge unknown
+#12001
+abomination merged fused flesh-mass~
+a writhing flesh-mass~
+A grotesque mass of merged bodies writhes and screams here.
+~
+Multiple beings - drake, orc, and human - were fused together by the Pattern
+Reave into a single horrific entity. Limbs protrude from the mass at random
+angles. Multiple faces scream from the surface, each retaining individual
+consciousness but sharing one mutilated body. It drags itself forward using
+whatever limbs happen to be on the bottom, attacking in desperate madness.
+The creature begs for death even as it kills.
+~
+unique~
+ABFG 0 0 -1 -1000 0
+48 20 99d15+465 48d10+95 15d3+32 pound
+-18 -18 -18 -12
+BFG 0 Q B
+stand stand none 3000
+ABCDEFHJKMX ABCDEFGHIJKLM huge unknown
+#12002
+horror crystalline glass-knight transparent~
+a crystallized glass-knight~
+A hollow glass knight stands here, moving in eerie silence.
+~
+Once a proud human knight in full plate armor, this being was crystallized
+into transparent glass by the Pattern Reave. The person inside was completely
+vaporized, leaving only a hollow glass shell in perfect detail. Yet somehow
+it still moves, still fights, driven by residual muscle memory imprinted in
+the crystal structure. It makes no sound when it moves. When struck, it rings
+like a bell. Cracks spread across its surface but never fully shatter.
+~
+unique~
+AB 0 0 -1 0 0
+42 16 87d13+382 42d10+84 13d3+28 slash
+-12 -12 -12 -8
+BCFGH CD N AB
+stand stand male 8000
+ABHMV ABCDEFGHIJKM medium unknown
+#12003
+nightmare temporal-loop soldier dying~
+a temporally-looped soldier~
+A human soldier dies over and over in an endless loop here.
+~
+This human soldier is trapped in a five-second time loop, experiencing their
+death eternally. An arrow strikes them in the throat, they fall gasping, hit
+the ground, then snap back to standing unharmed - only to be struck again.
+The loop has run for years. The soldier's sanity is long gone, but their body
+still reacts. If you interrupt the loop by attacking, they'll fight with the
+desperate fury of someone who wants the loop to end, even if it means true death.
+~
+human~
+ABG 0 11 -1 -500 0
+40 14 83d12+356 40d10+80 12d3+26 pierce
+-10 -10 -10 -6
+BCFGH C 0 0
+stand stand male 2000
+ABHMV ABCDEFGHIJK medium unknown
+#12004
+horror gravity-affected floating corpse~
+a gravity-defying corpse~
+A corpse floats here, moving in slow circles defying gravity.
+~
+This orc warrior died in a gravity anomaly created by the Pattern Reave.
+Their corpse floats about eight feet off the ground, drifting in lazy circles.
+But the Pattern gave them a cruel mockery of life - they're dead but still
+{waware{x. Their eyes track movement. They try to speak but have no breath.
+When threatened, the corpse can weaponize its gravity distortion, making
+attackers float helplessly or crushing them with localized gravity wells.
+~
+orc~
+ABG 0 0 -1 -800 0
+44 17 90d14+405 44d10+88 14d3+29 pound
+-14 -14 -14 -9
+BCFGH 0 P M
+stand stand male 3500
+AHMV ABCDEFGHIJK medium unknown
+#12005
+horror dimensional displaced flicker thing~
+a dimensionally-displaced thing~
+Something that exists in multiple dimensions flickers in and out here.
+~
+The Pattern Reave displaced this drake into four spatial dimensions instead
+of the usual three. It flickers in and out of visibility as it rotates through
+dimensions your eyes can't fully perceive. You see slices of it - a wing here,
+claws there, a head that exists from three angles at once. It's in constant
+pain from existing in too many places simultaneously, making it violently
+hostile. Its attacks come from impossible angles.
+~
+dragon~
+ABFG 0 0 -1 -1000 0
+50 22 103d17+506 50d11+100 17d3+35 claw
+-20 -20 -20 -14
+BCG A 0 D
+stand stand none 6000
+CDEFHJKVX ABCDEFGHIJKLM huge unknown
+#12006
+horror salt-statue cavalry dissolving~
+a dissolving salt-cavalry~
+A cavalry soldier made of salt slowly dissolves in the weather.
+~
+This human cavalry soldier and their mount were transformed into salt by
+the Pattern Reave. They remain aware, feeling themselves slowly dissolve
+with each rain, each humid day. Parts of them have already washed away -
+fingers, toes, sections of the horse's mane. The pain of dissolution is
+constant. They attack anything that approaches, driven mad by years of
+slowly melting. When struck, salt crystals spray from their wounds.
+~
+human~
+ABG 0 0 -1 -600 0
+43 16 88d13+390 43d10+86 13d3+28 pound
+-13 -13 -13 -8
+BCFGH C 0 AB
+stand stand male 4000
+ABHMV ABCDEFGHIJK large unknown
+#12007
+horror petrified-scream stone-drake alive~
+a petrified screaming drake~
+A drake turned to stone stands here, their mouth open in eternal scream.
+~
+This drake elder has been petrified into living stone. Their body is solid
+rock, immobile and incredibly heavy, yet they remain fully conscious. Their
+eyes can still move. Tears of liquid gemstone leak from their eyes. They've
+been frozen in this scream for years, unable to move, unable to die, unable
+even to close their mouth. The horror has driven them insane. They can only
+attack with magic, their mind the only weapon left to them.
+~
+dragon~
+ABQ 0 0 -1 -1000 0
+52 24 107d18+534 52d11+104 18d3+36 magic
+-22 -22 -22 -15
+BCDFGH ABC N 0
+stand stand female 7000
+CDEFHJKVX ABCDEFGHIJKLM huge unknown
+#12008
+horror bone-weapon living-weapon amalgam~
+a living bone-weapon~
+A grotesque weapon made of bone and flesh attacks autonomously here.
+~
+The Pattern Reave fused an orc warrior completely with their weapon,
+transforming them into a living battle-axe made of bone, muscle, and steel.
+The warrior's consciousness is spread throughout the weapon - they {ware{x
+the axe now. Their screaming face is visible in the blade. Their hands form
+the haft. They exist only to kill, their entire being reduced to a single
+purpose. The weapon swings itself, attacks autonomously, and bleeds when damaged.
+~
+orc~
+ABG 0 0 -1 -1000 0
+46 19 94d15+431 46d10+92 15d3+31 slash
+-16 -16 -16 -11
+BCFGH P 0 M
+stand stand none 4500
+AHMV BCDEFGHIJKM medium unknown
+#12009
+horror reality-tear void-thing shadow~
+a void-thing~
+A tear in reality moves here, darker than darkness itself.
+~
+This isn't truly a creature - it's a mobile tear in reality that has somehow
+gained predatory awareness. Where it moves, existence unravels. It appears as
+a vaguely humanoid void, an absence in the shape of something that might have
+been a drake. It hungers to unmake other things, to drag them into non-existence.
+Its attacks don't damage - they {werase{x. Wounds from it don't bleed, they
+simply cease to be. Dying to it means complete obliteration.
+~
+unique~
+ABFG 0 0 -1 -1000 0
+55 25 113d19+572 55d11+110 19d3+38 negative
+-25 -25 -25 -17
+BC 0 0 0
+stand stand none 0
+CHIL 0 huge unknown
+#12010
+horror temporal-stasis frozen-moment combat~
+a frozen combat echo~
+Warriors frozen mid-combat flicker in and out of existence here.
+~
+This is a temporal echo of multiple combatants - orc, human, and drake -
+frozen in a single moment of combat. They exist in temporal stasis, caught
+between heartbeats. The Pattern Reave preserved their battle forever, and
+now the echo repeats. If disturbed, the frozen warriors will include YOU
+in their eternal combat, attacking friend and foe alike with movements
+that exist outside normal time. They can't be killed because they're already
+dead - but they can kill you.
+~
+unique~
+ABG 0 11 -1 -750 0
+47 20 96d15+450 47d10+94 15d3+32 slash
+-17 -17 -17 -12
+BCFGH C M 0
+stand stand none 5500
+ABHMV ABCDEFGHIJK medium unknown
+#12011
+horror flesh-garden tentacle plant~
+a flesh-garden tentacle~
+Writhing tentacles made of muscle and sinew lash out from the ground.
+~
+Part of the grotesque flesh-garden created when organic matter merged and
+sprouted into plant-like structures, this tentacle entity has developed
+predatory intelligence. It's rooted in the ground like a plant but made
+entirely of {wmuscle{x, {wsinew{x, and {wbone{x. Multiple eyes dot its
+length - eyes that once belonged to the victims it grew from. It lashes
+out at anything that moves, trying to drag prey underground to feed the
+garden's hungry roots.
+~
+unique~
+ABG 0 0 -1 -1000 0
+41 15 85d13+370 41d10+82 13d3+27 whip
+-11 -11 -11 -7
+BCFGH 0 P AB
+stand stand none 1000
+ABCDEFHJKX CDEFGHIJKLM medium unknown
+#12012
+horror living-glass healer crystal transparent~
+a crystalline healer~
+A healer made of living glass tends to patients who don't exist.
+~
+This was once a drake healer, transformed into living transparent crystal
+by the Pattern Reave. They continue their work on autopilot, tending to
+patients who died years ago. Their glass hands pass through empty air,
+applying invisible bandages, speaking words of comfort to ghosts. But when
+something real enters their hospital, they become confused and hostile,
+trying to "heal" you with glass shards and medical procedures that no
+longer make sense. Their touch cuts. Their mercy kills.
+~
+dragon~
+ABQ 0 0 -1 500 0
+39 14 81d12+348 39d10+78 12d3+25 pound
+-9 -9 -9 -6
+BCFGH CD N AB
+stand stand female 3000
+CDEFHJKVX ABCDEFGHIJKLM large unknown
+#0
+
+
+
+#OBJECTS
+#0
+
+
+
+#ROOMS
+#12000
+Northern Crater Rim - West~
+You stand at the western edge of the northern crater rim, looking down into the
+massive scar that was once the drake city of Belaanir. The ground here is fused
+{Cglass{x from the reality-warping energies of the Pattern Reave. Twisted fragments
+of buildings protrude from the glassy surface at impossible angles - walls that
+curve in directions that shouldn't exist, doorways that open into nothing. The
+air itself seems wrong, shimmering with residual magical distortion.
+~
+0 0 0
+D1
+~
+~
+0 0 12001
+D2
+~
+~
+0 0 12007
+S
+#12001
+Northern Crater Rim~
+The northern rim offers a panoramic view of the devastation below. Reality feels
+thin here, as if the fabric of existence was torn and poorly mended. Occasionally
+you catch glimpses of things that aren't quite there - phantom screams, shadows
+with no source, colors that don't belong in this world. The ground is scarred with
+{Rblood{x trails that lead nowhere, frozen mid-flow by the catastrophic magic.
+~
+0 0 0
+D1
+~
+~
+0 0 12002
+D2
+~
+~
+0 0 12008
+D3
+~
+~
+0 0 12000
+S
+#12002
+Northern Crater Rim - Center West~
+A massive drake skeleton lies half-embedded in the ground here, its bones fused
+into the {Cglass{x in the moment of death. But something is horribly wrong - the
+skeleton is turned {winside out{x, with the marrow on the outside and the bone
+structure inverted. It shouldn't be possible, yet here it is, a monument to
+reality breaking. The skull screams silently at the sky.
+~
+0 0 0
+D1
+~
+~
+0 0 12003
+D2
+~
+~
+0 0 12009
+D3
+~
+~
+0 0 12001
+S
+#12003
+Northern Crater Rim - Center East~
+The rim is cracked here, with fissures that reveal nothing but absolute blackness
+below - not shadow, but the complete absence of existence. Pattern Reave didn't
+just destroy matter, it unmade it entirely. Peering into these cracks fills you
+with existential dread. The edges of the fissures pulse with {Munnatural{x colors,
+and the air near them tastes of copper and regret.
+~
+0 0 0
+D1
+~
+~
+0 0 12004
+D2
+~
+~
+0 0 12010
+D3
+~
+~
+0 0 12002
+S
+#12004
+Northern Crater Rim - East~
+Frozen in the glassy ground is an entire war banner - orc, by the crude stitching.
+But the fabric has been transformed into something crystalline and brittle, neither
+cloth nor mineral. The warrior who carried it is nearby, or what's left of them.
+Their body has been compressed to a fraction of its normal size, armor and all,
+as if gravity itself was rewritten. The face is locked in eternal agony.
+~
+0 0 0
+D1
+~
+~
+0 0 12005
+D2
+~
+~
+0 0 12011
+D3
+~
+~
+0 0 12003
+S
+#12005
+Northern Crater Rim - Easternmost~
+This section of the rim shows where the Pattern Reave's energy began to dissipate.
+The destruction is still total, but less... strange. Bodies here are simply dead,
+not warped into impossible shapes. The ground is scorched earth rather than fused
+glass. It's almost a relief to see normal devastation. Trees at the crater's edge
+are flash-burned to ash but still standing upright like {Dcharcoal{x statues.
+~
+0 0 0
+D2
+~
+~
+0 0 12012
+D3
+~
+~
+0 0 12004
+S
+#12006
+Upper Rim - Northwest~
+The western slope of the crater begins its descent here. What appears to be a
+human soldier is embedded in the crater wall, but they're walking upward at a
+ninety-degree angle to reality, frozen mid-step. Their footprints continue for
+several yards before simply ceasing to exist. Fragments of drake architecture
+float in mid-air nearby, defying gravity and sense.
+~
+0 0 0
+D1
+~
+~
+0 0 12007
+D2
+~
+~
+0 0 12015
+S
+#12007
+Upper Rim - North~
+A group of orcish warriors died here in a circle, their weapons raised against
+something at the center. But there's nothing there now - just a sphere of absolutely
+nothing, like a bubble in reality itself. The orcs' bodies are petrified, turned
+to {wstone{x mid-battle cry. Their weapons show stress fractures, as if time and
+entropy accelerated to centuries in a single moment.
+~
+0 0 0
+D0
+~
+~
+0 0 12000
+D1
+~
+~
+0 0 12008
+D2
+~
+~
+0 0 12016
+D3
+~
+~
+0 0 12006
+S
+#12008
+Upper Rim - North Central West~
+The ground here ripples like water frozen in time - waves of stone and glass
+creating an uneven, treacherous surface. Embedded in one of the wave peaks is
+a drake child's toy, perfectly preserved. A few feet away, the child itself is
+a {Rsmear{x of biological matter stretched across twenty yards of ground, like
+they were pulled apart by invisible hands. The Pattern didn't discriminate.
+~
+0 0 0
+D0
+~
+~
+0 0 12001
+D1
+~
+~
+0 0 12009
+D2
+~
+~
+0 0 12017
+D3
+~
+~
+0 0 12007
+S
+#12009
+Upper Rim - North Central~
+A massive chunk of what must have been a drake palace floats ten feet above the
+ground here, rotating slowly. It's upside-down and {Bburning{x with cold blue
+flames that never consume. Beneath it, the shadows it casts are solid enough to
+touch, like crystallized darkness. Reality is deeply broken in this section of
+the crater.
+~
+0 0 0
+D0
+~
+~
+0 0 12002
+D1
+~
+~
+0 0 12010
+D2
+~
+~
+0 0 12018
+D3
+~
+~
+0 0 12008
+S
+#12010
+Upper Rim - North Central East~
+Here the Pattern Reave created a localized time anomaly. One section of ground
+shows the same human soldier dying over and over in a loop - struck by an arrow,
+falling, hitting the ground, then standing again unharmed to be struck once more.
+It's silent and horrifying. The loop is only about five seconds long, and has been
+running for years.
+~
+0 0 0
+D0
+~
+~
+0 0 12003
+D1
+~
+~
+0 0 12011
+D2
+~
+~
+0 0 12019
+D3
+~
+~
+0 0 12009
+S
+#12011
+Upper Rim - Northeast Central~
+A perfect circle of drake corpses forms a ring here, all facing inward. At the
+center is a crystallized tear in space that shows... somewhere else. Another world,
+perhaps, or another time. You can see movement through it - figures that might be
+alive - but touching it seems like a supremely bad idea. The drakes apparently
+were trying to open an escape route when they died.
+~
+0 0 0
+D0
+~
+~
+0 0 12004
+D1
+~
+~
+0 0 12012
+D2
+~
+~
+0 0 12020
+D3
+~
+~
+0 0 12010
+S
+#12012
+Upper Rim - Northeast~
+The northeastern section of the upper rim shows evidence of the drakes' last stand.
+Spell-scorched earth and enormous claw marks suggest Behemut himself fought here
+before retreating to the center to cast Pattern Reave. Massive drake corpses lie
+in battle formation, their scales still gleaming despite years of exposure. They
+died as warriors, at least.
+~
+0 0 0
+D0
+~
+~
+0 0 12005
+D1
+~
+~
+0 0 12013
+D2
+~
+~
+0 0 12021
+D3
+~
+~
+0 0 12011
+S
+#12013
+Upper Rim - Easternmost~
+The eastern rim marks where the battle lines were before the Pattern Reave. Human
+siege equipment is scattered about - catapults, trebuchets, siege towers - all
+melted into abstract {wmental{x sculptures by the reality distortion. The wood has
+become metal, the metal has become something organic and pulsing. Nothing is what
+it should be. The air tastes wrong.
+~
+0 0 0
+D2
+~
+~
+0 0 12022
+D3
+~
+~
+0 0 12012
+S
+#12014
+Middle Rim - Northwest~
+Descending deeper into the crater, the destruction becomes more severe. A drake
+mage's tower has been compressed into a cube about six feet on each side, with all
+the architecture and unfortunate inhabitants crushed inside. You can see furniture,
+books, and body parts pressed against the translucent walls of the cube like insects
+in amber. The cube hums with trapped magical energy.
+~
+0 0 0
+D1
+~
+~
+0 0 12015
+D2
+~
+~
+0 0 12025
+S
+#12015
+Middle Rim - North~
+The ground here is covered in {wteeth{x. Not just a few - thousands of them,
+covering every inch of surface. They're from multiple species: human, orc, drake,
+and things you don't recognize. The Pattern Reave apparently pulled every tooth
+from every mouth in a massive radius and deposited them here. The sound of walking
+on them is disturbingly crunchy.
+~
+0 0 0
+D0
+~
+~
+0 0 12006
+D1
+~
+~
+0 0 12016
+D2
+~
+~
+0 0 12026
+D3
+~
+~
+0 0 12014
+S
+#12016
+Middle Rim - North-Northwest~
+A human knight in full plate armor stands here, completely petrified into {Cglass{x.
+Their sword is raised mid-swing, their face locked in a battle cry. But looking
+closer, you realize the glass is hollow - the person inside was {wvaporized{x,
+leaving only a perfect glass shell in the shape of their armor and body. The detail
+is exquisite and horrifying.
+~
+0 0 0
+D0
+~
+~
+0 0 12007
+D1
+~
+~
+0 0 12017
+D2
+~
+~
+0 0 12027
+D3
+~
+~
+0 0 12015
+S
+#12017
+Middle Rim - North-North~
+This section of the crater is dominated by a gravity anomaly. Small objects -
+pebbles, bone fragments, weapon shards - float in lazy circles about ten feet up.
+Some have been drifting in these patterns for years. The larger debris occasionally
+collides with a sound like wind chimes. Standing in the anomaly field makes you
+feel weightless and nauseous simultaneously.
+~
+0 0 0
+D0
+~
+~
+0 0 12008
+D1
+~
+~
+0 0 12018
+D2
+~
+~
+0 0 12028
+D3
+~
+~
+0 0 12016
+S
+#12018
+Middle Rim - North Center~
+The crater floor is stained here with colors that shouldn't exist - shades between
+{Rred{x and {Bblue{x that hurt to look at, {Ggreens{x that seem to vibrate. These
+are the pigments of unraveled reality. Where the colors pool, the ground itself
+becomes unstable, sometimes solid, sometimes liquid, sometimes both at once. Step
+carefully.
+~
+0 0 0
+D0
+~
+~
+0 0 12009
+D1
+~
+~
+0 0 12019
+D2
+~
+~
+0 0 12029
+D3
+~
+~
+0 0 12017
+S
+#12019
+Middle Rim - North-Northeast~
+A drake family huddled together in their final moment, their bodies now fused into
+a single {wmass{x of scale, bone, and flesh. You can still make out individual
+faces in the amalgamation - a father, mother, two children - all screaming. The
+Pattern Reave merged them into one entity before killing them. Their combined
+heartbeat can still be faintly heard if you press your ear to the mass.
+~
+0 0 0
+D0
+~
+~
+0 0 12010
+D1
+~
+~
+0 0 12020
+D2
+~
+~
+0 0 12030
+D3
+~
+~
+0 0 12018
+S
+#12020
+Middle Rim - Northeast~
+An orc war chief's banner still stands here, planted firmly in the ground. But
+the banner itself exists in multiple moments simultaneously - you see it freshly
+planted, then burning, then torn, then whole again, all at the same time. Looking
+at it too long makes your head ache as your brain tries to process the temporal
+impossibility.
+~
+0 0 0
+D0
+~
+~
+0 0 12011
+D1
+~
+~
+0 0 12021
+D2
+~
+~
+0 0 12031
+D3
+~
+~
+0 0 12019
+S
+#12021
+Middle Rim - East-Northeast~
+The eastern slope shows where human cavalry charged into the crater moments before
+the Pattern Reave struck. Horses and riders are scattered across the slope, but
+gravity affects them differently - some bodies fall upward slowly, others sideways.
+A few are stuck in place, struggling against invisible forces that prevent all
+movement. They've been dying of thirst for years but can't finish the process.
+~
+0 0 0
+D0
+~
+~
+0 0 12012
+D1
+~
+~
+0 0 12022
+D2
+~
+~
+0 0 12032
+D3
+~
+~
+0 0 12020
+S
+#12022
+Middle Rim - East~
+Here the crater wall is covered in handprints - thousands of them, burned into
+the {Cglass{x surface in {Rblood{x and ash. They belong to those who tried to
+climb out as the Pattern Reave consumed them. Some prints have six fingers, others
+three, others branch into impossible fractal patterns. The last desperate moments
+of the dying, preserved forever in crystalline horror.
+~
+0 0 0
+D0
+~
+~
+0 0 12013
+D1
+~
+~
+0 0 12023
+D2
+~
+~
+0 0 12033
+D3
+~
+~
+0 0 12021
+S
+#12023
+Middle Rim - Easternmost~
+The eastern edge of the crater transitions back to normal terrain, though "normal"
+is relative. The grass here grows in spiral patterns, and water flows uphill in
+defiance of physics. Small animals that wander too close to the crater develop
+extra limbs or lose their shadows. The residual magical contamination will likely
+persist for centuries.
+~
+0 0 0
+D2
+~
+~
+0 0 12034
+D3
+~
+~
+0 0 12022
+S
+#12024
+Lower Rim - Northwest~
+Descending deeper into the crater, you reach the lower rim where the worst of the
+reality distortion occurred. Here lies what appears to be a building constructed
+entirely from {wflesh{x and {wbone{x - but it was once a stone fortress. The
+Pattern Reave transformed the inorganic into organic, creating this pulsing,
+breathing structure. It's technically dead, but it still {gmoves{x.
+~
+0 0 0
+D1
+~
+~
+0 0 12025
+D2
+~
+~
+0 0 12036
+S
+#12025
+Lower Rim - North-Northwest~
+A section of ground here exists in two states simultaneously - solid stone and
+liquid magma. You can walk on it, but feel the heat. Reaching down reveals both
+hardness and fluidity. Bodies of drakes caught in this zone are half-melted,
+half-frozen, their expressions suggesting they felt both sensations fully as they
+died. The Pattern broke even the fundamental laws of matter.
+~
+0 0 0
+D0
+~
+~
+0 0 12014
+D1
+~
+~
+0 0 12026
+D2
+~
+~
+0 0 12037
+D3
+~
+~
+0 0 12024
+S
+#12026
+Lower Rim - North-North-Northwest~
+An inverted tower protrudes from the ground here, extending downward into the
+earth instead of up into the sky. Through cracks in its structure, you can see
+furnished rooms oriented wrong, with furniture on what should be the ceiling.
+Drake corpses lie scattered around it, their necks craned at unnatural angles
+from watching their home reality invert itself.
+~
+0 0 0
+D0
+~
+~
+0 0 12015
+D1
+~
+~
+0 0 12027
+D2
+~
+~
+0 0 12038
+D3
+~
+~
+0 0 12025
+S
+#12027
+Lower Rim - North-North~
+The air itself has solidified here in places, creating invisible walls you bump
+into. Other areas have vacuum pockets where breathing becomes difficult. The
+Pattern Reave rewrote the rules of atmosphere and pressure. Scattered throughout
+are air-drowned victims - those who suffocated when their lungs filled with
+crystallized air. Their faces are {Bblue{x and {wprismatic{x.
+~
+0 0 0
+D0
+~
+~
+0 0 12016
+D1
+~
+~
+0 0 12028
+D2
+~
+~
+0 0 12039
+D3
+~
+~
+0 0 12026
+S
+#12028
+Lower Rim - North Center West~
+Something massive exploded here - perhaps a drake elder or powerful war machine.
+The explosion is frozen mid-burst, a perfect sphere of debris and body parts
+suspended in stasis. You can walk through it, pushing past crystallized fire and
+suspended gore. At the exact center is a single heartbeat, still beating once
+every few seconds, keeping time for a body that no longer exists.
+~
+0 0 0
+D0
+~
+~
+0 0 12017
+D1
+~
+~
+0 0 12029
+D2
+~
+~
+0 0 12040
+D3
+~
+~
+0 0 12027
+S
+#12029
+Lower Rim - North Center~
+Here the ground has been replaced by a mirror surface, perfectly reflective. But
+the reflections don't match reality - you see yourself from angles that don't
+exist, and movements you haven't made yet. Corpses reflected in the mirror are
+alive and screaming, while their actual bodies lie still. Don't look too long,
+or you might see your own death reflected back.
+~
+0 0 0
+D0
+~
+~
+0 0 12018
+D1
+~
+~
+0 0 12030
+D2
+~
+~
+0 0 12041
+D3
+~
+~
+0 0 12028
+S
+#12030
+Lower Rim - North Center East~
+A human war camp was established here before the Pattern Reave. The tents still
+stand, but they're woven from {wpetrified screams{x - you can see the sound waves
+frozen into fabric-like structures. Inside the tents are the soldiers, their bodies
+transformed into musical instruments. The wind plays them occasionally, creating
+a haunting melody of the dead singing their own dirge.
+~
+0 0 0
+D0
+~
+~
+0 0 12019
+D1
+~
+~
+0 0 12031
+D2
+~
+~
+0 0 12042
+D3
+~
+~
+0 0 12029
+S
+#12031
+Lower Rim - Northeast Center~
+The crater floor here is covered in flowers - beautiful, vibrant flowers in colors
+you've never seen. They shouldn't be able to grow in this wasteland, yet they
+thrive. Closer inspection reveals why: each flower grows from a corpse, their roots
+burrowing into eye sockets and mouths. The flowers {gpulse{x with the heartbeats
+of the dead. They turn to watch you as you pass.
+~
+0 0 0
+D0
+~
+~
+0 0 12020
+D1
+~
+~
+0 0 12032
+D2
+~
+~
+0 0 12043
+D3
+~
+~
+0 0 12030
+S
+#12032
+Lower Rim - Northeast~
+An orcish shaman's body kneels here in prayer position, perfectly preserved. Their
+hands are raised to the sky, and from their palms grow trees - actual living trees,
+rooted through their bones and extending forty feet up. The shaman's face is
+peaceful, suggesting they accepted this transformation. Their body has become a
+grove, a final act of life magic twisted by the Pattern.
+~
+0 0 0
+D0
+~
+~
+0 0 12021
+D1
+~
+~
+0 0 12033
+D2
+~
+~
+0 0 12044
+D3
+~
+~
+0 0 12031
+S
+#12033
+Lower Rim - East-Northeast~
+A section of the original drake city street remains here, the cobblestones intact
+but rearranged into patterns that create optical illusions. Walking down the street,
+you seem to get farther away instead of closer. Distance and direction have no
+meaning here. Drake civilians lie along the street, their bodies stretched like
+taffy across impossible geometries.
+~
+0 0 0
+D0
+~
+~
+0 0 12022
+D1
+~
+~
+0 0 12034
+D2
+~
+~
+0 0 12045
+D3
+~
+~
+0 0 12032
+S
+#12034
+Lower Rim - East~
+The eastern slope features what can only be described as a battlefield graveyard
+that achieved sentience. The combined death echoes of thousands have formed into
+something aware and malevolent. You can feel it watching you, hear it whispering
+in languages that predate speech. The corpses here twitch occasionally, but it's
+not the bodies moving - it's the ground itself, possessed by mass death.
+~
+0 0 0
+D0
+~
+~
+0 0 12023
+D1
+~
+~
+0 0 12035
+D2
+~
+~
+0 0 12046
+D3
+~
+~
+0 0 12033
+S
+#12035
+Lower Rim - Easternmost~
+This section of the lower rim shows the transition zone where the Pattern Reave's
+power finally dissipated completely. Bodies here are merely dead, landscape merely
+destroyed - almost refreshing in its conventional horror. Weapons are just broken
+weapons, not transformed into singing nightmares. The return to normal physics is
+jarring after the impossible devastation of the inner crater.
+~
+0 0 0
+D2
+~
+~
+0 0 12047
+D3
+~
+~
+0 0 12034
+S
+#12036
+Deep Crater - Northwest~
+At this depth, you're surrounded by the full horror of Belaanir's destruction. The
+air itself is {wsolid{x in places, requiring you to push through it like water.
+In other spots, there's no air at all. A drake warrior's skeleton walks in place
+here, their bones animated by residual magic, forever marching toward a battle
+that already ended. They don't acknowledge your presence.
+~
+0 0 0
+D0
+~
+~
+0 0 12024
+D1
+~
+~
+0 0 12037
+S
+#12037
+Deep Crater - North-Northwest~
+The ground here is composed entirely of {wshattered moments{x - frozen fragments
+of time scattered like broken glass. Step on one and you experience that moment:
+a drake's final breath, an orc's death scream, a human's prayer. Each step brings
+a new death memory, overwhelming in its intensity. Travelers who linger here too
+long go mad from experiencing thousands of deaths.
+~
+0 0 0
+D0
+~
+~
+0 0 12025
+D1
+~
+~
+0 0 12038
+D2
+~
+~
+0 0 12048
+D3
+~
+~
+0 0 12036
+S
+#12038
+Deep Crater - North-North-Northwest~
+A drake library has been scattered across this section, but the books have become
+carnivorous. Their pages snap at you as you pass, and the words themselves have
+gained physical form - letters crawling across surfaces like insects. The knowledge
+contained within has been twisted into predatory hunger. Several half-eaten corpses
+suggest reading materials here take that term literally.
+~
+0 0 0
+D0
+~
+~
+0 0 12026
+D1
+~
+~
+0 0 12039
+D2
+~
+~
+0 0 12049
+D3
+~
+~
+0 0 12037
+S
+#12039
+Deep Crater - North-Northwest Center~
+Here stands what appears to be Behemut himself - or half of him, at least. The
+drake leader's body was split vertically down the middle when he cast Pattern
+Reave, one half remaining physical, the other half becoming pure energy. The
+physical half is petrified in agony. The energy half crackles and pulses with
+{Carcane{x power. Both halves scream silently.
+~
+0 0 0
+D0
+~
+~
+0 0 12027
+D1
+~
+~
+0 0 12040
+D2
+~
+~
+0 0 12050
+D3
+~
+~
+0 0 12038
+S
+#12040
+Deep Crater - North Center~
+The very center of the Pattern Reave's blast point is nearby, and reality is tissue-
+thin here. You can see through the world itself to the void beyond - infinite
+darkness dotted with distant lights that might be stars or might be other realities.
+The ground crackles like eggshell underfoot. Existing here feels {wprecarious{x,
+as if one wrong move might unmake you entirely.
+~
+0 0 0
+D0
+~
+~
+0 0 12028
+D1
+~
+~
+0 0 12041
+D2
+~
+~
+0 0 12051
+D3
+~
+~
+0 0 12039
+S
+#12041
+Deep Crater - North-Northeast Center~
+A human mage's final spell is frozen mid-cast, a {Bball{x of {Celemental{x fire
+hanging motionless in the air. It still radiates heat after all these years. The
+mage themselves is a statue of ash that somehow retains perfect detail - you can
+see individual wrinkles on their face, the panic in their eyes. Their spell never
+landed. Their enemy died anyway. Pattern Reave made all their power irrelevant.
+~
+0 0 0
+D0
+~
+~
+0 0 12029
+D1
+~
+~
+0 0 12042
+D2
+~
+~
+0 0 12052
+D3
+~
+~
+0 0 12040
+S
+#12042
+Deep Crater - Northeast~
+This section is filled with {wechoes{x made physical. You can see ghostly
+reenactments of the battle playing out - drakes breathing fire, orcs swinging
+axes, humans launching arrows. The echoes loop endlessly, translucent and silent,
+walking through the same motions they did in life. They pass through you without
+acknowledgment, forever fighting a battle they already lost.
+~
+0 0 0
+D0
+~
+~
+0 0 12030
+D1
+~
+~
+0 0 12043
+D2
+~
+~
+0 0 12053
+D3
+~
+~
+0 0 12041
+S
+#12043
+Deep Crater - East-Northeast~
+The ground here has developed a {wpulse{x, like a heartbeat. The entire section
+expands and contracts rhythmically - about forty beats per minute. It's the
+combined death throes of everyone who died nearby, their final heartbeats merged
+into the landscape itself. The rhythm is hypnotic and deeply disturbing. Some say
+if your heart synchronizes with it, you'll be absorbed into the crater.
+~
+0 0 0
+D0
+~
+~
+0 0 12031
+D1
+~
+~
+0 0 12044
+D2
+~
+~
+0 0 12054
+D3
+~
+~
+0 0 12042
+S
+#12044
+Deep Crater - East~
+An orc drummer boy died here mid-beat, their drum now fused to their chest. The
+drum still beats on its own - boom... boom... boom - marking time for an army that
+no longer exists. Around the boy, other orcs are arranged in perfect rank and file,
+all marching in place, all dead. The Pattern caught them in formation and preserved
+their discipline even in death.
+~
+0 0 0
+D0
+~
+~
+0 0 12032
+D1
+~
+~
+0 0 12045
+D2
+~
+~
+0 0 12055
+D3
+~
+~
+0 0 12043
+S
+#12045
+Deep Crater - East-East~
+The crater wall here is covered in drake eggs - hundreds of them, all crystallized
+in the moment before hatching. Inside each translucent shell you can see a perfectly
+formed drake wyrmling, frozen in time. They would have been the next generation.
+Now they're eternal monuments to potential never realized. Sometimes you can hear
+them crying from inside their prisons.
+~
+0 0 0
+D0
+~
+~
+0 0 12033
+D1
+~
+~
+0 0 12046
+D2
+~
+~
+0 0 12056
+D3
+~
+~
+0 0 12044
+S
+#12046
+Deep Crater - East-East-East~
+A massive drake statue dominates this section - except it's not a statue. It's a
+living drake who has been transformed into {wstone{x while fully conscious. Their
+eyes still move, tracking your passage. Tears of liquid {Cgemstone{x leak from
+their eyes. They've been trapped in this petrified state for years, fully aware,
+unable to die. It's perhaps the cruelest fate the Pattern Reave inflicted.
+~
+0 0 0
+D0
+~
+~
+0 0 12034
+D1
+~
+~
+0 0 12047
+D2
+~
+~
+0 0 12057
+D3
+~
+~
+0 0 12045
+S
+#12047
+Deep Crater - Easternmost~
+The eastern edge of the deep crater shows where human forces tried to retreat when
+they saw the Pattern Reave forming. They didn't make it. Bodies are scattered in
+full flight, some taking steps in mid-air where the ground beneath them ceased to
+exist. Others sank into earth that became liquid for just a moment. The retreat
+became a rout became a massacre became a reality-warping apocalypse.
+~
+0 0 0
+D0
+~
+~
+0 0 12035
+D3
+~
+~
+0 0 12046
+S
+#12048
+Lower Rim - Southwest~
+The southwestern section of the lower rim is dominated by what can only be called
+a {wflesh garden{x. Organic matter from hundreds of victims merged and sprouted,
+creating plant-like structures made of muscle, bone, and sinew. They {gmove{x
+slightly, swaying in a wind that doesn't exist. Some have developed eyes. Some
+weep. It's an abomination that refuses to fully die.
+~
+0 0 0
+D0
+~
+~
+0 0 12037
+D1
+~
+~
+0 0 12049
+S
+#12049
+Lower Rim - South-Southwest~
+The ground here is covered in {wmirrored{x fragments that don't reflect the present.
+Look into them and you see the battle as it was - the living, the fighting, the
+moment before everything ended. The mirrors show you what this place should be,
+making the current devastation even more tragic. Some fragments show the future -
+your corpse among the others. Best not to look too closely.
+~
+0 0 0
+D0
+~
+~
+0 0 12038
+D1
+~
+~
+0 0 12050
+D2
+~
+~
+0 0 12058
+D3
+~
+~
+0 0 12048
+S
+#12050
+Lower Rim - South-South-Southwest~
+A drake elder's corpse lies here, their body adorned with ceremonial robes and
+jewelry. But the Pattern Reave transformed their treasures - gold became {wlead{x,
+gems became {wtoxic{x crystals, silk became {wbarbed wire{x. The transformation
+happened while they wore it all. Their body bears the wounds of their own wealth
+turning against them, slowly and agonizingly.
+~
+0 0 0
+D0
+~
+~
+0 0 12039
+D1
+~
+~
+0 0 12051
+D2
+~
+~
+0 0 12059
+D3
+~
+~
+0 0 12049
+S
+#12051
+Lower Rim - South-South~
+This section houses a temporal echo of Behemut casting Pattern Reave. You can see
+him - translucent and ghostly - spreading his wings and speaking the words of power
+that unmade reality. The echo loops every few minutes, and each time it plays, the
+residual magic makes your skin {Ccrawl{x. Watching it is like witnessing the end
+of the world in slow motion, over and over.
+~
+0 0 0
+D0
+~
+~
+0 0 12040
+D1
+~
+~
+0 0 12052
+D2
+~
+~
+0 0 12060
+D3
+~
+~
+0 0 12050
+S
+#12052
+Lower Rim - South Center West~
+The Pattern's epicenter is close now - you can feel it pulling at your very being.
+Here lies a perfect circle of absolute destruction, where matter simply ceased to
+exist. The circle's edge shows partial vaporization - bodies half-gone, weapons
+cut cleanly through, armor truncated mid-plate. Everything within the circle is
+just... {wgone{x. Not destroyed. {wUnmade{x.
+~
+0 0 0
+D0
+~
+~
+0 0 12041
+D1
+~
+~
+0 0 12053
+D2
+~
+~
+0 0 12061
+D3
+~
+~
+0 0 12051
+S
+#12053
+Lower Rim - South Center~
+You're very close to ground zero now. Reality is barely holding together. Your
+own body feels unstable - you can see your bones through your skin, then not, then
+see your organs, then back to normal. The ground shifts between solid, liquid, and
+states that don't have names. Shadows exist without objects to cast them. Light
+bends in impossible curves. This is what happens when Pattern is broken.
+~
+0 0 0
+D0
+~
+~
+0 0 12042
+D1
+~
+~
+0 0 12054
+D2
+~
+~
+0 0 12062
+D3
+~
+~
+0 0 12052
+S
+#12054
+Lower Rim - South Center East~
+A massive drake war-horn lies here, split down the middle by forces that bent space
+itself. Looking through the split reveals not the other side, but somewhere completely
+different - maybe another plane of existence. {Cblue{x light streams through the
+opening, and occasionally things try to come through: tentacles, eyes, geometries
+that hurt to perceive. The Pattern Reave opened doors that should stay closed.
+~
+0 0 0
+D0
+~
+~
+0 0 12043
+D1
+~
+~
+0 0 12055
+D2
+~
+~
+0 0 12063
+D3
+~
+~
+0 0 12053
+S
+#12055
+Lower Rim - Southeast Center~
+Here the ground is composed of {wcompressed time{x. A square yard of ground might
+contain years of accumulated moments, all pressed together. Walking through it, you
+age and de-age randomly - your hair grows long, then short, then falls out, then
+returns. Scars appear and disappear. It's deeply disorienting. Bodies here show
+lives lived in seconds - infants aged to ancients, ancients regressed to children.
+~
+0 0 0
+D0
+~
+~
+0 0 12044
+D1
+~
+~
+0 0 12056
+D2
+~
+~
+0 0 12064
+D3
+~
+~
+0 0 12054
+S
+#12056
+Lower Rim - Southeast~
+An entire squadron of human cavalry is arrayed here in perfect formation, all
+turned to {Csalt{x. Horse and rider alike, crystallized into mineral statues with
+horrifying detail. The salt is slowly dissolving in the weather, meaning these
+warriors are dying a second time, eroding away year by year. Pools of {wbriny{x
+water collect around their bases, filled with dissolved soldiers.
+~
+0 0 0
+D0
+~
+~
+0 0 12045
+D1
+~
+~
+0 0 12057
+D2
+~
+~
+0 0 12065
+D3
+~
+~
+0 0 12055
+S
+#12057
+Lower Rim - East-Southeast~
+The eastern slope of the deep crater features a phenomenon the locals call the
+{wScreaming Stones{x. Certain rocks, when the wind passes over them, emit sounds
+that are unmistakably voices - pleading, cursing, praying. The Pattern Reave
+trapped souls in mineral form. The stones themselves try to arrange into words,
+slowly moving across the ground to spell out warnings and epitaphs.
+~
+0 0 0
+D0
+~
+~
+0 0 12046
+D3
+~
+~
+0 0 12056
+S
+#12058
+Middle Rim - Southwest~
+Ascending back toward the crater's middle rim, the wrongness starts to feel almost
+normal - which is its own kind of horror. A drake marketplace once stood here, and
+you can still see market stalls, but they're woven from {wpetrified smoke{x. The
+merchants are glass statues filled with {Rblood{x that still circulates. Some
+shoppers reached for goods that have fused into their hands.
+~
+0 0 0
+D0
+~
+~
+0 0 12049
+D1
+~
+~
+0 0 12059
+S
+#12059
+Middle Rim - South-Southwest~
+An orcish war-banner flutters here, but it's been turned {winside-out{x. The cloth
+shows its own threading and backing, while the dyed symbols have inverted through
+to nowhere. The flagpole is made of {wfrozen lightning{x, still crackling with
+electricity but solid to the touch. Around it lie orcs in various stages of
+dimensional displacement - some exist in only two dimensions, others in four.
+~
+0 0 0
+D0
+~
+~
+0 0 12050
+D1
+~
+~
+0 0 12060
+D2
+~
+~
+0 0 12066
+D3
+~
+~
+0 0 12058
+S
+#12060
+Middle Rim - South-South-Southwest~
+The crater slope here is terraced with what looks like agricultural fields, but
+they grow {wcorpses{x instead of crops. Bodies sprout from the soil like plants,
+in various stages of emergence - a head here, an arm there, a torso breaking through
+the surface. They don't decay. They just grow, eternally half-born from the earth.
+The field is tended by a ghostly drake farmer who doesn't realize they're dead.
+~
+0 0 0
+D0
+~
+~
+0 0 12051
+D1
+~
+~
+0 0 12061
+D2
+~
+~
+0 0 12067
+D3
+~
+~
+0 0 12059
+S
+#12061
+Middle Rim - South-South~
+A section of the original drake city wall stands here, but it's been turned
+{wtranslucent{x. You can see through the stone to the reinforcing beams inside,
+and through those to the deeper structure, infinitely. The wall has become
+fractal, each layer revealing more layers within. Drake defenders are embedded
+in the wall at various depths, visible like insects in amber, still fighting
+enemies that exist only in memory.
+~
+0 0 0
+D0
+~
+~
+0 0 12052
+D1
+~
+~
+0 0 12062
+D2
+~
+~
+0 0 12068
+D3
+~
+~
+0 0 12060
+S
+#12062
+Middle Rim - South Center West~
+Here the Pattern Reave created a zone of {wmultiplied existence{x. Everything that
+was here exists in copies - hundreds of the same corpse, the same broken weapon,
+the same bloodstain, all slightly offset from each other. Walking through creates
+an unsettling echo effect as you brush past duplicate realities. Some duplicates
+are alive while others are dead. Some scream. Some laugh. None are quite real.
+~
+0 0 0
+D0
+~
+~
+0 0 12053
+D1
+~
+~
+0 0 12063
+D2
+~
+~
+0 0 12069
+D3
+~
+~
+0 0 12061
+S
+#12063
+Middle Rim - South Center~
+The south-central section holds a horrifying trophy: an entire human battalion
+compressed into a cube ten feet on each side. Thousands of soldiers, all their
+equipment, their battle standards, everything - crushed together into a solid mass.
+You can see faces pressed against the surface from inside, weapons jutting out at
+random angles. The cube occasionally {gshifts{x, rearranging its contents.
+~
+0 0 0
+D0
+~
+~
+0 0 12054
+D1
+~
+~
+0 0 12064
+D2
+~
+~
+0 0 12070
+D3
+~
+~
+0 0 12062
+S
+#12064
+Middle Rim - South Center East~
+A drake artist's studio has been preserved here in twisted form. The paintings on
+the walls show the same scene: the moment Pattern Reave was cast. But the paint
+has become {wliquid fire{x, still wet and burning after years. The artist's body
+is part of their final canvas, merged into the wall mid-brushstroke, their last
+painting completed with their own dissolved flesh.
+~
+0 0 0
+D0
+~
+~
+0 0 12055
+D1
+~
+~
+0 0 12065
+D2
+~
+~
+0 0 12071
+D3
+~
+~
+0 0 12063
+S
+#12065
+Middle Rim - Southeast~
+The southeastern middle rim features an impossibility: a tree growing {wdownward{x
+into the sky. Its roots reach up into the air while its branches burrow into the
+earth. Birds that tried to nest in it are frozen mid-flight, permanently ascending
+downward. The tree's fruit are {wmemories{x - touch one and experience a random
+moment from the battle. Most are traumatic. All are final.
+~
+0 0 0
+D0
+~
+~
+0 0 12056
+D3
+~
+~
+0 0 12064
+S
+#12066
+Middle Rim - East-Southeast~
+Here lies what the survivors call the {wPit of Faces{x. The ground has been
+replaced with a surface made entirely of faces - human, orc, drake - all pressed
+together like cobblestones. They're still alive, somehow, mouths opening and closing
+in silent screams, eyes tracking movement. Walking on them is necessary but
+nauseating. They've been begging for death for years with no voice to carry the plea.
+~
+0 0 0
+D0
+~
+~
+0 0 12059
+D1
+~
+~
+0 0 12067
+S
+#12067
+Middle Rim - East~
+An orcish war-machine - some kind of siege engine - has been transformed into
+{wliving tissue{x. The wooden frame became bone, the metal gears became muscle,
+the ropes became {Rveins{x pumping black ichor. It still functions, creaking and
+groaning as it tries to fire ammunition it no longer has at enemies long dead. The
+crew merged into it, their screaming faces visible in the flesh-wood hybrid.
+~
+0 0 0
+D0
+~
+~
+0 0 12060
+D1
+~
+~
+0 0 12068
+D3
+~
+~
+0 0 12066
+S
+#12068
+Middle Rim - East-East~
+A human chaplain's prayer book lies open here, its pages turned to stone but still
+readable. The prayers have been rewritten in {Rblood{x that seeps from the stone
+pages eternally. The chaplain kneels nearby in permanent prayer, their body hollow
+like a shell. Inside the shell lives a colony of reality-warped insects that
+shouldn't be able to exist. They've made a home in the chaplain's faith.
+~
+0 0 0
+D0
+~
+~
+0 0 12061
+D1
+~
+~
+0 0 12069
+D3
+~
+~
+0 0 12067
+S
+#12069
+Middle Rim - Easternmost~
+The eastern middle rim transitions back toward conventional devastation. Here the
+bodies are merely dead, the architecture merely ruined. It's almost peaceful
+compared to the reality-warping horrors of the crater's depths. Drake homes have
+collapsed into rubble. Gardens are withered and dead. It's tragic, but it follows
+the normal rules of destruction. The mind can process this.
+~
+0 0 0
+D0
+~
+~
+0 0 12062
+D1
+~
+~
+0 0 12070
+D3
+~
+~
+0 0 12068
+S
+#12070
+Upper Rim - Southwest~
+Climbing back toward the upper rim, you find evidence of drake civilians who tried
+to flee underground when the battle started. A tunnel entrance here is sealed with
+{wcongealed time{x - you can see drakes in the tunnel, mid-run, frozen for eternity.
+Behind them, a wave of temporal distortion follows, still moving at a glacier's
+pace, still consuming. In a thousand years it might reach them.
+~
+0 0 0
+D0
+~
+~
+0 0 12063
+D1
+~
+~
+0 0 12071
+D3
+~
+~
+0 0 12069
+S
+#12071
+Upper Rim - South-Southwest~
+A human battlefield hospital was established here before the Pattern Reave struck.
+The wounded still lie on their cots, tended by {wcrystalline{x healers who've been
+transformed into living glass. The healers continue their work on autopilot, their
+glass hands passing through patients who died years ago. Medical supplies have
+become {wtoxic{x but the glass healers don't notice, eternally trying to save the
+already dead.
+~
+0 0 0
+D0
+~
+~
+0 0 12064
+D3
+~
+~
+0 0 12070
+S
+#0
+
+
+
+#SPECIALS
+S
+
+
+
+#RESETS
+S
+
+
+
+#SHOPS
+0
+
+
+
+#MOBPROGS
+#0
+
+#$
+
