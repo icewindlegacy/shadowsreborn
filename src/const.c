@@ -126,6 +126,7 @@ const struct item_type item_table[] = {
     {ITEM_MANUAL, "manual"},
     {ITEM_COMM, "commstone"},
     {ITEM_WINDGATE, "windgate"},
+    {ITEM_PYLON, "pylon"},
     {0, NULL}
 };
 
@@ -2035,6 +2036,12 @@ struct skill_type skill_table[MAX_SKILL] = {
      spell_portal, TAR_IGNORE, POS_STANDING,
      NULL, SLOT (519), 100, 24,
      "", "!Portal!", ""},
+
+    {
+     "pylon", {30, 26, 40, 35}, {1, 1, 2, 2},
+     spell_pylon, TAR_IGNORE, POS_STANDING,
+     NULL, SLOT (722), 50, 12,
+     "", "!Pylon!", ""},
 
     {
      "protection evil", {12, 9, 17, 11}, {1, 1, 2, 2},

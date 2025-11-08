@@ -1343,6 +1343,7 @@ struct    kill_data
 #define ITEM_MANUAL      43
 #define ITEM_COMM        44
 #define ITEM_WINDGATE    45
+#define ITEM_PYLON       46
 #define ITEM_QUEST       (aa) /* Quest Item extra flag */
 
 /* Quest item cost - stored in value[4] */

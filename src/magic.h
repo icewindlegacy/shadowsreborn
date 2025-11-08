@@ -120,6 +120,7 @@ DECLARE_SPELL_FUN(	spell_locate_object	);
 DECLARE_SPELL_FUN(	spell_magic_missile	);
 DECLARE_SPELL_FUN(	spell_marque		);
 DECLARE_SPELL_FUN(      spell_mass_healing	);
+DECLARE_SPELL_FUN(	spell_pylon		);
 DECLARE_SPELL_FUN(	spell_mass_invis	);
 DECLARE_SPELL_FUN(	spell_nexus		);
 DECLARE_SPELL_FUN(	spell_pass_door		);

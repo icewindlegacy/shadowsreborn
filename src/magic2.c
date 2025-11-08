@@ -223,3 +223,93 @@ void spell_marque(int sn, int level, CHAR_DATA *ch, void *vo, int target)
     act("$n traces glowing runes in the air that fade into nothingness.", ch, NULL, NULL, TO_ROOM);
     send_to_char("You may now use 'word of recall' to return here.\n\r", ch);
 }
+
+/* Pylon - create portal to clan's pylon in target area */
+void spell_pylon(int sn, int level, CHAR_DATA *ch, void *vo, int target)
+{
+    OBJ_DATA *pylon = NULL;
+    OBJ_DATA *portal;
+    ROOM_INDEX_DATA *pylon_room;
+    AREA_DATA *area;
+    char arg[MAX_INPUT_LENGTH];
+    
+    target_name = one_argument(target_name, arg);
+    
+    if (IS_NPC(ch))
+    {
+        send_to_char("NPCs cannot use pylons.\n\r", ch);
+        return;
+    }
+    
+    if (ch->clan == 0)
+    {
+        send_to_char("You must be in a clan to use pylons.\n\r", ch);
+        return;
+    }
+    
+    if (arg[0] == '\0')
+    {
+        send_to_char("Which area's pylon do you wish to connect to?\n\r", ch);
+        return;
+    }
+    
+    /* Search for the target area */
+    for (area = area_first; area != NULL; area = area->next)
+    {
+        if (!str_prefix(arg, area->name))
+            break;
+    }
+    
+    if (area == NULL)
+    {
+        send_to_char("No such area found.\n\r", ch);
+        return;
+    }
+    
+    /* Search for a pylon in that area belonging to this clan */
+    for (pylon = object_list; pylon != NULL; pylon = pylon->next)
+    {
+        if (pylon->item_type != ITEM_PYLON)
+            continue;
+            
+        if (pylon->in_room == NULL)
+            continue;
+            
+        if (pylon->in_room->area != area)
+            continue;
+            
+        /* value[2] stores the clan number that owns this pylon */
+        if (pylon->value[2] == ch->clan)
+            break;
+    }
+    
+    if (pylon == NULL)
+    {
+        send_to_char("Your clan does not have a pylon in that area.\n\r", ch);
+        return;
+    }
+    
+    pylon_room = pylon->in_room;
+    
+    if (pylon_room == NULL)
+    {
+        send_to_char("The pylon location no longer exists.\n\r", ch);
+        return;
+    }
+    
+    /* Create portal at caster's location */
+    portal = create_object(get_obj_index(OBJ_VNUM_PORTAL), 0);
+    portal->timer = 2 + level / 10;
+    portal->value[0] = pylon_room->vnum;
+    portal->value[3] = ch->in_room->vnum;
+    
+    free_string(portal->short_descr);
+    portal->short_descr = str_dup("a shimmering pylon portal");
+    free_string(portal->description);
+    portal->description = str_dup("A shimmering pylon portal rises from the ground here.");
+    
+    obj_to_room(portal, ch->in_room);
+    
+    act("$p rises from the ground with a hum of energy!", ch, portal, NULL, TO_ROOM);
+    act("$p rises from the ground with a hum of energy!", ch, portal, NULL, TO_CHAR);
+}
