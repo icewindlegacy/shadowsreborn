@@ -1267,7 +1267,7 @@ void obj_update (void)
             if (IS_NPC (obj->carried_by)
                 && obj->carried_by->pIndexData->pShop != NULL)
                 obj->carried_by->silver += obj->cost / 5;
-            else
+            else if (!IS_OBJ_STAT(obj, ITEM_HIDDEN))
             {
                 act (message, obj->carried_by, obj, NULL, TO_CHAR);
                 if (obj->wear_loc == WEAR_FLOAT)
@@ -1277,7 +1277,8 @@ void obj_update (void)
         else if (obj->in_room != NULL && (rch = obj->in_room->people) != NULL)
         {
             if (!(obj->in_obj && obj->in_obj->pIndexData->vnum == OBJ_VNUM_PIT
-                  && !CAN_WEAR (obj->in_obj, ITEM_TAKE)))
+                  && !CAN_WEAR (obj->in_obj, ITEM_TAKE))
+                && !IS_OBJ_STAT(obj, ITEM_HIDDEN))
             {
                 act (message, rch, obj, NULL, TO_ROOM);
                 act (message, rch, obj, NULL, TO_CHAR);
