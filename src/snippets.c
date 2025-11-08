@@ -2783,12 +2783,13 @@ void do_petname(CHAR_DATA *ch, char *argument)
 
     argument = one_argument(argument, command);
 
-    if (command[0] == '\0' || argument[0] == '\0')
+    if (command[0] == '\0')
     {
         send_to_char("\n\rsyntax: petname [name|short|long|desc] <argument>\n\r", ch);
         send_to_char("\n\r  example: \"petname name fido\"\n\r", ch);
         send_to_char("            \"petname short a hungry dog\"\n\r", ch);
         send_to_char("            \"petname long A hungry dog is here.\"\n\r", ch);
+        send_to_char("            \"petname desc\" (opens editor)\n\r", ch);
         send_to_char("\n\rTry using color in the descriptions!\n\r\n\r", ch);
         send_to_char("See \"help petname\" and \"help color\" for more information.\n\r", ch);
         return;
@@ -2796,6 +2797,12 @@ void do_petname(CHAR_DATA *ch, char *argument)
 
     if (!str_prefix(command, "name"))
     {
+        if (argument[0] == '\0')
+        {
+            send_to_char("You must specify a name.\n\r", ch);
+            return;
+        }
+        
         if (argument[0] == '{')  /* remove color codes from name */
         {
             argument++; 
@@ -2810,7 +2817,11 @@ void do_petname(CHAR_DATA *ch, char *argument)
     }
     else if (!str_prefix(command, "short"))
     {
-        if (argument[0] == '\0') return;
+        if (argument[0] == '\0')
+        {
+            send_to_char("You must specify a short description.\n\r", ch);
+            return;
+        }
         free_string(ch->pet->short_descr);
         ch->pet->short_descr = str_dup(argument);
         sprintf(buf, "%s's short description set to: \n\r%s\n\r",
@@ -2819,7 +2830,11 @@ void do_petname(CHAR_DATA *ch, char *argument)
     }
     else if (!str_prefix(command, "long"))
     {
-        if (argument[0] == '\0') return;
+        if (argument[0] == '\0')
+        {
+            send_to_char("You must specify a long description.\n\r", ch);
+            return;
+        }
         free_string(ch->pet->long_descr);
         sprintf(buf, "%s\n\r", argument);
         ch->pet->long_descr = str_dup(buf);
@@ -2829,12 +2844,8 @@ void do_petname(CHAR_DATA *ch, char *argument)
     }
     else if (!str_prefix(command, "description") || !str_prefix(command, "desc"))
     {
-        if (argument[0] == '\0')
-        {
-            string_append(ch, &ch->pet->description);
-            return;
-        }
-        send_to_char("Use 'petname desc' with no argument to enter the editor.\n\r", ch);
+        string_append(ch, &ch->pet->description);
+        return;
     }
     else
     {
@@ -2865,12 +2876,13 @@ void do_mountname(CHAR_DATA *ch, char *argument)
 
     argument = one_argument(argument, command);
 
-    if (command[0] == '\0' || argument[0] == '\0')
+    if (command[0] == '\0')
     {
         send_to_char("\n\rsyntax: mountname [name|short|long|desc] <argument>\n\r", ch);
         send_to_char("\n\r  example: \"mountname name shadowfax\"\n\r", ch);
         send_to_char("            \"mountname short a swift stallion\"\n\r", ch);
         send_to_char("            \"mountname long A swift stallion stands here.\"\n\r", ch);
+        send_to_char("            \"mountname desc\" (opens editor)\n\r", ch);
         send_to_char("\n\rTry using color in the descriptions!\n\r\n\r", ch);
         send_to_char("See \"help mountname\" and \"help color\" for more information.\n\r", ch);
         return;
@@ -2878,6 +2890,12 @@ void do_mountname(CHAR_DATA *ch, char *argument)
 
     if (!str_prefix(command, "name"))
     {
+        if (argument[0] == '\0')
+        {
+            send_to_char("You must specify a name.\n\r", ch);
+            return;
+        }
+        
         if (argument[0] == '{')  /* remove color codes from name */
         {
             argument++; 
@@ -2892,7 +2910,11 @@ void do_mountname(CHAR_DATA *ch, char *argument)
     }
     else if (!str_prefix(command, "short"))
     {
-        if (argument[0] == '\0') return;
+        if (argument[0] == '\0')
+        {
+            send_to_char("You must specify a short description.\n\r", ch);
+            return;
+        }
         free_string(ch->mount->short_descr);
         ch->mount->short_descr = str_dup(argument);
         sprintf(buf, "%s's short description set to: \n\r%s\n\r",
@@ -2901,7 +2923,11 @@ void do_mountname(CHAR_DATA *ch, char *argument)
     }
     else if (!str_prefix(command, "long"))
     {
-        if (argument[0] == '\0') return;
+        if (argument[0] == '\0')
+        {
+            send_to_char("You must specify a long description.\n\r", ch);
+            return;
+        }
         free_string(ch->mount->long_descr);
         sprintf(buf, "%s\n\r", argument);
         ch->mount->long_descr = str_dup(buf);
@@ -2911,12 +2937,8 @@ void do_mountname(CHAR_DATA *ch, char *argument)
     }
     else if (!str_prefix(command, "description") || !str_prefix(command, "desc"))
     {
-        if (argument[0] == '\0')
-        {
-            string_append(ch, &ch->mount->description);
-            return;
-        }
-        send_to_char("Use 'mountname desc' with no argument to enter the editor.\n\r", ch);
+        string_append(ch, &ch->mount->description);
+        return;
     }
     else
     {
