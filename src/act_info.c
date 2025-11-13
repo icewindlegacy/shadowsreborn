@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           act_info.c - November 3, 2025
- */            
+ *           act_info.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -221,7 +221,8 @@ void show_list_to_char (OBJ_DATA * list, CHAR_DATA * ch, bool fShort,
      */
     for (obj = list; obj != NULL; obj = obj->next_content)
     {
-        if (obj->wear_loc == WEAR_NONE && can_see_obj (ch, obj))
+        if (obj->wear_loc == WEAR_NONE && can_see_obj (ch, obj) 
+            && !IS_OBJ_STAT(obj, ITEM_HIDDEN))
         {
             pstrShow = format_obj_to_char (obj, ch, fShort);
 
@@ -1099,6 +1100,26 @@ void do_compact (CHAR_DATA * ch, char *argument)
     }
 }
 
+void do_mxp (CHAR_DATA * ch, char *argument)
+{
+    if (IS_NPC(ch) || ch->desc == NULL)
+        return;
+        
+    if (ch->desc->mxp)
+    {
+        send_to_char ("MXP mode removed.\n\r", ch);
+        ch->desc->mxp = FALSE;
+    }
+    else
+    {
+        send_to_char ("MXP mode enabled.\n\r", ch);
+        send_to_char ("Your client must support MXP to see clickable links.\n\r", ch);
+        ch->desc->mxp = TRUE;
+        /* Send MXP initialization to client */
+        write_to_buffer (ch->desc, MXPMODE(6), 0);  /* Enable MXP in client */
+    }
+}
+
 void do_long(CHAR_DATA *ch, char *argument)
 {
     if (!IS_SET(ch->comm,COMM_LONG))
@@ -1735,28 +1756,35 @@ void do_examine (CHAR_DATA * ch, char *argument)
              {
                 sprintf( buf2, "(%s)", dir_name[door] );
              }
-             if (fAuto)
-             {
-                 strcat (buf, " ");
-                 if ( IS_SET(pexit->exit_info, EX_CLOSED) )
-                 {
-                  strcat( buf, buf2 );
-                  continue;
-                 }
-                 strcat (buf, dir_name[door]);
-             }
-             else
-             {
-                 sprintf (buf + strlen (buf), "%-5s - %s",
-                          capitalize (dir_name[door]),
-                          room_is_dark (pexit->u1.to_room)
-                          ? "Too dark to tell" : pexit->u1.to_room->name);
-                 if (IS_IMMORTAL (ch))
-                     sprintf (buf + strlen (buf),
-                              " (room %d)\n\r", pexit->u1.to_room->vnum);
-                 else
-                     sprintf (buf + strlen (buf), "\n\r");
-             }
+            if (fAuto)
+            {
+                strcat (buf, " ");
+                if ( IS_SET(pexit->exit_info, EX_CLOSED) )
+                {
+                 strcat( buf, buf2 );
+                 continue;
+                }
+                /* Add MXP clickable exit - format: <send 'north'>north</send> */
+                sprintf (buf + strlen (buf), "%ssend '%s'%s%s%s/send%s",
+                         MXP_BEG, dir_name[door], MXP_END,
+                         dir_name[door],
+                         MXP_BEG, MXP_END);
+            }
+            else
+            {
+                /* Add MXP clickable exit for full exits display */
+                sprintf (buf + strlen (buf), "%ssend '%s'%s%-5s%s/send%s - %s",
+                         MXP_BEG, capitalize (dir_name[door]), MXP_END,
+                         capitalize (dir_name[door]),
+                         MXP_BEG, MXP_END,
+                         room_is_dark (pexit->u1.to_room)
+                         ? "Too dark to tell" : pexit->u1.to_room->name);
+                if (IS_IMMORTAL (ch))
+                    sprintf (buf + strlen (buf),
+                             " (room %d)\n\r", pexit->u1.to_room->vnum);
+                else
+                    sprintf (buf + strlen (buf), "\n\r");
+            }
          }
      }
  
@@ -4047,7 +4075,7 @@ void do_description (CHAR_DATA * ch, char *argument)
     /* No argument or "edit" - enter string editor */
     if (argument[0] == '\0')
     {
-        string_append (ch, &ch->description);
+        string_append (ch, &ch->description, CON_PLAYING);
         return;
     }
 
@@ -4055,7 +4083,7 @@ void do_description (CHAR_DATA * ch, char *argument)
 
     if (!str_cmp(arg, "edit") || !str_cmp(arg, "write"))
     {
-        string_append (ch, &ch->description);
+        string_append (ch, &ch->description, CON_PLAYING);
         return;
     }
 
@@ -4918,7 +4946,7 @@ void do_history( CHAR_DATA *ch, char *argument )
     if ( !str_cmp( arg, "write") )
 	{
 		if ( argument[0] == '\0' )
-	            string_append( ch, &ch->pcdata->history );
+	            string_append( ch, &ch->pcdata->history, CON_PLAYING );
 	    return;
 	}
 

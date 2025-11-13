@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           board.c - November 3, 2025
- */            
+ *           board.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik St{rfeldt, Tom Madsen, and Katja Nyboe.   *
@@ -91,12 +91,22 @@ BOARD_DATA boards[MAX_BOARD] =
 { "Ideas",	"Suggestion for improvement",	0,	2,	"all", DEF_NORMAL, 60, NULL, FALSE }, 
 { "Announce",	"Announcements from Immortals",	0,	L_IMM,	"all", DEF_NORMAL, 60, NULL, FALSE },
 { "Bugs",	"Typos, bugs, errors",		0,	1,	"imm", DEF_NORMAL, 60, NULL, FALSE },
-{ "Personal",	"Personal messages",		0,	1,	"all", DEF_EXCLUDE,28, NULL, FALSE }
+{ "Personal",	"Personal messages",		0,	1,	"all", DEF_EXCLUDE,28, NULL, FALSE },
+{ "Penalties",  "Penalties from the gods",		52,	52,	"imm", DEF_NORMAL, 999, NULL, FALSE },
+{ "Builds",   "Build requests",             52, 1, "imm", DEF_NORMAL, 999, NULL, FALSE }
 
 };
 
 /* The prompt that the character is given after finishing a note with ~ or END */
 const char * szFinishPrompt = "({WC{x)ontinue, ({WV{x)iew, ({WP{x)ost or ({WF{x)orget it?";
+
+/* Display the note finish prompt */
+void show_note_finish_prompt(DESCRIPTOR_DATA *d)
+{
+	write_to_buffer (d, "\n\r\n\r",0);
+	printf_to_desc (d, "%s", szFinishPrompt);
+	write_to_buffer (d, "\n\r", 0);
+}
 
 long last_note_stamp = 0; /* To generate unique timestamps on notes */
 
@@ -289,8 +299,10 @@ static void save_board (BOARD_DATA *board)
 /* Show one not to a character */
 static void show_note_to_char (CHAR_DATA *ch, NOTE_DATA *note, int num)
 {
+	char buf[MAX_STRING_LENGTH * 4];  /* Large buffer for long notes */
+	
 	/* Ugly colors ? */	
-	printf_to_char (ch,
+	sprintf (buf,
 			 "[{W%4d{x] {Y%s{x: {g%s{x\n\r"
 	         "{YDate{x:  %s\n\r"
 			 "{YTo{x:    %s\n\r"
@@ -300,6 +312,9 @@ static void show_note_to_char (CHAR_DATA *ch, NOTE_DATA *note, int num)
 	         note->date,
 	         note->to_list,
 	         note->text);
+	
+	/* Use pager so long notes respect scroll settings */
+	page_to_char (buf, ch);
 }
 
 /* Save changed boards */
@@ -567,12 +582,9 @@ static void do_nwrite (CHAR_DATA *ch, char *argument)
 		               ch->pcdata->in_progress->subject);
 		send_to_char ("{GYour note so far:{x\n\r", ch);
 		send_to_char (ch->pcdata->in_progress->text,ch);
+		send_to_char ("\n\r",ch);
 		
-		send_to_char ("\n\rEnter text. Type {W~{x or {WEND{x on an empty line to end note.\n\r"
-		                    "=======================================================\n\r",ch);
-		
-
-		ch->desc->connected = CON_NOTE_TEXT;		            
+		string_append (ch, &ch->pcdata->in_progress->text, CON_NOTE_FINISH);
 
 	}
 	
@@ -1033,9 +1045,7 @@ void handle_con_note_subject (DESCRIPTOR_DATA *d, char * argument)
 			ch->pcdata->in_progress->expire = 
 				current_time + ch->pcdata->board->purge_days * 24L * 3600L;				
 			printf_to_desc (d, "This note will expire %s\r",ctime(&ch->pcdata->in_progress->expire));
-			send_to_desc ("\n\rEnter text. Type {W~{x or {WEND{x on an empty line to end note.\n\r"
-			                    "=======================================================\n\r",d);
-			d->connected = CON_NOTE_TEXT;
+			string_append (ch, &ch->pcdata->in_progress->text, CON_NOTE_FINISH);
 		}
 	}
 }
@@ -1082,84 +1092,10 @@ void handle_con_note_expire(DESCRIPTOR_DATA *d, char * argument)
 	
 	/* note that ctime returns XXX\n so we only need to add an \r */
 
-	send_to_desc ("\n\rEnter text. Type {W~{x or {WEND{x on an empty line to end note.\n\r"
-	                    "=======================================================\n\r",d);
-
-	d->connected = CON_NOTE_TEXT;
+	string_append (ch, &ch->pcdata->in_progress->text, CON_NOTE_FINISH);
 }
 
 
-
-void handle_con_note_text (DESCRIPTOR_DATA *d, char * argument)
-{
-	CHAR_DATA *ch = d->character;
-	char buf[MAX_STRING_LENGTH];
-	char letter[4*MAX_STRING_LENGTH];
-	
-	if (!ch->pcdata->in_progress)
-	{
-		d->connected = CON_PLAYING;
-		bug ("nanny: In CON_NOTE_TEXT, but no note in progress",0);
-		return;
-	}
-
-	/* First, check for EndOfNote marker */
-
-	strcpy (buf, argument);
-	if ((!str_cmp(buf, "~")) || (!str_cmp(buf, "END")))
-	{
-		write_to_buffer (d, "\n\r\n\r",0);
-		printf_to_desc (d, "%s", szFinishPrompt);
-		write_to_buffer (d, "\n\r", 0);
-		d->connected = CON_NOTE_FINISH;
-		return;
-	}
-	
-	smash_tilde (buf); /* smash it now */
-
-	/* Check for too long lines. Do not allow lines longer than 80 chars */
-	
-	/* Hey, why #define MAX_LINE_LENGTH, then put a hardcoded value in here? ;-)
-	 * -- JR 09/24/00
-	 */
-
-	if (strlen (buf) > MAX_LINE_LENGTH)
-	{
-		printf_to_desc (d, "Too long line rejected. Do NOT go over %d characters!\n\r", MAX_LINE_LENGTH );
-		return;
-	}
-	
-	/* Not end of note. Copy current text into temp buffer, add new line, and copy back */
-
-	/* How would the system react to strcpy( , NULL) ? */		
-	if (ch->pcdata->in_progress->text)
-	{
-		strcpy (letter, ch->pcdata->in_progress->text);
-		free_string (ch->pcdata->in_progress->text);
-		ch->pcdata->in_progress->text = NULL; /* be sure we don't free it twice */
-	}
-	else
-		strcpy (letter, "");
-		
-	/* Check for overflow */
-	
-	if ((strlen(letter) + strlen (buf)) > MAX_NOTE_TEXT)
-	{ /* Note too long, take appropriate steps */
-		write_to_buffer (d, "Note too long!\n\r", 0);
-		free_note (ch->pcdata->in_progress);
-		ch->pcdata->in_progress = NULL;			/* important */
-		d->connected = CON_PLAYING;
-		return;			
-	}
-	
-	/* Add new line to the buffer */
-	
-	strcat (letter, buf);
-	strcat (letter, "\r\n"); /* new line. \r first to make note files better readable */
-
-	/* allocate dynamically */		
-	ch->pcdata->in_progress->text = str_dup (letter);
-}
 
 void handle_con_note_finish (DESCRIPTOR_DATA *d, char * argument)
 {
@@ -1177,7 +1113,7 @@ void handle_con_note_finish (DESCRIPTOR_DATA *d, char * argument)
 		{
 			case 'c': /* keep writing */
 				write_to_buffer (d,"Continuing note...\n\r",0);
-				d->connected = CON_NOTE_TEXT;
+				string_append (ch, &ch->pcdata->in_progress->text, CON_NOTE_FINISH);
 				break;
 
 			case 'v': /* view note so far */

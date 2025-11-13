@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           snippets.c - November 3, 2025
- */            
+ *           snippets.c - November 13, 2025
+ */
 /***************************************************************************
  * Snippet implementations for Shadows Reborn 
  * This file contains various snippet implementations as well as original
@@ -2161,10 +2161,14 @@ void do_circle( CHAR_DATA *ch, char *argument )
         return;
     }
  
+    /* Felar can circle with claws, others need a weapon */
     if ( ( obj = get_eq_char( ch, WEAR_WIELD ) ) == NULL)
     {
-        send_to_char( "You need to wield a weapon to circle.\n\r", ch );
-        return;
+        if (IS_NPC(ch) || ch->race != race_lookup("felar"))
+        {
+            send_to_char( "You need to wield a weapon to circle.\n\r", ch );
+            return;
+        }
     }
  
     if ( ch->fighting == NULL )
@@ -2185,6 +2189,79 @@ void do_circle( CHAR_DATA *ch, char *argument )
     {
         check_improve(ch,gsn_circle,FALSE,1);
         damage( ch, victim, 0, gsn_circle, DAM_PIERCE, TRUE, FALSE);
+    }
+ 
+    return;
+}
+
+/* Deathstroke - warrior/berserker version of circle */
+void do_deathstroke( CHAR_DATA *ch, char *argument )
+{
+    char arg[MAX_INPUT_LENGTH];
+    CHAR_DATA *victim;
+    OBJ_DATA *obj;
+ 
+    one_argument( argument, arg );
+ 
+    /* If no argument given, default to current fighting target */
+    if (arg[0] == '\0')
+    {
+        if (ch->fighting == NULL)
+        {
+            send_to_char("Deathstroke whom?\n\r",ch);
+            return;
+        }
+        victim = ch->fighting;
+    }
+    else
+    {
+        if ((victim = get_char_room(ch, arg)) == NULL)
+        {
+            send_to_char("They aren't here.\n\r",ch);
+            return;
+        }
+    }
+ 
+    if ( is_safe( ch, victim ) )
+      return;
+ 
+    if (IS_NPC(victim) &&
+         victim->fighting != NULL &&
+        !is_same_group(ch,victim->fighting))
+ 
+    {
+        send_to_char("Kill stealing is not permitted.\n\r",ch);
+        return;
+    }
+ 
+    /* Felar can deathstroke with claws, others need a weapon */
+    if ( ( obj = get_eq_char( ch, WEAR_WIELD ) ) == NULL)
+    {
+        if (IS_NPC(ch) || ch->race != race_lookup("felar"))
+        {
+            send_to_char( "You need to wield a weapon to deathstroke.\n\r", ch );
+            return;
+        }
+    }
+ 
+    if ( ch->fighting == NULL )
+    {
+        send_to_char( "You must be fighting in order to deathstroke.\n\r", ch );
+        return;
+    }
+ 
+    check_killer( ch, victim );
+    WAIT_STATE( ch, skill_table[gsn_deathstroke].beats );
+    if ( number_percent( ) < get_skill(ch,gsn_deathstroke)
+    || ( get_skill(ch,gsn_deathstroke) >= 2 && !IS_AWAKE(victim) ) )
+    {
+        check_improve(ch,gsn_deathstroke,TRUE,1);
+        multi_hit( ch, victim, gsn_deathstroke );
+    }
+    else
+    {
+        check_improve(ch,gsn_deathstroke,FALSE,1);
+        damage( ch, victim, 0, gsn_deathstroke, DAM_PIERCE, TRUE, FALSE);
     }
  
     return;
@@ -2879,7 +2956,7 @@ void do_petname(CHAR_DATA *ch, char *argument)
     }
     else if (!str_prefix(command, "description") || !str_prefix(command, "desc"))
     {
-        string_append(ch, &ch->pet->description);
+        string_append(ch, &ch->pet->description, CON_PLAYING);
         return;
     }
     else
@@ -2972,7 +3049,7 @@ void do_mountname(CHAR_DATA *ch, char *argument)
     }
     else if (!str_prefix(command, "description") || !str_prefix(command, "desc"))
     {
-        string_append(ch, &ch->mount->description);
+        string_append(ch, &ch->mount->description, CON_PLAYING);
         return;
     }
     else

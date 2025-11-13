@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           handler.c - November 3, 2025
- */            
+ *           handler.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -1474,6 +1474,147 @@ void affect_remove_obj (OBJ_DATA * obj, AFFECT_DATA * paf)
 
     if (obj->carried_by != NULL && obj->wear_loc != -1)
         affect_check (obj->carried_by, where, vector);
+    return;
+}
+
+/* Room affects - apply an affect to a room */
+void affect_to_room (ROOM_INDEX_DATA * room, AFFECT_DATA * paf)
+{
+    AFFECT_DATA *paf_new;
+
+    paf_new = new_affect ();
+
+    *paf_new = *paf;
+    paf_new->next = room->affected;
+    room->affected = paf_new;
+
+    if (paf->where == TO_AFFECTS)
+        SET_BIT (room->affected_by, paf->bitvector);
+
+    return;
+}
+
+/* Room affects - remove an affect from a room */
+void affect_remove_room (ROOM_INDEX_DATA * room, AFFECT_DATA * paf)
+{
+    if (room->affected == NULL)
+    {
+        bug ("Affect_remove_room: no affect.", 0);
+        return;
+    }
+
+    if (paf->bitvector)
+        switch (paf->where)
+        {
+            case TO_AFFECTS:
+                REMOVE_BIT (room->affected_by, paf->bitvector);
+                break;
+        }
+
+    if (paf == room->affected)
+    {
+        room->affected = paf->next;
+    }
+    else
+    {
+        AFFECT_DATA *prev;
+
+        for (prev = room->affected; prev != NULL; prev = prev->next)
+        {
+            if (prev->next == paf)
+            {
+                prev->next = paf->next;
+                break;
+            }
+        }
+
+        if (prev == NULL)
+        {
+            bug ("Affect_remove_room: cannot find paf.", 0);
+            return;
+        }
+    }
+
+    free_affect (paf);
+    return;
+}
+
+/* Apply room affects to a character entering the room */
+void apply_room_affects (CHAR_DATA * ch, ROOM_INDEX_DATA * room)
+{
+    AFFECT_DATA *paf;
+    AFFECT_DATA af;
+
+    if (IS_NPC (ch) || room == NULL || room->affected == NULL)
+        return;
+
+    for (paf = room->affected; paf != NULL; paf = paf->next)
+    {
+        /* Don't reapply if already affected */
+        if (is_affected (ch, paf->type))
+            continue;
+
+        /* Create a temporary room affect on the character */
+        af.where = paf->where;
+        af.type = paf->type;
+        af.level = paf->level;
+        af.duration = -1;            /* Lasts while in room */
+        af.location = paf->location;
+        af.modifier = paf->modifier;
+        af.bitvector = paf->bitvector;
+
+        affect_to_char (ch, &af);
+
+        /* Send generic message about the affect */
+        if (paf->type > 0 && paf->type < MAX_SKILL)
+        {
+            char buf[MAX_STRING_LENGTH];
+            sprintf (buf, "{MYou feel the room's %s affect you.{x\n\r",
+                     skill_table[paf->type].name);
+            send_to_char (buf, ch);
+        }
+    }
+
+    return;
+}
+
+/* Remove room affects from a character leaving the room */
+void remove_room_affects (CHAR_DATA * ch, ROOM_INDEX_DATA * room)
+{
+    AFFECT_DATA *paf;
+    AFFECT_DATA *paf_next;
+    AFFECT_DATA *room_paf;
+
+    if (IS_NPC (ch) || room == NULL || room->affected == NULL)
+        return;
+
+    /* Go through character's affects and remove any that match room affects */
+    for (paf = ch->affected; paf != NULL; paf = paf_next)
+    {
+        paf_next = paf->next;
+
+        /* Check if this affect came from the room (duration -1) */
+        if (paf->duration != -1)
+            continue;
+
+        /* Check if the room has this affect */
+        for (room_paf = room->affected; room_paf != NULL; room_paf = room_paf->next)
+        {
+            if (room_paf->type == paf->type)
+            {
+                /* Send message about affect ending */
+                if (paf->type > 0 && skill_table[paf->type].msg_off)
+                {
+                    send_to_char (skill_table[paf->type].msg_off, ch);
+                    send_to_char ("\n\r", ch);
+                }
+
+                affect_remove (ch, paf);
+                break;
+            }
+        }
+    }
+
     return;
 }
 

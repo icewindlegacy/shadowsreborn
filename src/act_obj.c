@@ -16,8 +16,8 @@
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           act_obj.c - November 3, 2025
- */            
+ *           act_obj.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -170,6 +170,9 @@ void get_obj (CHAR_DATA * ch, OBJ_DATA * obj, OBJ_DATA * container)
             }
     }
 
+    /* Check for get/put traps */
+    if (checkgetput(ch, obj))
+        return;
 
     if (container != NULL)
     {
@@ -506,6 +509,10 @@ void do_put (CHAR_DATA * ch, char *argument)
         act ("The $d is closed.", ch, NULL, container->name, TO_CHAR);
         return;
     }
+
+    /* Check for container traps */
+    if (checkgetput(ch, container))
+        return;
 
     if (str_cmp (arg1, "all") && str_prefix ("all.", arg1)
         && (number == 1))
@@ -1961,6 +1968,7 @@ void wear_obj (CHAR_DATA * ch, OBJ_DATA * obj, bool fReplace)
     if (CAN_WEAR (obj, ITEM_WIELD))
     {
         int sn, skill;
+        OBJ_DATA *secondary;
 
         /* Felar cannot wield weapons - hand-to-hand only */
         if (!IS_NPC (ch) && ch->race == race_lookup ("felar")) /* felar is race 6 */
@@ -1969,14 +1977,29 @@ void wear_obj (CHAR_DATA * ch, OBJ_DATA * obj, bool fReplace)
             return;
         }
 
+        /* If dual wielding and trying to re-equip main weapon, temporarily remove secondary */
+        secondary = get_eq_char (ch, WEAR_SECONDARY);
+        if (secondary != NULL && get_eq_char (ch, WEAR_WIELD) == NULL && fReplace)
+        {
+            unequip_char (ch, secondary);
+        }
+
         if (!remove_obj (ch, WEAR_WIELD, fReplace))
+        {
+            /* Re-equip secondary if we removed it */
+            if (secondary != NULL && secondary->wear_loc == WEAR_NONE)
+                equip_char (ch, secondary, WEAR_SECONDARY);
             return;
+        }
 
         if (!IS_NPC (ch)
             && get_obj_weight (obj) >
             (str_app[get_curr_stat (ch, STAT_STR)].wield * 10))
         {
             send_to_char ("It is too heavy for you to wield.\n\r", ch);
+            /* Re-equip secondary if we removed it */
+            if (secondary != NULL && secondary->wear_loc == WEAR_NONE)
+                equip_char (ch, secondary, WEAR_SECONDARY);
             return;
         }
 
@@ -1985,10 +2008,13 @@ void wear_obj (CHAR_DATA * ch, OBJ_DATA * obj, bool fReplace)
             && get_eq_char (ch, WEAR_SHIELD) != NULL)
         {
             send_to_char ("You need two hands free for that weapon.\n\r", ch);
+            /* Re-equip secondary if we removed it */
+            if (secondary != NULL && secondary->wear_loc == WEAR_NONE)
+                equip_char (ch, secondary, WEAR_SECONDARY);
             return;
         }
 
-        if (get_eq_char (ch, WEAR_SECONDARY) != NULL)
+        if (secondary != NULL && secondary->wear_loc != WEAR_NONE)
         {
             send_to_char ("You cannot wield a two-handed weapon while using a secondary weapon.\n\r", ch);
             return;
@@ -1997,6 +2023,10 @@ void wear_obj (CHAR_DATA * ch, OBJ_DATA * obj, bool fReplace)
         act ("$n wields $p.", ch, obj, NULL, TO_ROOM);
         act ("You wield $p.", ch, obj, NULL, TO_CHAR);
         equip_char (ch, obj, WEAR_WIELD);
+
+        /* Re-equip secondary if we temporarily removed it */
+        if (secondary != NULL && secondary->wear_loc == WEAR_NONE)
+            equip_char (ch, secondary, WEAR_SECONDARY);
 
         sn = get_weapon_sn (ch);
 
@@ -2076,6 +2106,40 @@ void wear_obj (CHAR_DATA * ch, OBJ_DATA * obj, bool fReplace)
 }
 
 
+
+void do_hold (CHAR_DATA * ch, char *argument)
+{
+    char arg[MAX_INPUT_LENGTH];
+    OBJ_DATA *obj;
+
+    one_argument (argument, arg);
+
+    if (arg[0] == '\0')
+    {
+        send_to_char ("Hold what?\n\r", ch);
+        return;
+    }
+
+    if ((obj = get_obj_carry (ch, arg, ch)) == NULL)
+    {
+        send_to_char ("You do not have that item.\n\r", ch);
+        return;
+    }
+
+    if (get_eq_char (ch, WEAR_SECONDARY) != NULL)
+    {
+        send_to_char ("You cannot hold an item while using 2 weapons.\n\r", ch);
+        return;
+    }
+
+    if (!remove_obj (ch, WEAR_HOLD, TRUE))
+        return;
+
+    act ("$n holds $p in $s hand.", ch, obj, NULL, TO_ROOM);
+    act ("You hold $p in your hand.", ch, obj, NULL, TO_CHAR);
+    equip_char (ch, obj, WEAR_HOLD);
+    return;
+}
 
 void do_wear (CHAR_DATA * ch, char *argument)
 {
@@ -2157,6 +2221,17 @@ void do_remove (CHAR_DATA * ch, char *argument)
     {
         send_to_char ("You do not have that item.\n\r", ch);
         return;
+    }
+
+    /* If wielding two of the same weapon, remove secondary first */
+    if (obj->wear_loc == WEAR_WIELD)
+    {
+        OBJ_DATA *secondary = get_eq_char (ch, WEAR_SECONDARY);
+        if (secondary != NULL && is_name(arg, secondary->name))
+        {
+            remove_obj (ch, WEAR_SECONDARY, TRUE);
+            return;
+        }
     }
 
     remove_obj (ch, obj->wear_loc, TRUE);

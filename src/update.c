@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           update.c - November 3, 2025
- */            
+ *           update.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -693,6 +693,35 @@ void mobile_update (void)
                 move_char (ch, door, FALSE);
             }
         }
+        
+        /* Plague rats spread disease */
+        if (IS_AFFECTED(ch, AFF_PLAGUE) && is_name("plague", ch->name) && is_name("rat", ch->name))
+        {
+            CHAR_DATA *vch;
+            AFFECT_DATA af;
+            
+            for (vch = ch->in_room->people; vch != NULL; vch = vch->next_in_room)
+            {
+                if (IS_NPC(vch) || IS_AFFECTED(vch, AFF_PLAGUE))
+                    continue;
+                
+                /* 10% chance per tick to spread plague */
+                if (number_percent() < 10)
+                {
+                    af.where = TO_AFFECTS;
+                    af.type = gsn_plague;
+                    af.level = ch->level;
+                    af.duration = 5;
+                    af.location = APPLY_STR;
+                    af.modifier = -5;
+                    af.bitvector = AFF_PLAGUE;
+                    affect_join(vch, &af);
+                    
+                    send_to_char("{gA plague rat bites you!{x\n\r", vch);
+                    act("A plague rat bites $n!", vch, NULL, NULL, TO_ROOM);
+                }
+            }
+        }
     }
 
     return;
@@ -1246,6 +1275,9 @@ void obj_update (void)
             case ITEM_PORTAL:
                 message = "$p fades out of existence.";
                 break;
+            case ITEM_PYLON:
+                message = "$p crumbles to dust.";
+                break;
             case ITEM_CONTAINER:
                 if (CAN_WEAR (obj, ITEM_WEAR_FLOAT))
                     if (obj->contains)
@@ -1264,7 +1296,7 @@ void obj_update (void)
             if (IS_NPC (obj->carried_by)
                 && obj->carried_by->pIndexData->pShop != NULL)
                 obj->carried_by->silver += obj->cost / 5;
-            else
+            else if (!IS_OBJ_STAT(obj, ITEM_HIDDEN))
             {
                 act (message, obj->carried_by, obj, NULL, TO_CHAR);
                 if (obj->wear_loc == WEAR_FLOAT)
@@ -1274,7 +1306,8 @@ void obj_update (void)
         else if (obj->in_room != NULL && (rch = obj->in_room->people) != NULL)
         {
             if (!(obj->in_obj && obj->in_obj->pIndexData->vnum == OBJ_VNUM_PIT
-                  && !CAN_WEAR (obj->in_obj, ITEM_TAKE)))
+                  && !CAN_WEAR (obj->in_obj, ITEM_TAKE))
+                && !IS_OBJ_STAT(obj, ITEM_HIDDEN))
             {
                 act (message, rch, obj, NULL, TO_ROOM);
                 act (message, rch, obj, NULL, TO_CHAR);

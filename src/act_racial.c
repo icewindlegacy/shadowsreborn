@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           act_racial.c - November 3, 2025
- */            
+ *           act_racial.c - November 13, 2025
+ */
 /***************************************************************************
  *  Racial abilities for Shadows Reborn                                     *
  ***************************************************************************/
@@ -1010,8 +1010,11 @@ void do_darkness (CHAR_DATA *ch, char *argument)
 void do_goblinmob (CHAR_DATA *ch, char *argument)
 {
     CHAR_DATA *gob;
-    MOB_INDEX_DATA *pMobIndex;
     AFFECT_DATA af;
+    int num_goblins;
+    int gob_level;
+    int i;
+    char buf[MAX_STRING_LENGTH];
     
     /* Check if character is a hobgoblin */
     if (!IS_NPC(ch) && ch->race != race_lookup("hobgoblin"))
@@ -1034,29 +1037,92 @@ void do_goblinmob (CHAR_DATA *ch, char *argument)
         return;
     }
     
-    /* Try to load the goblin trio mob - if it doesn't exist, create a basic one */
-    pMobIndex = get_mob_index(MOB_VNUM_GOBLIN_TRIO);
+    /* Randomly summon 1-3 goblins */
+    num_goblins = number_range(1, 3);
     
-    if (pMobIndex == NULL)
+    /* Calculate goblin level based on number summoned */
+    if (num_goblins == 1)
+        gob_level = ch->level;
+    else if (num_goblins == 2)
+        gob_level = ch->level / 2;
+    else
+        gob_level = ch->level / 3;
+    
+    /* Ensure minimum level of 1 */
+    gob_level = UMAX(1, gob_level);
+    
+    /* Summon the goblins */
+    for (i = 0; i < num_goblins; i++)
     {
-        send_to_char("The goblin mob is not available (MOB_VNUM 3091 not found).\n\r", ch);
-        send_to_char("An immortal needs to create a mob with vnum 3091 called 'trio of goblins'.\n\r", ch);
-        return;
+        gob = create_mobile(get_mob_index(MOB_VNUM_DEMON));
+        
+        /* Configure as a goblin */
+        free_string(gob->name);
+        gob->name = str_dup("goblin summoned");
+        free_string(gob->short_descr);
+        gob->short_descr = str_dup("a summoned goblin");
+        free_string(gob->long_descr);
+        gob->long_descr = str_dup("A small goblin stands here, ready to fight.\n\r");
+        
+        /* Set stats based on goblin level */
+        gob->level = gob_level;
+        gob->max_hit = gob_level * 20 + number_range(gob_level * 5, gob_level * 10);
+        gob->hit = gob->max_hit;
+        gob->max_mana = 100;
+        gob->mana = gob->max_mana;
+        gob->alignment = -500;
+        
+        gob->armor[AC_PIERCE] = interpolate(gob_level, 100, -100);
+        gob->armor[AC_BASH] = interpolate(gob_level, 100, -100);
+        gob->armor[AC_SLASH] = interpolate(gob_level, 100, -100);
+        gob->armor[AC_EXOTIC] = interpolate(gob_level, 100, -100);
+        
+        gob->damage[DICE_NUMBER] = UMAX(1, gob_level / 10);
+        gob->damage[DICE_TYPE] = number_range(gob_level / 3, gob_level / 2);
+        gob->damage[DICE_BONUS] = UMAX(0, gob_level / 8);
+        
+        /* Set appropriate stats */
+        gob->perm_stat[STAT_STR] = UMIN(25, 11 + gob_level / 5);
+        gob->perm_stat[STAT_INT] = UMIN(25, 10 + gob_level / 6);
+        gob->perm_stat[STAT_WIS] = UMIN(25, 10 + gob_level / 6);
+        gob->perm_stat[STAT_DEX] = UMIN(25, 12 + gob_level / 5);
+        gob->perm_stat[STAT_CON] = UMIN(25, 11 + gob_level / 5);
+        
+        gob->gold = 0;
+        gob->timer = 0;
+        
+        /* Make it a charmed pet */
+        SET_BIT(gob->act, ACT_PET);
+        af.where = TO_AFFECTS;
+        af.type = gsn_charm_person;
+        af.level = ch->level;
+        af.duration = -1;  /* Permanent until killed */
+        af.bitvector = AFF_CHARM;
+        af.modifier = 0;
+        af.location = 0;
+        affect_to_char(gob, &af);
+        
+        gob->leader = ch;
+        gob->master = ch;
+        add_follower(gob, ch);
+        char_to_room(gob, ch->in_room);
+        
+        /* Set first goblin as pet */
+        if (i == 0)
+            ch->pet = gob;
     }
     
-    gob = create_mobile(pMobIndex);
-    char_to_room(gob, ch->in_room);
+    sprintf(buf, "{yYou whistle sharply and %s goblin%s scramble%s to your aid!{x\n\r",
+            num_goblins == 1 ? "a" : (num_goblins == 2 ? "two" : "three"),
+            num_goblins == 1 ? "" : "s",
+            num_goblins == 1 ? "s" : "");
+    send_to_char(buf, ch);
     
-    /* Make it a charmed pet */
-    SET_BIT(gob->act, ACT_PET);
-    STR_SET_BIT(gob->affected_by, AFF_CHARM);
-    gob->leader = ch;
-    gob->master = ch;
-    ch->pet = gob;
-    add_follower(gob, ch);
-    
-    send_to_char("{yYou whistle sharply and three goblins scramble to your aid!{x\n\r", ch);
-    act("{y$n whistles sharply and three goblins scramble to $s aid!{x", ch, NULL, NULL, TO_ROOM);
+    sprintf(buf, "{y$n whistles sharply and %s goblin%s scramble%s to $s aid!{x",
+            num_goblins == 1 ? "a" : (num_goblins == 2 ? "two" : "three"),
+            num_goblins == 1 ? "" : "s",
+            num_goblins == 1 ? "s" : "");
+    act(buf, ch, NULL, NULL, TO_ROOM);
     
     /* Apply weariness for 20 ticks */
     af.where     = TO_AFFECTS;

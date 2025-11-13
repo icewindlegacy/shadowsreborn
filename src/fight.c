@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           fight.c - November 3, 2025
- */            
+ *           fight.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -77,7 +77,7 @@ void dam_message args ((CHAR_DATA * ch, CHAR_DATA * victim, int dam,
                         int dt, bool immune, bool critical));
 void death_cry args ((CHAR_DATA * ch));
 void group_gain args ((CHAR_DATA * ch, CHAR_DATA * victim));
-int xp_compute args ((CHAR_DATA * gch, CHAR_DATA * victim, int total_levels));
+int xp_compute args ((CHAR_DATA * gch, CHAR_DATA * victim, int in_group));
 bool is_safe args ((CHAR_DATA * ch, CHAR_DATA * victim));
 void make_corpse args ((CHAR_DATA * ch));
 void one_hit args ((CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary ));
@@ -341,6 +341,17 @@ void multi_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt)
         if (ch->fighting != victim)
             return;
     }
+    
+    /* Shield strike skill - extra attack with shield if no weapon wielded */
+    if (!IS_NPC (ch) && get_eq_char (ch, WEAR_SHIELD) != NULL 
+        && get_eq_char (ch, WEAR_WIELD) == NULL
+        && get_skill (ch, gsn_shield_strike) > 0)
+    {
+        one_hit (ch, victim, TYPE_HIT + gsn_shield_strike, FALSE);
+        check_improve (ch, gsn_shield_strike, TRUE, 3);
+        if (ch->fighting != victim)
+            return;
+    }
 
     if (IS_AFFECTED (ch, AFF_HASTE))
         one_hit (ch, victim, dt, FALSE);
@@ -572,6 +583,10 @@ void one_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary )
     /* Force DAM_BASH for ohshit skill - swinging random objects */
     if (dt == TYPE_HIT + gsn_ohshit)
         dam_type = DAM_BASH;
+    
+    /* Force DAM_BASH for shield strike skill - bashing with shield */
+    if (dt == TYPE_HIT + gsn_shield_strike)
+        dam_type = DAM_BASH;
 
     if (dam_type == -1)
         dam_type = DAM_BASH;
@@ -739,6 +754,49 @@ void one_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary )
                 else
                 {
                     /* Fallback to hand-to-hand if somehow no held object */
+                    dam = number_range (1 + 4 * skill / 100,
+                                       2 * ch->level / 3 * skill / 100);
+                }
+            }
+            /* Shield strike skill - bash with shield */
+            else if (!IS_NPC (ch) && sn == gsn_shield_strike)
+            {
+                OBJ_DATA *shield;
+                int weight;
+                int dice_num, dice_size;
+                
+                shield = get_eq_char (ch, WEAR_SHIELD);
+                if (shield != NULL)
+                {
+                    weight = get_obj_weight (shield);
+                    
+                    /* Scale damage based on weight: shields are typically heavy */
+                    if (weight <= 30)
+                    {
+                        dice_num = 1;
+                        dice_size = 5;
+                    }
+                    else if (weight >= 300)
+                    {
+                        dice_num = 3;
+                        dice_size = 8;
+                    }
+                    else
+                    {
+                        /* Interpolate between 1d5 and 3d8 */
+                        dice_num = 1 + ((weight - 30) * 2) / 270;
+                        dice_size = 5 + ((weight - 30) * 3) / 270;
+                    }
+                    
+                    dam = dice (dice_num, dice_size) * skill / 100;
+                    
+                    /* Minimum damage based on level */
+                    if (dam < 1 + ch->level / 10)
+                        dam = 1 + ch->level / 10;
+                }
+                else
+                {
+                    /* Fallback to hand-to-hand if somehow no shield */
                     dam = number_range (1 + 4 * skill / 100,
                                        2 * ch->level / 3 * skill / 100);
                 }
@@ -941,6 +999,46 @@ void one_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary )
         }
     }
 
+    /* Elemental shield retaliatory damage */
+    if (result && victim != ch)
+    {
+        int shield_dam;
+        int shield_sn;
+        
+        /* Check for fire shield */
+        shield_sn = skill_lookup("fire shield");
+        if (shield_sn > 0 && is_affected(victim, shield_sn))
+        {
+            shield_dam = number_range(victim->level / 4, victim->level / 2);
+            act ("{R$n is burned by $N's fire shield!{x", ch, NULL, victim, TO_NOTVICT);
+            act ("{RYou are burned by $N's fire shield!{x", ch, NULL, victim, TO_CHAR);
+            act ("{RYour fire shield burns $n!{x", ch, NULL, victim, TO_VICT);
+            damage (victim, ch, shield_dam, shield_sn, DAM_FIRE, FALSE, FALSE);
+        }
+        
+        /* Check for ice shield */
+        shield_sn = skill_lookup("ice shield");
+        if (shield_sn > 0 && is_affected(victim, shield_sn))
+        {
+            shield_dam = number_range(victim->level / 4, victim->level / 2);
+            act ("{C$n is frozen by $N's ice shield!{x", ch, NULL, victim, TO_NOTVICT);
+            act ("{CYou are frozen by $N's ice shield!{x", ch, NULL, victim, TO_CHAR);
+            act ("{CYour ice shield freezes $n!{x", ch, NULL, victim, TO_VICT);
+            damage (victim, ch, shield_dam, shield_sn, DAM_COLD, FALSE, FALSE);
+        }
+        
+        /* Check for lightning shield */
+        shield_sn = skill_lookup("lightning shield");
+        if (shield_sn > 0 && is_affected(victim, shield_sn))
+        {
+            shield_dam = number_range(victim->level / 4, victim->level / 2);
+            act ("{Y$n is shocked by $N's lightning shield!{x", ch, NULL, victim, TO_NOTVICT);
+            act ("{YYou are shocked by $N's lightning shield!{x", ch, NULL, victim, TO_CHAR);
+            act ("{YYour lightning shield shocks $n!{x", ch, NULL, victim, TO_VICT);
+            damage (victim, ch, shield_dam, shield_sn, DAM_LIGHTNING, FALSE, FALSE);
+        }
+    }
+
     if (result && wield != NULL && wield->item_type == ITEM_WEAPON)
     {
         int wear = 0;
@@ -952,7 +1050,8 @@ void one_hit (CHAR_DATA * ch, CHAR_DATA * victim, int dt, bool secondary )
         if (dam > 200)
             wear++;
 
-        if (wear > 0)
+        /* Only apply wear damage 10% of the time */
+        if (wear > 0 && number_percent() <= 10)
             damage_item_condition(wield, wear, ch);
     }
 
@@ -1176,7 +1275,13 @@ bool damage (CHAR_DATA * ch, CHAR_DATA * victim, int dam, int dt,
                 const char *vs, *vp;
                 char buf1[256], buf2[256], buf3[256];
                 char punct;
-                int pain_percent = 1000 * dam / victim->max_hit;
+                int pain_percent;
+                
+                /* Prevent division by zero */
+                if (victim->max_hit <= 0)
+                    pain_percent = 1000;  /* Treat as massive damage */
+                else
+                    pain_percent = 1000 * dam / victim->max_hit;
                 
                 if ( dam  ==   0 ) { vs = "miss";	vp = "misses";		}
                 else if ( pain_percent <=   5 ) { vs = "{gscratch";	vp = "{gscratches";	}
@@ -1239,6 +1344,88 @@ bool damage (CHAR_DATA * ch, CHAR_DATA * victim, int dam, int dt,
             else
             {
                 /* No held object - fall back to regular message */
+                dam_message (ch, victim, dam, dt, immune, critical);
+            }
+        }
+        /* Special message for shield strike skill with shield */
+        else if (dt == TYPE_HIT + gsn_shield_strike && !IS_NPC(ch))
+        {
+            OBJ_DATA *shield = get_eq_char(ch, WEAR_SHIELD);
+            if (shield != NULL)
+            {
+                /* Generate damage verb based on damage amount */
+                const char *vs, *vp;
+                char buf1[256], buf2[256], buf3[256];
+                char punct;
+                int pain_percent;
+                
+                /* Prevent division by zero */
+                if (victim->max_hit <= 0)
+                    pain_percent = 1000;  /* Treat as massive damage */
+                else
+                    pain_percent = 1000 * dam / victim->max_hit;
+                
+                if ( dam  ==   0 ) { vs = "miss";	vp = "misses";		}
+                else if ( pain_percent <=   5 ) { vs = "{gscratch";	vp = "{gscratches";	}
+                else if ( pain_percent <=  10 ) { vs = "{Ggraze";	vp = "{Ggrazes";		}
+                else if ( pain_percent <=  25 ) { vs = "{ghit";	vp = "{ghits";		}
+                else if ( pain_percent <=  30 ) { vs = "{cinjure";	vp = "{cinjures";		}
+                else if ( pain_percent <=  40 ) { vs = "{cwound";	vp = "{cwounds";		}
+                else if ( pain_percent <=  55 ) { vs = "{Cmaul";       vp = "{Cmauls";		}
+                else if ( pain_percent <=  65 ) { vs = "{ydestroy";	vp = "{ydestroys";	}
+                else if ( pain_percent <=  70 ) { vs = "{ydestroy";	vp = "{ydestroys";	}
+                else if ( pain_percent <=  80 ) { vs = "{rmaim";	vp = "{rmaims";		}
+                else if ( pain_percent <=  90 ) { vs = "{rMUTILATE";	vp = "{rMUTILATES";	}
+                else if ( pain_percent <=  100 ) { vs = "{RDISEMBOWEL";	vp = "{RDISEMBOWELS";	}
+                else if ( pain_percent <=  120 ) { vs = "{RDISMEMBER";	vp = "{RDISMEMBERS";	}
+                else if ( pain_percent <=  140 ) { vs = "{RMASSACRE";	vp = "{RMASSACRES";	}
+                else if ( pain_percent <=  160 ) { vs = "{RMANGLE";	vp = "{RMANGLES";		}
+                else if ( pain_percent <=  180 ) { vs = "{W*** {RDEMOLISH ***{W==={R";
+                             vp = "{W*** {RDEMOLISHES {W==={R";			}
+                else if ( pain_percent <=  190 ) { vs = "{W*** {RDEVASTATE ***{W==={R";
+                             vp = "{W*** {RDEVASTATES {W==={R";			}
+                else if ( pain_percent <= 210)  { vs = "{W=== {ROBLITERATE {W==={R";
+                             vp = "{W=== {ROBLITERATES {W==={R";		}
+                else if ( pain_percent <= 230)  { vs = "{r>>> ANNIHILATE <<<";
+                             vp = "{r>>> ANNIHILATES <<<";		}
+                else if ( pain_percent <= 250)  { vs = "{R<<< ERADICATE >>>";
+                             vp = "{R<<< ERADICATES >>>";			}
+                else                   { vs = "{Mdo {r***{RUNS{YPE{WA{YKA{RBLE{r***{M things to";
+                             vp = "{Mdoes {r***{RUNS{YPE{WA{YKA{RBLE{r***{M things to";		}
+                
+                punct = (pain_percent <= 90) ? '.' : '!';
+                
+                /* Custom messages with shield bash */
+                if (IS_SET(ch->act, PLR_AUTODAMAGE))
+                {
+                    sprintf (buf1, "{3$n's shield bash with $p %s {3$N%c (%d){x", vp, punct, dam);
+                    sprintf (buf2, "{2Your shield bash with $p %s {2$N%c (%d){x", vp, punct, dam);
+                    sprintf (buf3, "{4$n's shield bash with $p %s {4you%c (%d){x", vp, punct, dam);
+                }
+                else
+                {
+                    sprintf (buf1, "{3$n's shield bash with $p %s {3$N%c{x", vp, punct);
+                    sprintf (buf2, "{2Your shield bash with $p %s {2$N%c{x", vp, punct);
+                    sprintf (buf3, "{4$n's shield bash with $p %s {4you%c{x", vp, punct);
+                }
+                
+                act (buf1, ch, shield, victim, TO_NOTVICT);
+                act (buf2, ch, shield, victim, TO_CHAR);
+                
+                if (IS_SET(victim->act, PLR_AUTODAMAGE))
+                {
+                    char buf3_damage[256];
+                    sprintf (buf3_damage, "{4$n's shield bash with $p %s {4you%c (%d){x", vp, punct, dam);
+                    act (buf3_damage, ch, shield, victim, TO_VICT);
+                }
+                else
+                {
+                    act (buf3, ch, shield, victim, TO_VICT);
+                }
+            }
+            else
+            {
+                /* No shield - fall back to regular message */
                 dam_message (ch, victim, dam, dt, immune, critical);
             }
         }
@@ -2037,7 +2224,12 @@ void set_fighting (CHAR_DATA * ch, CHAR_DATA * victim)
 {
     if (ch->fighting != NULL)
     {
-        bug ("Set_fighting: already fighting", 0);
+        char bug_buf[MAX_STRING_LENGTH];
+        sprintf(bug_buf, "Set_fighting: %s already fighting %s, tried to fight %s",
+                IS_NPC(ch) ? ch->short_descr : ch->name,
+                IS_NPC(ch->fighting) ? ch->fighting->short_descr : ch->fighting->name,
+                IS_NPC(victim) ? victim->short_descr : victim->name);
+        bug(bug_buf, 0);
         return;
     }
 
@@ -2448,24 +2640,29 @@ void group_gain args ((CHAR_DATA * ch, CHAR_DATA * victim))
     if (victim == ch)
         return;
 
+    /* Prevent XP exploit: No XP if killer is an NPC (charmed pet) */
+    if (IS_NPC(ch))
+        return;
+    
+    /* Prevent XP exploit: No XP if victim is a charmed pet/follower */
+    if (IS_NPC(victim) && IS_AFFECTED(victim, AFF_CHARM))
+        return;
+
+    /* Count group members for determining if in group */
     members = 0;
-    group_levels = 0;
     for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room)
     {
-        if (is_same_group (gch, ch))
-        {
+        if (is_same_group (gch, ch) && !IS_NPC(gch))
             members++;
-            group_levels += IS_NPC (gch) ? gch->level / 2 : gch->level;
-        }
     }
 
     if (members == 0)
     {
         bug ("Group_gain: members.", members);
         members = 1;
-        group_levels = ch->level;
     }
 
+    /* Award XP to each group member */
     for (gch = ch->in_room->people; gch != NULL; gch = gch->next_in_room)
     {
         OBJ_DATA *obj;
@@ -2474,21 +2671,11 @@ void group_gain args ((CHAR_DATA * ch, CHAR_DATA * victim))
         if (!is_same_group (gch, ch) || IS_NPC (gch))
             continue;
 
-/*    Taken out, add it back if you want it
-    if ( gch->level - lch->level >= 5 )
-    {
-        send_to_char( "You are too high for this group.\n\r", gch );
-        continue;
-    }
-
-    if ( gch->level - lch->level <= -5 )
-    {
-        send_to_char( "You are too low for this group.\n\r", gch );
-        continue;
-    }
-*/
-
-        xp = xp_compute (gch, victim, group_levels);
+        /* Compute XP based on individual level vs victim level */
+        /* Pass 1 if in group (members > 1), 0 if solo */
+        xp = xp_compute (gch, victim, (members > 1 ? 1 : 0));
+        
+        /* Remove old XP cap - new system handles limits via level difference */
         
         if(IS_SET(gch->act, PLR_NOEXP))
         {
@@ -2513,6 +2700,17 @@ void group_gain args ((CHAR_DATA * ch, CHAR_DATA * victim))
         {
             sprintf (buf, "You receive %d experience points.\n\r", xp);
             send_to_char (buf, gch);
+            
+            /* Log suspicious XP gains */
+            if (xp > gch->level * 100)
+            {
+                sprintf(buf, "LARGE XP GAIN: %s (level %d) gained %d XP from killing %s (killer: %s)",
+                        gch->name, gch->level, xp,
+                        IS_NPC(victim) ? victim->short_descr : victim->name,
+                        IS_NPC(ch) ? ch->short_descr : ch->name);
+                log_string(buf);
+            }
+            
             gain_exp (gch, xp);
         }
 
@@ -2554,232 +2752,148 @@ void group_gain args ((CHAR_DATA * ch, CHAR_DATA * victim))
 
 /*
  * Compute xp for a kill.
- * Also adjust alignment of killer.
- * Edit this function to change xp computations.
+ * Completely rewritten system based on level difference.
+ * Base XP is modified by level difference tables and mob difficulty bonuses.
  */
-int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim, int total_levels )
+int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim, int in_group )
 {
-    int xp,base_exp;
-    int align,level_range;
-    int change;
-    int time_per_level;
+    int xp;
+    int base_exp;
+    int level_diff;
+    int percent_modifier;
 
-    level_range = victim->level - gch->level;
- 
-    /* compute the base exp */
-    switch (level_range)
-    {
- 	default : 	base_exp =   0;		break;
-	case -9 :	base_exp =   1;		break;
-	case -8 :	base_exp =   2;		break;
-	case -7 :	base_exp =   5;		break;
-	case -6 : 	base_exp =   9;		break;
-	case -5 :	base_exp =  11;		break;
-	case -4 :	base_exp =  22;		break;
-	case -3 :	base_exp =  33;		break;
-	case -2 :	base_exp =  50;		break;
-	case -1 :	base_exp =  66;		break;
-	case  0 :	base_exp =  83;		break;
-	case  1 :	base_exp =  99;		break;
-	case  2 :	base_exp = 121;		break;
-	case  3 :	base_exp = 143;		break;
-	case  4 :	base_exp = 165;		break;
-    } 
+    /* Calculate level difference (positive = target is higher level) */
+    level_diff = victim->level - gch->level;
     
-    if (level_range > 4)
-	base_exp = 160 + 20 * (level_range - 4);
-
-    /* jerome : base xp addition ---------------------- */
-
-      if(IS_NPC(victim) )/* at max a mob with all worth 5 level above his own*/
-       {
-         if( is_affected( victim, skill_lookup("sanctuary") ) )
-            base_exp = (base_exp * 130) / 100;
-         if( is_affected( victim, skill_lookup("haste") ) )
-            base_exp = (base_exp * 120) / 100;
-         if( IS_SET(victim->off_flags,OFF_AREA_ATTACK) ) 
-            base_exp = (base_exp * 120) / 100;
-         if( IS_SET(victim->off_flags,OFF_BACKSTAB) ) 
-            base_exp = (base_exp * 120) / 100;
-         if( IS_SET(victim->off_flags,OFF_FAST) )
-            base_exp = (base_exp * 120) / 100;
-         if( IS_SET(victim->off_flags,OFF_DODGE) )
-            base_exp = (base_exp * 110) / 100;
-         if( IS_SET(victim->off_flags,OFF_PARRY) )
-            base_exp = (base_exp * 110) / 100;
-
-         if( victim->spec_fun != 0 )
-          {
-           if(   !str_cmp(spec_name(victim->spec_fun),"spec_breath_any")
-              || !str_cmp(spec_name(victim->spec_fun),"spec_breath_acid")
-              || !str_cmp(spec_name(victim->spec_fun),"spec_breath_fire")
-              || !str_cmp(spec_name(victim->spec_fun),"spec_breath_frost")
-              || !str_cmp(spec_name(victim->spec_fun),"spec_breath_gas")
-              || !str_cmp(spec_name(victim->spec_fun),"spec_breath_lightning")
-             )
-             base_exp = (base_exp * 125) / 100;
-           
-           else if(   !str_cmp(spec_name(victim->spec_fun),"spec_cast_cleric")
-                   || !str_cmp(spec_name(victim->spec_fun),"spec_cast_mage")
-                   || !str_cmp(spec_name(victim->spec_fun),"spec_cast_undead")
-                  ) 
-                base_exp = (base_exp * 120) / 100;
-         
-           else if( !str_cmp(spec_name(victim->spec_fun),"spec_poison") )
-                base_exp = (base_exp * 110) / 100;
-          }
-       }
-    /*    back to normal code    -------------------- */
-
-    /* do alignment computations */
-   
-    align = victim->alignment - gch->alignment;
-
-    if (IS_SET(victim->act,ACT_NOALIGN))
+    /* Base exp: 10 * victim's level (level 10 mob = 100 base exp) */
+    base_exp = victim->level * 10;
+    
+    /* Apply level difference modifier based on solo or group */
+    if (in_group)
     {
-	/* no change */
+        /* Group XP Table: +11 to -10 range */
+        switch (level_diff)
+        {
+            case  11: 
+            case  12:
+            default:  
+                if (level_diff >= 11) percent_modifier = 0;
+                else if (level_diff <= -7) percent_modifier = 0;
+                else percent_modifier = 0;  /* Should never hit this */
+                break;
+            case  10: percent_modifier = 200; break;
+            case   9: percent_modifier = 190; break;
+            case   8: percent_modifier = 180; break;
+            case   7: percent_modifier = 170; break;
+            case   6: percent_modifier = 160; break;
+            case   5: percent_modifier = 150; break;
+            case   4: percent_modifier = 140; break;
+            case   3: percent_modifier = 130; break;
+            case   2: percent_modifier = 120; break;
+            case   1: percent_modifier = 110; break;
+            case   0: percent_modifier = 100; break;
+            case  -1: percent_modifier = 100; break;
+            case  -2: percent_modifier =  90; break;
+            case  -3: percent_modifier =  80; break;
+            case  -4: percent_modifier =  40; break;
+            case  -5: percent_modifier =  20; break;
+            case  -6: percent_modifier =   0; break;
+            case  -7: percent_modifier =   0; break;
+            case  -8: percent_modifier =   0; break;
+            case  -9: percent_modifier =   0; break;
+            case -10: percent_modifier =   0; break;
+        }
     }
-
-    else if (align > 500) /* monster is more good than slayer */
+    else
     {
-	change = (align - 500) * base_exp / 500 * gch->level/total_levels; 
-	change = UMAX(1,change);
-        gch->alignment = UMAX(-1000,gch->alignment - change);
-    }
-
-    else if (align < -500) /* monster is more evil than slayer */
-    {
-	change =  ( -1 * align - 500) * base_exp/500 * gch->level/total_levels;
-	change = UMAX(1,change);
-	gch->alignment = UMIN(1000,gch->alignment + change);
-    }
-
-    else /* improve this someday */
-    {
-	change =  gch->alignment * base_exp/500 * gch->level/total_levels;  
-	gch->alignment -= change;
+        /* Solo XP Table: +6 to -6 range */
+        switch (level_diff)
+        {
+            case   7:
+            case   8:
+            case   9:
+            case  10:
+            default:
+                if (level_diff >= 7) percent_modifier = 0;
+                else if (level_diff <= -7) percent_modifier = 0;
+                else percent_modifier = 0;  /* Should never hit this */
+                break;
+            case   6: percent_modifier =   0; break;
+            case   5: percent_modifier = 150; break;
+            case   4: percent_modifier = 140; break;
+            case   3: percent_modifier = 120; break;
+            case   2: percent_modifier = 110; break;
+            case   1: percent_modifier = 100; break;
+            case   0: percent_modifier = 100; break;
+            case  -1: percent_modifier = 100; break;
+            case  -2: percent_modifier =  90; break;
+            case  -3: percent_modifier =  80; break;
+            case  -4: percent_modifier =  60; break;
+            case  -5: percent_modifier =  20; break;
+            case  -6: percent_modifier =   0; break;
+        }
     }
     
-    /* calculate exp multiplier */
-    if (IS_SET(victim->act,ACT_NOALIGN))
-	xp = base_exp;
-
-    else if (gch->alignment > 500)  /* for goodie two shoes */
-    {
-	if (victim->alignment < -750)
-	    xp = (base_exp *4)/3;
-   
- 	else if (victim->alignment < -500)
-	    xp = (base_exp * 5)/4;
-
-        else if (victim->alignment > 750)
-	    xp = base_exp / 4;
-
-   	else if (victim->alignment > 500)
-	    xp = base_exp / 2;
-
-        else if (victim->alignment > 250)
-	    xp = (base_exp * 3)/4; 
-
-	else
-	    xp = base_exp;
-    }
-
-    else if (gch->alignment < -500) /* for baddies */
-    {
-	if (victim->alignment > 750)
-	    xp = (base_exp * 5)/4;
-	
-  	else if (victim->alignment > 500)
-	    xp = (base_exp * 11)/10; 
-
-   	else if (victim->alignment < -750)
-	    xp = base_exp/2;
-
-	else if (victim->alignment < -500)
-	    xp = (base_exp * 3)/4;
-
-	else if (victim->alignment < -250)
-	    xp = (base_exp * 9)/10;
-
-	else
-	    xp = base_exp;
-    }
-
-    else if (gch->alignment > 200)  /* a little good */
-    {
-
-	if (victim->alignment < -500)
-	    xp = (base_exp * 6)/5;
-
- 	else if (victim->alignment > 750)
-	    xp = base_exp/2;
-
-	else if (victim->alignment > 0)
-	    xp = (base_exp * 3)/4; 
-	
-	else
-	    xp = base_exp;
-    }
-
-    else if (gch->alignment < -200) /* a little bad */
-    {
-	if (victim->alignment > 500)
-	    xp = (base_exp * 6)/5;
- 
-	else if (victim->alignment < -750)
-	    xp = base_exp/2;
-
-	else if (victim->alignment < 0)
-	    xp = (base_exp * 3)/4;
-
-	else
-	    xp = base_exp;
-    }
-
-    else /* neutral */
-    {
-
-	if (victim->alignment > 500 || victim->alignment < -500)
-	    xp = (base_exp * 4)/3;
-
-	else if (victim->alignment < 200 && victim->alignment > -200)
-	    xp = base_exp/2;
-
- 	else
-	    xp = base_exp;
-    }
-
-    /* more exp at the low levels */
-    if (gch->level < 6)
-    	xp = 10 * xp / (gch->level + 4);
-
-    /* less at high */
-    if (gch->level > 35 )
-	xp =  15 * xp / (gch->level - 25 );
-
-    /* reduce for playing time */
+    /* Apply percentage modifier */
+    xp = (base_exp * percent_modifier) / 100;
     
+    /* If no XP from level difference, return 0 now */
+    if (xp == 0)
+        return 0;
+
+    /* Apply difficulty bonuses for harder mobs */
+    if (IS_NPC(victim))
     {
-	/* compute quarter-hours per level */
-	time_per_level = 4 *
-			 (gch->played + (int) (current_time - gch->logon))/3600
-			 / gch->level;
+        /* Sanctuary bonus: +30% */
+        if (is_affected(victim, skill_lookup("sanctuary")))
+            xp = (xp * 130) / 100;
+            
+        /* Haste bonus: +20% */
+        if (is_affected(victim, skill_lookup("haste")))
+            xp = (xp * 120) / 100;
+            
+        /* Offensive flag bonuses */
+        if (IS_SET(victim->off_flags, OFF_AREA_ATTACK))
+            xp = (xp * 120) / 100;
+        if (IS_SET(victim->off_flags, OFF_BACKSTAB))
+            xp = (xp * 120) / 100;
+        if (IS_SET(victim->off_flags, OFF_FAST))
+            xp = (xp * 120) / 100;
+        if (IS_SET(victim->off_flags, OFF_DODGE))
+            xp = (xp * 110) / 100;
+        if (IS_SET(victim->off_flags, OFF_PARRY))
+            xp = (xp * 110) / 100;
 
-	time_per_level = URANGE(2,time_per_level,12);
-	if (gch->level < 15)
-                          /* make it a curve */
-	    time_per_level = UMAX(time_per_level,(15 - gch->level));
-	xp = xp * time_per_level / 12;
+        /* Special function bonuses */
+        if (victim->spec_fun != 0)
+        {
+            /* Breath weapons: +25% */
+            if (!str_cmp(spec_name(victim->spec_fun), "spec_breath_any") ||
+                !str_cmp(spec_name(victim->spec_fun), "spec_breath_acid") ||
+                !str_cmp(spec_name(victim->spec_fun), "spec_breath_fire") ||
+                !str_cmp(spec_name(victim->spec_fun), "spec_breath_frost") ||
+                !str_cmp(spec_name(victim->spec_fun), "spec_breath_gas") ||
+                !str_cmp(spec_name(victim->spec_fun), "spec_breath_lightning"))
+            {
+                xp = (xp * 125) / 100;
+            }
+            /* Spellcasters: +20% */
+            else if (!str_cmp(spec_name(victim->spec_fun), "spec_cast_cleric") ||
+                     !str_cmp(spec_name(victim->spec_fun), "spec_cast_mage") ||
+                     !str_cmp(spec_name(victim->spec_fun), "spec_cast_undead"))
+            {
+                xp = (xp * 120) / 100;
+            }
+            /* Poison: +10% */
+            else if (!str_cmp(spec_name(victim->spec_fun), "spec_poison"))
+            {
+                xp = (xp * 110) / 100;
+            }
+        }
     }
-   
-    /* randomize the rewards */
-    xp = number_range (xp * 3/4, xp * 5/4);
 
-    /* adjust for grouping */
-    xp = xp * gch->level/( UMAX(1,total_levels -1) );
-
-    return xp;
+    /* Return final XP amount */
+    return UMAX(1, xp);
 }
 
 
@@ -2797,6 +2911,16 @@ void dam_message (CHAR_DATA * ch, CHAR_DATA * victim, int dam, int dt,
         return;
 
     int pain_percent;
+    
+    /* Prevent division by zero */
+    if (victim->max_hit <= 0)
+    {
+        bugf("dam_message: %s has max_hit = %d!", 
+             IS_NPC(victim) ? victim->short_descr : victim->name, 
+             victim->max_hit);
+        victim->max_hit = 1;  /* Fix it to prevent crash */
+    }
+    
     pain_percent = 1000 * dam/victim->max_hit;
          
          if ( dam  ==   0 ) { vs = "miss";	vp = "misses";		}
@@ -3243,6 +3367,148 @@ void do_bash (CHAR_DATA * ch, char *argument)
         check_improve (ch, gsn_bash, FALSE, 1);
         ch->position = POS_RESTING;
         WAIT_STATE (ch, skill_table[gsn_bash].beats * 3 / 2);
+    }
+    check_killer (ch, victim);
+}
+
+void do_shield_slam (CHAR_DATA * ch, char *argument)
+{
+    char arg[MAX_INPUT_LENGTH];
+    CHAR_DATA *victim;
+    OBJ_DATA *shield;
+    int chance;
+
+    one_argument (argument, arg);
+
+    if (MOUNTED(ch))
+    {
+        send_to_char("You can't shield slam while riding!\n\r", ch);
+        return;
+    }
+
+    /* Check if they have the skill */
+    if ((chance = get_skill (ch, gsn_shield_slam)) == 0
+        || (!IS_NPC (ch)
+            && ch->level < skill_table[gsn_shield_slam].skill_level[ch->class]))
+    {
+        send_to_char ("Shield slam? What's that?\n\r", ch);
+        return;
+    }
+
+    /* Check if they have a shield equipped */
+    shield = get_eq_char (ch, WEAR_SHIELD);
+    if (shield == NULL)
+    {
+        send_to_char ("You need a shield to perform a shield slam!\n\r", ch);
+        return;
+    }
+
+    if (arg[0] == '\0')
+    {
+        victim = ch->fighting;
+        if (victim == NULL)
+        {
+            send_to_char ("But you aren't fighting anyone!\n\r", ch);
+            return;
+        }
+    }
+    else if ((victim = get_char_room (ch, arg)) == NULL)
+    {
+        send_to_char ("They aren't here.\n\r", ch);
+        return;
+    }
+
+    if (victim->position < POS_FIGHTING)
+    {
+        act ("You'll have to let $M get back up first.", ch, NULL, victim, TO_CHAR);
+        return;
+    }
+
+    if (victim == ch)
+    {
+        send_to_char ("You slam yourself with your shield. Ouch!\n\r", ch);
+        return;
+    }
+
+    if (is_safe (ch, victim))
+        return;
+
+    if (IS_NPC (victim) &&
+        victim->fighting != NULL && !is_same_group (ch, victim->fighting))
+    {
+        send_to_char ("Kill stealing is not permitted.\n\r", ch);
+        return;
+    }
+
+    if (IS_AFFECTED (ch, AFF_CHARM) && ch->master == victim)
+    {
+        act ("But $N is your friend!", ch, NULL, victim, TO_CHAR);
+        return;
+    }
+
+    /* modifiers */
+    
+    /* Shield weight helps */
+    chance += get_obj_weight(shield) / 10;
+    
+    /* size and weight */
+    chance += ch->carry_weight / 250;
+    chance -= victim->carry_weight / 200;
+
+    if (ch->size < victim->size)
+        chance += (ch->size - victim->size) * 15;
+    else
+        chance += (ch->size - victim->size) * 10;
+
+    /* stats */
+    chance += get_curr_stat (ch, STAT_STR);
+    chance -= (get_curr_stat (victim, STAT_DEX) * 4) / 3;
+    chance -= GET_AC (victim, AC_BASH) / 25;
+    
+    /* speed */
+    if (IS_SET (ch->off_flags, OFF_FAST) || IS_AFFECTED (ch, AFF_HASTE))
+        chance += 10;
+    if (IS_SET (victim->off_flags, OFF_FAST) || IS_AFFECTED (victim, AFF_HASTE))
+        chance -= 30;
+
+    /* level */
+    chance += (ch->level - victim->level);
+
+    if (!IS_NPC (victim) && chance < get_skill (victim, gsn_dodge))
+        chance -= 3 * (get_skill (victim, gsn_dodge) - chance);
+
+    /* now the attack */
+    if (number_percent () < chance)
+    {
+        act ("{6$n slams into you with $p, stunning you!{x", ch, shield, victim, TO_VICT);
+        act ("{6You slam $N with $p, stunning $M!{x", ch, shield, victim, TO_CHAR);
+        act ("{6$n slams $N with $p, stunning $M!{x", ch, shield, victim, TO_NOTVICT);
+        check_improve (ch, gsn_shield_slam, TRUE, 1);
+
+        /* Daze/stun the victim longer than bash */
+        DAZE_STATE (victim, 4 * PULSE_VIOLENCE);
+        WAIT_STATE (ch, skill_table[gsn_shield_slam].beats);
+        victim->position = POS_RESTING;
+        
+        /* Damage based on shield weight and skill */
+        damage (ch, victim, 
+                number_range (2 + get_obj_weight(shield) / 20, 
+                             2 + ch->size + get_obj_weight(shield) / 10 + chance / 20),
+                gsn_shield_slam, DAM_BASH, FALSE, FALSE);
+
+        if (RIDDEN(victim))
+        {
+            mount_success(RIDDEN(victim), victim, FALSE);
+        }
+    }
+    else
+    {
+        damage (ch, victim, 0, gsn_shield_slam, DAM_BASH, FALSE, FALSE);
+        act ("{6You stumble with your shield slam!{x", ch, NULL, victim, TO_CHAR);
+        act ("{6$n stumbles with a shield slam.{x", ch, NULL, victim, TO_NOTVICT);
+        act ("{6You evade $n's shield slam.{x", ch, NULL, victim, TO_VICT);
+        check_improve (ch, gsn_shield_slam, FALSE, 1);
+        WAIT_STATE (ch, skill_table[gsn_shield_slam].beats * 3 / 2);
     }
     check_killer (ch, victim);
 }
@@ -3844,10 +4110,14 @@ void do_backstab (CHAR_DATA * ch, char *argument)
         return;
     }
 
+    /* Felar can backstab with claws, others need a weapon */
     if ((obj = get_eq_char (ch, WEAR_WIELD)) == NULL)
     {
-        send_to_char ("You need to wield a weapon to backstab.\n\r", ch);
-        return;
+        if (IS_NPC(ch) || ch->race != race_lookup("felar"))
+        {
+            send_to_char ("You need to wield a weapon to backstab.\n\r", ch);
+            return;
+        }
     }
 
     if (victim->hit < victim->max_hit / 3)
@@ -3869,6 +4139,89 @@ void do_backstab (CHAR_DATA * ch, char *argument)
     {
         check_improve (ch, gsn_backstab, FALSE, 1);
         damage (ch, victim, 0, gsn_backstab, DAM_NONE, TRUE, FALSE);
+    }
+
+    return;
+}
+
+/* Ambush - warrior/berserker version of backstab */
+void do_ambush (CHAR_DATA * ch, char *argument)
+{
+    char arg[MAX_INPUT_LENGTH];
+    CHAR_DATA *victim;
+    OBJ_DATA *obj;
+
+    one_argument (argument, arg);
+
+    if ( MOUNTED(ch) )
+    {
+        send_to_char("You can't ambush while riding!\n\r", ch);
+        return;
+    }
+
+    if (arg[0] == '\0')
+    {
+        send_to_char ("Ambush whom?\n\r", ch);
+        return;
+    }
+
+    if (ch->fighting != NULL)
+    {
+        send_to_char ("You're already in combat.\n\r", ch);
+        return;
+    }
+
+    else if ((victim = get_char_room (ch, arg)) == NULL)
+    {
+        send_to_char ("They aren't here.\n\r", ch);
+        return;
+    }
+
+    if (victim == ch)
+    {
+        send_to_char ("How can you ambush yourself?\n\r", ch);
+        return;
+    }
+
+    if (is_safe (ch, victim))
+        return;
+
+    if (IS_NPC (victim) &&
+        victim->fighting != NULL && !is_same_group (ch, victim->fighting))
+    {
+        send_to_char ("Kill stealing is not permitted.\n\r", ch);
+        return;
+    }
+
+    /* Felar can ambush with claws, others need a weapon */
+    if ((obj = get_eq_char (ch, WEAR_WIELD)) == NULL)
+    {
+        if (IS_NPC(ch) || ch->race != race_lookup("felar"))
+        {
+            send_to_char ("You need to wield a weapon to ambush.\n\r", ch);
+            return;
+        }
+    }
+
+    if (victim->hit < victim->max_hit / 3)
+    {
+        act ("$N is hurt and suspicious ... you can't sneak up.",
+             ch, NULL, victim, TO_CHAR);
+        return;
+    }
+
+    check_killer (ch, victim);
+    WAIT_STATE (ch, skill_table[gsn_ambush].beats);
+    if (number_percent () < get_skill (ch, gsn_ambush)
+        || (get_skill (ch, gsn_ambush) >= 2 && !IS_AWAKE (victim)))
+    {
+        check_improve (ch, gsn_ambush, TRUE, 1);
+        multi_hit (ch, victim, gsn_ambush);
+    }
+    else
+    {
+        check_improve (ch, gsn_ambush, FALSE, 1);
+        damage (ch, victim, 0, gsn_ambush, DAM_NONE, TRUE, FALSE);
     }
 
     return;

@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           magic.c - November 3, 2025
- */            
+ *           magic.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -4760,15 +4760,19 @@ void spell_word_of_recall (int sn, int level, CHAR_DATA * ch, void *vo,
     if (IS_NPC (victim))
         return;
 
-    /* Select faction-appropriate temple */
-    if (victim->faction == FACTION_ORCISH)
-        location = get_room_index (ROOM_VNUM_ORCISH_TEMPLE);
-    else
-        location = get_room_index (ROOM_VNUM_TEMPLE);
+    /* Check if they have a marqued room */
+    if (victim->pcdata->marqued_room == 0)
+    {
+        send_to_char("You haven't marqued any location yet. Use the 'marque' spell first.\n\r", victim);
+        return;
+    }
+
+    location = get_room_index(victim->pcdata->marqued_room);
     
     if (location == NULL)
     {
-        send_to_char ("You are completely lost.\n\r", victim);
+        send_to_char("Your marqued location no longer exists!\n\r", victim);
+        victim->pcdata->marqued_room = 0;
         return;
     }
 
@@ -4783,10 +4787,10 @@ void spell_word_of_recall (int sn, int level, CHAR_DATA * ch, void *vo,
         stop_fighting (victim, TRUE);
 
     ch->move /= 2;
-    act ("$n disappears.", victim, NULL, NULL, TO_ROOM);
+    act ("$n disappears in a flash of arcane energy!", victim, NULL, NULL, TO_ROOM);
     char_from_room (victim);
     char_to_room (victim, location);
-    act ("$n appears in the room.", victim, NULL, NULL, TO_ROOM);
+    act ("$n appears in a flash of arcane energy!", victim, NULL, NULL, TO_ROOM);
     do_function (victim, &do_look, "auto");
 }
 

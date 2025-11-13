@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           act_move.c - November 3, 2025
- */            
+ *           act_move.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -383,8 +383,19 @@ void move_char (CHAR_DATA * ch, int door, bool follow)
             act ("$n leaves $T.", ch, NULL, dir_name[door], TO_ROOM);
     }
 
+    /* Check for movement traps */
+    if (checkmovetrap(ch, door))
+        return;
+
+    /* Remove room affects from old room */
+    remove_room_affects (ch, in_room);
+
     char_from_room (ch);
     char_to_room (ch, to_room);
+
+    /* Apply room affects from new room */
+    apply_room_affects (ch, to_room);
+
     if (!IS_AFFECTED (ch, AFF_SNEAK) && ch->invis_level < LEVEL_HERO)
     {
         if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
@@ -635,6 +646,10 @@ void do_open (CHAR_DATA * ch, char *argument)
             send_to_char ("It's locked.\n\r", ch);
             return;
         }
+
+        /* Check for open traps on containers */
+        if (checkopen(ch, obj))
+            return;
 
         REMOVE_BIT (obj->value[1], CONT_CLOSED);
         act ("You open $p.", ch, obj, NULL, TO_CHAR);

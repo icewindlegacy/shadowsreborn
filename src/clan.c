@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           clan.c - November 3, 2025
- */            
+ *           clan.c - November 13, 2025
+ */
 /* **************************************************************
   December 27th, 1997
   Gothar's Clan Systems Version 1.0
@@ -55,6 +55,9 @@ Here is a listing of what the code does:
 #include "merc.h"
 #include "recycle.h"
 #include "clan.h"
+
+/* External function declarations */
+void info args((CHAR_DATA *ch, int level, char *message, ...));
 
 #define OUTCAST		2
 #define INDEP		0
@@ -509,12 +512,17 @@ void load_clans (void)
     /* Initialize all clans to empty */
     for (i = 0; i < MAX_CLAN; i++)
     {
+        int j;
         clan_table[i].name = NULL;
         clan_table[i].who_name = NULL;
         clan_table[i].deathroom = ROOM_VNUM_MORGUE;
         clan_table[i].recall = ROOM_VNUM_TEMPLE;
         clan_table[i].independent = FALSE;  /* Default to FALSE, set TRUE only for clan 0 */
         clan_table[i].min_level = 0;
+        
+        /* Initialize war declarations to false */
+        for (j = 0; j < MAX_CLAN; j++)
+            clan_table[i].war_declared[j] = FALSE;
     }
     
     /* Clan 0 is always the Independent clan */
@@ -1072,4 +1080,370 @@ void do_petition( CHAR_DATA *ch, char *argument )
     log_string(buf);
     
     save_char_obj(ch);
+}
+
+/* Join loner clan */
+void do_join (CHAR_DATA *ch, char *argument)
+{
+    char arg[MAX_INPUT_LENGTH];
+    int loner_clan;
+
+    one_argument(argument, arg);
+
+    if (IS_NPC(ch))
+    {
+        send_to_char("NPCs cannot join clans.\n\r", ch);
+        return;
+    }
+
+    if (arg[0] == '\0')
+    {
+        send_to_char("Join what? (Try 'join loner')\n\r", ch);
+        return;
+    }
+
+    if (str_cmp(arg, "loner"))
+    {
+        send_to_char("You can only use this command to join the loner clan.\n\r", ch);
+        send_to_char("For other clans, use the 'petition' command.\n\r", ch);
+        return;
+    }
+
+    if (ch->level < 10)
+    {
+        send_to_char("You must be level 10 or higher to join the loner clan.\n\r", ch);
+        return;
+    }
+
+    loner_clan = clan_lookup("loner");
+    if (loner_clan == 0)  /* Clan not found */
+    {
+        send_to_char("The loner clan does not exist.\n\r", ch);
+        return;
+    }
+
+    if (ch->clan == loner_clan)
+    {
+        send_to_char("You are already a member of the loner clan.\n\r", ch);
+        return;
+    }
+
+    if (ch->clan != 0)
+    {
+        send_to_char("You must leave your current clan before joining loner.\n\r", ch);
+        return;
+    }
+
+    ch->clan = loner_clan;
+    send_to_char("{WYou have joined the loner clan!{x\n\r", ch);
+    send_to_char("{WYou may now engage in player killing and stealing.{x\n\r", ch);
+    printf_to_char(ch, "{WYour PK range is: levels %d to %d{x\n\r", 
+                   (ch->level * 3) / 4, ch->level + (ch->level / 4));
+    
+    save_char_obj(ch);
+    return;
+}
+
+/* Display PK range */
+void do_range (CHAR_DATA *ch, char *argument)
+{
+    int min_level, max_level;
+
+    if (IS_NPC(ch))
+    {
+        send_to_char("NPCs don't have a PK range.\n\r", ch);
+        return;
+    }
+
+    if (ch->clan == 0)
+    {
+        send_to_char("Join a clan or loner if you want to pkill.\n\r", ch);
+        return;
+    }
+
+    min_level = (ch->level * 3) / 4;
+    max_level = ch->level + (ch->level / 4);
+
+    printf_to_char(ch, "{WYour current PK range is: levels %d to %d{x\n\r", 
+                   min_level, max_level);
+    printf_to_char(ch, "{WClan: %s{x\n\r", 
+                   clan_table[ch->clan].name ? clan_table[ch->clan].name : "Unknown");
+    
+    return;
+}
+
+/* Save clan war declarations */
+void save_clan_wars (void)
+{
+    FILE *fp;
+    char buf[MAX_STRING_LENGTH];
+    int i, j;
+    
+    sprintf(buf, "%sclan_wars.dat", CLAN_DIR);
+    
+    if (!(fp = fopen(buf, "w")))
+    {
+        bugf("save_clan_wars: Could not open %s for writing", buf);
+        return;
+    }
+    
+    for (i = 0; i < MAX_CLAN; i++)
+    {
+        if (clan_table[i].name == NULL || clan_table[i].name[0] == '\0')
+            continue;
+        
+        for (j = 0; j < MAX_CLAN; j++)
+        {
+            if (clan_table[i].war_declared[j])
+            {
+                fprintf(fp, "%d %d\n", i, j);
+            }
+        }
+    }
+    
+    fprintf(fp, "-1\n");
+    fclose(fp);
+}
+
+/* Load clan war declarations */
+void load_clan_wars (void)
+{
+    FILE *fp;
+    char buf[MAX_STRING_LENGTH];
+    int clan_from, clan_to;
+    
+    sprintf(buf, "%sclan_wars.dat", CLAN_DIR);
+    
+    if (!(fp = fopen(buf, "r")))
+    {
+        /* File doesn't exist yet - not an error */
+        return;
+    }
+    
+    while (fscanf(fp, "%d", &clan_from) == 1 && clan_from != -1)
+    {
+        if (fscanf(fp, "%d", &clan_to) != 1)
+            break;
+        
+        if (clan_from >= 0 && clan_from < MAX_CLAN &&
+            clan_to >= 0 && clan_to < MAX_CLAN)
+        {
+            clan_table[clan_from].war_declared[clan_to] = TRUE;
+        }
+    }
+    
+    fclose(fp);
+}
+
+/* Declare war or peace */
+void do_declare (CHAR_DATA *ch, char *argument)
+{
+    char arg1[MAX_INPUT_LENGTH];
+    char arg2[MAX_INPUT_LENGTH];
+    char buf[MAX_STRING_LENGTH];
+    int target_clan;
+    int i, j;
+    bool found_any = FALSE;
+    
+    argument = one_argument(argument, arg1);
+    argument = one_argument(argument, arg2);
+    
+    if (IS_NPC(ch))
+    {
+        send_to_char("NPCs cannot declare war.\n\r", ch);
+        return;
+    }
+    
+    /* Handle 'declare list' */
+    if (!str_cmp(arg1, "list"))
+    {
+        send_to_char("{RClan War Status:{x\n\r\n\r", ch);
+        
+        /* Show blood enemies (mutual wars) */
+        for (i = 0; i < MAX_CLAN; i++)
+        {
+            if (clan_table[i].name == NULL || clan_table[i].name[0] == '\0')
+                continue;
+            
+            for (j = i + 1; j < MAX_CLAN; j++)
+            {
+                if (clan_table[j].name == NULL || clan_table[j].name[0] == '\0')
+                    continue;
+                
+                if (clan_table[i].war_declared[j] && clan_table[j].war_declared[i])
+                {
+                    sprintf(buf, "%s and %s are {Rblood enemies{x.\n\r",
+                            clan_table[i].who_name,
+                            clan_table[j].who_name);
+                    send_to_char(buf, ch);
+                    found_any = TRUE;
+                }
+            }
+        }
+        
+        /* Show one-way wars */
+        for (i = 0; i < MAX_CLAN; i++)
+        {
+            if (clan_table[i].name == NULL || clan_table[i].name[0] == '\0')
+                continue;
+            
+            for (j = 0; j < MAX_CLAN; j++)
+            {
+                if (i == j)
+                    continue;
+                if (clan_table[j].name == NULL || clan_table[j].name[0] == '\0')
+                    continue;
+                
+                /* Only show one-way wars (not blood enemies) */
+                if (clan_table[i].war_declared[j] && !clan_table[j].war_declared[i])
+                {
+                    sprintf(buf, "%s has declared war on %s.\n\r",
+                            clan_table[i].who_name,
+                            clan_table[j].who_name);
+                    send_to_char(buf, ch);
+                    found_any = TRUE;
+                }
+            }
+        }
+        
+        if (!found_any)
+            send_to_char("There are no active clan wars.\n\r", ch);
+        
+        return;
+    }
+    
+    /* Check if player is a clan leader */
+    if (ch->clan == 0 || ch->pcdata->leader != ch->clan)
+    {
+        send_to_char("Only clan leaders can declare war or peace.\n\r", ch);
+        return;
+    }
+    
+    if (arg1[0] == '\0' || arg2[0] == '\0')
+    {
+        send_to_char("Syntax:\n\r", ch);
+        send_to_char("  declare war <clan>\n\r", ch);
+        send_to_char("  declare peace <clan>\n\r", ch);
+        send_to_char("  declare list\n\r", ch);
+        return;
+    }
+    
+    /* Look up target clan */
+    target_clan = clan_lookup(arg2);
+    if (target_clan == 0 || target_clan == ch->clan)
+    {
+        send_to_char("Invalid clan.\n\r", ch);
+        return;
+    }
+    
+    if (clan_table[target_clan].name == NULL || clan_table[target_clan].name[0] == '\0')
+    {
+        send_to_char("That clan does not exist.\n\r", ch);
+        return;
+    }
+    
+    /* Handle war declaration */
+    if (!str_prefix(arg1, "war"))
+    {
+        if (clan_table[ch->clan].war_declared[target_clan])
+        {
+            send_to_char("Your clan has already declared war on them.\n\r", ch);
+            return;
+        }
+        
+        /* Check for confirmation */
+        if (!ch->pcdata->confirm_delete)
+        {
+            sprintf(buf, "{RYou are about to declare WAR on %s!{x\n\r", clan_table[target_clan].name);
+            send_to_char(buf, ch);
+            sprintf(buf, "{RType 'declare war %s' again to confirm.{x\n\r", arg2);
+            send_to_char(buf, ch);
+            ch->pcdata->confirm_delete = TRUE;
+            return;
+        }
+        
+        /* Confirmed - declare war */
+        ch->pcdata->confirm_delete = FALSE;
+        clan_table[ch->clan].war_declared[target_clan] = TRUE;
+        
+        sprintf(buf, "{R%s has declared WAR on %s!{x",
+                clan_table[ch->clan].name,
+                clan_table[target_clan].name);
+        
+        info(NULL, 0, buf);
+        
+        /* Check if this creates blood enemies */
+        if (clan_table[target_clan].war_declared[ch->clan])
+        {
+            sprintf(buf, "{R%s and %s are now BLOOD ENEMIES!{x",
+                    clan_table[ch->clan].name,
+                    clan_table[target_clan].name);
+            info(NULL, 0, buf);
+        }
+        
+        save_clan_wars();
+        return;
+    }
+    
+    /* Handle peace declaration */
+    if (!str_prefix(arg1, "peace"))
+    {
+        bool was_blood_enemies = FALSE;
+        
+        if (!clan_table[ch->clan].war_declared[target_clan])
+        {
+            send_to_char("Your clan has not declared war on them.\n\r", ch);
+            return;
+        }
+        
+        /* Check if they were blood enemies */
+        if (clan_table[target_clan].war_declared[ch->clan])
+            was_blood_enemies = TRUE;
+        
+        /* Check for confirmation */
+        if (!ch->pcdata->confirm_delete)
+        {
+            sprintf(buf, "{WYou are about to declare PEACE with %s!{x\n\r", clan_table[target_clan].name);
+            send_to_char(buf, ch);
+            sprintf(buf, "{WType 'declare peace %s' again to confirm.{x\n\r", arg2);
+            send_to_char(buf, ch);
+            ch->pcdata->confirm_delete = TRUE;
+            return;
+        }
+        
+        /* Confirmed - declare peace */
+        ch->pcdata->confirm_delete = FALSE;
+        clan_table[ch->clan].war_declared[target_clan] = FALSE;
+        
+        if (was_blood_enemies)
+        {
+            sprintf(buf, "{W%s has declared PEACE with %s!{x",
+                    clan_table[ch->clan].name,
+                    clan_table[target_clan].name);
+            info(NULL, 0, buf);
+            
+            sprintf(buf, "{Y%s and %s are no longer blood enemies.{x",
+                    clan_table[ch->clan].name,
+                    clan_table[target_clan].name);
+            info(NULL, 0, buf);
+            
+            sprintf(buf, "{R%s still has war declared on %s.{x",
+                    clan_table[target_clan].name,
+                    clan_table[ch->clan].name);
+            info(NULL, 0, buf);
+        }
+        else
+        {
+            sprintf(buf, "{W%s has declared PEACE with %s!{x",
+                    clan_table[ch->clan].name,
+                    clan_table[target_clan].name);
+            info(NULL, 0, buf);
+        }
+        
+        save_clan_wars();
+        return;
+    }
+    
+    send_to_char("Invalid option. Use 'war', 'peace', or 'list'.\n\r", ch);
+    return;
 }

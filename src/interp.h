@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           interp.h - November 3, 2025
- */            
+ *           interp.h - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -107,7 +107,9 @@ DECLARE_DO_FUN( do_autosac		);
 DECLARE_DO_FUN( do_autosplit	);
 DECLARE_DO_FUN( do_autotick 	);
 DECLARE_DO_FUN(	do_backstab		);
+DECLARE_DO_FUN( do_ambush		);
 DECLARE_DO_FUN( do_bandage		);
+DECLARE_DO_FUN( do_plant		);
 DECLARE_DO_FUN( do_rake			);
 DECLARE_DO_FUN( do_bleeding		);
 DECLARE_DO_FUN( do_brawl		);
@@ -124,6 +126,7 @@ DECLARE_DO_FUN(	do_bamfout		);
 DECLARE_DO_FUN(	do_ban			);
 DECLARE_DO_FUN( do_bash			);
 DECLARE_DO_FUN( do_berserk		);
+DECLARE_DO_FUN( do_shield_slam		);
 DECLARE_DO_FUN( do_board		);
 DECLARE_DO_FUN(	do_brandish		);
 DECLARE_DO_FUN( do_brief		);
@@ -138,6 +141,7 @@ DECLARE_DO_FUN(	do_colour		);
 DECLARE_DO_FUN(	do_commands		);
 DECLARE_DO_FUN( do_combine		);
 DECLARE_DO_FUN( do_compact		);
+DECLARE_DO_FUN( do_mxp			);
 DECLARE_DO_FUN(	do_compare		);
 DECLARE_DO_FUN(	do_consider		);
 DECLARE_DO_FUN(	do_copyover		);
@@ -174,6 +178,7 @@ DECLARE_DO_FUN(	do_freeze		);
 DECLARE_DO_FUN( do_gain			);
 DECLARE_DO_FUN(	do_get			);
 DECLARE_DO_FUN(	do_give			);
+DECLARE_DO_FUN( do_hold			);
 DECLARE_DO_FUN( do_gossip		);
 DECLARE_DO_FUN(	do_goto			);
 DECLARE_DO_FUN( do_grats		);
@@ -292,6 +297,7 @@ DECLARE_DO_FUN(	do_save			);
 DECLARE_DO_FUN(	do_say			);
 DECLARE_DO_FUN(	do_scan			);
 DECLARE_DO_FUN(	do_score		);
+DECLARE_DO_FUN( do_scan		);
 DECLARE_DO_FUN(	do_oldscore		);
 DECLARE_DO_FUN( do_scroll		);
 DECLARE_DO_FUN(	do_sell			);
@@ -375,6 +381,9 @@ DECLARE_DO_FUN( do_clanleader	);
 DECLARE_DO_FUN( do_induct		);
 DECLARE_DO_FUN( do_outcast		);
 DECLARE_DO_FUN( do_petition		);
+DECLARE_DO_FUN( do_join			);
+DECLARE_DO_FUN( do_range		);
+DECLARE_DO_FUN( do_declare		);
 DECLARE_DO_FUN( cmd_press		);
 DECLARE_DO_FUN( cmd_windgate	);
 DECLARE_DO_FUN( do_qmread		);
@@ -388,6 +397,10 @@ DECLARE_DO_FUN( do_forget		);
 DECLARE_DO_FUN( do_remember		);
 DECLARE_DO_FUN( do_petname		);
 DECLARE_DO_FUN( do_mountname		);
+DECLARE_DO_FUN( do_trapset		);
+DECLARE_DO_FUN( do_trapremove		);
+DECLARE_DO_FUN( do_trapstat		);
+DECLARE_DO_FUN( do_traplist		);
 DECLARE_DO_FUN( do_award		);
 DECLARE_DO_FUN( do_avatar		);
 DECLARE_DO_FUN( do_secset		);
@@ -436,6 +449,7 @@ DECLARE_DO_FUN( do_keyring );
 
 /* Circle skill */
 DECLARE_DO_FUN( do_circle );
+DECLARE_DO_FUN( do_deathstroke );
 
 /* Tobacco system */
 DECLARE_DO_FUN( do_smoke );

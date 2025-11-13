@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           merc.h - November 3, 2025
- */            
+ *           merc.h - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -197,6 +197,34 @@ typedef void SPELL_FUN args( ( int sn, int level, CHAR_DATA *ch, void *vo,
 /* I am lazy :) */
 #define MSL MAX_STRING_LENGTH
 #define MIL MAX_INPUT_LENGTH
+
+/*
+ * MXP - MUD Extension Protocol
+ * Special characters for MXP tags
+ */
+/* strings */
+#define MXP_BEG "\x03"    /* becomes < */
+#define MXP_END "\x04"    /* becomes > */
+#define MXP_AMP "\x05"    /* becomes & */
+
+/* characters */
+#define MXP_BEGc '\x03'    /* becomes < */
+#define MXP_ENDc '\x04'    /* becomes > */
+#define MXP_AMPc '\x05'    /* becomes & */
+
+/* constructs an MXP tag with < and > around it */
+#define MXPTAG(arg) MXP_BEG arg MXP_END
+
+#define ESC "\x1B"  /* esc character */
+#define MXPMODE(arg) ESC "[" #arg "z"
+
+/* flags for show_list_to_char */
+enum {
+  eItemNothing,   /* item is not readily accessible */
+  eItemGet,       /* item on ground */
+  eItemDrop,      /* item in inventory */
+  eItemBid        /* auction item */
+};
 
 
 /* Datatype that flag is. This is mainly here for readability */
@@ -566,9 +594,11 @@ struct    descriptor_data
     CHAR_DATA *        original;
     bool        valid;
 	bool        ansi;
+	bool        mxp;           /* MXP enabled for this connection */
     char *      host;
     sh_int      descriptor;
     sh_int      connected;
+    sh_int      return_connected; /* State to return to after string editor */
     bool        fcommand;
     char        inbuf        [4 * MAX_INPUT_LENGTH];
     char        incomm       [MAX_INPUT_LENGTH];
@@ -855,8 +885,8 @@ struct    kill_data
 #define MOB_VNUM_FIDO       3090
 #define MOB_VNUM_CITYGUARD  3060
 #define MOB_VNUM_VAMPIRE    3404
-#define MOB_VNUM_GOBLIN_TRIO 3091
-
+#define MOB_VNUM_GOBLIN_TRIO 3019
+#define MOB_VNUM_DEMON       3028
 #define MOB_VNUM_PATROLMAN  2106
 #define GROUP_VNUM_TROLLS   2100
 #define GROUP_VNUM_OGRES    2101
@@ -1242,6 +1272,8 @@ struct    kill_data
 #define OBJ_VNUM_SPRING            22
 #define OBJ_VNUM_DISC              23
 #define OBJ_VNUM_PORTAL            25
+#define OBJ_VNUM_BUG               26
+#define OBJ_VNUM_BLOODBATH         27
 
 #define OBJ_VNUM_GRUBS             420
 #define OBJ_VNUM_ROSE              1001
@@ -1295,6 +1327,7 @@ struct    kill_data
 #define OBJ_VNUM_STEAK                 8
 #define OBJ_VNUM_FILET                 19
 #define OBJ_VNUM_SCROLL_SCRIBING      3078
+#define OBJ_VNUM_DEAD_SOUL       419
 
 
 
@@ -1343,10 +1376,35 @@ struct    kill_data
 #define ITEM_MANUAL      43
 #define ITEM_COMM        44
 #define ITEM_WINDGATE    45
+#define ITEM_PYLON       46
 #define ITEM_QUEST       (aa) /* Quest Item extra flag */
 
 /* Quest item cost - stored in value[4] */
 #define QUEST_COST(obj)  ((obj)->cost)
+
+/*
+ * Trap types
+ */
+#define TRAP_DAM_SLEEP      -1
+#define TRAP_DAM_TELEPORT    0
+#define TRAP_DAM_FIRE        1
+#define TRAP_DAM_COLD        2
+#define TRAP_DAM_ACID        3
+#define TRAP_DAM_ENERGY      4
+#define TRAP_DAM_BLUNT       5
+#define TRAP_DAM_PIERCE      6
+#define TRAP_DAM_SLASH       7
+
+#define TRAP_EFF_MOVE        1   /* trigger on movement */
+#define TRAP_EFF_OBJECT      2   /* trigger on get or put */
+#define TRAP_EFF_ROOM        4   /* affect all in room */
+#define TRAP_EFF_NORTH       8   /* movement in this direction */
+#define TRAP_EFF_EAST       16
+#define TRAP_EFF_SOUTH      32
+#define TRAP_EFF_WEST       64
+#define TRAP_EFF_UP        128
+#define TRAP_EFF_DOWN      256
+#define TRAP_EFF_OPEN      512   /* trigger on open */
 
 
 
@@ -1371,6 +1429,7 @@ struct    kill_data
 #define ITEM_NOPURGE       (O)
 #define ITEM_ROT_DEATH     (P)
 #define ITEM_VIS_DEATH     (Q)
+#define ITEM_HIDDEN        (R)
 #define ITEM_NONMETAL      (S)
 #define ITEM_NOLOCATE      (T)
 #define ITEM_MELT_DROP     (U)
@@ -1378,7 +1437,9 @@ struct    kill_data
 #define ITEM_SELL_EXTRACT  (W)
 #define ITEM_BURN_PROOF    (Y)
 #define ITEM_NOUNCURSE     (Z)
+#define ITEM_TRAP          (X)
 #define ITEM_QUESTITEM     (aa) /* Quest Item flag */
+#define ITEM_RELIC         (bb) /* Relic Item flag */
 #define ITEM_GROTH_SKIHEA  ITEM_BLESS
 #define ITEM_GOOD          ITEM_BLESS
 
@@ -1404,7 +1465,6 @@ struct    kill_data
 #define ITEM_HOLD         (O)
 #define ITEM_NO_SAC       (P)
 #define ITEM_WEAR_FLOAT   (Q)
-#define ITEM_RELIC        (R)
 #define ITEM_WEAR_COMM    (S)
 
 /* weapon class */
@@ -2063,6 +2123,7 @@ struct    pc_data
     int				duration;               /* Duration of investment */
     char *			history;                /* Character history */
     time_t			login_time;             /* Session login time for mudinfo */
+    sh_int			marqued_room;           /* Room vnum for word of recall */
 
 };
 
@@ -2135,6 +2196,10 @@ struct    obj_index_data
     int                 exp;
     sh_int              timer;
     int                 value[5];
+    sh_int              trap_eff;       /* trap effect flags */
+    sh_int              trap_dam;       /* trap damage type */
+    sh_int              trap_charge;    /* trap charges */
+    bool                trap_enabled;   /* trap is active */
 };
 
 
@@ -2176,6 +2241,10 @@ struct    obj_data
     sh_int              timer;
     int                 value [5];
     KEY_DATA *          keys;           /* keyring */
+    sh_int              trap_eff;       /* trap effect flags */
+    sh_int              trap_dam;       /* trap damage type */
+    sh_int              trap_charge;    /* trap charges */
+    bool                trap_enabled;   /* trap is active */
 };
 
 
@@ -2283,6 +2352,8 @@ struct    room_index_data
     sh_int        darkness_timer;  /* Timer for magical darkness */
     RESET_DATA *        last_mob_reset;
     RESET_DATA *        last_obj_reset;
+    AFFECT_DATA *    affected;      /* Room affects */
+    long        affected_by;    /* Room affect flags */
   
 };
 
@@ -2384,6 +2455,8 @@ struct mprog_code
  * These are skill_lookup return values for common skills and spells.
  */
 extern    sh_int    gsn_backstab;
+extern    sh_int    gsn_ambush;
+extern    sh_int    gsn_plant;
 extern    sh_int    gsn_charge;
 extern    sh_int    gsn_dodge;
 extern  sh_int  gsn_envenom;
@@ -2406,6 +2479,7 @@ extern    sh_int    gsn_swimming;
 extern    sh_int    gsn_bandage;
 extern    sh_int    gsn_counter;
 extern    sh_int    gsn_circle;
+extern    sh_int    gsn_deathstroke;
 extern    sh_int    gsn_critical;
 extern    sh_int    gsn_phase;
 extern    sh_int    gsn_lunge;
@@ -2464,6 +2538,8 @@ extern sh_int  gsn_dirt;
 extern sh_int  gsn_hand_to_hand;
 extern sh_int  gsn_trip;
 extern sh_int  gsn_ohshit;
+extern sh_int  gsn_shield_strike;
+extern sh_int  gsn_shield_slam;
 extern sh_int  gsn_tune;
  
 extern sh_int  gsn_fast_healing;
@@ -3035,8 +3111,12 @@ bool	is_full_name	args( ( const char *str, char *namelist ) );
 bool    is_exact_name    args( ( char *str, char *namelist ) );
 void    affect_to_char    args( ( CHAR_DATA *ch, AFFECT_DATA *paf ) );
 void    affect_to_obj    args( ( OBJ_DATA *obj, AFFECT_DATA *paf ) );
+void    affect_to_room    args( ( ROOM_INDEX_DATA *room, AFFECT_DATA *paf ) );
 void    affect_remove    args( ( CHAR_DATA *ch, AFFECT_DATA *paf ) );
 void    affect_remove_obj args( (OBJ_DATA *obj, AFFECT_DATA *paf ) );
+void    affect_remove_room args( ( ROOM_INDEX_DATA *room, AFFECT_DATA *paf ) );
+void    apply_room_affects args( ( CHAR_DATA *ch, ROOM_INDEX_DATA *room ) );
+void    remove_room_affects args( ( CHAR_DATA *ch, ROOM_INDEX_DATA *room ) );
 void    affect_strip    args( ( CHAR_DATA *ch, int sn ) );
 bool    is_affected    args( ( CHAR_DATA *ch, int sn ) );
 void    affect_join    args( ( CHAR_DATA *ch, AFFECT_DATA *paf ) );
@@ -3180,7 +3260,7 @@ void    hint_update    args( ( void ) );
 int     find_door       args( ( CHAR_DATA *ch, char *arg ) );
 /* string.c */
 void    string_edit    args( ( CHAR_DATA *ch, char **pString ) );
-void    string_append   args( ( CHAR_DATA *ch, char **pString ) );
+void    string_append   args( ( CHAR_DATA *ch, char **pString, sh_int return_state ) );
 char *    string_replace    args( ( char * orig, char * old, char * new ) );
 void    string_add      args( ( CHAR_DATA *ch, char *argument ) );
 char *  format_string   args( ( char *oldstring /*, bool fSpace */ ) );
@@ -3424,6 +3504,13 @@ KEY_DATA *new_key args((void));
 void free_key args((KEY_DATA *key));
 void save_keyring args((FILE *fp, OBJ_DATA *obj));
 void load_keyring args((FILE *fp, OBJ_DATA *obj));
+
+/* trap.c */
+bool checkmovetrap args((CHAR_DATA *ch, int dir));
+bool checkgetput args((CHAR_DATA *ch, OBJ_DATA *obj));
+void save_traps args((void));
+void load_traps args((void));
+bool checkopen args((CHAR_DATA *ch, OBJ_DATA *obj));
 
 #include "clan.h"
 #include "lookup.h"

@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           save.c - November 3, 2025
- */            
+ *           save.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -243,6 +243,8 @@ void fwrite_char (CHAR_DATA * ch, FILE * fp)
              : ch->in_room == NULL ? 3001 : ch->in_room->vnum);
     if (ch->riding)
         fprintf(fp, "Riding %d\n", ch->riding);
+    if (ch->pcdata->marqued_room != 0)
+        fprintf(fp, "Marqued %d\n", ch->pcdata->marqued_room);
              fprintf( fp, "PkPdMkMd %d %d %d %d %d %d %d\n",
                 ch->pkill, ch->pdeath, ch->pkattempt, ch->mkill, ch->mdeath, 
                 ch->arenakill, ch->arenadeath );
@@ -713,7 +715,6 @@ if (recurse_next && obj->next_content != NULL)
      * Castrate storage characters.
      */
     if (ch && ((ch->level < obj->level - 2 && obj->item_type != ITEM_CONTAINER)
-        || obj->item_type == ITEM_KEY
         || (obj->item_type == ITEM_MAP && !obj->value[0])))
         return;
 
@@ -859,6 +860,14 @@ if (recurse_next && obj->next_content != NULL)
     if ( obj->keys )
 	save_keyring( fp, obj);
 
+    /* Save trap data if object is a trap */
+    if (IS_SET(obj->extra_flags, ITEM_TRAP))
+    {
+        fprintf(fp, "Trap %d %d %d %d\n", 
+                obj->trap_eff, obj->trap_dam, obj->trap_charge, 
+                obj->trap_enabled ? 1 : 0);
+    }
+
     fprintf (fp, "End\n\n");
 
 //    if (obj->contains != NULL)
@@ -912,9 +921,17 @@ void fwrite_obj_ground(OBJ_DATA *obj, FILE *fp, int iNest)
     for (ed = obj->extra_descr; ed != NULL; ed = ed->next)
         fprintf(fp, "ExDe %s~ %s~\n", ed->keyword, ed->description);
 
+    /* Save trap data if object is a trap */
+    if (IS_SET(obj->extra_flags, ITEM_TRAP))
+    {
+        fprintf(fp, "Trap %d %d %d %d\n", 
+                obj->trap_eff, obj->trap_dam, obj->trap_charge, 
+                obj->trap_enabled ? 1 : 0);
+    }
+
     fprintf(fp, "End\n\n");
 
-    // If it’s a container, save its contents recursively (this is fine)
+    // If it's a container, save its contents recursively (this is fine)
     if (obj->contains != NULL)
         //fwrite_obj(NULL, obj->contains, fp, iNest + 1);
         fwrite_obj(NULL, obj->contains, fp, iNest + 1, TRUE);
@@ -1724,6 +1741,10 @@ void fread_char (CHAR_DATA * ch, FILE * fp)
                 KEY ("Quest_Accum", ch->pcdata->quest_accum, fread_number (fp));
                 KEY ("QuestNext", ch->pcdata->nextquest, fread_number (fp));
                 KEY ("QuestNext", ch->pcdata->countdown, fread_number (fp));
+                break;
+
+            case 'M':
+                KEY ("Marqued", ch->pcdata->marqued_room, fread_number (fp));
                 break;
 
             case 'R':
@@ -2636,6 +2657,16 @@ void fread_obj (CHAR_DATA * ch, FILE * fp)
             case 'T':
                 KEY ("Timer", obj->timer, fread_number (fp));
                 KEY ("Time", obj->timer, fread_number (fp));
+                
+                if (!str_cmp (word, "Trap"))
+                {
+                    obj->trap_eff = fread_number (fp);
+                    obj->trap_dam = fread_number (fp);
+                    obj->trap_charge = fread_number (fp);
+                    obj->trap_enabled = (fread_number (fp) != 0);
+                    fMatch = TRUE;
+                    break;
+                }
                 break;
 
             case 'V':

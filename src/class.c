@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           class.c - November 3, 2025
- */            
+ *           class.c - November 13, 2025
+ */
 /* Online setting of skill/spell levels, 
  * (c) 1996 Erwin S. Andreasen <erwin@andreasen.org>
  *
@@ -78,36 +78,13 @@ void load_class (int num)
     char buf[MAX_STRING_LENGTH];
     int level,n;
     FILE *fp;
-    int base_class = -1;
-    
-    /* Map orcish classes to their base human classes */
-    switch (num)
-    {
-        case 4: base_class = 0; break; /* sorcerer -> mage */
-        case 5: base_class = 1; break; /* shaman -> cleric */
-        case 6: base_class = 2; break; /* knave -> thief */
-        case 7: base_class = 3; break; /* berserker -> warrior */
-    }
     
     sprintf (buf, "%s%s", CLASS_DIR, class_table[num].name);
     
     if (!(fp = fopen (buf, "r")))
     {
-        /* If orcish class file doesn't exist, try base class file */
-        if (base_class >= 0)
-        {
-            sprintf (buf, "%s%s", CLASS_DIR, class_table[base_class].name);
-            if (!(fp = fopen (buf, "r")))
-            {
-                bugf ("Could not open file %s in order to load class %s.", buf, class_table[num].name);
-                return;
-            }
-        }
-        else
-        {
-            bugf ("Could not open file %s in order to load class %s.", buf, class_table[num].name);
-            return;
-        }
+        bugf ("Could not open file %s in order to load class %s.", buf, class_table[num].name);
+        return;
     }
      
      fscanf (fp, "%d", &level);

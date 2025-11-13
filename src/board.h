@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           board.h - November 3, 2025
- */            
+ *           board.h - November 13, 2025
+ */
 /* Includes for board system */
 /* This is version 2 of the board system, (c) 1995-96 erwin@pip.dknet.dk */
 
@@ -28,7 +28,7 @@
 #define DEF_INCLUDE 1 /* 'names' MUST be included (only ONE name!)    */
 #define DEF_EXCLUDE 2 /* 'names' must NOT be included (one name only) */
 
-#define MAX_BOARD 	  5 
+#define MAX_BOARD 	  7
 
 #define DEFAULT_BOARD 0 /* default board is board #0 in the boards      */
                         /* It should be readable by everyone!           */
@@ -84,8 +84,8 @@ void save_notes ();
 void handle_con_note_to 		(DESCRIPTOR_DATA *d, char * argument);
 void handle_con_note_subject 	(DESCRIPTOR_DATA *d, char * argument);
 void handle_con_note_expire 	(DESCRIPTOR_DATA *d, char * argument);
-void handle_con_note_text 		(DESCRIPTOR_DATA *d, char * argument);
 void handle_con_note_finish 	(DESCRIPTOR_DATA *d, char * argument);
+void show_note_finish_prompt	(DESCRIPTOR_DATA *d);
 
 
 /* Commands */

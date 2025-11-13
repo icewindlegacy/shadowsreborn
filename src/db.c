@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           db.c - November 3, 2025
- */            
+ *           db.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -120,6 +120,8 @@ TIME_INFO_DATA time_info;
 WEATHER_DATA weather_info[SECT_MAX];
 
 sh_int gsn_backstab;
+sh_int gsn_ambush;
+sh_int gsn_plant;
 sh_int gsn_charge;
 sh_int gsn_dodge;
 sh_int gsn_envenom;
@@ -138,6 +140,7 @@ sh_int gsn_second_attack;
 sh_int gsn_third_attack;
 sh_int gsn_counter;
 sh_int gsn_circle;
+sh_int gsn_deathstroke;
 sh_int gsn_critical;
 sh_int gsn_phase;
 sh_int gsn_engage;
@@ -182,6 +185,8 @@ sh_int gsn_dirt;
 sh_int gsn_hand_to_hand;
 sh_int gsn_trip;
 sh_int gsn_ohshit;
+sh_int gsn_shield_strike;
+sh_int gsn_shield_slam;
 sh_int gsn_tune;
 sh_int gsn_lunge;
 
@@ -306,6 +311,8 @@ void fix_exits args ((void));
 void fix_mobprogs args ((void));
 
 void reset_area args ((AREA_DATA * pArea));
+void room_update args ((AREA_DATA * pArea));
+void room_aff_update args ((ROOM_INDEX_DATA * room));
 
 /*
  * Big mama top level function.
@@ -404,6 +411,7 @@ void boot_db ()
      */
     log_string ("Loading clans...");
     load_clans ();
+    load_clan_wars ();
 
     /*
      * Read in all the area files.
@@ -517,6 +525,8 @@ void boot_db ()
         load_storages ();          /* Load clan storeroom contents */
         log_string ("Loading donation pits...");
         load_pits ();              /* Load donation pit contents */
+        log_string ("Loading traps...");
+        load_traps ();             /* Load trap data */
         load_wizlist ();           /* Load wizlist */
         log_string ("Loading mudinfo statistics...");
         load_mudinfo_stats ();     /* Load MUD statistics */
@@ -959,7 +969,7 @@ void load_old_obj (FILE * fp)
         letter = fread_letter (fp);
         if (letter != '#')
         {
-            bug ("Load_objects: # not found.", 0);
+            bugf ("Load_objects: # not found. Got '%c' (0x%02x) instead.", letter, (unsigned char)letter);
             exit (1);
         }
 
@@ -992,6 +1002,12 @@ void load_old_obj (FILE * fp)
         pObjIndex->item_type = fread_number (fp);
         pObjIndex->extra_flags = fread_flag (fp);
         pObjIndex->wear_flags = fread_flag (fp);
+        
+        /* Initialize trap data - will be loaded from trap file if needed */
+        pObjIndex->trap_eff = 0;
+        pObjIndex->trap_dam = 0;
+        pObjIndex->trap_charge = 0;
+        pObjIndex->trap_enabled = FALSE;
         pObjIndex->value[0] = fread_number (fp);
         pObjIndex->value[1] = fread_number (fp);
         pObjIndex->value[2] = fread_number (fp);
@@ -1001,7 +1017,7 @@ void load_old_obj (FILE * fp)
         pObjIndex->condition = 100;
         pObjIndex->weight = fread_number (fp);
         pObjIndex->cost = fread_number (fp);    /* Unused */
-        pObjIndex->qcost = fread_number (fp);                   /* Initialize quest cost */
+        pObjIndex->qcost = fread_number (fp);
         /* Cost per day */ fread_number (fp);
 
 
@@ -1277,6 +1293,8 @@ void load_rooms (FILE * fp)
         pRoomIndex->contents = NULL;
         pRoomIndex->extra_descr = NULL;
         pRoomIndex->area = area_last;
+        pRoomIndex->affected = NULL;        /* Room affects */
+        pRoomIndex->affected_by = 0;        /* Room affect flags */
         pRoomIndex->vnum = vnum;
         pRoomIndex->name = fread_string (fp);
         pRoomIndex->description = fread_string (fp);
@@ -1716,6 +1734,7 @@ void area_update (void)
 
     for (pArea = area_first; pArea != NULL; pArea = pArea->next)
     {
+        room_update (pArea);  /* Update room affects */
 
         if (++pArea->age < 3)
             continue;
@@ -1739,6 +1758,65 @@ void area_update (void)
                 pArea->age = 15 - 2;
             else if (pArea->nplayer == 0)
                 pArea->empty = TRUE;
+        }
+    }
+
+    return;
+}
+
+/* Update room affects for an entire area */
+void room_update (AREA_DATA * pArea)
+{
+    ROOM_INDEX_DATA *room;
+    int vnum;
+
+    for (vnum = pArea->min_vnum; vnum <= pArea->max_vnum; vnum++)
+    {
+        if ((room = get_room_index (vnum)))
+            room_aff_update (room);
+    }
+
+    return;
+}
+
+/* Update affects for a single room */
+void room_aff_update (ROOM_INDEX_DATA * room)
+{
+    AFFECT_DATA *paf;
+    AFFECT_DATA *paf_next;
+
+    for (paf = room->affected; paf != NULL; paf = paf_next)
+    {
+        paf_next = paf->next;
+        if (paf->duration > 0)
+        {
+            paf->duration--;
+            if (number_range (0, 4) == 0 && paf->level > 0)
+                paf->level--;        /* spell strength fades with time */
+        }
+        else if (paf->duration < 0)
+            ;                /* Permanent affect */
+        else
+        {
+            if (paf_next == NULL
+                || paf_next->type != paf->type || paf_next->duration > 0)
+            {
+                /* Room affect expired - could send message to room occupants */
+                if (paf->type > 0 && skill_table[paf->type].msg_off)
+                {
+                    CHAR_DATA *rch;
+                    for (rch = room->people; rch != NULL; rch = rch->next_in_room)
+                    {
+                        if (!IS_NPC (rch))
+                        {
+                            send_to_char (skill_table[paf->type].msg_off, rch);
+                            send_to_char ("\n\r", rch);
+                        }
+                    }
+                }
+            }
+
+            affect_remove_room (room, paf);
         }
     }
 
@@ -2493,6 +2571,10 @@ OBJ_DATA *create_object (OBJ_INDEX_DATA * pObjIndex, int level)
     obj->item_type = pObjIndex->item_type;
     obj->extra_flags = pObjIndex->extra_flags;
     obj->wear_flags = pObjIndex->wear_flags;
+    obj->trap_eff = pObjIndex->trap_eff;
+    obj->trap_dam = pObjIndex->trap_dam;
+    obj->trap_charge = pObjIndex->trap_charge;
+    obj->trap_enabled = pObjIndex->trap_enabled;
     obj->value[0] = pObjIndex->value[0];
     obj->value[1] = pObjIndex->value[1];
     obj->value[2] = pObjIndex->value[2];
@@ -2550,6 +2632,7 @@ OBJ_DATA *create_object (OBJ_INDEX_DATA * pObjIndex, int level)
         case ITEM_MAP:
         case ITEM_CLOTHING:
         case ITEM_PORTAL:
+        case ITEM_PYLON:
             if (!pObjIndex->new_format)
                 obj->cost /= 5;
             break;

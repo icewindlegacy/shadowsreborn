@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           act_wiz.c - November 3, 2025
- */            
+ *           act_wiz.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -2511,6 +2511,10 @@ void do_shutdown (CHAR_DATA * ch, char *argument)
     /* Save donation pits before shutdown */
     log_string("Saving donation pits...");
     save_all_pits();
+    
+    /* Save trap data before shutdown */
+    log_string("Saving trap data...");
+    save_traps();
     
     /* Save mudinfo statistics before shutdown */
     log_string("Saving mudinfo statistics...");
@@ -5152,6 +5156,10 @@ void do_copyover (CHAR_DATA * ch, char *argument)
     /* Save donation pits before copyover */
     log_string("Saving donation pits for copyover...");
     save_all_pits();
+    
+    /* Save trap data before copyover */
+    log_string("Saving trap data for copyover...");
+    save_traps();
 
     sprintf (buf, "\n\r *** COPYOVER by %s - please remain seated!\n\r",
              ch->name);

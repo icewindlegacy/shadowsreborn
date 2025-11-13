@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           nanny.c - November 3, 2025
- */            
+ *           nanny.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -145,8 +145,8 @@ void nanny (DESCRIPTOR_DATA * d, char *argument)
     bool fOld;
     extern int mud_telnetga, mud_ansicolor;
 
-    /* Delete leading spaces UNLESS character is writing a note */
-	if (d->connected != CON_NOTE_TEXT)
+    /* Delete leading spaces UNLESS character is in string editor */
+	if (d->pString == NULL)
 	{
 		while ( isspace(*argument) )
 			argument++;
@@ -916,10 +916,6 @@ void nanny (DESCRIPTOR_DATA * d, char *argument)
 			handle_con_note_expire (d, argument);
 			break;
 
-		case CON_NOTE_TEXT:
-			handle_con_note_text (d, argument);
-			break;
-
 		case CON_NOTE_FINISH:
 			handle_con_note_finish (d, argument);
 			break;
@@ -1021,7 +1017,7 @@ void nanny (DESCRIPTOR_DATA * d, char *argument)
 
             wiznet ("$N has left real life behind.", ch, NULL,
                     WIZ_LOGINS, WIZ_SITES, get_trust (ch));
-                    info( ch, 0, "{W[{YINFO{W]:{x %s just logged on!", ch->name );
+                    info( ch, 0, "{Y[Info] %s has slipped into the shadows!", ch->name );
 
             if (ch->pet != NULL)
             {

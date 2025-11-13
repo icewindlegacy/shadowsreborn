@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           comm.c - November 3, 2025
- */            
+ *           comm.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -1731,25 +1731,269 @@ bool process_output (DESCRIPTOR_DATA * d, bool fPrompt)
          ++str;
          while ((*point = *i) != '\0')
              ++point, ++i;
-     }
-     *point = '\0';
-     pbuff = buffer;
-     colourconv (pbuff, buf, ch);
-     send_to_char ("{p", ch);
-     write_to_buffer (ch->desc, buffer, 0);
-     send_to_char ("{x", ch);
- 
-     if (ch->prefix[0] != '\0')
-         write_to_buffer (ch->desc, ch->prefix, 0);
-     return;
+    }
+    *point = '\0';
+    pbuff = buffer;
+    colourconv (pbuff, buf, ch);
+    
+    /* MXP Quick Command Bar - shown above prompt for MXP clients */
+    if (ch->desc && ch->desc->mxp)
+    {
+        char mxp_bar[MAX_STRING_LENGTH];
+        
+        sprintf(mxp_bar, "%ssend 'look'%s{Clook{x%s/send%s ",
+                MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+        sprintf(mxp_bar + strlen(mxp_bar), "%ssend 'inventory'%s{Cinv{x%s/send%s ",
+                MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+        sprintf(mxp_bar + strlen(mxp_bar), "%ssend 'equipment'%s{Ceq{x%s/send%s ",
+                MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+        sprintf(mxp_bar + strlen(mxp_bar), "%ssend 'score'%s{Cscore{x%s/send%s ",
+                MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+        sprintf(mxp_bar + strlen(mxp_bar), "%ssend 'who'%s{Cwho{x%s/send%s ",
+                MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+        sprintf(mxp_bar + strlen(mxp_bar), "%ssend 'scan'%s{Cscan{x%s/send%s ",
+                MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+        
+        if (ch->level < LEVEL_HERO)
+        {
+            sprintf(mxp_bar + strlen(mxp_bar), "%ssend 'skills'%s{Cskills{x%s/send%s ",
+                    MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+            sprintf(mxp_bar + strlen(mxp_bar), "%ssend 'spells'%s{Cspells{x%s/send%s",
+                    MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+        }
+        else
+        {
+            sprintf(mxp_bar + strlen(mxp_bar), "%ssend 'wizhelp'%s{Cwizhelp{x%s/send%s",
+                    MXP_BEG, MXP_END, MXP_BEG, MXP_END);
+        }
+        
+        strcat(mxp_bar, "\n\r");
+        send_to_char(mxp_bar, ch);
+    }
+    
+    send_to_char ("{p", ch);
+    write_to_buffer (ch->desc, buffer, 0);
+    send_to_char ("{x", ch);
+
+    if (ch->prefix[0] != '\0')
+        write_to_buffer (ch->desc, ch->prefix, 0);
+    return;
  }
  
 
 /*
+ * MXP Support Functions
+ * Based on Nick Gammon's MXP implementation for ROM
+ * Reference: https://www.gammon.com.au/mushclient/addingservermxp.htm
+ */
+
+/*
+ * Count number of mxp tags needing converting
+ *    ie. < becomes &lt;
+ *        > becomes &gt;
+ *        & becomes &amp;
+ */
+int count_mxp_tags (const int bMXP, const char *txt, int length)
+{
+    char c;
+    const char * p;
+    int count;
+    int bInTag = FALSE;
+    int bInEntity = FALSE;
+
+    for (p = txt, count = 0;
+         length > 0;
+         p++, length--)
+    {
+        c = *p;
+        if (bInTag)  /* in a tag, eg. <send> */
+        {
+            if (!bMXP)
+                count--;     /* not output if not MXP */
+               
+            if (c == MXP_ENDc)
+                bInTag = FALSE;
+        } /* end of being inside a tag */
+        else if (bInEntity)  /* in an entity, eg. &version; */
+        {
+            if (!bMXP)
+                count--;     /* not output if not MXP */
+               
+            if (c == ';')
+                bInEntity = FALSE;
+        } /* end of being inside an entity */
+        else switch (c)
+        {
+            case MXP_BEGc:
+                bInTag = TRUE;
+                if (!bMXP)
+                    count--;     /* not output if not MXP */
+                break;
+                   
+            case MXP_ENDc:   /* shouldn't get this case */
+                if (!bMXP)
+                    count--;     /* not output if not MXP */
+                break;
+                   
+            case MXP_AMPc:
+                bInEntity = TRUE;
+                if (!bMXP)
+                    count--;     /* not output if not MXP */
+                break;
+                   
+            default:
+                if (bMXP)
+                {
+                    switch (c)
+                    {
+                        case '<':       /* < becomes &lt; */
+                        case '>':       /* > becomes &gt; */
+                            count += 3;
+                            break;
+                               
+                        case '&':
+                            count += 4;    /* & becomes &amp; */
+                            break;
+                               
+                        case '"':        /* " becomes &quot; */
+                            count += 5;
+                            break;
+                    } /* end of inner switch */
+                }   /* end of MXP enabled */
+        } /* end of switch on character */
+    }   /* end of counting special characters */
+
+    return count;
+} /* end of count_mxp_tags */
+
+
+/*
+ * Converts MXP tags in a string
+ */
+void convert_mxp_tags (const int bMXP, char * dest, const char *src, int length)
+{
+    char c;
+    const char * ps;
+    char * pd;
+    int bInTag = FALSE;
+    int bInEntity = FALSE;
+
+    for (ps = src, pd = dest; length > 0; ps++, length--)
+    {
+        c = *ps;
+        if (bInTag)  /* in a tag, eg. <send> */
+        {
+            if (bMXP)
+                *pd++ = c;    /* output tag */
+           
+            if (c == MXP_ENDc)
+            {
+                bInTag = FALSE;
+                if (bMXP)
+                    pd [-1] = '>';  /* replace MXP_ENDc with > */
+            }
+        } /* end of being inside a tag */
+        else if (bInEntity)  /* in an entity, eg. &version; */
+        {
+            if (bMXP)
+                *pd++ = c;    /* output entity */
+           
+            if (c == ';')
+                bInEntity = FALSE;
+        } /* end of being inside an entity */
+        else switch (c)
+        {
+            case MXP_BEGc:
+                bInTag = TRUE;
+                if (bMXP)
+                {
+                    *pd++ = '<';    /* replace MXP_BEGc with < */
+                }
+                break;
+               
+            case MXP_ENDc:   /* shouldn't get this case */
+                if (bMXP)
+                    *pd++ = '>';
+                break;
+               
+            case MXP_AMPc:
+                bInEntity = TRUE;
+                if (bMXP)
+                {
+                    *pd++ = '&';    /* replace MXP_AMPc with & */
+                }
+                break;
+               
+            /* now for the special characters */
+            case '<':
+                if (bMXP)
+                {
+                    *pd++ = '&';
+                    *pd++ = 'l';
+                    *pd++ = 't';
+                    *pd++ = ';';
+                }
+                else
+                    *pd++ = c;
+                break;
+               
+            case '>':
+                if (bMXP)
+                {
+                    *pd++ = '&';
+                    *pd++ = 'g';
+                    *pd++ = 't';
+                    *pd++ = ';';
+                }
+                else
+                    *pd++ = c;
+                break;
+               
+            case '&':
+                if (bMXP)
+                {
+                    *pd++ = '&';
+                    *pd++ = 'a';
+                    *pd++ = 'm';
+                    *pd++ = 'p';
+                    *pd++ = ';';
+                }
+                else
+                    *pd++ = c;
+                break;
+               
+            case '"':
+                if (bMXP)
+                {
+                    *pd++ = '&';
+                    *pd++ = 'q';
+                    *pd++ = 'u';
+                    *pd++ = 'o';
+                    *pd++ = 't';
+                    *pd++ = ';';
+                }
+                else
+                    *pd++ = c;
+                break;
+               
+            default:
+                *pd++ = c;
+                break;
+        } /* end of switch on character */
+    }   /* end of converting special characters */
+
+    *pd = 0;    /* terminating null */
+} /* end of convert_mxp_tags */
+
+
+/*
  * Append onto an output buffer.
+ * Now with MXP support - converts MXP tags appropriately.
  */
 void write_to_buffer (DESCRIPTOR_DATA * d, const char *txt, int length)
 {
+    int adjusted_length;
+    
     /*
      * Find length in case caller didn't.
      */
@@ -1767,9 +2011,14 @@ void write_to_buffer (DESCRIPTOR_DATA * d, const char *txt, int length)
     }
 
     /*
+     * Adjust length for MXP tag conversions
+     */
+    adjusted_length = length + count_mxp_tags (d->mxp, txt, length);
+
+    /*
      * Expand the buffer as needed.
      */
-    while (d->outtop + length >= d->outsize)
+    while (d->outtop + adjusted_length >= d->outsize)
     {
         char *outbuf;
 
@@ -1787,10 +2036,10 @@ void write_to_buffer (DESCRIPTOR_DATA * d, const char *txt, int length)
     }
 
     /*
-     * Copy.
+     * Copy and convert MXP tags.
      */
-    strncpy (d->outbuf + d->outtop, txt, length);
-    d->outtop += length;
+    convert_mxp_tags (d->mxp, d->outbuf + d->outtop, txt, length);
+    d->outtop += adjusted_length;
     return;
 }
 

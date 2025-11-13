@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           olc_act.c - November 3, 2025
- */            
+ *           olc_act.c - November 13, 2025
+ */
 /***************************************************************************
  *  File: olc_act.c                                                        *
  *                                                                         *
@@ -1708,7 +1708,7 @@ bool change_exit (CHAR_DATA * ch, char *argument, int door)
                 return FALSE;
             }
 
-            string_append (ch, &pRoom->exit[door]->description);
+            string_append (ch, &pRoom->exit[door]->description, CON_PLAYING);
             return TRUE;
         }
 
@@ -1817,7 +1817,7 @@ REDIT (redit_ed)
         ed->next = pRoom->extra_descr;
         pRoom->extra_descr = ed;
 
-        string_append (ch, &ed->description);
+        string_append (ch, &ed->description, CON_PLAYING);
 
         return TRUE;
     }
@@ -1844,7 +1844,7 @@ REDIT (redit_ed)
             return FALSE;
         }
 
-        string_append (ch, &ed->description);
+        string_append (ch, &ed->description, CON_PLAYING);
 
         return TRUE;
     }
@@ -2002,7 +2002,7 @@ REDIT (redit_desc)
 
     if (argument[0] == '\0')
     {
-        string_append (ch, &pRoom->description);
+        string_append (ch, &pRoom->description, CON_PLAYING);
         return TRUE;
     }
 
@@ -2053,6 +2053,144 @@ REDIT (redit_clan)
     pRoom->clan = clan_lookup (argument);
 
     send_to_char ("Clan set.\n\r", ch);
+    return TRUE;
+}
+
+REDIT (redit_aff)
+{
+    ROOM_INDEX_DATA *pRoom;
+    AFFECT_DATA *paf;
+    AFFECT_DATA af;
+    char arg1[MAX_INPUT_LENGTH];
+    char arg2[MAX_INPUT_LENGTH];
+    char arg3[MAX_INPUT_LENGTH];
+    char arg4[MAX_INPUT_LENGTH];
+    char buf[MAX_STRING_LENGTH];
+    int sn, level, duration, modifier;
+
+    EDIT_ROOM (ch, pRoom);
+
+    argument = one_argument (argument, arg1);
+    argument = one_argument (argument, arg2);
+    argument = one_argument (argument, arg3);
+    argument = one_argument (argument, arg4);
+
+    if (arg1[0] == '\0')
+    {
+        send_to_char ("Syntax: aff <spell/skill> <level> <duration> <modifier>\n\r", ch);
+        send_to_char ("        aff remove <spell/skill>\n\r", ch);
+        send_to_char ("        aff list\n\r\n\r", ch);
+        send_to_char ("Sets a room affect that applies to players entering the room.\n\r", ch);
+        send_to_char ("Duration: -1 for permanent, 0+ for ticks\n\r", ch);
+        send_to_char ("Modifier: bonus/penalty to apply (usually 0 for simple affects)\n\r", ch);
+        return FALSE;
+    }
+
+    if (!str_cmp (arg1, "list"))
+    {
+        if (pRoom->affected == NULL)
+        {
+            send_to_char ("This room has no affects.\n\r", ch);
+            return FALSE;
+        }
+
+        send_to_char ("{WRoom Affects:{x\n\r", ch);
+        send_to_char ("Spell                 Level Duration Modifier\n\r", ch);
+        send_to_char ("----------------------------------------------\n\r", ch);
+
+        for (paf = pRoom->affected; paf != NULL; paf = paf->next)
+        {
+            if (paf->type > 0 && paf->type < MAX_SKILL)
+            {
+                sprintf (buf, "%-21s %5d %8d %8d\n\r",
+                         skill_table[paf->type].name,
+                         paf->level,
+                         paf->duration,
+                         paf->modifier);
+                send_to_char (buf, ch);
+            }
+        }
+        return FALSE;
+    }
+
+    if (!str_cmp (arg1, "remove"))
+    {
+        if (arg2[0] == '\0')
+        {
+            send_to_char ("Remove which affect?\n\r", ch);
+            return FALSE;
+        }
+
+        if ((sn = skill_lookup (arg2)) < 0)
+        {
+            send_to_char ("No such skill or spell.\n\r", ch);
+            return FALSE;
+        }
+
+        for (paf = pRoom->affected; paf != NULL; paf = paf->next)
+        {
+            if (paf->type == sn)
+            {
+                affect_remove_room (pRoom, paf);
+                send_to_char ("Room affect removed.\n\r", ch);
+                return TRUE;
+            }
+        }
+
+        send_to_char ("That affect is not on this room.\n\r", ch);
+        return FALSE;
+    }
+
+    /* Adding a new affect */
+    if ((sn = skill_lookup (arg1)) < 0)
+    {
+        send_to_char ("No such skill or spell.\n\r", ch);
+        return FALSE;
+    }
+
+    if (arg2[0] == '\0' || !is_number (arg2))
+    {
+        send_to_char ("You must specify a level.\n\r", ch);
+        return FALSE;
+    }
+    level = atoi (arg2);
+
+    if (arg3[0] == '\0' || !is_number (arg3))
+    {
+        send_to_char ("You must specify a duration.\n\r", ch);
+        return FALSE;
+    }
+    duration = atoi (arg3);
+
+    if (arg4[0] != '\0' && is_number (arg4))
+        modifier = atoi (arg4);
+    else
+        modifier = 0;
+
+    /* Check if affect already exists and remove it */
+    for (paf = pRoom->affected; paf != NULL; paf = paf->next)
+    {
+        if (paf->type == sn)
+        {
+            affect_remove_room (pRoom, paf);
+            break;
+        }
+    }
+
+    /* Create and add the new affect */
+    af.where = TO_AFFECTS;
+    af.type = sn;
+    af.level = level;
+    af.duration = duration;
+    af.location = APPLY_NONE;
+    af.modifier = modifier;
+    af.bitvector = 0;  /* Bitvector set by spell's own logic */
+
+    affect_to_room (pRoom, &af);
+
+    sprintf (buf, "Room affect '%s' added (level %d, duration %d).\n\r",
+             skill_table[sn].name, level, duration);
+    send_to_char (buf, ch);
     return TRUE;
 }
 
@@ -2475,6 +2613,19 @@ void show_obj_values (CHAR_DATA * ch, OBJ_INDEX_DATA * obj)
                      obj->value[4],
                      obj->value[4] == FACTION_HUMAN ? "(Human)" :
                      obj->value[4] == FACTION_ORCISH ? "(Orcish)" : "(None/Any)");
+            send_to_char (buf, ch);
+            break;
+
+        case ITEM_PYLON:
+            sprintf (buf,
+                     "[v0] Charges:        [%d] (0 = infinite)\n\r"
+                     "[v1] Unused\n\r"
+                     "[v2] Clan Number:    [%d] %s\n\r"
+                     "[v3] Unused\n\r",
+                     obj->value[0],
+                     obj->value[2],
+                     obj->value[2] > 0 && obj->value[2] < MAX_CLAN ? 
+                         clan_table[obj->value[2]].name : "(None)");
             send_to_char (buf, ch);
             break;
 
@@ -3053,6 +3204,26 @@ bool set_obj_values (CHAR_DATA * ch, OBJ_INDEX_DATA * pObj, int value_num,
             }
             break;
 
+        case ITEM_PYLON:
+            switch (value_num)
+            {
+                default:
+                    send_to_char("Pylon values:\n\r", ch);
+                    send_to_char("  [v0] Charges (0 = infinite/permanent)\n\r", ch);
+                    send_to_char("  [v2] Clan number (required)\n\r", ch);
+                    return FALSE;
+
+                case 0:
+                    send_to_char ("CHARGES SET.\n\r\n\r", ch);
+                    pObj->value[0] = atoi (argument);
+                    break;
+                case 2:
+                    send_to_char ("CLAN NUMBER SET.\n\r\n\r", ch);
+                    pObj->value[2] = atoi (argument);
+                    break;
+            }
+            break;
+
         case ITEM_FURNITURE:
             switch (value_num)
             {
@@ -3611,7 +3782,7 @@ OEDIT (oedit_short)
 
     free_string (pObj->short_descr);
     pObj->short_descr = str_dup (argument);
-    pObj->short_descr[0] = LOWER (pObj->short_descr[0]);
+    pObj->short_descr[0] = UPPER (pObj->short_descr[0]);
 
     send_to_char ("Short description set.\n\r", ch);
     return TRUE;
@@ -3865,7 +4036,7 @@ OEDIT (oedit_ed)
         ed->next = pObj->extra_descr;
         pObj->extra_descr = ed;
 
-        string_append (ch, &ed->description);
+        string_append (ch, &ed->description, CON_PLAYING);
 
         return TRUE;
     }
@@ -3891,7 +4062,7 @@ OEDIT (oedit_ed)
             return FALSE;
         }
 
-        string_append (ch, &ed->description);
+        string_append (ch, &ed->description, CON_PLAYING);
 
         return TRUE;
     }
@@ -4462,7 +4633,7 @@ MEDIT (medit_desc)
 
     if (argument[0] == '\0')
     {
-        string_append (ch, &pMob->description);
+        string_append (ch, &pMob->description, CON_PLAYING);
         return TRUE;
     }
 

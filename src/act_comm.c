@@ -16,8 +16,8 @@
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           act_comm.c - November 3, 2025
- */            
+ *           act_comm.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -97,11 +97,36 @@ void do_delete (CHAR_DATA * ch, char *argument)
         }
         else
         {
+            char deleted_path[MAX_INPUT_LENGTH];
+            char timestamp[MAX_INPUT_LENGTH];
+            time_t now;
+            struct tm *timeinfo;
+            
             sprintf (strsave, "%s%s", PLAYER_DIR, capitalize (ch->name));
+            
+            /* Create timestamp for deleted file */
+            now = time(NULL);
+            timeinfo = localtime(&now);
+            strftime(timestamp, sizeof(timestamp), "%Y%m%d_%H%M%S", timeinfo);
+            
+            /* Create deleted directory if it doesn't exist */
+            sprintf (deleted_path, "../deleted/%s.%s", capitalize (ch->name), timestamp);
+            
             wiznet ("$N turns $Mself into line noise.", ch, NULL, 0, 0, 0);
             stop_fighting (ch, TRUE);
             do_function (ch, &do_quit, "");
-            unlink (strsave);
+            
+            /* Move file to deleted directory instead of unlinking */
+            if (rename(strsave, deleted_path) != 0)
+            {
+                /* If rename fails (deleted dir doesn't exist?), try to log it */
+                char buf[MAX_STRING_LENGTH];
+                sprintf(buf, "Failed to move deleted pfile for %s to %s", 
+                        ch->name, deleted_path);
+                log_string(buf);
+                /* Still delete it as fallback */
+                unlink(strsave);
+            }
             return;
         }
     }
@@ -2509,6 +2534,54 @@ else
   }
 }
 
+/* Check for bugs in room and broadcast message */
+void check_room_bugs(CHAR_DATA *ch, char *message, char *type)
+{
+    OBJ_DATA *obj;
+    DESCRIPTOR_DATA *d;
+    char buf[MAX_STRING_LENGTH];
+    int frequency;
+    
+    for (obj = ch->in_room->contents; obj != NULL; obj = obj->next_content)
+    {
+        if (obj->pIndexData->vnum == OBJ_VNUM_BUG)
+        {
+            frequency = obj->value[0];
+            sprintf(buf, "{W[{YBUG %d{W]{x %s %s: %s", 
+                    frequency, ch->name, type, message);
+            
+            /* Broadcast to everyone with a commstone tuned to this frequency */
+            for (d = descriptor_list; d != NULL; d = d->next)
+            {
+                CHAR_DATA *victim = d->character;
+                OBJ_DATA *comm;
+                
+                if (d->connected != CON_PLAYING)
+                    continue;
+                    
+                if (victim == NULL)
+                    continue;
+                    
+                /* Check if they have a commstone tuned to this frequency */
+                for (comm = victim->carrying; comm != NULL; comm = comm->next_content)
+                {
+                    if (comm->item_type == ITEM_COMM)
+                    {
+                        /* Check all 4 frequency slots */
+                        if (comm->value[0] == frequency || comm->value[1] == frequency ||
+                            comm->value[2] == frequency || comm->value[3] == frequency)
+                        {
+                            send_to_char(buf, victim);
+                            send_to_char("\n\r", victim);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 void do_say (CHAR_DATA * ch, char *argument)
 {
     if (argument[0] == '\0')
@@ -2519,6 +2592,9 @@ void do_say (CHAR_DATA * ch, char *argument)
 
     act ("{6$n says '{7$T{6'{x", ch, NULL, argument, TO_ROOM);
     act ("{6You say '{7$T{6'{x", ch, NULL, argument, TO_CHAR);
+
+    /* Check for listening devices */
+    check_room_bugs(ch, argument, "says");
 
     if (!IS_NPC (ch))
     {
@@ -2835,6 +2911,10 @@ void do_emote (CHAR_DATA * ch, char *argument)
     act ("$n $T", ch, NULL, argument, TO_ROOM);
     act ("$n $T", ch, NULL, argument, TO_CHAR);
     MOBtrigger = TRUE;
+    
+    /* Check for listening devices */
+    check_room_bugs(ch, argument, "emotes");
+    
     return;
 }
 
@@ -3273,7 +3353,7 @@ void do_quit (CHAR_DATA * ch, char *argument)
     
     wiznet ("$N rejoins the real world.", ch, NULL, WIZ_LOGINS, 0,
             get_trust (ch));
-            info( ch, 0, "{W[{YINFO{W]:{x %s just logged out!", ch->name );
+            info( ch, 0, "{Y[Info] %s has stepped back into the light.", ch->name );
 
     /*
      * After extract_char the ch is no longer valid!
@@ -3691,6 +3771,16 @@ void do_group (CHAR_DATA * ch, char *argument)
                  ch, NULL, victim, TO_VICT, POS_SLEEPING);
         act_new ("You remove $N from your group.",
                  ch, NULL, victim, TO_CHAR, POS_SLEEPING);
+        return;
+    }
+
+    /* Check level restrictions for grouping */
+    /* Can only group if both would benefit from killing mobs around each other's level */
+    /* Solo XP range is +6 to -6, so checking if they're within that range */
+    if (abs(ch->level - victim->level) > 6)
+    {
+        sprintf(buf, "The level difference is too great. You can only group with players within 6 levels.\n\r");
+        send_to_char(buf, ch);
         return;
     }
 

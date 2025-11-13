@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           magic.h - November 3, 2025
- */            
+ *           magic.h - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -118,7 +118,9 @@ DECLARE_SPELL_FUN(	spell_know_alignment	);
 DECLARE_SPELL_FUN(	spell_lightning_bolt	);
 DECLARE_SPELL_FUN(	spell_locate_object	);
 DECLARE_SPELL_FUN(	spell_magic_missile	);
+DECLARE_SPELL_FUN(	spell_marque		);
 DECLARE_SPELL_FUN(      spell_mass_healing	);
+DECLARE_SPELL_FUN(	spell_pylon		);
 DECLARE_SPELL_FUN(	spell_mass_invis	);
 DECLARE_SPELL_FUN(	spell_nexus		);
 DECLARE_SPELL_FUN(	spell_pass_door		);
@@ -151,5 +153,31 @@ DECLARE_SPELL_FUN(	spell_general_purpose	);
 DECLARE_SPELL_FUN(	spell_high_explosive	);
 DECLARE_SPELL_FUN(	spell_regular_shots	);
 DECLARE_SPELL_FUN(	spell_groth_skihea	);
-DECLARE_SPELL_FUN(	spell_ugha		);
+DECLARE_SPELL_FUN(	spell_ugah		);
 DECLARE_SPELL_FUN(	spell_fear		);
+DECLARE_SPELL_FUN(	spell_bahg_grock	);
+DECLARE_SPELL_FUN(	spell_ghaash_bogh	);
+DECLARE_SPELL_FUN(	spell_demonspawn	);
+DECLARE_SPELL_FUN(	spell_typhoon		);
+DECLARE_SPELL_FUN(	spell_dead_soul		);
+DECLARE_SPELL_FUN(	spell_fire_shield	);
+DECLARE_SPELL_FUN(	spell_ice_shield	);
+DECLARE_SPELL_FUN(	spell_lightning_shield	);
+DECLARE_SPELL_FUN(	spell_blood_bath	);
+DECLARE_SPELL_FUN(	spell_invoke_water	);
+DECLARE_SPELL_FUN(	spell_decompose		);
+DECLARE_SPELL_FUN(	spell_battlefavor	);
+DECLARE_SPELL_FUN(	spell_forcefield	);
+DECLARE_SPELL_FUN(	spell_sphere_summoning	);
+DECLARE_SPELL_FUN(	spell_mage_barrier	);
+DECLARE_SPELL_FUN(	spell_soul_twist	);
+DECLARE_SPELL_FUN(	spell_turn		);
+DECLARE_SPELL_FUN(	spell_thin		);
+DECLARE_SPELL_FUN(	spell_weapon_faith	);
+DECLARE_SPELL_FUN(	spell_infest		);
+DECLARE_SPELL_FUN(	spell_touch_death	);
+DECLARE_SPELL_FUN(	spell_ghoul_touch	);
+DECLARE_SPELL_FUN(	spell_crippling_touch	);
+DECLARE_SPELL_FUN(	spell_blackmantle	);
+DECLARE_SPELL_FUN(	spell_dark_rune		);
+DECLARE_SPELL_FUN(	spell_mirror_image	);

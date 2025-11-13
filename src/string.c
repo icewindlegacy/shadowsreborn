@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           string.c - November 3, 2025
- */            
+ *           string.c - November 13, 2025
+ */
 /***************************************************************************
  *  File: string.c                                                         *
  *                                                                         *
@@ -83,7 +83,7 @@ void string_edit (CHAR_DATA * ch, char **pString)
  Purpose:    Puts player into append mode for given string.
  Called by:    (many)olc_act.c
  ****************************************************************************/
-void string_append (CHAR_DATA * ch, char **pString)
+void string_append (CHAR_DATA * ch, char **pString, sh_int return_state)
 {
     send_to_char ("-=======- Entering APPEND Mode -========-\n\r", ch);
     send_to_char ("    Type .h on a new line for help\n\r", ch);
@@ -101,6 +101,7 @@ void string_append (CHAR_DATA * ch, char **pString)
     send_to_char( "\n\r", ch ); */
 
     ch->desc->pString = pString;
+    ch->desc->return_connected = return_state;
 
     return;
 }
@@ -272,6 +273,16 @@ void string_add (CHAR_DATA * ch, char *argument)
         }
 
         ch->desc->pString = NULL;
+        /* Set return state if one was specified */
+        if (ch->desc->return_connected != CON_PLAYING)
+        {
+            ch->desc->connected = ch->desc->return_connected;
+            ch->desc->return_connected = CON_PLAYING;
+            
+            /* If returning to note finish state, show the prompt */
+            if (ch->desc->connected == CON_NOTE_FINISH)
+                show_note_finish_prompt(ch->desc);
+        }
         return;
     }
 
@@ -289,6 +300,16 @@ void string_add (CHAR_DATA * ch, char *argument)
 
         /* Force character out of editing mode. */
         ch->desc->pString = NULL;
+        /* Set return state if one was specified */
+        if (ch->desc->return_connected != CON_PLAYING)
+        {
+            ch->desc->connected = ch->desc->return_connected;
+            ch->desc->return_connected = CON_PLAYING;
+            
+            /* If returning to note finish state, show the prompt */
+            if (ch->desc->connected == CON_NOTE_FINISH)
+                show_note_finish_prompt(ch->desc);
+        }
         return;
     }
 

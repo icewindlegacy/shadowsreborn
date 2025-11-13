@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           magic2.c - November 3, 2025
- */            
+ *           magic2.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -193,4 +193,152 @@ void spell_nexus (int sn, int level, CHAR_DATA * ch, void *vo, int target)
         act ("$p rises up from the ground.", to_room->people, portal, NULL,
              TO_CHAR);
     }
+}
+
+/* Marque - mark a room for word of recall */
+void spell_marque(int sn, int level, CHAR_DATA *ch, void *vo, int target)
+{
+    if (IS_NPC(ch))
+    {
+        send_to_char("NPCs cannot marque locations.\n\r", ch);
+        return;
+    }
+
+    if (IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL))
+    {
+        send_to_char("This room cannot be marqued.\n\r", ch);
+        return;
+    }
+
+    if (IS_SET(ch->in_room->room_flags, ROOM_PRIVATE) ||
+        IS_SET(ch->in_room->room_flags, ROOM_SOLITARY))
+    {
+        send_to_char("You cannot marque a private location.\n\r", ch);
+        return;
+    }
+
+    ch->pcdata->marqued_room = ch->in_room->vnum;
+    
+    act("You marque this location with mystical energy.", ch, NULL, NULL, TO_CHAR);
+    act("$n traces glowing runes in the air that fade into nothingness.", ch, NULL, NULL, TO_ROOM);
+    send_to_char("You may now use 'word of recall' to return here.\n\r", ch);
+}
+
+/* Pylon - create portal to clan's pylon in target area */
+void spell_pylon(int sn, int level, CHAR_DATA *ch, void *vo, int target)
+{
+    OBJ_DATA *pylon = NULL;
+    OBJ_DATA *portal, *stone;
+    ROOM_INDEX_DATA *pylon_room;
+    AREA_DATA *area;
+    char arg[MAX_INPUT_LENGTH];
+    
+    target_name = one_argument(target_name, arg);
+    
+    if (IS_NPC(ch))
+    {
+        send_to_char("NPCs cannot use pylons.\n\r", ch);
+        return;
+    }
+    
+    if (ch->clan == 0)
+    {
+        send_to_char("You must be in a clan to use pylons.\n\r", ch);
+        return;
+    }
+    
+    if (arg[0] == '\0')
+    {
+        send_to_char("Which area's pylon do you wish to connect to?\n\r", ch);
+        return;
+    }
+    
+    /* Check for warp stone */
+    stone = get_eq_char(ch, WEAR_HOLD);
+    if (!IS_IMMORTAL(ch) && (stone == NULL || stone->item_type != ITEM_WARP_STONE))
+    {
+        send_to_char("You lack the proper component for this spell.\n\r", ch);
+        return;
+    }
+    
+    /* Search for the target area */
+    for (area = area_first; area != NULL; area = area->next)
+    {
+        if (!str_prefix(arg, area->name))
+            break;
+    }
+    
+    if (area == NULL)
+    {
+        send_to_char("No such area found.\n\r", ch);
+        return;
+    }
+    
+    /* Search for a pylon in that area belonging to this clan */
+    for (pylon = object_list; pylon != NULL; pylon = pylon->next)
+    {
+        if (pylon->item_type != ITEM_PYLON)
+            continue;
+            
+        if (pylon->in_room == NULL)
+            continue;
+            
+        if (pylon->in_room->area != area)
+            continue;
+            
+        /* value[2] stores the clan number that owns this pylon */
+        if (pylon->value[2] == ch->clan)
+            break;
+    }
+    
+    if (pylon == NULL)
+    {
+        send_to_char("Your clan does not have a pylon in that area.\n\r", ch);
+        return;
+    }
+    
+    pylon_room = pylon->in_room;
+    
+    if (pylon_room == NULL)
+    {
+        send_to_char("The pylon location no longer exists.\n\r", ch);
+        return;
+    }
+    
+    /* Consume the warp stone */
+    if (stone != NULL && stone->item_type == ITEM_WARP_STONE)
+    {
+        act("You draw upon the power of $p.", ch, stone, NULL, TO_CHAR);
+        act("It flares brightly and vanishes!", ch, stone, NULL, TO_CHAR);
+        extract_obj(stone);
+    }
+    
+    /* Create portal at caster's location */
+    portal = create_object(get_obj_index(OBJ_VNUM_PORTAL), 0);
+    portal->timer = 20;
+    portal->value[0] = 100;  /* High charges - lasts until timer expires */
+    portal->value[3] = pylon_room->vnum;  /* Destination vnum */
+    
+    /* Set descriptive names based on clan and area */
+    {
+        char short_buf[MAX_STRING_LENGTH];
+        char long_buf[MAX_STRING_LENGTH];
+        char name_buf[MAX_STRING_LENGTH];
+        
+        sprintf(name_buf, "%s pylon %s", clan_table[ch->clan].name, area->name);
+        sprintf(short_buf, "a pylon to %s", area->name);
+        sprintf(long_buf, "A {Mpylon{x to %s hums with energy here.", area->name);
+        
+        free_string(portal->name);
+        portal->name = str_dup(name_buf);
+        free_string(portal->short_descr);
+        portal->short_descr = str_dup(short_buf);
+        free_string(portal->description);
+        portal->description = str_dup(long_buf);
+    }
+    
+    obj_to_room(portal, ch->in_room);
+    
+    act("$p rises from the ground with a hum of energy!", ch, portal, NULL, TO_ROOM);
+    act("$p rises from the ground with a hum of energy!", ch, portal, NULL, TO_CHAR);
 }

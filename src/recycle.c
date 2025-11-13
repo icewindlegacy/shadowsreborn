@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           recycle.c - November 3, 2025
- */            
+ *           recycle.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -148,10 +148,13 @@ DESCRIPTOR_DATA *new_descriptor (void)
     VALIDATE (d);
 
     d->connected = CON_GET_NAME;
+    d->return_connected = CON_PLAYING;
     d->showstr_head = NULL;
     d->showstr_point = NULL;
+    d->pString = NULL;
     d->outsize = 2000;
     d->outbuf = alloc_mem (d->outsize);
+    d->mxp = FALSE;  /* MXP off by default */
 
     return d;
 }
@@ -456,6 +459,7 @@ PC_DATA *new_pcdata (void)
     pcdata->share_level = 0;
     pcdata->shares_bought = 0;
     pcdata->duration = 0;
+    pcdata->marqued_room = 0;
 
     pcdata->buffer = new_buf ();
 

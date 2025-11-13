@@ -7,17 +7,17 @@
  *     X88888  888888  888Y88b 888Y88..88PY88b 888 d88P     X8
  * 88888P'888  888"Y888888 "Y88888 "Y88P"  "Y8888888P" 88888P'
  * 
- *                       888     
- *                       888     
- *                       888     
+ *                 888     
+ *                 888     
+ *                 888     
  *	888d888 .d88b. 88888b.   .d88b. 888d88888888b.  
  *	888P"  d8P  Y8b888 "88bd88""88b888P"  888 "88b 
  *	888    88888888888  888888  888888    888  888 
  *	888    Y8b.    888 d88PY88..88P888    888  888 
  *	888     "Y8888 88888P"  "Y88P" 888    888  888  
  *           Om - Shadows Reborn - v1.0
- *           tables.c - November 3, 2025
- */            
+ *           tables.c - November 13, 2025
+ */
 /***************************************************************************
  *  Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,        *
  *  Michael Seifert, Hans Henrik Strfeldt, Tom Madsen, and Katja Nyboe.    *
@@ -465,6 +465,7 @@ const struct flag_type type_flags[] = {
     {"manual", ITEM_MANUAL, TRUE},
     {"commstone", ITEM_COMM, TRUE},
     {"windgate", ITEM_WINDGATE, TRUE},
+    {"pylon", ITEM_PYLON, TRUE},
     {NULL, 0, 0}
 };
 
@@ -488,12 +489,14 @@ const struct flag_type extra_flags[] = {
     {"rotdeath", ITEM_ROT_DEATH, TRUE},
     {"relic", ITEM_RELIC, TRUE},
     {"visdeath", ITEM_VIS_DEATH, TRUE},
+    {"hidden", ITEM_HIDDEN, TRUE},
     {"nonmetal", ITEM_NONMETAL, TRUE},
     {"meltdrop", ITEM_MELT_DROP, TRUE},
     {"hadtimer", ITEM_HAD_TIMER, TRUE},
     {"sellextract", ITEM_SELL_EXTRACT, TRUE},
     {"burnproof", ITEM_BURN_PROOF, TRUE},
     {"nouncurse", ITEM_NOUNCURSE, TRUE},
+    {"trap", ITEM_TRAP, TRUE},
     {"questitem", ITEM_QUESTITEM, TRUE},
     {"quest", ITEM_QUEST, TRUE},
     {"grothskihea", ITEM_GROTH_SKIHEA, TRUE},
